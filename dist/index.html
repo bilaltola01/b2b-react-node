@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+        <title>Portal Login</title>
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=no">
+        
+        <script src="scripts/vendor/vendor.js"></script>
+        <script src="scripts/js/bundle.js"></script>
+        
+        <link href='https://fonts.googleapis.com/css?family=Lato:400,700,900,300,100' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="styles/main.css">
+        
+    </head>
+    <body>
+        <div id="global-container" class="global-container layout--login">
+            <!-- OUTDATED BROWSER MESSAGE -->
+            <!--[if IE 9]><div class="browser-outdated ie9"><![endif]-->
+            <!--[if gt IE 9]><!--> <div class="browser-outdated"> <!--<![endif]-->
+                <p class="browser-outdated--upgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+            </div>
+            
+            <!-- ##HEADER -->
+            <header id="header" class="header">
+                <div class="layout--header-wrapper vertical-container">
+                    <div class="vertically-centered">
+                        <h1 class="login--title">
+                            <img src="images/logo-arqiva-white.svg" alt="Logo of Arqiva"><br>
+                            Customer Portal
+                        </h1>
+
+                        <!-- ##LOGIN-FORM -->
+                        <form class="login--form" action="dashboard.html">
+                            <p class="login--input">
+                                <label class="login--label label--username" for="login--username">Username</label>
+                                <input type="text" name="login--username" id="login--username" class="input--underline" placeholder="Username">
+                            </p>
+                            <p class="login--input">
+                                <label class="login--label label--password" for="login--password">Password</label>
+                                <input type="password" name="login--password" id="login--password" class="input--underline" placeholder="Password">
+                            </p>
+
+                            <button id="button--login" class="button button--login-outline">Log In</button>
+
+                        </form>
+                        <a href="#," class="login--link">
+                            Forgotten your details?
+                        </a>
+                    </div>
+                </div>
+            </header>
+        
+            <!-- ##MAIN -->
+            <main id="main" class="main clearfix">
+                <a href="#," class="logo--main--login">
+                    <img src="images/logo-nbc-universal-white-2.svg" alt="Logo of NBC Universal">
+                </a>
+                
+                <!-- ##ARTICLES -->
+                <article class="portal--article article-active">
+                    <div class="full-width-container">
+                        <div class="overlay overlay--black"></div>
+                        <img class="full-screen" src="images/SCIFI_The-Expanse_final.jpg" alt="The Good Place - Tuesdays at 19:30">
+                    </div>
+                    <div class="portal--article--content">
+                        <header>
+                            <h1>
+                                <b>S2</b>
+                                The Expanse
+                            </h1>
+                            <h2>Premieres <time>2017</time></h2>
+                        </header>
+                        <p>
+                            Hundreds of years in the future, humans have colonized the solar system. The U.N. controls Earth. Mars is an independent military power. The planets rely on the resources of the Asteroid Belt, where air and water are more precious than gold. For decades, tensions have been rising between these three places. Earth, Mars and the Belt are now on the brink of war. And all it will take is a single spark.
+                        </p>
+                    </div>
+                </article>
+                
+                <article class="portal--article">
+                    <div class="full-width-container">
+                        <div class="overlay overlay--black"></div>
+                        <img class="full-screen" src="images/Syfy_dark_matter_final.jpg" alt="The Blacklist - Thursdays at 18:30">
+                    </div>
+                    <div class="portal--article--content">
+                        <header>
+                            <h1>
+                                <b>S2</b>
+                                Dark Matter
+                            </h1>
+                            <h2>Premiered <time>July 01, 2016</time></h2>
+                        </header>
+                        <p>
+                            The crew of a derelict spaceship is awakened from stasis with no memories of who they are or how they got on board. Facing threats at every turn - and the realization that they were wanted criminals pre-amnesia - they have to work together to survive a voyage charged with vengeance, betrayal and hidden secrets.
+                        </p>
+                    </div>
+                </article>
+                
+                <article class="portal--article">
+                    <div class="full-width-container">
+                        <div class="overlay overlay--black"></div>
+                        <img class="full-screen" src="images/13_street_Bates_motel.jpg" alt="Mr. Robot - Mondays at 18:00">
+                    </div>
+                    <div class="portal--article--content">
+                        <header>
+                            <h1>
+                                <b>S2</b>
+                                Bates Motel
+                            </h1>
+                            <h2>&nbsp;</h2>
+                        </header>
+                        <p>
+                            The teenage years of Norman Bates from Alfred Hitchcock's "Psycho."
+                        </p>
+                    </div>
+                </article>  
+            </main>
+        </div>
+    </body>
+</html>

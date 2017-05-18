@@ -1,0 +1,41 @@
+{
+  "name": "cpl-front-end",
+  "version": "1.0.0",
+  "description": "Arqiva Customer Portal",
+  "main": "index.html",
+  "dependencies": {
+    "babel": "^6.5.2",
+    "browserify": "^13.1.0",
+    "d3": "^4.2.2",
+    "gulp-browserify": "^0.5.1",
+    "jquery": "^3.1.0",
+    "moment": "^2.14.1"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-beautify": "^2.0.0",
+    "gulp-cache": "^0.4.5",
+    "gulp-concat": "^2.6.0",
+    "gulp-convert": "^0.2.0",
+    "gulp-if": "^2.0.1",
+    "gulp-imagemin": "^3.0.3",
+    "gulp-jsonminify": "^1.0.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-replace": "^0.5.4",
+    "gulp-sass": "^2.3.2",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-uglify": "^2.0.0",
+    "minimist": "^1.2.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://Stylizit@bitbucket.org/capablue/cpl-front-end.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/capablue/cpl-front-end#readme"
+}

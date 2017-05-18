@@ -1,0 +1,55 @@
+// Channels module
+.channels{
+    padding: $global-padding 0 $global-padding $global-padding;
+}
+.channel{
+    float: left;
+    width: 50%;
+    padding-right: $global-padding;
+    padding-bottom: 15px;
+    
+    @include box-sizing(border-box);
+}
+.channel:nth-child(even){
+    
+}
+.channel img{
+    display: inline-block;
+    width: 203px;
+    height: auto;
+    border: 1px solid $color-channel-image-border;
+}
+.channel img.no-border{
+    border: 1px solid transparent;
+}
+.channel .channel--content{
+    display: inline-block;
+    vertical-align: bottom;
+    margin: 0 0 0 15px;
+}
+.channel--title{
+    margin: 0;
+    padding: 0;
+    color: $dark-blue;
+    font-weight: 700;
+    font-size: 0.875em;
+    letter-spacing: 0.05em;
+}
+.channel--text{
+    margin: 0;
+    padding: 0;
+    color: $color-channel-text;
+    font-weight: 700;
+    font-size: 0.8125em;
+    letter-spacing: 0.05em;
+}
+.channel--components--text{
+    margin: 0 0 10px 0;
+    padding: 0;
+}
+
+.channel--image{
+    position: relative;
+    display: inline-block;
+    line-height: 0;
+}

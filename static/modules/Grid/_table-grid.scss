@@ -1,0 +1,45 @@
+// Grid
+.grid--container{
+    position: relative;
+    width: 20000px;
+    left: 0;
+    
+    @include transition(0.3s, all);
+}
+.grid--arcs{
+    float: left;
+    width: 700px;
+}
+.grid--table{
+    float: left;
+    width: 800px;
+    padding-right: 20px;
+}
+
+
+// Grid items
+.content--item{
+    margin-bottom: $global-padding;
+}
+
+.content--item a{
+    display: block;
+    border: 1px solid $color-grid-item-borders;
+    background: transparent;
+}
+.content--item a:hover{
+    background: $color-grid-item-hover;
+}
+
+.content--item--title{
+    margin: 0;
+    padding: 15px $global-padding;
+    font-size: 0.9375em;
+    font-weight: 500;
+    color: $medium-blue;
+    text-align: center;
+    border-bottom: 1px solid $color-grid-item-borders;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

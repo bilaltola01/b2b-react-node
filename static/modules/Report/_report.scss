@@ -1,0 +1,107 @@
+//
+// Module support & reports
+//
+
+.report{
+    padding: $global-padding * 2 0;
+    margin: 0 20px;
+    border-bottom: 1px solid $color-table-report-borders;
+}
+.section--support .report{
+    margin: 0;
+    padding: 0 $global-padding;
+}
+.report:last-child{
+    border-bottom: 0 none;
+}
+.section--support .report--hero .report--main,
+.section--support .report--hero .report--header--text,
+.section--support .report--hero .report--footer{
+    position: relative;
+    top: 40px;
+}
+
+
+.report .text--select{
+    font-weight: 700;
+    text-transform: uppercase;
+}
+.section--support .report .news--text{
+    float: left;
+    margin: 0 0 5px 0;
+}
+.report--container{
+    width: 700px;
+    padding-right: $global-padding * 2;
+    display: table-cell;
+    vertical-align: middle;
+}
+.section--support .report--container,
+.section--support .report--footer{
+    padding-top: $global-padding;
+    padding-bottom: $global-padding * 2;
+}
+.report--header{
+    margin: 0;
+    padding: 0;
+}
+.section--support .report--header{
+    float: left;
+}
+.report--header img{
+    float: left;
+    margin-right: 100px;
+}
+.section--support .report--header img{
+    margin: 0;
+    padding-right: $global-padding;
+}
+.section--support .report--header--image{
+    width: 200px;
+    float: left;
+}
+.report--header--image img{
+    max-width: 100%;
+    height: auto;
+}
+.report--header--text{
+    float: left;
+    width: 300px;
+    padding-right: $global-padding;
+}
+.section--support .report--header--text{
+    width: 245px;
+}
+
+.report--main{
+    margin: 0;
+    padding: 0;
+}
+.section--support .report--main{
+    float: left;
+}
+
+.report--footer{
+    display: table-cell;
+    vertical-align: middle;
+}
+.section--support .report--footer{
+    vertical-align: top;
+}
+.report--footer--container{
+    float: left;
+    padding-right: $global-padding * 2;
+}
+.report--footer--title.news--text{
+    margin: 0;
+    padding: 0;
+    color: $light-blue;
+    font-weight: 700;
+}
+.section--support .report--hero .report--footer--text.news--text{
+    font-size: 0.875em;
+}
+.report--footer--text{
+    margin: 5px 0 0 0;
+    padding: 0;
+}
