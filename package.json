@@ -5,7 +5,7 @@
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "concurrently \"npm run start:client\" \" npm run start:server\"",
+    "start": "npm run start:server",
     "start:client": "webpack-dev-server --inline --progress --hot",
     "start:server": "node main.js",
     "init-eslint": "./node_modules/.bin/eslint --init"
