@@ -8,4 +8,3 @@ const Server = require('./Server');
 let server = new Server(express, new RouterWrapper(express.Router()), new DatabaseLayer());
 
 
-

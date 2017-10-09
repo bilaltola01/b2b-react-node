@@ -1,0 +1,318 @@
+// -----------------------------------------------------------------------------
+// This file contains all application-wide Sass variables.
+// -----------------------------------------------------------------------------
+
+/// Regular font family
+/// @type List
+$main-font-stack: 'Lato', 'Helvetica Neue Light', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+$menu-font-stack: 'Pinyon Script', cursive;
+
+/// Defaults
+$default-font-stack : $main-font-stack;
+$default-text-color: #fff;
+$default-link-color: #fff;
+
+/// Globals
+$global-padding: 20px;
+
+/// Font buttons
+
+
+// Font Offers
+
+////////////////
+// VARIABLES ///
+////////////////
+$num-slides-login: 3;
+
+//////////////
+/// COLORS ///
+//////////////
+
+///
+/// Main colors
+///
+
+$white: #fff;
+$black: #424242;
+$red: #FF004C;
+$blue: #2b76b8;
+$yellow: #FFBC3D;
+$orange: #FFA600;
+$turquoise: #00B6AE;
+$dark-blue: rgba(60, 65, 83, 1.0);
+$medium-blue: rgba(77, 83, 104, 1.0);
+$light-blue: #898E9F;
+$purple: #9782B7;
+
+///
+///
+
+/// Box shadow
+$color-box-shadows-dark: rgba(36, 31, 32, 0.27);
+$color-box-shadows-light: #E9F1FA;
+
+/// Triangles
+$color-triangle-calendar-borders: #E9F1FA;
+
+/// Arrows
+$color-arrows-semi-transparent: rgba(255, 255, 255, 0.47);
+$color-arrows-blue: rgba(77, 83, 104, 0.70);
+$color-arrows-grey: #BEBEBE;
+$color-arrow-table-hover: #858EAA;
+$color-arrow-table-background: #727B9C;
+
+/// Chart
+$color-graph-lines: rgba(255, 255, 255, 0.12);
+$color-graph-main-curve: #5093E1;
+$color-graph-background: #405976;
+$color-graph-label-horizontal: #CBCED7;
+$color-chart-legend-text: #979DB0;
+$color-chart-legend-total: rgba(77, 83, 104, 0.77);
+$color-chart-legend-borders: rgba(220, 228, 235, 0.48);
+$color-chart-legend-background: #F8FAFC;
+$color-chart-total: rgba(77, 83, 104, 0.84);
+$color-pie-grey: #ECEFF2;
+$color-chart-purple: #CBD4F5;
+$color-chart-dark-blue: #727B9C;
+$color-chart-medium-blue: #8E99C3;
+
+/// Select
+$color-select-options-text: #979DB0;
+$color-select-borders: #ECEFF2;
+$color-select-background: #ECEFF2;
+$color-select-arrows-background: #CCCDD7;
+
+/// Filter
+$color-filter-borders: #ECEFF2;
+$color-filter-link-hover: #979DB0;
+$color-filter-header-background: #F8FAFC;
+
+/// Calendar
+$color-calendar-borders: #ECEFF2;
+$color-calendar-week-text: #979DB0;
+$color-calendar-cells-text: rgba(77, 83, 104, 0.45);
+$color-calendar-day-borders: #F1F5F9;
+$color-calendar-day-link-background: #8E99C3;
+
+/// Icons
+$color-icon-calendar-hover-background: #858EAA;
+$color-icon-calendar-background: #727B9C;
+
+/// Aside
+$color-aside-borders: #DCE4EB;
+$color-aside-section-background: #F1F5F9;
+
+/// Main
+$color-main-background: #4F5168;
+$content-background: #F7FAFC;
+
+
+/// Footer
+$color-footer-borders: rgba(151, 157, 176, 0.13);
+
+/// Configuration
+$color-configuration-main-border: #65667A;
+$color-configuration-menu-items: rgba(236, 239, 242, 0.57);
+$color-section-dark-background: #4F5168;
+
+/// Module
+$color-module-borders: #E9F1FA;
+$color-container-borders: #E9F1FA;
+
+/// Overlay
+$color-overlay-dark: rgba(77, 83, 104, 0.89);
+$color-overlay-purple: rgba(60, 65, 83, 0.6);
+
+/// Channel
+$color-channel-text: #A7ADBE;
+$color-channel-image-border: #ECF1F5;
+$color-channel-overlay: $color-overlay-dark;
+
+
+/// Status
+$color-status-blank-issue: rgba(255, 255, 255, 0.5);
+$color-status-blank: rgba(137, 142, 159, 0.5);
+
+/// Datetime
+$color-datetime-title: #979DB0;
+
+/// Login
+$color-login-subtitle: rgba(255, 255, 255, 0.5);
+
+/// Grid
+$color-grid-item-hover: rgba(241, 245, 249, 0.58);
+$color-grid-item-borders: #E9F1FA;
+
+/// Toolbar
+$color-toolbar-background: #CCCDD7;
+$color-toolbar-user-type: #979DB0;
+$color-toolbar-borders: #E9F1FA;
+
+/// Header (left menu)
+$color-header-hover-left-bar: rgba(43, 118, 184, 0.5);///rgba(189, 26, 82, 0.64);
+$color-header-cell-inactive: rgba(92, 94, 119, 0.5);
+$color-header-hover-cell: rgba(60, 65, 83, 0.4);
+$color-header-subnavigation-text: #CBCED7;
+$color-header-background: #4F5168;
+
+/// Table
+$color-cell-issue: #FFDAE8;
+$color-table-borders: #EEF3F8;
+$color-table-hover: #E8EEF5;
+$color-table-header-background: #F8FAFC;
+$color-cell-background: #F8FAFC;
+$color-table-title-borders: #E9F1FA;
+$color-table-report-borders: #E9F1FA;
+
+/// Footer
+$color-footer-logo-label: #445661;
+
+/// Input
+$color-input-search-borders: rgba(203, 206, 215, 0.54);
+$color-input-checkbox-borders: #979DB0;
+$color-input-placeholders: #979DB0;
+$color-input-date-background: #F8FAFC;
+$color-input-date-borders: #E9F1FA;
+
+/// Button
+$color-button-outline-borders: #DEE6ED;
+$color-button-white-border: #DCE4EB;
+$color-button-filled-hover-background: #858EAA;
+$color-button-filled-background: #727B9C;
+$color-button-outline-hover: #858EAA;
+$color-button-textarea-hover-background: #858EAA;
+$color-button-textarea-background: #727B9C;
+$color-button-filled-white: #727B9C;
+$color-button-view: #727B9C;
+
+/// Switch
+$color-switch-background: #F8FAFC;
+$color-switch-borders: rgba(233, 241, 250, 0.6);
+$color-switch-unselected-hover: #858EAA;
+$color-switch-selected: #727B9C;
+
+/// Key Values
+$color-key-text: #979DB0;
+
+
+///
+/// Whites
+///
+
+/// $white-pure: #fff;
+///$white-transparent: rgba(255, 255, 255, 0.5);
+/// $white-transparent-secondary: rgba(255, 255, 255, 0.47);
+/// $white-transparent-third: rgba(255, 255, 255, 0.12);
+
+///
+/// Greys
+///
+
+///$grey-transparent: rgba(151, 157, 176, 0.13);
+///$grey-datetime: #A7ADBE;
+///$grey-arrows: #BEBEBE;
+///$grey-light: #ECEFF2;
+///$grey-light-transparent: rgba(236, 239, 242, 0.57);
+
+/// Primary Colors
+///
+
+/// Blues
+
+///$blue-purple-primary: #4F5168;
+///$blue-purple-secondary: #898E9F;
+///$blue-purple-third: #727B9C;
+///$blue-purple-fourth: #8E99C3;
+///$blue-purple-fifth: #CBD4F5;
+///$blue-purple-button-hover: #858EAA;
+///$blue-purple-overlay: rgba(60, 65, 83, 0.6);
+///$blue-purple-status: rgba(137, 142, 159, 0.5);
+
+///$purple-link-hover: #9782B7;
+
+///$blue-light: #F7FAFC;
+///$blue-light-secondary: #E9F1FA;
+///$blue-light-third: #F1F5F9;
+///$blue-light-fourth: #DCE4EB;
+///$blue-light-fifth: #DEE6ED;
+///$blue-light-sixth: rgba(233, 241, 250, 0.6);
+///$blue-light-seventh: #F8FAFC;
+///$blue-light-eightieth: rgba(241, 245, 249, 0.58);
+///$blue-light-ninetieth: rgba(220, 228, 235, 0.48);
+///$blue-light-table-hover: #E8EEF5;
+///$blue-light-table-border: #EEF3F8;
+///$blue-light-image-border: #ECF1F5;
+
+///$blue-dark-primary: rgba(77, 83, 104, 1.0);
+///$blue-dark-secondary: rgba(77, 83, 104, 0.77);
+///$blue-dark-third: rgba(92, 94, 119, 0.5);
+///$blue-dark-calendar-cells: rgba(77, 83, 104, 0.45);
+///$blue-dark-overlays: rgba(77, 83, 104, 0.89);
+///$blue-dark-chart-legends: rgba(77, 83, 104, 0.84);
+//$blue-dark-arrows: rgba(77, 83, 104, 0.70);
+
+///$blue-darker: rgba(60, 65, 83, 1.0);
+///$blue-darker-secondary: rgba(60, 65, 83, 0.4);
+
+///$blue-grey-primary: #CBCED7;
+///$blue-grey-secondary: #979DB0;
+///$blue-grey-arrows: #CCCDD7;
+///$blue-grey-third: #65667A;
+///$blue-grey-transparent: rgba(203, 206, 215, 0.54);
+
+///$blue-green-primary: #445661;
+///$blue-graphs: #5093E1;
+///$blue-graph-background: #405976;
+
+///
+/// Reds
+///
+/// $blue-bright: #FF004C;
+///$blue-dark: rgba(189, 26, 82, 0.64);
+///$blue-light: #FFDAE8;
+
+/// Yellow
+/// $yellow: #FFBC3D;
+
+/// Orange
+/// $orange: #FFA600;
+
+/// Turquoise
+/// $turquoise: #00B6AE;
+
+/// Global blocks colors
+
+///  Backgrounds
+
+
+/// Components
+
+
+/// Text Colors
+
+
+
+
+
+/// Container's maximum width
+/// @type Length
+$max-width: 1180px !default;
+
+
+/// Breakpoints map
+/// @prop {String} keys - Keys are identifiers mapped to a given length
+/// @prop {Map} values - Values are actual breakpoints expressed in pixels
+/// @see {mixin} respond-to
+$breakpoints: (
+  'small': (min-width: 320px),
+  'medium': (min-width: 768px),
+  'large': (min-width: 1024px),
+) !default;
+
+
+/// Relative or absolute URL where all assets are served from
+/// @type String
+/// @example scss - When using a CDN
+///   $base-url: 'http://cdn.example.com/assets/';
+$base-url: '/assets/' !default;

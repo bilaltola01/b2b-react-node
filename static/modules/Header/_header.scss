@@ -1,0 +1,147 @@
+//
+// Header (left bar)
+//
+.layout--dashboard .navigation{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 200px;
+    height: 100%;
+    background: $color-header-background;
+    
+    z-index: 999;
+}
+
+
+.navigation--main ul,
+.navigation--secondary{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.navigation--main ul li a{
+    display: block;
+    width: auto;
+    border-bottom: 1px solid $dark-blue;
+}
+
+// First level navigation
+.navigation--first-level > li:first-child{
+    border-top: 1px solid $dark-blue;
+}
+.navigation--first-level > li > a{
+    padding: 25px $global-padding;
+    color: $white;
+    font-size: 0.6875em;
+    font-weight: 700;
+    letter-spacing: 0.055em;
+    text-transform: uppercase;
+}
+
+.navigation--main a,
+.navigation--secondary a{
+    position: relative;
+    &:not(.nav-active):hover{
+        background-color: $color-header-hover-cell;
+    }
+}
+
+.navigation--main a:not(.nav-active):before,
+.navigation--secondary a:not(.nav-active):before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background-color: transparent;
+    
+    @include transition(0.30s, background-color);
+}
+.navigation--main a:not(.nav-active):hover:before,
+.navigation--secondary a:not(.nav-active):hover:before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: $color-header-hover-left-bar;
+}
+.navigation--main a.nav-active,
+.navigation--secondary a.nav-active{
+    background-color: $dark-blue;
+    color: $white;
+}
+.navigation--main a.nav-active:before,
+.navigation--secondary a.nav-active:before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: $blue;
+}
+
+.navigation--first-level a.has-subnav:after{
+    content: "";
+    position: absolute;
+    right: 20px;
+
+    /* TODO: replace by arrow--filled class */
+    width: 0;
+    height: 0;
+    margin-top: 5px;
+    border-style: solid;
+    border-width: 5px 4px 0 4px;
+    border-color: $color-arrows-semi-transparent transparent transparent transparent;
+}
+
+// Sub level navigation
+.navigation--sub-level{
+    height: 0;
+    visibility: hidden;
+    opacity: 0;
+    
+    @include transition(0.30s, all);
+}
+.has-subnav.subnav-opened + .navigation--sub-level{
+    height: 5.75em;
+    visibility: visible;
+    opacity: 1;
+}
+.has-subnav.subnav-opened,
+.has-subnav.subnav-opened + .navigation--sub-level li a:not(.nav-active){
+    background-color: $color-header-cell-inactive;
+    
+    &:hover{
+        background-color: $color-header-hover-cell;
+    }
+}
+
+
+.has-subnav.subnav-opened:after{
+    @include transform(rotate(-180deg));
+}
+
+.navigation--sub-level li a,
+.navigation--secondary li a{
+    padding: 15px $global-padding 15px $global-padding + 10;
+    color: $color-header-subnavigation-text;
+    font-size: 0.6875em;
+    font-weight: 700;
+    letter-spacing: 0.055em;
+}
+
+
+// Secondary links
+.navigation--secondary{
+    position: absolute;
+    bottom: 120px;
+    width: 100%;
+}
+.navigation--secondary li a{
+    display: block;
+    padding-left: $global-padding + 20px;
+}

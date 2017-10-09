@@ -1,0 +1,129 @@
+// Arrows
+.arrow{
+    position: absolute;
+    top: 20px;
+    display: block;
+    width: 16px;
+    height: 16px;
+    text-indent: -9999px;
+    z-index: 300;
+}
+.arrow:before,
+.arrow:after{
+    content: "";
+    position: absolute;
+    display: block;
+    width: 8px;
+    height: 2px;
+    background-color: $color-arrows-grey;
+}
+.arrow:before{
+    top: 4px;
+}
+.arrow:after{
+    top: 10px;
+}
+
+.arrow--prev{
+    left: 10px;
+}
+.arrow--next{
+    right: 11px;
+}
+.arrow--prev:before{
+    @include transform(rotate(-60deg));
+}
+.arrow--prev:after{
+    @include transform(rotate(60deg));
+}
+.arrow--next:before{
+    right: 0;
+    @include transform(rotate(60deg));
+}
+.arrow--next:after{
+    right: 0;
+    @include transform(rotate(-60deg));
+}
+
+
+// Arrow--table
+.arrow--table{
+    position: absolute;
+    top: 50%;
+    display: block;
+    width: 20px;
+    height: 40px;
+    background: $color-arrow-table-background;
+    text-indent: -9999px;
+    z-index: 201;
+    
+    @include transform(translate(0, -50%));
+    
+    &:hover{
+        background-color: $color-arrow-table-hover;
+    }
+}
+
+.arrow--table:before,
+.arrow--table:after{
+    content: "";
+    position: absolute;
+    top: 50%;
+    display: block;
+    width: 8px;
+    height: 2px;
+    background: $white;
+}
+.arrow--table:before{
+    margin-top: -3px;
+}
+.arrow--table:after{
+    margin-top: 2px;
+}
+.arrow--table.arrow--prev:before,
+.arrow--table.arrow--prev:after{
+     left: 6px;
+}
+.arrow--table.arrow--next:before,
+.arrow--table.arrow--next:after{
+     left: 5px;
+}
+.arrow--table.arrow--prev:before{
+    @include transform(rotate(-45deg));
+}
+.arrow--table.arrow--prev:after{
+    @include transform(rotate(45deg));
+}
+.arrow--table.arrow--next:before{
+    @include transform(rotate(45deg));
+}
+.arrow--table.arrow--next:after{
+    @include transform(rotate(-45deg));
+}
+
+.arrow--table.arrow--prev{
+    left: 0;
+    
+    @include border-radius(90px 0 0 90px);
+}
+.arrow--table.arrow--next{
+    right: 0;
+    
+    @include border-radius(0 90px 90px 0);
+}
+
+// Arrow filled
+.arrow--filled:after{
+    display: block;
+    width: 0;
+    height: 0;
+    margin-top: 5px;
+    border-style: solid;
+    border-width: 5px 4px 0 4px;
+}
+.arrow--filled--white:after{
+    border-color: $color-arrows-semi-transparent transparent transparent transparent;
+}
+.arrow--filled--blue:after{
+    border-color: $color-arrows-blue transparent transparent transparent;
+}

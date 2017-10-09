@@ -1,0 +1,82 @@
+@charset 'UTF-8';
+
+// 1. Configuration and helpers
+@import
+    'abstracts/variables',
+    'abstracts/functions',
+    'abstracts/mixins';
+
+// 2. Vendors
+@import
+    'vendor/normalize';
+
+// 3. Base stuff
+@import
+    'base/base',
+    'base/helpers',
+    'base/grid';
+
+// 4. Master layout
+// CSS Styles that are inherited by all layouts
+@import
+    '../../components/Layout/layout';
+
+// 5. Child layouts
+// Each layout (Login & Dashboard for now) inherits the global styles in layout
+@import
+    '../../components/Layout/LayoutLogin/layout-login',
+    '../../components/Layout/LayoutDashboard/layout-dashboard';
+
+// 6. Local Modules
+// Modules that are local to a layout
+@import
+    '../../components/Breadcrumb/breadcrumb',
+    '../../components/Status/status',
+    '../../components/Tooltip/tooltip',
+    '../../components/Menu/menu',
+    '../../components/CustomSelect/custom-select',
+    '../../components/Calendar/calendar',
+    '../../components/Chart/chart',
+    '../../components/Table/table';
+
+@import
+    '../../modules/module',
+    '../../modules/Footer/footer',
+    '../../modules/Header/header',
+    '../../modules/Contact/contact',
+    '../../modules/GroupButtons/group-buttons',
+    '../../modules/News/news',
+    '../../modules/Aside/aside',
+    '../../modules/Toolbar/toolbar',
+    '../../modules/Comment/comment',
+    '../../modules/Configuration/configuration',
+    '../../modules/Switch/switch',
+    '../../modules/Channel/channel',
+    '../../modules/Filter/filter',
+    '../../modules/Alert/alert',
+    '../../modules/Grid/table-grid',
+    '../../modules/Schedule/schedule',
+    '../../modules/Report/report',
+    '../../modules/ItemDetails/item-detail';
+
+// 7. Global components
+// CSS Components that can be found all over the app
+@import
+    'global-components/logo',
+    'global-components/placeholder',
+    'global-components/button',
+    'global-components/arrow',
+    'global-components/icon',
+    'global-components/circle',
+    'global-components/triangle',
+    'global-components/overlay',
+    'global-components/input';
+
+/*
+// 7. Pages-specific styles
+// Each page inherits the global styles defined in its layout and 
+// has its own and specific styles defined here
+@import
+     '../../components/Layout/LayoutLogin/layout-login',
+    '../../components/Layout/LayoutDashboard/layout-dashboard';
+*/

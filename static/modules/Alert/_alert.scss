@@ -1,0 +1,35 @@
+// Module alert
+.module--alert{
+    position: relative;
+    background: $white;
+    opacity: 1;
+    
+    @include transition(0.3s, all);
+}
+.module--alert.hidden{
+    height: 0;
+    opacity: 0;
+    margin: 18px 0;
+    z-index: -1;
+}
+.module--alert .content--container{
+    border-top: 0 none;
+}
+.alert--container{
+    overflow: hidden;
+}
+.alert--block:first-child{
+    float: left;
+    width: auto;
+    margin-right: 85px;
+}
+.alert--block:last-child{
+    display: inline-block;
+    float: none;
+}
+.alert--content{
+    padding: 40px $global-padding 10px $global-padding;
+}
+.module--alert .label--key{
+    width: 100px;
+}

@@ -1,0 +1,98 @@
+// Icon close
+.icon--close{
+    text-indent: -9999px;
+}
+.icon--close:before,
+.icon--close:after{
+    content: "";
+    display: block;
+    position: absolute;
+    width: 28px;
+    height: 2px;
+    top: 50%;
+    left: 10px;
+    background: $medium-blue;
+}
+.icon--close:before{
+    @include transform(rotate(45deg));
+}
+.icon--close:after{
+    @include transform(rotate(-45deg));
+}
+
+.tooltip .icon--close{
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: block;
+    width: 48px;
+    height: 48px;
+}
+
+// Icon calendar
+.icon--calendar{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 33px;
+    height: 33px;
+    background-color: $color-icon-calendar-background;
+    background-image: url('../../global/img/icon-calendar-white.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    
+    border-top-right-radius: 2px;
+    -webkit-border-top-right-radius: 2px;
+    -moz-border-top-right-radius: 2px;
+    
+    border-bottom-right-radius: 2px;
+    -webkit-border-bottom-right-radius: 2px;
+    -moz-border-bottom-right-radius: 2px;
+    
+    &:hover{
+        background-color: $color-icon-calendar-hover-background;
+    }
+}
+
+// Icons contact
+.icon--contact{
+    margin: 0 20px 0 0;
+    padding: 0;
+    float: left;
+    width: 13px;
+    display: block; 
+    text-indent: -9999px;
+}
+.icon--phone{
+    background: url('../../global/img/icon-phone-blue.svg') no-repeat center 4px;
+}
+.icon--mail{
+    background: url('../../global/img/icon-mail-blue.svg') no-repeat center 4px;
+}
+
+// Icon FAQ
+.icon--faq{
+    background-image: url('../../global/img/icon-faq-grey.svg');
+    background-repeat: no-repeat;
+    background-position: 20px 50%;
+}
+.icon--faq:after{
+    background-image: url('../../global/img/icon-faq-white.svg');
+}
+
+// Icon Configuration
+.icon--configuration{
+    background-image: url('../../global/img/icon-configuration-grey.svg');
+    background-repeat: no-repeat;
+    background-position: 20px 50%;
+}
+.icon--configuration:after{
+    background-image: url('../../global/img/icon-configuration-white.svg');
+}
+
+// Icon storm
+.icon--storm{
+    background-image: url('../../global/img/icon-storm-white.svg');
+    background-repeat: no-repeat;
+    background-position: 20px 13px;
+}

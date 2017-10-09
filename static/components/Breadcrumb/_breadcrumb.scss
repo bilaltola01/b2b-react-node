@@ -1,0 +1,27 @@
+//
+// Breadcrumbs
+//
+
+.breadcrumbs{
+    margin: 0 0 10px 0;
+    padding: 0;
+    list-style: none;
+}
+.breadcrumbs li{
+    display: inline-block;
+}
+.breadcrumbs li:after{
+    content: ">";
+    display: inline-block;
+    margin: 0 0 0 5px;
+    color: $light-blue;
+    font-size: 0.75rem;
+}
+.breadcrumbs li:last-child:after{
+    display: none;
+}
+.breadcrumbs li a{
+    font-size: 0.75em;
+    text-decoration: underline;
+    color: $light-blue;
+}
