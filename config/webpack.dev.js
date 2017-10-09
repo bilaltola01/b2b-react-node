@@ -11,7 +11,7 @@ module.exports = webpackMerge(commonConfig, {
 
     output: {
         path: '/',//helpers.root('dist'),
-        publicPath: helpers.root() + PORT + '/',
+        publicPath: 'https://one-menu-b2b.herokuapp.com:' + PORT + '/',
         filename: '[name]-bundle.js',//[name].js',
         chunkFilename: '[id].chunk.js'
     },
