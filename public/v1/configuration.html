@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+        <title>Configuration</title>
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=no">
+
+        <script src="scripts/js/bundle.js"></script>
+        
+        <script>
+            PageReports();
+        </script>
+        
+        <link href='https://fonts.googleapis.com/css?family=Lato:400,700,900,300,100' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="styles/main.css">
+        
+    </head>
+    <body>
+        <div id="global-container" class="global-container layout--dashboard">
+            <!-- OUTDATED BROWSER MESSAGE -->
+            <!--[if IE 9]><div class="browser-outdated ie9"><![endif]-->
+            <!--[if gt IE 9]><!--> <div class="browser-outdated"> <!--<![endif]-->
+                <p class="browser-outdated--upgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+            </div>
+            
+            <!-- ##MODAL -->
+            <div id="modal--target" class="overlay overlay--modal hidden">
+                
+            </div>
+            
+            <!-- ##HEADER -->
+            <header class="navigation">
+                <h1 class="logo--main--dashboard">
+                    <a href="index.html"><img src="static/global/img/logo-nbc-universal-white-2.svg" alt="Logo of NBC Universal"></a>
+                </h1>
+                
+                <!-- ##MAIN-NAVIGATION -->
+                <nav class="navigation--main">
+                    <ul class="navigation--first-level">
+                        <li>
+                            <a href="dashboard.html">Dashboard</a>
+                        </li>
+                        <li>
+                            <a class="has-subnav subnav-opened" href="#,">Media Management</a>
+                            <ul class="navigation--sub-level">
+                                <li><a href="schedules.html">Schedules</a></li>
+                                <li><a href="asset-tracking.html">Asset tracking</a></li>
+                                <li><a href="catalogue.html">Catalogue</a></li>
+                                <li><a href="reports.html">Reports</a></li>
+                                <li><a href="support.html">Support</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#,">Confidence Feed</a>
+                        </li>
+                        <li>
+                            <a class="has-subnav" href="#,">Live to File</a>
+                            <ul class="navigation--sub-level">
+                                <li><a href="#,">File Overview</a></li>
+                                <li><a href="catalogue.html">Catalogue</a></li>
+                                <li><a href="reports.html">Reports</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+                
+                <!-- ##LINKS -->
+                <ul class="navigation--secondary">
+                    <li><a class="link-icon nav-active icon--configuration" href="configuration.html">Configurations</a></li>
+                    <li><a class="link-icon icon--faq" href="faqs.html">FAQS</a></li>
+                </ul>
+                
+            </header>
+            
+            <!-- ##CONTENT -->
+            <div class="content">
+                
+                <!-- ##TOOLBAR -->
+                <section class="toolbar clearfix">
+                    <h3 class="content--container--title">Arqiva Customer Portal</h3>
+                    <nav class="admin-nav">
+                        <a href="#,">
+                            <h4 class="login">
+                                Catherine
+                                <span>Admin</span>
+                            </h4>
+                            <img src="static/global/img/avatar-admin@2x.png" alt="Avatar of Catherine">
+                        </a>
+                    </nav>
+                </section>
+                
+                <main class="content--section section--dark section--no-aside section--configuration global-padding-wrapper">
+                    <h1 class="content--title">Configurations</h1>
+
+                    <h2 class="content--subtitle">Service menu</h2>
+                    <p class="content--text">
+                        Select items you want to see/hide on your menu.
+                    </p>
+
+                    <div class="configuration--items clearfix">
+                        <div class="configuration--item">
+                            <p class="custom-radio">  
+                                <input type="checkbox" name="media-management" id="media-management" class="input--custom-radio" checked>
+                                <label class="custom-radio--label content--table--title" for="media-management">Media management</label>
+                            </p>
+                            <ul>
+                                <li>Schedules</li>
+                                <li>Asset tracking</li>
+                                <li>Catalogue</li>
+                                <li>Reports</li>
+                                <li>Support</li>
+                            </ul>
+                        </div>
+                        <div class="configuration--item">
+                            <p class="custom-radio">  
+                                <input type="checkbox" name="live-to-file" id="live-to-file" class="input--custom-radio" checked>
+                                <label class="custom-radio--label content--table--title" for="live-to-file">Live to File</label>
+                            </p>
+                            <ul>
+                                <li>File Overview</li>
+                                <li>Catalogue</li>
+                                <li>Reports</li>
+                            </ul>
+                        </div>
+                        <div class="configuration--item">
+                            <p class="custom-radio">  
+                                <input type="checkbox" name="distribution" id="distribution" class="input--custom-radio">
+                                <label class="custom-radio--label content--table--title" for="distribution">Media Distribution</label>
+                            </p>
+                            <ul>
+                                <li>Overview</li>
+                                <li>Fiber</li>
+                                <li>Satellite</li>
+                            </ul>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        
+        
+            <!-- ##FOOTER -->
+            <footer class="footer clearfix">
+                <div class="footer--logo">
+                    <p>Service provided by</p>
+                    <img src="static/global/img/logo-arqiva-red.svg" alt="Logo of Arqiva">
+                </div>
+                <div class="footer--menu clearfix">
+                    <ul>
+                        <li><a href="#,">Arqiva.com</a></li>
+                        <li><a href="#,">Terms & Conditions</a></li>
+                        <li><a href="#,">Contact</a></li>
+                        <li><a href="#,">Configuration</a></li>
+                        <li><a href="#,">FAQS</a></li>
+                    </ul>
+                    <p class="copyright">
+                        &copy; Copyright Arqiva 2016
+                    </p>
+                </div>
+            </footer>
+        </div>
+        
+    </body>
+</html>

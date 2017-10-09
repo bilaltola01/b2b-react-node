@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+        <title>Schedules</title>
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=no">
+
+        <script src="scripts/js/bundle.js"></script>
+        
+        <script>
+            PageSchedules();
+        </script>
+        
+        <link href='https://fonts.googleapis.com/css?family=Lato:400,700,900,300,100' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="styles/main.css">
+        
+    </head>
+    <body>
+        <div id="global-container" class="global-container layout--dashboard">
+            <!-- OUTDATED BROWSER MESSAGE -->
+            <!--[if IE 9]><div class="browser-outdated ie9"><![endif]-->
+            <!--[if gt IE 9]><!--> <div class="browser-outdated"> <!--<![endif]-->
+                <p class="browser-outdated--upgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+            </div>
+            
+            <!-- ##MODAL -->
+            <div id="modal--target" class="overlay overlay--modal hidden">
+                
+            </div>
+            
+            <!-- ##HEADER -->
+            <header class="navigation">
+                <h1 class="logo--main--dashboard">
+                    <a href="index.html"><img src="images/logo-nbc-universal-white-2.svg" alt="Logo of NBC Universal"></a>
+                </h1>
+                
+                <!-- ##MAIN-NAVIGATION -->
+                <nav class="navigation--main">
+                    <ul class="navigation--first-level">
+                        <li>
+                            <a href="dashboard.html">Dashboard</a>
+                        </li>
+                        <li>
+                            <a class="has-subnav subnav-opened" href="#,">Media Management</a>
+                            <ul class="navigation--sub-level">
+                                <li><a class="nav-active" href="schedules.html">Schedules</a></li>
+                                <li><a href="asset-tracking.html">Asset tracking</a></li>
+                                <li><a href="catalogue.html">Catalogue</a></li>
+                                <li><a href="reports.html">Reports</a></li>
+                                <li><a href="support.html">Support</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#,">Confidence Feed</a>
+                        </li>
+                        <li>
+                            <a class="has-subnav" href="#,">Live to File</a>
+                            <ul class="navigation--sub-level">
+                                <li><a href="#,">File Overview</a></li>
+                                <li><a href="catalogue.html">Catalogue</a></li>
+                                <li><a href="reports.html">Reports</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+                
+                <!-- ##LINKS -->
+                <ul class="navigation--secondary">
+                    <li><a class="link-icon icon--configuration" href="configuration.html">Configurations</a></li>
+                    <li><a class="link-icon icon--faq" href="faqs.html">FAQS</a></li>
+                </ul>
+                
+            </header>
+            
+            <!-- ##CONTENT -->
+            <div class="content">
+                
+                <!-- ##TOOLBAR -->
+                <section class="toolbar clearfix">
+                    <h3 class="content--container--title">Arqiva Customer Portal</h3>
+                    <nav class="admin-nav">
+                        <a href="#,">
+                            <h4 class="login">
+                                Catherine
+                                <span>Admin</span>
+                            </h4>
+                            <img src="images/avatar-admin@2x.png" alt="Avatar of Catherine">
+                        </a>
+                    </nav>
+                </section>
+                
+                <div class="main-content">
+                    <!-- ##ASIDE -->
+                    <aside class="aside">
+
+                        <!-- ##SERVICE EXCELLENCE -->
+                        <section class="aside--section section--recent-activity">
+                           
+                            
+                            <h1 class="aside--title">Recent Activity</h1>
+                            <div class="comment comment--box global-padding-wrapper">
+                                
+                                <img class="comment--avatar" src="images/avatar-admin@2x.png" alt="">
+                                <div class="comment--content">
+                                    <form>
+                                        <textarea class="comment--textarea">Make a comment</textarea>
+                                        <button type="submit" class="button--textarea">Post</button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="comment">
+                                <a href="#," class="comments-opened comment--title--link has-comments">
+                                    <h2 class="comment--title">Today</h2>
+                                </a>
+                                <div class="comments">
+                                    <div class="comment--container">
+                                        <img class="comment--avatar" src="images/avatar-charlie@2x.png" alt="">
+                                        <div class="comment--content">
+                                            <h3 class="comment--content--title">Charlie Johnson</h3>
+                                            <span class="title--datetime">
+                                                <time datetime="">
+                                                    <span class="title--date">17:27</span> <span class="title--timezone">GMT</span>
+                                                </time>
+                                            </span>
+                                            <p class="comment--content--text news--text">
+                                                I'm transferring the 4 missing assets for <em>Final v4</em> now
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="comment--container">
+                                        <img class="comment--avatar" src="images/img-a.svg" alt="">
+                                        <div class="comment--content">
+                                            <h3 class="comment--content--title">Arqiva</h3>
+                                            <span class="title--datetime">
+                                                <time datetime="">
+                                                    <span class="title--date">17:30</span> <span class="title--timezone">GMT</span>
+                                                </time>
+                                            </span>
+                                            <p class="comment--content--text news--text">
+                                                <em>Final v4</em> processed and <em>4 assets missing</em>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="comment">
+                                <a href="#," class="comment--title--link has-comments">
+                                    <h2 class="comment--title">30/06/2016</h2>
+                                </a>
+                                <div class="comments">
+                                    <div class="comment--container">
+                                        <img class="comment--avatar" src="images/img-a.svg" alt="">
+                                        <div class="comment--content">
+                                            <h3 class="comment--content--title">Arqiva</h3>
+                                            <span class="title--datetime">
+                                                <time datetime="">
+                                                    <span class="title--date">17:30</span> <span class="title--timezone">GMT</span>
+                                                </time>
+                                            </span>
+                                            <p class="comment--content--text news--text">
+                                                <em>Final v4</em> processed and <em>4 assets missing</em>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="comment">
+                                <a href="#," class="comment--title--link has-comments">
+                                    <h2 class="comment--title">29/06/2016</h2>
+                                </a>
+                                <div class="comments">
+                                    <div class="comment--container">
+                                        <img class="comment--avatar" src="images/img-a.svg" alt="">
+                                        <div class="comment--content">
+                                            <h3 class="comment--content--title">Arqiva</h3>
+                                            <span class="title--datetime">
+                                                <time datetime="">
+                                                    <span class="title--date">17:30</span> <span class="title--timezone">GMT</span>
+                                                </time>
+                                            </span>
+                                            <p class="comment--content--text news--text">
+                                                <em>Final v4</em> processed and <em>4 assets missing</em>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="comment">
+                                <a href="#," class="comment--title--link has-comments">
+                                    <h2 class="comment--title">28/06/2016</h2>
+                                </a>
+                                <div class="comments">
+                                    <div class="comment--container">
+                                        <img class="comment--avatar" src="images/img-a.svg" alt="">
+                                        <div class="comment--content">
+                                            <h3 class="comment--content--title">Arqiva</h3>
+                                            <span class="title--datetime">
+                                                <time datetime="">
+                                                    <span class="title--date">17:30</span> <span class="title--timezone">GMT</span>
+                                                </time>
+                                            </span>
+                                            <p class="comment--content--text news--text">
+                                                <em>Final v4</em> processed and <em>4 assets missing</em>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </aside>
+
+                    <!-- ##MAIN -->
+                    <main class="main">
+                        
+                        <!-- ##SECTION -->
+                        <section class="content--section section--dashboard">
+                            <h1 class="content--title">
+                                Schedule overview
+                                <span class="title--datetime">
+                                    Updated
+                                    <time datetime="">
+                                        <span class="title--date">06/08/2016 - 18:00</span> <span class="title--timezone">GMT</span>
+                                    </time>
+                                </span>
+                            </h1>
+
+                            <!-- ##MODULE-SCHEDULE -->
+                            <article class="content--module module--schedule">
+                                <div class="content--container has-table">
+                                    <header class="content--container--header no-border">
+                                        <div class="schedule--filters--container">
+                                            <div class="filters--header">
+                                                <h2 class="content--container--title filter--title">Filter by:</h2>
+                                                <form class="form--search">
+                                                    <input type="text" class="input--search" name="schedule--search" id="schedule--search" placeholder="Search">
+                                                    <button class="button--search" type="submit">Search</button>
+                                                </form>
+                                            </div>
+                                            <div class="filters">
+                                                <div class="filter">
+                                                    <div class="filter--container">
+                                                        <div class="filter--header">
+                                                            <h3 class="filter--subtitle">Channels</h3>
+                                                            <a href="#," class="filter--link">Clear</a>
+                                                        </div>
+                                                        <div class="filter--scrollable">
+                                                            <p class="filter--option">
+                                                                <input type="checkbox" name="channels--all" id="channels--all" class="input--checkbox">
+                                                                <label class="checkbox--label" for="channels--all">All</label>
+                                                            </p>
+                                                            <p class="filter--option">
+                                                                <input type="checkbox" name="channels--13-france" id="channels--13-france" class="input--checkbox" checked>
+                                                                <label class="checkbox--label" for="channels--13-france">13th St France (<span class="filter--count">2</span>)</label>
+                                                            </p>
+                                                            <p class="filter--option">
+                                                                <input type="checkbox" name="channels--13-poland" id="channels--13-poland" class="input--checkbox" checked>
+                                                                <label class="checkbox--label" for="channels--13-poland">13th St Poland (<span class="filter--count">2</span>)</label>
+                                                            </p>
+                                                            <p class="filter--option">
+                                                                <input type="checkbox" name="channels--diva-romania" id="channels--diva-romania" class="input--checkbox" checked>
+                                                                <label class="checkbox--label" for="channels--diva-romania">Diva Romania (<span class="filter--count">4</span>)</label>
+                                                            </p>
+                                                            <p class="filter--option">
+                                                                <input type="checkbox" name="channels--movies-24" id="channels--movies-24" class="input--checkbox" checked>
+                                                                <label class="checkbox--label" for="channels--movies-24">Movies 24 (<span class="filter--count">4</span>)</label>
+                                                            </p>
+                                                            <p class="filter--option">
+                                                                <input type="checkbox" name="channels--movies-24plus" id="channels--movies-24plus" class="input--checkbox" checked>
+                                                                <label class="checkbox--label" for="channels--movies-24plus">Movies 24 Plus (<span class="filter--count">4</span>)</label>
+                                                            </p>
+                                                            <p class="filter--option">
+                                                                <input type="checkbox" name="channels--scifi-poland" id="channels--scifi-poland" class="input--checkbox" checked>
+                                                                <label class="checkbox--label" for="channels--scifi-poland">Sci Fi Poland (<span class="filter--count">4</span>)</label>
+                                                            </p>
+                                                            <p class="filter--option">
+                                                                <input type="checkbox" name="channels--studio-uni-sa" id="channels--studio-uni-sa" class="input--checkbox" checked>
+                                                                <label class="checkbox--label" for="channels--studio-uni-sa">Studio Uni SA (<span class="filter--count">4</span>)</label>
+                                                            </p>
+                                                            <p class="filter--option">
+                                                                <input type="checkbox" name="channels--syfy-france" id="channels--syfy-france" class="input--checkbox" checked>
+                                                                <label class="checkbox--label" for="channels--syfy-france">SyFy France (<span class="filter--count">4</span>)</label>
+                                                            </p>
+                                                            <p class="filter--option">
+                                                                <input type="checkbox" name="channels--syfy-middle-east" id="channels--syfy-middle-east" class="input--checkbox" checked>
+                                                                <label class="checkbox--label" for="channels--syfy-middle-east">SyFy Middle East (<span class="filter--count">4</span>)</label>
+                                                            </p>
+                                                            <p class="filter--option">
+                                                                <input type="checkbox" name="channels--syfy-uk" id="channels--syfy-uk" class="input--checkbox" checked>
+                                                                <label class="checkbox--label" for="channels--syfy-uk">SyFy UK (<span class="filter--count">4</span>)</label>
+                                                            </p>
+                                                            <p class="filter--option">
+                                                                <input type="checkbox" name="channels--tele-mundo-sa" id="channels--tele-mundo-sa" class="input--checkbox" checked>
+                                                                <label class="checkbox--label" for="channels--tele-mundo-sa">Tele Mundo SA (<span class="filter--count">4</span>)</label>
+                                                            </p>
+                                                            <p class="filter--option">
+                                                                <input type="checkbox" name="channels--universal-hungary" id="channels--universal-hungary" class="input--checkbox" checked>
+                                                                <label class="checkbox--label" for="channels--universal-hungary">Universal Hungary (<span class="filter--count">4</span>)</label>
+                                                            </p>
+                                                            <p class="filter--option">
+                                                                <input type="checkbox" name="channels--universal-ireland" id="channels--universal-ireland" class="input--checkbox" checked>
+                                                                <label class="checkbox--label" for="channels--universal-ireland">Universal Ireland (<span class="filter--count">4</span>)</label>
+                                                            </p>
+                                                            <p class="filter--option">
+                                                                <input type="checkbox" name="channels--universal-poland" id="channels--universal-poland" class="input--checkbox" checked>
+                                                                <label class="checkbox--label" for="channels--universal-poland">Universal Poland (<span class="filter--count">4</span>)</label>
+                                                            </p>
+                                                            <p class="filter--option">
+                                                                <input type="checkbox" name="channels--universal-sa" id="channels--universal-sa" class="input--checkbox" checked>
+                                                                <label class="checkbox--label" for="channels--universal-sa">Universal SA (<span class="filter--count">4</span>)</label>
+                                                            </p>
+                                                            <p class="filter--option">
+                                                                <input type="checkbox" name="channels--universal-uk" id="channels--universal-uk" class="input--checkbox" checked>
+                                                                <label class="checkbox--label" for="channels--universal-uk">Universal UK (<span class="filter--count">4</span>)</label>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="filter">
+                                                    <div class="filter--container">
+                                                        <div class="filter--header">
+                                                            <h3 class="filter--subtitle">Schedule Type</h3>
+                                                            <a href="#," class="filter--link">Clear</a>
+                                                        </div>
+                                                        <div class="filter--scrollable">
+                                                            <p class="filter--option">
+                                                                <input type="checkbox" name="schedule-type--all" id="schedule-type--all" class="input--checkbox" checked>
+                                                                <label class="checkbox--label" for="schedule-type--all">All</label>
+                                                            </p>
+                                                            <p class="filter--option">
+                                                                <input type="checkbox" name="schedule-type--advanced" id="schedule-type--advanced" class="input--checkbox">
+                                                                <label class="checkbox--label" for="schedule-type--advanced">Advanced (<span class="filter--count">13</span>)</label>
+                                                            </p>
+                                                            <p class="filter--option">
+                                                                <input type="checkbox" name="schedule-type--final" id="schedule-type--final" class="input--checkbox">
+                                                                <label class="checkbox--label" for="schedule-type--final">Final (<span class="filter--count">2</span>)</label>
+                                                            </p>         
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="filter">
+                                                    <div class="filter--container">
+                                                        <div class="filter--header">
+                                                            <h3 class="filter--subtitle">Schedule Status</h3>
+                                                            <a href="#," class="filter--link">Clear</a>
+                                                        </div>
+                                                        <div class="filter--scrollable">
+                                                            <p class="filter--option">
+                                                                <input type="checkbox" name="schedule-status--all" id="schedule-status--all" class="input--checkbox" checked>
+                                                                <label class="checkbox--label" for="schedule-status--all">All</label>
+                                                            </p>
+                                                            <p class="filter--option">
+                                                                <input type="checkbox" name="schedule-status--received" id="schedule-status--received" class="input--checkbox">
+                                                                <label class="checkbox--label" for="schedule-status--received">Received (<span class="filter--count">13</span>)</label>
+                                                            </p>
+                                                            <p class="filter--option">
+                                                                <input type="checkbox" name="schedule-status--blank" id="schedule-status--blank" class="input--checkbox">
+                                                                <label class="checkbox--label" for="schedule-status--blank">Processing (<span class="filter--count">2</span>)</label>
+                                                            </p>         
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="filters--inline schedule--actions">
+                                            <div class="filters--inline--metadata schedule--metadata">
+                                                <div class="filter--schedule-date">
+                                                    <p>
+                                                        <label class="label--schedule-date">Date</label>
+                                                        <input type="text" name="schedule--date-from" class="input--schedule-date schedule--date-from display-calendar" id="schedule--date-from" value="06/08/2016">
+                                                        <a href="#," class="icon--calendar display-calendar"></a>
+                                                        <div class="calendar--container">
+                                                            <div class="triangle triangle--calendar"></div>
+                                                            <div class="calendar date-picker">
+                                                                <ol id="calendar--year" class="calendar--year">
+
+                                                                </ol>
+                                                            </div>
+                                                        </div>
+                                                    </p>
+                                                   <p>
+                                                        <label class="label--schedule-date">- to -</label>
+                                                        <input type="text" name="schedule--date-to" class="input--schedule-date" value="10/08/2016">
+                                                    </p>
+                                                </div>
+                                                <span class="title--datetime">
+                                                    Showing
+                                                    <span class="schedule--displayed">34</span> of <span class="schedule--total">60</span> available schedules
+                                                    </time>
+                                                </span>
+                                            </div>
+                                            <div class="push-right">
+                                                <a href="#," class="button--action button--action-filled">Export Missing List (xls)</a>
+                                            </div>
+                                        </div>
+                                    </header>
+                                    <div class="global-padding-wrapper arrow--table--container">
+                                        <div class="content--table-container table--schedule has-hover">
+                                            <a href="#," class="arrow--table arrow--prev" id="arrow--prev">Previous</a>
+                                            <a href="#," class="arrow--table arrow--next" id="arrow--next">Next</a>
+                                            <table class="content--table">
+                                                <thead>
+                                                    <tr class="clickable-row" data-href="asset-tracking.html">
+                                                        <th class="content--table--title">Channel</th>
+                                                        <th class="content--table--title">06/08</th>
+                                                        <th class="content--table--title">07/08</th>
+                                                        <th class="content--table--title">08/08</th>
+                                                        <th class="content--table--title">09/08</th>
+                                                        <th class="content--table--title">10/08</th>
+                                                        <th class="content--table--title">11/08</th>
+                                                        <th class="content--table--title">12/08</th>
+                                                        <th class="content--table--title">13/08</th>
+                                                        <th class="content--table--title">14/08</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr class="clickable-row" data-href="asset-tracking.html">
+                                                        <td>13th St France</td>
+                                                        <td><span class="status status--success">Success</span>Final V1</td>
+                                                        <td><span class="status status--success">Success</span>Final V1</td>
+                                                        <td><span class="status status--warning">Warning</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                    </tr>
+                                                    <tr class="clickable-row" data-href="asset-tracking.html">
+                                                        <td>13th St Poland</td>
+                                                        <td><span class="status status--success">Success</span>Final V1</td>
+                                                        <td><span class="status status--success">Success</span>Final V1</td>
+                                                        <td><span class="status status--warning">Warning</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                    </tr>
+                                                    <tr class="clickable-row" data-href="asset-tracking.html">
+                                                        <td>Diva Romania</td>
+                                                        <td><span class="status status--success">Success</span>Final V1</td>
+                                                        <td><span class="status status--warning">Warning</span>Advance V1</td>
+                                                        <td><span class="status status--warning">Warning</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                    </tr>
+                                                    <tr class="clickable-row" data-href="asset-tracking.html">
+                                                        <td>Movies 24</td>
+                                                        <td><span class="status status--success">Success</span>Final V1</td>
+                                                        <td><span class="status status--success">Success</span>Final V1</td>
+                                                        <td><span class="status status--warning">Warning</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                    </tr>
+                                                    <tr class="clickable-row" data-href="asset-tracking.html">
+                                                        <td>Movies 24 Plus</td>
+                                                        <td><span class="status status--success">Success</span>Final V1</td>
+                                                        <td><span class="status status--success">Success</span>Final V1</td>
+                                                        <td><span class="status status--warning">Warning</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                    </tr>
+                                                    <tr class="clickable-row" data-href="asset-tracking.html">
+                                                        <td>Sci Fi Poland</td>
+                                                        <td><span class="status status--success">Success</span>Final V1</td>
+                                                        <td><span class="status status--success">Success</span>Final V1</td>
+                                                        <td><span class="status status--warning">Warning</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                    </tr>
+                                                    <tr class="clickable-row" data-href="asset-tracking.html">
+                                                        <td>Studio Uni SA</td>
+                                                        <td><span class="status status--success">Success</span>Final V1</td>
+                                                        <td><span class="status status--warning">Warning</span>Advance V1</td>
+                                                        <td><span class="status status--warning">Warning</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                    </tr>
+                                                    <tr class="clickable-row" data-href="asset-tracking.html">
+                                                        <td>SyFy France</td>
+                                                        <td><span class="status status--success">Success</span>Final V1</td>
+                                                        <td class="cell-issue">
+                                                            <span class="status status--issue display-tooltip">
+                                                                Issue
+                                                            </span>
+                                                            <div class="tooltip tooltip--issue">
+                                                                <a href="#," class="icon--close">Close</a>
+                                                                <h2 class="tooltip--title"><span class="status status--issue display-tooltip">Issue</span>Lorem ipsum dolor sit amet</h2>
+                                                                <p class="main--text">
+                                                                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.<br>
+                                                                    Comments: “Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.”
+                                                                </p>
+                                                                <div class="triangle triangle--rounded"></div>
+                                                            </div>
+                                                            No Schedule
+                                                        </td>
+                                                        <td><span class="status status--warning">Warning</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                    </tr>
+                                                    <tr class="clickable-row" data-href="asset-tracking.html">
+                                                        <td>SyFy Middle East</td>
+                                                        <td><span class="status status--success">Success</span>Final V1</td>
+                                                        <td><span class="status status--warning">Warning</span>Advance V1</td>
+                                                        <td><span class="status status--warning">Warning</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                    </tr>
+                                                    <tr class="clickable-row" data-href="asset-tracking.html">
+                                                        <td>SyFy UK</td>
+                                                        <td><span class="status status--success">Success</span>Final V1</td>
+                                                        <td class="cell-issue">
+                                                            <span class="status status--issue display-tooltip">
+                                                                Issue
+                                                            </span>
+                                                            <div class="tooltip tooltip--issue">
+                                                                <a href="#," class="icon--close">Close</a>
+                                                                <h2 class="tooltip--title"><span class="status status--issue display-tooltip">Issue</span>Lorem ipsum dolor sit amet</h2>
+                                                                <p class="main--text">
+                                                                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.<br>
+                                                                    Comments: “Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.”
+                                                                </p>
+                                                                <div class="triangle triangle--rounded"></div>
+                                                            </div>
+                                                            No Schedule
+                                                        </td>
+                                                        <td><span class="status status--warning">Warning</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                    </tr>
+                                                    <tr class="clickable-row" data-href="asset-tracking.html">
+                                                        <td>Tele Mundo SA</td>
+                                                        <td><span class="status status--success">Success</span>Final V1</td>
+                                                        <td><span class="status status--warning">Warning</span>Advance V1</td>
+                                                        <td><span class="status status--warning">Warning</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                    </tr>
+                                                    <tr class="clickable-row" data-href="asset-tracking.html">
+                                                        <td>Universal Hungary</td>
+                                                        <td><span class="status status--success">Success</span>Final V1</td>
+                                                        <td><span class="status status--warning">Warning</span>Advance V1</td>
+                                                        <td><span class="status status--warning">Warning</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                    </tr>
+                                                    <tr class="clickable-row" data-href="asset-tracking.html">
+                                                        <td>Universal Ireland</td>
+                                                        <td><span class="status status--success">Success</span>Final V1</td>
+                                                        <td><span class="status status--warning">Warning</span>Advance V1</td>
+                                                        <td><span class="status status--warning">Warning</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                    </tr>
+                                                    <tr class="clickable-row" data-href="asset-tracking.html">
+                                                        <td>Universal Poland</td>
+                                                        <td><span class="status status--success">Success</span>Final V1</td>
+                                                        <td><span class="status status--warning">Warning</span>Advance V1</td>
+                                                        <td><span class="status status--warning">Warning</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                    </tr>
+                                                    <tr class="clickable-row" data-href="asset-tracking.html">
+                                                        <td>Universal SA</td>
+                                                        <td><span class="status status--success">Success</span>Final V1</td>
+                                                        <td><span class="status status--warning">Warning</span>Advance V1</td>
+                                                        <td><span class="status status--warning">Warning</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                    </tr>
+                                                    <tr class="clickable-row" data-href="asset-tracking.html">
+                                                        <td>Universal UK</td>
+                                                        <td><span class="status status--success">Success</span>Final V1</td>
+                                                        <td><span class="status status--warning">Warning</span>Advance V1</td>
+                                                        <td><span class="status status--warning">Warning</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                        <td><span class="status status--blank">Processing</span>Advance V1</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+                        </section>
+
+                    </main>
+                </div>
+            </div>
+        
+        
+            <!-- ##FOOTER -->
+            <footer class="footer clearfix">
+                <div class="footer--logo">
+                    <p>Service provided by</p>
+                    <img src="images/logo-arqiva-red.svg" alt="Logo of Arqiva">
+                </div>
+                <div class="footer--menu clearfix">
+                    <ul>
+                        <li><a href="#,">Arqiva.com</a></li>
+                        <li><a href="#,">Terms & Conditions</a></li>
+                        <li><a href="#,">Contact</a></li>
+                        <li><a href="#,">Configuration</a></li>
+                        <li><a href="#,">FAQS</a></li>
+                    </ul>
+                    <p class="copyright">
+                        &copy; Copyright Arqiva 2016
+                    </p>
+                </div>
+            </footer>
+        </div>
+        
+    </body>
+</html>

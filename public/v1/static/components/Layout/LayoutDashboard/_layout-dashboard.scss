@@ -1,0 +1,265 @@
+///////////////////
+// ##LAYOUT--DASHBOARD
+///////////////////
+
+.layout--dashboard{
+    color: $medium-blue;
+    background: $color-main-background;
+}
+.layout--dashboard a{
+    color: $light-blue;
+}
+
+// Global padding wrapper
+.layout--dashboard .global-padding-wrapper{
+    padding: $global-padding;
+}
+.grid.global-padding-wrapper{
+    padding-right: 0;
+}
+.content--switches.global-padding-wrapper{
+    padding-bottom: 0;
+}
+
+
+// Links
+a.text-link:hover{
+    color: $purple;
+    text-decoration: underline;
+}
+.article--text .text-link{
+    text-decoration: underline;
+}
+.link-icon:after{
+    content: "";
+    display: block;
+    position: absolute;
+    top: 17px;
+    left: 0;
+    width: 13px;
+    height: 12px;
+    padding-left: $global-padding;
+    opacity: 0;
+    background-repeat: no-repeat;
+    background-position: 20px 50%;
+}
+.link-icon:hover{
+    background-image: none;
+}
+.link-icon:hover:after{
+    opacity: 1;
+}
+
+// Text styles
+.article--title{
+    margin: 0 0 5px 0;
+    padding: 0;
+    font-size: 0.8125em;
+    font-weight: 600;
+    color: $medium-blue;
+}
+.article--text{
+    margin: 0;
+    padding: 0;
+    font-size: 0.75em;
+}
+
+.copyright{
+    float: left;
+    margin: 0;
+    padding: 0 60px;
+    text-align: center;
+    font-size: 0.75em;
+    font-weight: 500;
+    color: $light-blue;
+    line-height: 80px;   
+}
+
+
+//
+// Main Content
+//
+.content{
+    width: auto;
+    margin-left: 200px;
+    
+    background: $content-background;
+}
+
+
+//
+// Main
+//
+
+.layout--dashboard .main{
+    margin-right: 268px;
+    padding: $global-padding;
+}
+
+
+// Section dark
+.section--no-aside{
+    min-height: 100vh;
+}
+.layout--dashboard .content--section.section--dark{
+    padding-left: 21px;
+    background: $color-section-dark-background;
+    border-left: 1px solid $color-configuration-main-border;
+}
+.section--dark .content--title{
+    color: $white;
+}
+.section--dark .content--title:before{
+    background-color: $white;
+}
+
+// Content text
+.content--text{
+    margin: 0;
+    padding: 0;
+    font-size: 0.875em;
+    font-weight: 500;
+    color: $medium-blue;
+}
+.section--dark .content--text{
+    color: $white;
+}
+
+// Content title
+.content--title{
+    position: relative;
+    margin: 0 0 36px 0;
+    padding: 0;
+    font-size: 1.6875em;
+    font-weight: 500;
+}
+.content--title:before{
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 1em;
+    height: 4px;
+    background-color: $medium-blue;
+}
+
+// Content subtitle
+.content--subtitle{
+    margin: 0 0 10px 0;
+    padding: 0;
+    font-size: 1.25em;
+    font-weight: 500;
+}
+.section--dark .content--subtitle{
+    color: $white;
+    margin: 0 0 5px 0;
+}
+.content--module.no-spacing .content--subtitle{
+    margin-bottom: 0;
+    border-bottom: 1px solid $color-module-borders;
+}
+
+// Content subsubtitle
+.content--subsubtitle{
+    margin: 0 0 10px 0;
+    padding: 0;
+    font-size: 1.0625em;
+    font-weight: 500;
+}
+.module--asset-detail .content--subsubtitle{
+    margin: 0;
+}
+.section--tabular .content--container--title,
+.section--tabular .content--container > .content--subsubtitle{
+    border-bottom: 1px solid $color-table-title-borders;
+}
+.report--header--text .content--subsubtitle{
+    margin: 0;
+}
+.section--support .report--header--text .content--subsubtitle{
+    margin: 0 0 5px 0;
+}
+
+// Content Container title
+.content--container--title{
+    margin: 0;
+    padding: 0;
+    font-size: 0.875em; // 0.8125em
+    text-transform: uppercase;
+    font-weight: 500;
+    letter-spacing: 0.046em;
+}
+.content--container--header.header--orange .content--container--title{
+    color: $white;
+}
+.icon .content--container--title{
+    padding-left: 40px;
+}
+
+
+// Title Datetime
+.title--datetime{
+    margin-left: $global-padding;
+    font-size: 0.6875rem;
+    color: $color-datetime-title;
+}
+.comment .title--datetime{
+    margin-left: 10px;
+}
+.schedule--actions.has-dropdown .title--datetime{
+    position: relative;
+    top: -3px;
+}
+
+// Content legend
+.content--legend{
+    margin-left: $global-padding;
+    color: $medium-blue;
+    font-size: 12px;
+}
+
+// Key Value styles
+.label--key{
+    display: inline-block;
+    width: 150px;
+    margin: 0;
+    padding: 0;
+    font-size: 0.6875em;
+    color: $color-key-text;
+    text-transform: uppercase;
+    font-weight: 900;
+}
+.label--value{
+    font-size: 0.75em;
+    font-weight: 600;
+    line-height: 2.7em;
+    color: $medium-blue;    
+}
+.content--label .label--value{
+    line-height: 1.8em;
+}
+
+// Checkbox label
+.checkbox--label{
+    font-size: 0.75em;
+    font-weight: 500;
+    color: $medium-blue;
+    letter-spacing: 0.05em;
+}
+
+// Asset titles styles
+.asset--title{
+    margin: 0;
+    padding: 0;
+    font-size: 1.0625em;
+    color: $medium-blue;
+    font-weight: 700;
+    
+}
+.asset--subtitle{
+    margin: 0;
+    padding: 0;
+    font-size: 0.875em;
+    color: $medium-blue;
+    font-weight: 700;
+}

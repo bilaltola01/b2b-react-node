@@ -1,0 +1,58 @@
+// -----------------------------------------------------------------------------
+// This file contains very basic styles.
+// -----------------------------------------------------------------------------
+
+html, html a{
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: greyscale;
+}
+
+html, body{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: $white;
+}
+body{
+    color: $default-text-color;
+    font: normal 16px / 1.4 $main-font-stack;
+}
+
+/*
+*, *::before, *::after {
+  box-sizing: inherit;
+} 
+*/
+
+/**
+ * Basic styles for links
+ */
+a {
+    color: $default-link-color;
+    text-decoration: none;
+    
+    -webkit-transition: background-color .30s, color .30s, border-color .30s;
+    -moz-transition: background-color .30s, color .30s, border-color .30s;
+    -o-transition: background-color .30s, color .30s, border-color .30s;
+    -ms-transition: background-color .30s, color .30s, border-color .30s;
+    transition: background-color .30s, color .30s, border-color .30s;
+
+    @include on-event {
+        color: $default-link-color;
+        text-decoration: none;
+    }
+}
+
+.global-container{
+    position: relative;
+    width: 100%;
+    min-width: 320px;
+}
+.wrapper{
+    position: relative;
+    margin: 0 auto;
+    max-width: $max-width;
+}
+.push-right{
+    float: right;
+}
