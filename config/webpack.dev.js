@@ -1,3 +1,4 @@
+const path = require('path');
 const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -10,8 +11,9 @@ module.exports = webpackMerge(commonConfig, {
     devtool: 'cheap-module-eval-source-map',
 
     output: {
-        path: '/',//helpers.root('dist'),
-        publicPath: 'https://one-menu-b2b.herokuapp.com:' + PORT + '/',
+        path: path.join(__dirname, 'public'),//helpers.root('dist'),
+        publicPath: //'https://one-menu-b2b.herokuapp.com:' + PORT + '/',
+        '/public/',
         filename: '[name]-bundle.js',//[name].js',
         chunkFilename: '[id].chunk.js'
     },
