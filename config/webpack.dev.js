@@ -4,14 +4,14 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const commonConfig = require('./webpack.common');
 const helpers = require('./helpers');
 
-const PORT = 8080;
+const PORT = process.env.PORT || 8080;
 
 module.exports = webpackMerge(commonConfig, {
     devtool: 'cheap-module-eval-source-map',
 
     output: {
         path: '/',//helpers.root('dist'),
-        publicPath: 'http://localhost:' + PORT + '/',
+        publicPath: path.join(__dirname, '') + PORT + '/',
         filename: '[name]-bundle.js',//[name].js',
         chunkFilename: '[id].chunk.js'
     },
