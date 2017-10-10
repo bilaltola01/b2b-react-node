@@ -12,7 +12,8 @@ let DBConnecter = {
 		    	password: pwd || constants.DB_PWD,
 		    	database: db || constants.DB_NAME,
 		    	ssl: has_ssl || constants.DB_SSL_ENABLED
-			} : constants.DB_STRING
+			} : constants.DB_STRING,
+			ssl: has_ssl
 		});
 	}
 };
