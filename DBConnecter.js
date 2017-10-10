@@ -5,6 +5,7 @@ let DBConnecter = {
 	connect: (host, port, db, user, pwd, has_ssl) => {
 		return knex({
 		 	client: constants.DB_TYPE,
+		 	debug: true,
 			connection: (constants.HOST === 'localhost') ? {
 		    	host: host || constants.DB_URL,
 		    	port: port || constants.DB_PORT,
@@ -13,7 +14,10 @@ let DBConnecter = {
 		    	database: db || constants.DB_NAME,
 		    	ssl: has_ssl || constants.DB_SSL_ENABLED
 			} : constants.DB_STRING,
-			ssl: has_ssl
+			ssl: has_ssl,
+			pool: {
+				max: 100
+			}
 		});
 	}
 };
