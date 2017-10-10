@@ -1,5 +1,5 @@
 const knex = require('knex');
-const constants = require('constants');
+const constants = require('../constants');
 
 let DBConnecter = {
 	connect: (host, db, user, pwd) => {
