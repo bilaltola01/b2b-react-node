@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npm run start:server",
-    "start:local": "HOST='localhost' JWT_SECRET='Q~&NvAHug*`3%M=T' CLOUDINARY_NAME='one-menu' CLOUDINARY_SECRET='VNjS8wLJW1x23xH_Sz364J4xfew' CLOUDINARY_API_KEY='834776295221634' DB_URL='localhost' DB_ENV='DEV' DB_NAME='oneme-5ru-u-121572' DB_USER='root' DB_PWD='root' node main.js",
+    "start:local": "HOST='localhost' JWT_SECRET='Q~&NvAHug*`3%M=T' CLOUDINARY_NAME='one-menu' CLOUDINARY_SECRET='VNjS8wLJW1x23xH_Sz364J4xfew' CLOUDINARY_API_KEY='834776295221634' DB_TYPE='mysql' DB_URL='localhost' DB_ENV='DEV' DB_NAME='oneme-5ru-u-121572' DB_USER='root' DB_PWD='root' node main.js",
     "start:client": "webpack-dev-server --inline --progress --hot",
     "start:server": "npm run start:node",
     "start:node": "node main.js",
@@ -31,6 +31,7 @@
     "mysql2": "1.3.3",
     "node-geocoder": "3.16.0",
     "node-libs-browser": "2.0.0",
+    "pg": "7.3.0",
     "query-string": "4.3.4",
     "react": "15.6.1",
     "react-dom": "15.6.1",

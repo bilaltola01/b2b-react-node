@@ -1,9 +1,10 @@
 const knex = require('knex');
+const constants = require('constants');
 
 let DBConnecter = {
 	connect: (host, db, user, pwd) => {
 		return knex({
-		 	client: 'mysql',
+		 	client: constants.DB_TYPE,
 			connection: {
 		    	host: host,
 		    	user: user,
