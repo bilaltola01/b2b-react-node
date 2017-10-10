@@ -10,12 +10,7 @@ let DBLayer = class {
         // Connect to the Database
         this.connection = null;
         if (!this.connection) {
-            this.connection = this.util.connect(
-                constants.DB_URL,
-                constants.DB_NAME,
-                constants.DB_USER,
-                constants.DB_PWD
-            );
+            this.connection = this.util.connect();
         }
     }
 };

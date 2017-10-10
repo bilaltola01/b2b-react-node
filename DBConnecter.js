@@ -6,10 +6,10 @@ let DBConnecter = {
 		return knex({
 		 	client: constants.DB_TYPE,
 			connection: {
-		    	host: host,
-		    	user: user,
-		    	password: pwd,
-		    	database: db
+		    	host: host || constants.DB_URL,
+		    	user: user || constants.DB_USER,
+		    	password: pwd || constants.DB_PWD,
+		    	database: db || constants.DB_NAME
 			}
 		});
 	}
