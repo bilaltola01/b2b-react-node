@@ -13,6 +13,7 @@ let DBConnecter = {
 		    	password: pwd || constants.DB_PWD,
 		    	database: db || constants.DB_NAME
 			},
+			acquireConnectionTimeout: 50000,
 			ssl: has_ssl,
 			pool: {
 				max: 100
