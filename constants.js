@@ -13,3 +13,4 @@ exports.DB_NAME = process.env.DB_NAME;
 exports.DB_USER = /*'oneme-5ru-u-121572';*/process.env.DB_USER;
 exports.DB_PWD = /*'wTYTMR^E!';*/process.env.DB_PWD;
 exports.DB_SSL_ENABLED = process.env.DB_SSL_ENABLED;
+exports.DB_STRING = process.env.DB_STRING;
