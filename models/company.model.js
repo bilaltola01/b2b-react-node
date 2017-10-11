@@ -13,7 +13,7 @@ var db = require('knex')({
       host: constants.DB_URL,
       user: constants.DB_USER,
       password: constants.DB_PWD,
-      database: constants.DB_NAME
+      database: process.env.DATABASE_URL || constants.DB_NAME
   },
   //acquireConnectionTimeout: 10000,
   //ssl: has_ssl,
