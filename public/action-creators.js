@@ -75,6 +75,8 @@ export function saveMenu (data, cb) {
           if (res && typeof cb === 'function') {
             cb(data);
           }
+        }).catch(err => {
+          console.log(err);
         });
       });
     }

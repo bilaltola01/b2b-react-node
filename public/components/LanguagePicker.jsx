@@ -4,13 +4,20 @@ class LanguagePicker extends Component {
 	render() {
 		const { onPickerClick, onPickerItemClick, data } = this.props;
 
-		let firstItemTitle;
-		switch (data.type) {
-			case 'languages':
-				firstItemTitle = (data.items && data.items.length > 0) ? data.items[0].Name : '';
-			default:
-				firstItemTitle = (data.items && data.items.length > 0) ? data.items[0].Title : '';
-		}
+		console.log(data);
+
+		let firstItemTitle = (type => {
+			switch (type) {
+				case 'languages':
+					return (data.items && data.items.length > 0) ? data.items[0].Name : '';
+				case 'branches':
+					return (data.items && data.items.length > 0) ? data.items[0].Name : '';
+				default:
+					return (data.items && data.items.length > 0) ? data.items[0].Title : '';
+			}
+		})(data.type);
+
+		console.log(firstItemTitle);
 
 		const options = (data.items && data.items.length > 0) ? data.items.map((item, index) => {
 			let finalCode = item.CodeFull ? item.CodeFull : item.Code;
@@ -22,6 +29,10 @@ class LanguagePicker extends Component {
 				case 'cuisines':
 					return (
 						<option value={item.Title} key={item.CuisineID}>{item.Title}</option>
+					);
+				case 'branches':
+					return (
+						<option value={item.Name} key={item.BranchID}>{item.Name}</option>
 					);
 				case 'categories':
 					return (
@@ -44,6 +55,10 @@ class LanguagePicker extends Component {
 				case 'cuisines':
 					return (
 						<li data-id={item.CuisineID} rel={item.Title} onClick={(e) => onPickerItemClick(e)} key={item.CuisineID}>{item.Title}</li>
+					);
+				case 'branches':
+					return (
+						<li data-id={item.BranchID} rel={item.Name} onClick={(e) => onPickerItemClick(e)} key={item.BranchID}>{item.Name}</li>
 					);
 				case 'categories':
 					return (

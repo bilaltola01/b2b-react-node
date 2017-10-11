@@ -41,6 +41,12 @@ export function postMenuLanguage (nextId, lang) {
 // UPDATE
 //
 export function updateMenuLanguages (menuId, langs) {
+    /*
+    if (!langs || langs.length <= 0) {
+        return Promise.resolve();
+    }
+    */
+
     // Compare menu categories in the object to the categories in the DB
     let ids = langs.map(c => c.id)
     //let languages = getMenuLanguages(ids);

@@ -6,6 +6,7 @@ import * as actionCreators from '../action-creators';
 
 import MenuCategoriesEdit from './MenuCategoriesEdit';
 import BranchLanguagesEdit from './BranchLanguagesEdit';
+import MenuBranchesEdit from './MenuBranchesEdit';
 
 let createHandlers = (ctx) => {
 	let onSaveMenu = () => {
@@ -43,15 +44,19 @@ class SectionArticleAddMenu extends Component {
 
 	render() {
 		const {
-			id,
 			title,
 			component
 		} = this.props;
 
 		let categories = [];
 		let languages = [];
+		let branches = [];
 
 		console.log(this.props);
+
+		const menuBranches = (
+			<MenuBranchesEdit branches={branches} onChange={this.handlers.onChanges} />
+		);
 
 		const menuLanguages = (
 			<BranchLanguagesEdit languages={languages} onChange={this.handlers.onChanges} />
@@ -86,6 +91,10 @@ class SectionArticleAddMenu extends Component {
 	                </form>
 
 	                <div className="menu--languages">
+		                {menuBranches}
+		            </div>
+
+	                <div className="menu--languages">
 		                {menuLanguages}
 		            </div>
 
@@ -99,7 +108,6 @@ class SectionArticleAddMenu extends Component {
 };
 
 SectionArticleAddMenu.propTypes = {
-	id: PropTypes.number,
 	title: PropTypes.string,
 	dateUpdate: PropTypes.object,
 	component: PropTypes.object
