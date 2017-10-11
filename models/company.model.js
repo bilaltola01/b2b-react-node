@@ -1,9 +1,25 @@
 "use strict";
 
 const DBLayer = require('../DBLayer');
-const db = DBLayer.connection;
+const constants = require('../constants');
+//const db = DBLayer.connection;
 const cryptUtils = require('../shared/crypt-utils');
 const dateUtils = require('../shared/date-utils');
+
+var db = require('knex')({
+  client: constants.DB_TYPE,
+  debug: true,
+  connection: {
+      host: constants.DB_URL,
+      port: constants.DB_PORT,
+      user: constants.DB_USER,
+      password: constants.DB_PWD,
+      database: constants.DB_NAME
+  },
+  //acquireConnectionTimeout: 10000,
+  //ssl: has_ssl,
+  //pool: { min: 0, max: 7 }
+});
 
 // Create new company in the database
 // Returns a resolved Promise containing its id
