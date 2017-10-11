@@ -165,7 +165,7 @@ export function getMenuCategory (id) {
                 id: cat.CategoryStandardID,
                 isCustom: false,
                 title: cat.Title,
-                description: cat.Description
+                description: cat.Description,
             };
             tmpcat.meals = meals.filter((meal) => {
                 return cat.MenuCategoryID === meal.MenuCategoryID;
@@ -174,6 +174,7 @@ export function getMenuCategory (id) {
                     id: meal.MealID,
                     title: meal.Title,
                     description: meal.Description,
+                    price: parseFloat(meal.Price) || null,
                     enableDetails: meal.enableDetails,
                     detail: {}
                 };

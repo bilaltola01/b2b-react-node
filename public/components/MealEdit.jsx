@@ -19,14 +19,17 @@ let createHandlers = (ctx) => {
 			if (typeof fn === 'function') {
 				let title = document.querySelector('#meal-id-' + ctx.props.id + ' #meal-title').value;
 				let desc = document.querySelector('#meal-id-' + ctx.props.id + ' #meal-description').value;
+				let price = document.querySelector('#meal-id-' + ctx.props.id + ' #meal-price').value;
 
 				console.log(title);
 				console.log(desc);
+				console.log(price);
 
 				let tmp = {
 					id: ctx.props.id,
 					title: title,
-					description: desc
+					description: desc,
+					price: parseFloat(price) || null
 				};
 
 				console.log(tmp);
@@ -54,7 +57,7 @@ class MealEdit extends Component {
 	}
 
 	render() {
-		const { id, title, description, enableDetails, detail, onRemove, onChange } = this.props;
+		const { id, title, description, price, enableDetails, detail, onRemove, onChange } = this.props;
 		let detailComponents = '';
 
 		if (Object.keys(detail).length > 0 && enableDetails) {
@@ -76,6 +79,10 @@ class MealEdit extends Component {
 	                    <label className="label--edit">Enter new Description:</label>
 	                    <input className="input--edit" type="text" name="meal--description" id="meal-description" defaultValue={description} onChange={(e) => this.handlers.onChange({target: e, key: 'description'}, onChange)} />
 	                </div>
+	                <div className="edit--block">
+	                    <label className="label--edit">Enter new Price:</label>
+	                    <input className="input--edit" type="text" name="meal--price" id="meal-price" defaultValue={price > 0 ? price : ''} onChange={(e) => this.handlers.onChange({target: e, key: 'price'}, onChange)} />
+	                </div>
 		            {detailComponents}
 	            </div>
             </div>
@@ -87,6 +94,7 @@ MealEdit.propTypes = {
 	id: PropTypes.number,
 	title: PropTypes.string,
 	description: PropTypes.string,
+	price: PropTypes.number,
 	enableDetails: PropTypes.bool,
 	detail: PropTypes.object,
 	onRemove: PropTypes.func,

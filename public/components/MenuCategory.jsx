@@ -9,7 +9,7 @@ class MenuCategory extends Component {
 
 		if (meals.length > 0) {
 			mealComponents = meals.map((meal, index) => {
-				return <Meal id={meal.id} title={meal.title} description={meal.description} enableDetails={meal.enableDetails} detail={meal.detail} key={index} />;
+				return <Meal id={meal.id} title={meal.title} description={meal.description} price={meal.price} enableDetails={meal.enableDetails} detail={meal.detail} key={index} />;
 			});
 		}
 

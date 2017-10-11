@@ -11,6 +11,7 @@ let createHandlers = (ctx) => {
 				id: ctx.props.category.id,
 				title: "",
 				description: "",
+				price: null,
 				enableDetails: false,
 				detail: {},
 				onRemove: onRemove
@@ -39,6 +40,7 @@ let createHandlers = (ctx) => {
 					let tmp = meal;
 					tmp.title = obj.title;
 					tmp.description = obj.description;
+					tmp.price = parseFloat(obj.price) || null;
 					return tmp;
 				}
 
@@ -105,7 +107,7 @@ class MealsEdit extends Component {
 		const { meals, onChange, category } = this.props;
 
 		const mealComponents = (this.state.allMeals.length > 0) ? this.state.allMeals.map((meal, index) => {
-			return <MealEdit id={meal.id} title={meal.title} description={meal.description} enableDetails={meal.enableDetails} detail={meal.detail} key={meal.id} onChange={this.handlers.onChange} onRemove={this.handlers.onRemove} />;
+			return <MealEdit id={meal.id} title={meal.title} description={meal.description} price={meal.price} enableDetails={meal.enableDetails} detail={meal.detail} key={meal.id} onChange={this.handlers.onChange} onRemove={this.handlers.onRemove} />;
 		}) : null;
 
 		return (

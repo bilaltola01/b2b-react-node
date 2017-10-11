@@ -117,6 +117,7 @@ const MAP_TABLE = [
             ['menuCategoryId', 'MenuCategoryID'],
             ['title', 'Title'],
             ['description', 'Description'],
+            ['price', 'Price'],
             ['enableDetails', 'EnableDetails']
         ])
     },

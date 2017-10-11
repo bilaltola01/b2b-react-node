@@ -25,7 +25,7 @@ class Menu extends Component {
 	                    <p className="food-menu--description">{ownProps.description}</p>
 	                }
 
-	                {ownProps && ownProps.price &&
+	                {ownProps && ownProps.price && ownProps.price > 0 &&
 	                	<p className="food-menu--price">{ownProps.price}</p>
 	                }
 

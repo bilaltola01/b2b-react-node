@@ -1368,6 +1368,12 @@ a.text-link:hover {
   line-height: 1.5em;
 }
 
+.food-menu--text .food-meal--price {
+  display: block;
+  font-size: 0.9em;
+  line-height: 1.5em;
+}
+
 .food-menu--price {
   margin: 5px 0 20px 0;
   padding: 0;
