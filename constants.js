@@ -7,10 +7,12 @@ exports.CLOUDINARY_SECRET = process.env.CLOUDINARY_SECRET;
 exports.CLOUDINARY_API_KEY = process.env.CLOUDINARY_API_KEY;
 exports.DB_TYPE = process.env.DB_TYPE;
 exports.DB_PORT = process.env.DB_PORT;
-exports.DB_URL = /*'10.16.11.13';*/process.env.DB_URL; //46.32.240.33
+exports.DB_URL = process.env.DB_URL;
 exports.DB_ENV = process.env.DB_ENV;
 exports.DB_NAME = process.env.DB_NAME;
-exports.DB_USER = /*'oneme-5ru-u-121572';*/process.env.DB_USER;
-exports.DB_PWD = /*'wTYTMR^E!';*/process.env.DB_PWD;
+exports.DB_USER = process.env.DB_USER;
+exports.DB_PWD = process.env.DB_PWD;
 exports.DB_SSL_ENABLED = process.env.DB_SSL_ENABLED;
 exports.DB_STRING = process.env.DB_STRING;
+exports.STRAKER_TOKEN = (process.env.DB_ENV === 'DEV') ? process.env.STRAKER_TOKEN_DEV : process.env.STRAKER_TOKEN_PROD;
+exports.STRAKER_TRANSLATION_URL = 'https://' + (process.env.DB_ENV === 'DEV') ? 'sandbox' : 'api' + '.strakertranslations.com/v3/translate';

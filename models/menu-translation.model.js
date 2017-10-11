@@ -2,13 +2,10 @@
 
 const rp = require('request-promise-native');
 
+const constants = require('../constants');
 const DBLayer = require('../DBLayer');
 const db = DBLayer.connection;
 const dateUtils = require('../shared/date-utils');
-
-const SANDBOX_TOKEN = 'ACE563CA-FF89-4C7D-8DDF-35B5F11CFA21';
-const TRANSLATION_ENV = 'sandbox';
-const TRANSLATION_URL = 'https://' + TRANSLATION_ENV + '.strakertranslations.com/v3/translate';
 
 ///////////////////
 // TODO: Menu
@@ -34,13 +31,13 @@ MenuTranslation.create = (obj) => {
   // Send a req to the Staker server to translate
   const options = {
     method: 'POST',
-    uri: TRANSLATION_URL + '/text',
+    uri: constants.STRAKER_TRANSLATION_URL + '/text',
     body: menu,
     json: true,
     headers: {
       "content-type": "application/json",
       "cache-control": "no-cache",
-      "Authorization": "Bearer " + SANDBOX_TOKEN
+      "Authorization": "Bearer " + constants.STRAKER_TOKEN
     }
   };
 
