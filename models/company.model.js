@@ -9,12 +9,12 @@ const dateUtils = require('../shared/date-utils');
 var db = require('knex')({
   client: constants.DB_TYPE,
   debug: true,
-  connection: {
+  connection: (constants.DB_URL === 'localhost') ? {
       host: constants.DB_URL,
       user: constants.DB_USER,
       password: constants.DB_PWD,
-      database: process.env.DATABASE_URL || constants.DB_NAME
-  },
+      database: constants.DB_NAME
+  } : process.env.DATABASE_URL,
   //acquireConnectionTimeout: 10000,
   //ssl: has_ssl,
   //pool: { min: 0, max: 7 }
