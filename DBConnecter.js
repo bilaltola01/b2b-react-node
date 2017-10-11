@@ -1,9 +1,8 @@
-const knex = require('knex');
 const constants = require('./constants');
 
-let DBConnecter = {
-	connect: (host, port, db, user, pwd, has_ssl) => {
-		return knex({
+let DBConnecter = class {
+	constructor(host, port, db, user, pwd, has_ssl) {
+		this.connection = require('knex')({
 		 	client: constants.DB_TYPE,
 		 	debug: true,
 			connection: {

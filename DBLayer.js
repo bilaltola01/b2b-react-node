@@ -6,11 +6,11 @@ const shared = require('./shared/handlers');
 
 let DBLayer = class {
     constructor() {
-        this.util = db_util;
+        this.util = new db_util();
         // Connect to the Database
         this.connection = null;
         if (!this.connection) {
-            this.connection = this.util.connect();
+            this.connection = this.util.connection;
         }
     }
 };
