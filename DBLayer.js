@@ -15,4 +15,6 @@ let DBLayer = class {
     }
 };
 
-module.exports = DBLayer;
+let dbLayer = new DBLayer();
+
+module.exports = dbLayer;

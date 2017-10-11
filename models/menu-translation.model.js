@@ -3,7 +3,7 @@
 const rp = require('request-promise-native');
 
 const DBLayer = require('../DBLayer');
-const db = new DBLayer().connection;
+const db = DBLayer.connection;
 const dateUtils = require('../shared/date-utils');
 
 const SANDBOX_TOKEN = 'ACE563CA-FF89-4C7D-8DDF-35B5F11CFA21';

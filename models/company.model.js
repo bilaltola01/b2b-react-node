@@ -1,7 +1,7 @@
 "use strict";
 
 const DBLayer = require('../DBLayer');
-const db = new DBLayer().connection;
+const db = DBLayer.connection;
 const cryptUtils = require('../shared/crypt-utils');
 const dateUtils = require('../shared/date-utils');
 

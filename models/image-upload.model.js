@@ -1,7 +1,7 @@
 "use strict";
 
 const DBLayer = require('../DBLayer');
-const db = new DBLayer().connection;
+const db = DBLayer.connection;
 
 const ImageUploadUtils = require('../shared/image-upload-utils');
 

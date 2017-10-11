@@ -7,6 +7,6 @@ const Server = require('./Server');
 
 
 // Launch server
-let server = new Server(express, new RouterWrapper(express.Router()), new DatabaseLayer());
+let server = new Server(express, new RouterWrapper(express.Router()), DatabaseLayer);
 
 
