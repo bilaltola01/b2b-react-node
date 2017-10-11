@@ -13,9 +13,9 @@ let DBConnecter = {
 		    	password: pwd || constants.DB_PWD,
 		    	database: db || constants.DB_NAME
 			},
-			acquireConnectionTimeout: 10000,
-			ssl: has_ssl,
-			pool: { min: 0, max: 7 }
+			//acquireConnectionTimeout: 10000,
+			//ssl: has_ssl,
+			//pool: { min: 0, max: 7 }
 		});
 	}
 };
