@@ -40,8 +40,7 @@ class MenuBranchEdit extends Component {
 MenuBranchEdit.propTypes = {
 	id: PropTypes.number,
 	name: PropTypes.string,
-	onRemove: PropTypes.func,
-	onChange: PropTypes.func
+	onRemove: PropTypes.func
 };
 
 export default MenuBranchEdit;

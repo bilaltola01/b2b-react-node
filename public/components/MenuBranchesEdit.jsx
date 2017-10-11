@@ -14,9 +14,9 @@ let createHandlers = (ctx) => {
 		ctx.setState((prevState) => {
 			branches = prevState.allBranches;
 
-			let newBranch = ctx.props.availableBranches.find(branch => {
-				return branch.LanguageID === obj.id;
-			});
+			let newBranch = (ctx.props.profile && ctx.props.profile.branches) ? ctx.props.profile.branches.find(branch => {
+				return branch.BranchID === obj.id;
+			}) : null;
 
 			if (newBranch) {
 				branches.push(newBranch);
@@ -33,10 +33,11 @@ let createHandlers = (ctx) => {
 	};
 
 	let onRemove = (obj) => {
+		console.log(obj);
 		let branches;
 		ctx.setState((prevState) => {
 			branches = prevState.allBranches.reduce((acc, current) => {
-				return (current.id !== obj.id) ? acc.concat([current]) : acc;
+				return (current.BranchID !== obj.id) ? acc.concat([current]) : acc;
 			}, []);
 
 			console.log(prevState.allBranches);
@@ -111,12 +112,12 @@ class MenuBranchesEdit extends Component {
 		const branchesComponent = (this.state.allBranches && this.state.allBranches.length > 0) ? this.state.allBranches.map((branch, index) => {
 			return (index < this.state.allBranches.length - 1)
 				? (
-					<span key={cuisine.CuisineID}>
+					<span key={branch.BranchID}>
 						<MenuBranchEdit id={branch.BranchID} name={branch.Name} onRemove={this.handlers.onRemove} key={branch.BranchID} />
 						,&nbsp;
 					</span>
 				) : (
-					<span key={cuisine.CuisineID}>
+					<span key={branch.BranchID}>
 						<MenuBranchEdit id={branch.BranchID} name={branch.Name} onRemove={this.handlers.onRemove} key={branch.BranchID} />
 					</span>
 				)
