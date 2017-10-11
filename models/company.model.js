@@ -11,7 +11,6 @@ var db = require('knex')({
   debug: true,
   connection: {
       host: constants.DB_URL,
-      port: constants.DB_PORT,
       user: constants.DB_USER,
       password: constants.DB_PWD,
       database: constants.DB_NAME
