@@ -14,7 +14,12 @@ let createHandlers = (ctx) => {
 		ctx.setState((prevState) => {
 			languages = prevState.allLanguages;
 
-			let newLang = ctx.props.availableLanguages.find(lang => {
+			const selectedBranches = (ctx.props.menu && ctx.props.menu.branches.length > 0) ? ctx.props.menu.branches : [];
+			const branchLanguages = (selectedBranches && selectedBranches.length > 0) ? selectedBranches.reduce((acc, current) => {
+				return acc.concat(current.languages.map(lang => lang.Language));
+			}, []) : languages || [];
+
+			let newLang = branchLanguages.find(lang => {
 				return lang.LanguageID === obj.id;
 			});
 
@@ -91,14 +96,19 @@ class BranchLanguagesEdit extends Component {
 	}
 
 	render() {
-		const { languages, availableLanguages, onChange } = this.props;
+		const { languages, onChange } = this.props;
 
-		console.log(availableLanguages);
+		const selectedBranches = (this.props.menu && this.props.menu.branches.length > 0) ? this.props.menu.branches : [];
+		const branchLanguages = (selectedBranches && selectedBranches.length > 0) ? selectedBranches.reduce((acc, current) => {
+			return acc.concat(current.languages.map(lang => lang.Language));
+		}, []) : languages || [];
 
-		// list of all languages available should be retrieved from db
+		console.log(branchLanguages);
+
+		// list of all languages available is retrieved from selected branches
 		const obj = {
 			type: "languages",
-			items: availableLanguages || []
+			items: branchLanguages
 		};
 
 		console.log(this.state);
@@ -107,7 +117,7 @@ class BranchLanguagesEdit extends Component {
 			return <BranchLanguageEdit id={language.LanguageID} code={language.Code} codeFull={language.CodeFull} name={language.Name} title={language.Title} onRemove={this.handlers.onRemove} key={language.LanguageID} />;
 		}) : null;
 
-		return (
+		return (branchLanguages && branchLanguages.length > 0) ? (
 			<div>
 				<p className="menu--title">Languages</p>
 				<div>
@@ -121,14 +131,21 @@ class BranchLanguagesEdit extends Component {
                     </div>
 				</div>
 			</div>
-		)
+		) : null;
 	}
 };
 
 BranchLanguagesEdit.propTypes = {
 	languages: PropTypes.array,
-	availableLanguages: PropTypes.array,
 	onChange: PropTypes.func
 };
 
-export default BranchLanguagesEdit;
+const mapStateToProps = (state) => {
+	console.log(state);
+  return {
+    menu: state._menu.menu,
+    languages: state._languages.languages
+  };
+};
+
+export default connect(mapStateToProps)(BranchLanguagesEdit);

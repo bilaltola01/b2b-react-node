@@ -129,7 +129,7 @@ class MenuBranchesEdit extends Component {
 				{branchesComponent}
 
 				<div id="menu-branch-add" className="language--add">
-					<label>Add a branch:</label>
+					<label>Add a branch for this menu:</label>
 					<div id="branch-picker" className="language--picker">
 						<LanguagePicker data={obj} onAdd={this.handlers.onAdd} onPickerClick={this.handlers.onPickerClick} onPickerItemClick={this.handlers.onPickerItemClick} />
                     </div>
@@ -147,7 +147,7 @@ MenuBranchesEdit.propTypes = {
 const mapStateToProps = (state) => {
 	console.log(state);
   return {
-    profile: state._profile.profile,
+    profile: state._profile.profile
   };
 };
 

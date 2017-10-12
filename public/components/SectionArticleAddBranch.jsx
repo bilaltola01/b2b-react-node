@@ -143,7 +143,7 @@ class SectionArticleAddBranch extends Component {
 		);
 
 		const branchLanguages = (
-			<BranchLanguagesEdit languages={[]} availableLanguages={availableLanguages} onChange={this.handlers.onChanges} />
+			<BranchLanguagesEdit languages={[]} onChange={this.handlers.onChanges} />
 		);
 
 		const allImagesComponent = (
