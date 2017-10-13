@@ -17,15 +17,16 @@ let createHandlers = (ctx) => {
 		if (obj.target && obj.key) {
 			// actually remove that thing from the global store
 			if (typeof fn === 'function') {
-				let title = document.querySelector('#meal-id-' + ctx.props.id + ' #meal-title').value;
-				let desc = document.querySelector('#meal-id-' + ctx.props.id + ' #meal-description').value;
-				let price = document.querySelector('#meal-id-' + ctx.props.id + ' #meal-price').value;
+				let title = document.querySelector('#meal-id-' + ctx.props.catId + '-' + ctx.props.id + ' #meal-title').value;
+				let desc = document.querySelector('#meal-id-' + ctx.props.catId + '-' + ctx.props.id + ' #meal-description').value;
+				let price = document.querySelector('#meal-id-' + ctx.props.catId + '-' + ctx.props.id + ' #meal-price').value;
 
 				console.log(title);
 				console.log(desc);
 				console.log(price);
 
 				let tmp = {
+					catId: ctx.props.catId,
 					id: ctx.props.id,
 					title: title,
 					description: desc,
@@ -57,7 +58,7 @@ class MealEdit extends Component {
 	}
 
 	render() {
-		const { id, title, description, price, enableDetails, detail, onRemove, onChange } = this.props;
+		const { id, catId, title, description, price, enableDetails, detail, onRemove, onChange } = this.props;
 		let detailComponents = '';
 
 		if (Object.keys(detail).length > 0 && enableDetails) {
@@ -65,7 +66,7 @@ class MealEdit extends Component {
 		}
 
 		return (
-			<div id={"meal-id-" + id}>
+			<div id={"meal-id-" + catId +'-' + id}>
 				<h4 className="meal--edit--title">
 					Meal n°{id}
 					<span className="status status--issue remove" onClick={(e) => this.handlers.onRemove({id}, onRemove)}></span>
@@ -92,6 +93,7 @@ class MealEdit extends Component {
 
 MealEdit.propTypes = {
 	id: PropTypes.number,
+	catId: PropTypes.number,
 	title: PropTypes.string,
 	description: PropTypes.string,
 	price: PropTypes.number,

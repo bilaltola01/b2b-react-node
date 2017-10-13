@@ -14,7 +14,7 @@ let createHandlers = (ctx) => {
 		ctx.setState((prevState) => {
 			languages = prevState.allLanguages;
 
-			const selectedBranches = (ctx.props.menu && ctx.props.menu.branches.length > 0) ? ctx.props.menu.branches : [];
+			const selectedBranches = (ctx.props.menu && ctx.props.menu.branches && ctx.props.menu.branches.length > 0) ? ctx.props.menu.branches : [];
 			const branchLanguages = (selectedBranches && selectedBranches.length > 0) ? selectedBranches.reduce((acc, current) => {
 				return acc.concat(current.languages.map(lang => lang.Language));
 			}, []) : languages || [];
@@ -98,7 +98,7 @@ class BranchLanguagesEdit extends Component {
 	render() {
 		const { languages, onChange } = this.props;
 
-		const selectedBranches = (this.props.menu && this.props.menu.branches.length > 0) ? this.props.menu.branches : [];
+		const selectedBranches = (this.props.menu && this.props.menu.branches && this.props.menu.branches.length > 0) ? this.props.menu.branches : [];
 		const branchLanguages = (selectedBranches && selectedBranches.length > 0) ? selectedBranches.reduce((acc, current) => {
 			return acc.concat(current.languages.map(lang => lang.Language));
 		}, []) : languages || [];

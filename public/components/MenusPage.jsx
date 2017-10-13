@@ -72,6 +72,7 @@ class MenusPage extends Component {
 
     const menus = (this.state.component && this.state.component.menus && this.state.component.menus) ? this.state.component.menus : [];
 
+    console.log(menus);
 
     const company = {
       name: profile.Name,

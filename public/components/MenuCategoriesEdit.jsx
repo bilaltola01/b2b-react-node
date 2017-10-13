@@ -1,8 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 
+import { connect } from 'react-redux';
+import * as actionCreators from '../action-creators';
+
 import MenuCategoryEdit from './MenuCategoryEdit';
 
 let createHandlers = (ctx) => {
+	let lastSelectedCategory = 1;
+	let totalCategories = (ctx.props && ctx.props.availableCategories) ? ctx.props.availableCategories : [];
 	let onCategoryRemove = (obj) => {
 		console.log(obj);
 		let categories;
@@ -27,12 +32,16 @@ let createHandlers = (ctx) => {
 		let categories;
 		ctx.setState((prevState) => {
 			console.log(prevState.allCategories);
+
 			categories = prevState.allCategories.map((prevCategory, index) => {
-				if (prevCategory.id === cat.oldId) {
+				console.log(prevCategory);
+
+				if (prevCategory.id === cat.id || (prevCategory.id === 1 /*&& prevState.allCategories.length === 1*/)) {
 					let obj = prevCategory;
 					obj.title = cat.title;
 					obj.id = cat.id;
-					if (cat.meals) {
+
+					if (cat.meals && cat.meals.length > 0) {
 						obj.meals = cat.meals;
 					}
 
@@ -42,6 +51,8 @@ let createHandlers = (ctx) => {
 
 				return prevCategory;
 			});
+
+			lastSelectedCategory = cat.id;
 
 			console.log(categories);
 			ctx.props.onChange('categories', {data: categories});
@@ -53,29 +64,32 @@ let createHandlers = (ctx) => {
 	};
 
 	let onCategoryAdd = (obj) => {
+		console.log(obj);
 		let categories;
 		ctx.setState((prevState) => {
 			categories = prevState.allCategories;
-			let nextID = 1;
+			lastSelectedCategory = 1;
 
+			/*
 			if (prevState.allCategories.length > 0) {
 				nextID = parseInt(prevState.allCategories[prevState.allCategories.length - 1].id, 10) + 1;
 			}
+			*/
 
-			let obj = {
-				id: nextID,
+			let finalObj = {
+				id: lastSelectedCategory,
 				isCustom: false,
 				title: "",
 				description: "",
 				meals: [],
-				totalCategories: ctx.totalCategories,
+				totalCategories: totalCategories,
 				onCategoryRemove: onCategoryRemove,
 				onChange: ctx.props.onChange
 			};
 
-			console.log(obj);
+			console.log(finalObj);
 
-			categories.push(obj);
+			categories.push(finalObj);
 			console.log(categories);
 			ctx.props.onChange('categories', {data: categories});
 
@@ -83,12 +97,17 @@ let createHandlers = (ctx) => {
 				allCategories: categories
 			}
 		});
-	}
+	};
+
+	let getAvailableCategories = (type) => {
+        ctx.props.dispatch(actionCreators.getCategories(type));
+    };
 
 	return {
 		onCategoryRemove,
 		onCategoryAdd,
-		onCategoryChange
+		onCategoryChange,
+		getAvailableCategories
 	};
 };
 
@@ -96,54 +115,24 @@ class MenuCategoriesEdit extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			allCategories: props.categories
+			allCategories: []
 		};
 		this.handlers = createHandlers(this);
-		this.totalCategories = [
-			{
-				id: 2,
-                isCustom: false,
-                title: "Starters",
-                description: "First meal of the menu"
-            },
-            {
-				id: 3,
-                isCustom: false,
-                title: "Mains",
-                description: "Main meal of the menu"
-            },
-            {
-				id: 4,
-                isCustom: false,
-                title: "Desserts",
-                description: "Last meal of the menu"
-            },
-            {
-				id: 5,
-                isCustom: false,
-                title: "Sides",
-                description: "Extra munchies for the hungriest!"
-            },
-            {
-				id: 6,
-                isCustom: false,
-                title: "Appetizers",
-                description: "Some 'amuse-gueules' to titillate your stomach!"
-            },
-            {
-				id: 1,
-                isCustom: false,
-                title: "Beverages",
-                description: "Cold and hot drinks"
-            },
-		];
 	}
+
+	componentDidMount() {
+        this.handlers.getAvailableCategories('standard');
+    }
 
 	render() {
 		const { categories, onChange } = this.props;
 
-		const categoriesComponent = (this.state.allCategories.length > 0) ? this.state.allCategories.map((category, index) => {
-			return <MenuCategoryEdit id={category.id} totalCategories={this.totalCategories} isCustom={category.isCustom} title={category.title} description={category.description} meals={category.meals} onChange={this.handlers.onCategoryChange} onCategoryRemove={this.handlers.onCategoryRemove} key={index} />;
+		const totalCategories = (this.props && this.props.availableCategories) ? this.props.availableCategories : [];
+
+		console.log(totalCategories);
+
+		const categoriesComponent = (this.state.allCategories && this.state.allCategories.length > 0) ? this.state.allCategories.map((category, index) => {
+			return <MenuCategoryEdit id={category.CategoryStandardID} totalCategories={totalCategories} isCustom={false} title={category.Title} description={category.Description} meals={category.meals || []} onChange={this.handlers.onCategoryChange} onCategoryRemove={this.handlers.onCategoryRemove} key={category.CategoryStandardID} />;
 		}) : null;
 
 		return (
@@ -168,4 +157,12 @@ MenuCategoriesEdit.propTypes = {
 	onChange: PropTypes.func
 };
 
-export default MenuCategoriesEdit;
+
+const mapStateToProps = (state) => {
+	console.log(state);
+  return {
+    availableCategories: state._categories.categories
+  };
+};
+
+export default connect(mapStateToProps)(MenuCategoriesEdit);

@@ -187,6 +187,9 @@ export function translateMeal (langs, meal) {
             };
         });
 
+        console.log('props to translate!!');
+        console.log(propsToTranslate);
+
         return Promise.all(langs.map((lang) => {
             return propsToTranslate.map((prop) => {
                 return Ajax().post('/translate-meal', {

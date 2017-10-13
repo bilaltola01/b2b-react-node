@@ -5,13 +5,10 @@ import Meal from './Meal';
 class MenuCategory extends Component {
 	render() {
 		const { id, isCustom, title, description, meals } = this.props;
-		let mealComponents = '';
 
-		if (meals.length > 0) {
-			mealComponents = meals.map((meal, index) => {
-				return <Meal id={meal.id} title={meal.title} description={meal.description} price={meal.price} enableDetails={meal.enableDetails} detail={meal.detail} key={index} />;
-			});
-		}
+		const mealComponents = (meals && meals.length > 0) ? meals.map((meal, index) => {
+			return <Meal id={meal.id} title={meal.title} description={meal.description} price={meal.price} enableDetails={meal.enableDetails} detail={meal.detail} key={index} />;
+		}) : '';
 
 		return (
 			<div className="food-menu--part">

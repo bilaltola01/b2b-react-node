@@ -29,6 +29,7 @@ import * as ProfileService from './components/Profile/profile.service';
 import * as LanguageService from './components/Language/language.service';
 import * as CuisineService from './components/Cuisine/cuisine.service';
 import * as BranchService from './components/Profile/branch.service';
+import * as MenuCategoryService from './components/Menu/menu-category.service';
 
 import { StorageManagerInstance } from './shared/storage.utils';
 
@@ -328,7 +329,24 @@ export function setPopup (data, cb) {
   }
 };
 
+export function getCategories (type, cb) {
+  return {
+    types: ['GET_CATEGORIES_REQUEST', 'GET_CATEGORIES_SUCCESS', 'GET_CATEGORIES_FAILURE'],
+    promise: () => {
+      return new Promise((resolve, reject) => {
+        MenuCategoryService.getCategories(type).then((res) => {
+          console.log('request succeeded with JSON response', res);
 
+          if (res && typeof cb === 'function') {
+            cb(res);
+          }
+
+          resolve(res);
+        });
+      });
+    }
+  }
+};
 
 export function getLanguages (cb) {
   return {

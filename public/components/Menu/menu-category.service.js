@@ -93,6 +93,30 @@ function getMenuCategories (ids) {
     });
 }
 
+function _getCategories (type) {
+    if (type !== 'standard') {
+        return Promise.reject();
+    }
+
+    return Ajax().get('/category-standard', {
+        headers: {
+            "content-type": "application/json",
+            "cache-control": "no-cache",
+            "x-access-token": StorageManagerInstance.read('token')
+        }
+    });
+}
+
+export function getCategories (type) {
+    return _getCategories(type).then(res => {
+        if (!res || !res.success) {
+            return Promise.reject(res);
+        }
+
+        return res.obj;
+    });
+}
+
 export function getMenuCategory (id) {
     let categories;
     let meals;
@@ -109,11 +133,15 @@ export function getMenuCategory (id) {
         }
 
         let cats = res.obj;
+        console.log(res.obj);
 
         return cats.filter((cat, index) => {
             return cat.MenuID === id;
         });
     }).then((res) => {
+        console.log(res);
+        console.log(id);
+
         categories = res;
 
         return Ajax().get('/meal', {
@@ -130,13 +158,7 @@ export function getMenuCategory (id) {
 
         meals = res.obj;
 
-        return Ajax().get('/category-standard', {
-            headers: {
-                "content-type": "application/json",
-                "cache-control": "no-cache",
-                "x-access-token": StorageManagerInstance.read('token')
-            }
-        });
+        return _getCategories('standard');
     }).then((res) => {
         if (!res || !res.success) {
             return Promise.reject(res);
@@ -183,10 +205,10 @@ export function getMenuCategory (id) {
         }) : null;
 
         console.log(returns);
-        return {
+        return Promise.resolve({
             id: id,
             categories: returns
-        };
+        });
     });
 }
 

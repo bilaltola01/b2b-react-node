@@ -3,12 +3,22 @@ import React, { Component, PropTypes } from 'react';
 import MealEdit from './MealEdit';
 
 let createHandlers = (ctx) => {
+	let lastSelectedMeal = 1;
 	let onAdd = () => {
 		ctx.setState((prevState) => {
+			console.log(prevState.allMeals);
 			let meals = prevState.allMeals;
 
+			/*
+			if (prevState.allMeals.length > 0) {
+				nextID = parseInt(prevState.allMeals[prevState.allMeals.length - 1].id, 10) + 1;
+			}
+			*/
+
+
 			let obj = {
-				id: ctx.props.category.id,
+				id: lastSelectedMeal,
+				catId: ctx.props.category.id,
 				title: "",
 				description: "",
 				price: null,
@@ -17,12 +27,14 @@ let createHandlers = (ctx) => {
 				onRemove: onRemove
 			};
 
+			lastSelectedMeal++;
+
 			console.log(obj);
 
 			meals.push(obj);
 
 			ctx.props.onChange({
-				id: ctx.props.category.id,
+				catId: ctx.props.category.id,
 				title: ctx.props.category.title,
 				meals: meals
 			});
@@ -34,15 +46,32 @@ let createHandlers = (ctx) => {
 	};
 
 	let onChange = (obj) => {
+		console.log(obj);
 		ctx.setState((prevState) => {
+			console.log(prevState.allMeals);
+
+			//ctx.props.category.id === obj.catId
+
 			let meals = prevState.allMeals.map((meal) => {
-				if (meal.id === obj.id) {
+				if ((ctx.props.category.id === obj.catId && meal.id === obj.id)
+					|| (meal.id === 1 && prevState.allMeals.length === 1)) {
+					let tmp = meal;
+					tmp.id = obj.id;
+					tmp.catId = obj.catId;
+					tmp.title = obj.title;
+					tmp.description = obj.description;
+					tmp.price = parseFloat(obj.price) || null;
+					return tmp;
+				}
+				/*
+				if (meal.id === obj.id || meal.id === 1) {
 					let tmp = meal;
 					tmp.title = obj.title;
 					tmp.description = obj.description;
 					tmp.price = parseFloat(obj.price) || null;
 					return tmp;
 				}
+				*/
 
 				return meal;
 			}, []);
@@ -54,7 +83,7 @@ let createHandlers = (ctx) => {
 			console.log(ctx.props.category.title);
 
 			ctx.props.onChange({
-				id: ctx.props.category.id,
+				catId: ctx.props.category.id,
 				title: ctx.props.category.title,
 				meals: meals
 			});
@@ -76,7 +105,7 @@ let createHandlers = (ctx) => {
 			console.log(meals);
 
 			ctx.props.onChange({
-				id: ctx.props.category.id,
+				catId: ctx.props.category.id,
 				title: ctx.props.category.title,
 				meals: meals
 			});
@@ -98,7 +127,7 @@ class MealsEdit extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			allMeals: props.meals
+			allMeals: []
 		};
 		this.handlers = createHandlers(this);
 	}
@@ -106,8 +135,10 @@ class MealsEdit extends Component {
 	render() {
 		const { meals, onChange, category } = this.props;
 
-		const mealComponents = (this.state.allMeals.length > 0) ? this.state.allMeals.map((meal, index) => {
-			return <MealEdit id={meal.id} title={meal.title} description={meal.description} price={meal.price} enableDetails={meal.enableDetails} detail={meal.detail} key={meal.id} onChange={this.handlers.onChange} onRemove={this.handlers.onRemove} />;
+		console.log(category);
+
+		const mealComponents = (this.state.allMeals && this.state.allMeals.length > 0) ? this.state.allMeals.map((meal, index) => {
+			return <MealEdit id={meal.id} catId={category.id} title={meal.title} description={meal.description} price={meal.price} enableDetails={meal.enableDetails} detail={meal.detail} key={index} onChange={this.handlers.onChange} onRemove={this.handlers.onRemove} />;
 		}) : null;
 
 		return (

@@ -26,7 +26,9 @@ let createHandlers = (ctx) => {
 	};
 
 	let onAdd = (obj) => {
+		console.log(obj);
 		ctx.setState((prevState) => {
+			console.log(prevState);
 			let cat = {
 				oldId: prevState.category.id,
 				id: obj.id,
@@ -44,7 +46,7 @@ let createHandlers = (ctx) => {
 	let onMealsChange = (obj) => {
 		console.log(obj);
 		let cat = {
-			id: obj.id,
+			id: obj.catId,
 			title: obj.title,
 			meals: obj.meals
 		};
@@ -62,8 +64,8 @@ let createHandlers = (ctx) => {
 		let text = e.target.textContent;
 		//let id = parseInt(e.target.getAttribute('data-id'), 10);
 		let id = ctx.props.totalCategories.find((cat) => {
-			return cat.title === text;
-		}).id;
+			return cat.Title === text;
+		}).CategoryStandardID;
 		let target = e.target.parentNode.previousElementSibling;
 		target.setAttribute('data-rel', rel);
 		target.textContent = text;
@@ -116,18 +118,22 @@ class MenuCategoryEdit extends Component {
 			(this.state.expanded) ? 'opened' : ''
 		);
 
+		const stateId = this.state.category.id;
+		const stateTitle = this.state.category.title;
+
 		const mealComponents = (
-			<MealsEdit meals={meals} category={{id, title}} onChange={this.handlers.onMealsChange} />
+			<MealsEdit meals={meals} category={{id: stateId, title: stateTitle}} onChange={this.handlers.onMealsChange} />
 		);
+
+		console.log(id, totalCategories);
+
+		
 
 		return (
 			<div className="food-menu--part">
-				<div className="" onClick={(e) => this.handlers.onCategoryAdd({id}, onCategoryAdd)}>
-
-				</div>
         		<h4>
-        			Category n°{id}
-        			<span className="status status--issue remove" onClick={(e) => this.handlers.onCategoryRemove({id}, onCategoryRemove)}></span>
+        			Category n°{stateId}
+        			<span className="status status--issue remove" onClick={(e) => this.handlers.onCategoryRemove({id: stateId}, onCategoryRemove)}></span>
         		</h4>
         		<div className="content--edit">
 	        		<div id="menu-category-add" className="language--add">

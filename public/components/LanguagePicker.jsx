@@ -4,8 +4,6 @@ class LanguagePicker extends Component {
 	render() {
 		const { onPickerClick, onPickerItemClick, data } = this.props;
 
-		console.log(data);
-
 		let firstItemTitle = (type => {
 			switch (type) {
 				case 'languages':
@@ -34,7 +32,7 @@ class LanguagePicker extends Component {
 					);
 				case 'categories':
 					return (
-						<option value={item.title} key={item.id}>{item.title}</option>
+						<option value={item.Title} key={item.CategoryStandardID}>{item.Title}</option>
 					);
 				default:
 					return (
@@ -60,7 +58,7 @@ class LanguagePicker extends Component {
 					);
 				case 'categories':
 					return (
-						<li data-id={item.id} rel={item.title} onClick={(e) => onPickerItemClick(e)} key={item.id}>{item.title}</li>
+						<li data-id={item.CategoryStandardID} rel={item.Title} onClick={(e) => onPickerItemClick(e)} key={item.CategoryStandardID}>{item.Title}</li>
 					);
 				default:
 					return (
