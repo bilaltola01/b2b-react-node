@@ -7,6 +7,7 @@ class Home extends Component {
   render () {
     const { dispatch } = this.props;
 
+    /*
     const images = [
       {
         id: 1,
@@ -24,6 +25,8 @@ class Home extends Component {
         altDesc: "Image of a Wonderful Kitty"
       }
     ];
+    */
+    const images = [];
 
     return (
       <div id="global-container" className="global-container layout--login">
