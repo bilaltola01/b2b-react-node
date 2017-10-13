@@ -470,7 +470,7 @@ export function setProfile (profile, data) {
   };
 };
 
-export function getAuth (data) {
+export function getAuth (data, cb) {
   return {
     types: ['AUTH_REQUEST', 'AUTH_SUCCESS', 'AUTH_FAILURE'],
     promise: () => {
@@ -505,6 +505,13 @@ export function getAuth (data) {
           // If user is successfully logged in, Store the auth token in localStorage for further usage
           if (res.token && res.success) {
             StorageManagerInstance.save('token', res.token);
+            if (typeof cb === 'function') {
+              cb({
+                authenticated: true,
+                completed: true,
+                token: res.token
+              });
+            }
             resolve({
               authenticated: true,
               completed: true,

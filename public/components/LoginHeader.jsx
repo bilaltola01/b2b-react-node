@@ -1,8 +1,34 @@
 import React, { Component, PropTypes } from 'react';
+import { Redirect, Route } from 'react-router';
 
 import * as actionCreators from '../action-creators';
 
+let createHandlers = (ctx) => {
+	let onLogin = (e) => {
+		e.preventDefault();
+		ctx.props.dispatch(actionCreators.getAuth(ctx.getDataFromEvent(e), (res) => {
+			if (res && res.authenticated) {
+				ctx.setState({
+					hasToRedirect: true
+				});
+			}
+		}));
+	};
+
+	return {
+		onLogin
+	};
+};
+
 class LoginHeader extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			hasToRedirect: false
+		};
+		this.handlers = createHandlers(this);
+	}
+
 	getDataFromEvent(e) {
 		e.preventDefault();
 
@@ -21,7 +47,7 @@ class LoginHeader extends Component {
 	render () {
 		const { dispatch, token, isAuthenticated, completed } = this.props;
 
-		return (
+		return (!this.state.hasToRedirect) ? (
 			<header id="header" className="header">
 			    <div className="layout--header-wrapper vertical-container">
 			        <div className="vertically-centered">
@@ -40,7 +66,7 @@ class LoginHeader extends Component {
 			                    <input type="password" name="Pwd" id="login--password" className="input--underline" placeholder="Password" />
 			                </p>
 
-			                <button id="button--login" className="button button--login-outline" onClick={(e) => dispatch(actionCreators.getAuth(this.getDataFromEvent(e)))}>Log In</button>
+			                <button id="button--login" className="button button--login-outline" onClick={this.handlers.onLogin}>Log In</button>
 			            </form>
 			            <a href="#," className="login--link">
 			                Forgotten your details?
@@ -48,7 +74,12 @@ class LoginHeader extends Component {
 			        </div>
 			    </div>
 			</header>
-		);
+		) : (
+	    	<Redirect to={{
+	        	pathname: '/dashboard',
+	        	state: { from: this.props.location }
+	    	}} />
+	    );
 	}
 };
 
