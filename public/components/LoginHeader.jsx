@@ -1,7 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 
-// We use the same ES6 import trick to get all action creators and produce a hash like we did with
-// our reducers. If you haven't yet, go get a look at our action creator (./action-creators.js).
 import * as actionCreators from '../action-creators';
 
 class LoginHeader extends Component {
