@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router-dom';
 
 import SectionArticleDeleteBranch from './SectionArticleDeleteBranch';
-//import SectionArticleDeleteMenu from './SectionArticleDeleteMenu';
+import SectionArticleDeleteMenu from './SectionArticleDeleteMenu';
 
 class SectionArticleDelete extends Component {
 	render() {
@@ -14,8 +14,8 @@ class SectionArticleDelete extends Component {
 			switch(type) {
 				case 'branches':
 					return <SectionArticleDeleteBranch title={title} dateUpdate={dateUpdate} component={component} />
-				/*case 'menus':
-					return <SectionArticleDeleteMenu title={title} dateUpdate={dateUpdate} component={component} />*/
+				case 'menus':
+					return <SectionArticleDeleteMenu title={title} dateUpdate={dateUpdate} component={component} />
 				default:
 					return <SectionArticleDeleteBranch title={title} dateUpdate={dateUpdate} component={component} />
 			}

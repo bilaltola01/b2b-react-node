@@ -23,6 +23,7 @@ export function postMenuCategory (nextId, cat) {
     console.log(cat);
 
     cat.menuId = nextId;
+    cat.menuCategoryId = cat.catId;
 
     if (cat.MenuCategoryID) {
         delete cat.MenuCategoryID;

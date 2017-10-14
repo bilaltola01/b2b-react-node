@@ -9,9 +9,20 @@ import { StorageManagerInstance } from  '../../shared/storage.utils';
 
 export function postMenuLanguages (nextId, langs) {
     // Compare menu categories in the object to the categories in the DB
-    let ids = langs.map(c => c.id)
+    let convertedLangs = langs.map(c => {
+        return {
+            code: c.Code,
+            codeFull: c.CodeFull,
+            date: c.Date,
+            dateUpdated: c.DateUpdated,
+            flagId: c.FlagID,
+            id: c.LanguageID,
+            name: c.Name,
+            title: c.Title
+        };
+    });
     //let languages = getMenuLanguages(ids);
-    return Promise.all(langs.map((lang) => {
+    return Promise.all(convertedLangs.map((lang) => {
         return postMenuLanguage(nextId, lang);
     }));
 }
@@ -119,3 +130,38 @@ export function removeMenuLanguage () {
 
 
 
+function convertOpts (opts, isUpdate) {
+    console.log(opts);
+
+/*
+    if (!opts.id) {
+        console.error('The menu id to update is not specified!');
+        return;
+    }
+    */
+
+    let id = opts.id;
+    let obj = Object.keys(opts).reduce((acc, current) => {
+        let matchingKeys = [];
+        for (let key of Mapping.getTableMap('Language', true).keys()) {
+            if (current === key) {
+                matchingKeys.push(key);
+            }
+        }
+
+        if (matchingKeys.length > 0) {
+            acc[Mapping.getDBString('menu', current)] = opts[current];
+        }
+        return acc;
+    }, {});
+    //
+
+    console.log({id: id, updates: obj});
+
+    return (isUpdate) ? {
+        id: id,
+        updates: obj
+    } : {
+        obj: obj
+    };
+}

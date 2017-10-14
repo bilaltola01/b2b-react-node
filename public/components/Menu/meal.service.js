@@ -26,9 +26,10 @@ export function postMeal (meal) {
     console.log(meal);
 
     if (meal.id) {
-        meal.menuCategoryId = meal.id;
         delete meal.id;
     }
+
+    meal.menuCategoryId = meal.catId;
 
     return Ajax().post('/meal', {
         body: JSON.stringify(convertOpts(meal, false)),

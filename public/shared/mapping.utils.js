@@ -137,6 +137,7 @@ const MAP_TABLE = [
         table: new Map([
             ['id', 'CategoryID'],
             ['categoryId', 'CategoryID'],
+            ['catId', 'CategoryID'],
             ['menuId', 'MenuID']
         ])
     },
@@ -242,8 +243,6 @@ export let Mapping = {
         }) : MAP_TABLE_DB.find((entity) => {
             return entity.key === type;
         });
-
-        console.log(t);
 
         if (!t || t.length <= 0) {
             return;

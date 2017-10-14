@@ -106,7 +106,7 @@ class MenuPage extends Component {
           type: "menus",
           title: "Menu",
           component: {
-            type: "Menus",
+            type: "Menu",
             title: "",
             props: {
               menus: filteredMenus

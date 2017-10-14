@@ -312,6 +312,30 @@ export function deleteBranch (branch, cb) {
 };
 
 
+export function deleteMenu (menu, cb) {
+  console.log(menu);
+  return {
+    types: ['DELETE_MENU_REQUEST', 'DELETE_MENU_SUCCESS', 'DELETE_MENU_FAILURE'],
+    promise: () => {
+      return new Promise((resolve, reject) => {
+        console.log('WHY DOES IT DELETE DIRECTLY???');
+        /*
+        MenuService.deleteMenu(menu).then((res) => {
+          console.log('request succeeded with JSON response', res);
+
+          if (res && typeof cb === 'function') {
+            cb(res);
+          }
+
+          resolve(res);
+        });
+        */
+      });
+    }
+  }
+};
+
+
 export function setPopup (data, cb) {
   return {
     types: ['SET_POPUP_REQUEST', 'SET_POPUP_SUCCESS', 'SET_POPUP_FAILURE'],
