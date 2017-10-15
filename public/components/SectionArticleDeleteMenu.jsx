@@ -25,7 +25,15 @@ let createHandlers = (ctx) => {
   };
 
   let deleteMenu = (component, cb) => {
-  	ctx.props.dispatch(actionCreators.deleteMenu(component, cb));
+  	console.log('component?');
+  	console.log(component);
+  	ctx.props.dispatch(actionCreators.deleteMenu(component, (res) => {
+  		goToMenus();
+  	}));
+  };
+
+  let dispatchPopup = (obj) => {
+  	ctx.props.dispatch(actionCreators.setPopup(obj));
   };
 
   let onPageLoad = () => {
@@ -34,8 +42,9 @@ let createHandlers = (ctx) => {
 		return menu.MenuID === id;
 	}) : null;
 
-  	ctx.props.dispatch(actionCreators.setPopup({
-  		isOpened: true,
+
+	ctx.popupObj = {
+  		isOpened: false,
   		type: 'delete',
   		component: component,
   		text: 'Are you sure you want to delete this menu?',
@@ -44,7 +53,7 @@ let createHandlers = (ctx) => {
   				type: 'submit',
   				text: 'Delete',
   				fn: (comp, cb) => {
-  					deleteMenu(comp, cb);
+  					deleteMenu(component, cb);
   				}
   			},
   			{
@@ -55,13 +64,15 @@ let createHandlers = (ctx) => {
   				}
   			}
   		]
-  	}));
+  	};
   };
 
   return {
     headerOnClick,
     onPageLoad,
-    goToMenus
+    goToMenus,
+    deleteMenu,
+    dispatchPopup
   };
 };
 
@@ -77,6 +88,30 @@ class SectionArticleDeleteMenu extends Component {
 
 	componentDidMount() {
         this.handlers.onPageLoad();
+    }
+
+    componentWillReceiveProps(nextProps) {
+    	if (nextProps.component.props.menus && nextProps.component.props.menus.length > 0) {
+			let menuComponent = nextProps.component.props.menus[0] || null;
+			this.popupObj.isOpened = true;
+			this.popupObj.actions = [
+	  			{
+	  				type: 'submit',
+	  				text: 'Delete',
+	  				fn: (comp, cb) => {
+	  					this.handlers.deleteMenu(menuComponent, cb);
+	  				}
+	  			},
+	  			{
+	  				type: 'cancel',
+	  				text: 'Cancel',
+	  				fn: (comp, cb) => {
+	  					this.handlers.goToMenus();
+	  				}
+	  			}
+	  		];
+	  		this.handlers.dispatchPopup(this.popupObj);
+    	}
     }
 
 	render() {

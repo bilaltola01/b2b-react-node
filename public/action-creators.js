@@ -319,7 +319,7 @@ export function deleteMenu (menu, cb) {
     promise: () => {
       return new Promise((resolve, reject) => {
         console.log('WHY DOES IT DELETE DIRECTLY???');
-        /*
+
         MenuService.deleteMenu(menu).then((res) => {
           console.log('request succeeded with JSON response', res);
 
@@ -329,7 +329,6 @@ export function deleteMenu (menu, cb) {
 
           resolve(res);
         });
-        */
       });
     }
   }

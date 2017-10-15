@@ -12,9 +12,9 @@ import * as Meal from './meal.service';
 
 export function postMenuCategories (nextId, cats) {
     return Promise.all(cats.map((cat) => {
-        return Meal.postMeals(cat.meals).then((res) => {
-            return postMenuCategory(nextId, cat);
-        });
+        return postMenuCategory(nextId, cat).then((newCatId) => {
+            return Meal.postMeals(cat.meals, newCatId);
+        })
     }));
 }
 
@@ -23,7 +23,6 @@ export function postMenuCategory (nextId, cat) {
     console.log(cat);
 
     cat.menuId = nextId;
-    cat.menuCategoryId = cat.catId;
 
     if (cat.MenuCategoryID) {
         delete cat.MenuCategoryID;
@@ -36,6 +35,14 @@ export function postMenuCategory (nextId, cat) {
             "cache-control": "no-cache",
             "x-access-token": StorageManagerInstance.read('token')
         }
+    }).then(res => {
+        if (!res || !res.success) {
+            return Promise.reject(res);
+        }
+
+        let id = res.obj[0];
+
+        return Promise.resolve(id);
     });
 }
 
@@ -185,13 +192,14 @@ export function getMenuCategory (id) {
 
         let returns = (cats && cats.length > 0) ? cats.map((cat) => {
             let tmpcat = {
+                catId: cat.MenuCategoryID,
                 id: cat.CategoryStandardID,
                 isCustom: false,
                 title: cat.Title,
                 description: cat.Description,
             };
             tmpcat.meals = meals.filter((meal) => {
-                return cat.MenuCategoryID === meal.MenuCategoryID;
+                return parseInt(cat.MenuCategoryID, 10) === parseInt(meal.MenuCategoryID, 10);
             }).map((meal) => {
                 return {
                     id: meal.MealID,

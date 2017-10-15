@@ -10,7 +10,7 @@ const TRANSLATION_URL = 'https://' + TRANSLATION_ENV + '.strakertranslations.com
 //
 // POST
 //
-export function postMeals (meals) {
+export function postMeals (meals, newCatId) {
     console.log(meals);
     if (meals.length <= 0) {
         return removeMeals();
@@ -18,18 +18,18 @@ export function postMeals (meals) {
     // Compare meals in the object to the meals in the DB
     let ids = meals.map(c => c.id);
     return Promise.all(meals.map((meal) => {
-        return postMeal(meal);
+        return postMeal(meal, newCatId);
     }));
 }
 
-export function postMeal (meal) {
+export function postMeal (meal, newCatId) {
     console.log(meal);
 
     if (meal.id) {
         delete meal.id;
     }
 
-    meal.menuCategoryId = meal.catId;
+    meal.menuCategoryId = newCatId;
 
     return Ajax().post('/meal', {
         body: JSON.stringify(convertOpts(meal, false)),
@@ -192,6 +192,7 @@ export function translateMeal (langs, meal) {
         console.log(propsToTranslate);
 
         return Promise.all(langs.map((lang) => {
+            console.log(lang);
             return propsToTranslate.map((prop) => {
                 return Ajax().post('/translate-meal', {
                     body: JSON.stringify(convertForTranslation(lang, {type: 'meal', id: id, prop: prop})),

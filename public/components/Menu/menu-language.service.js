@@ -9,16 +9,16 @@ import { StorageManagerInstance } from  '../../shared/storage.utils';
 
 export function postMenuLanguages (nextId, langs) {
     // Compare menu categories in the object to the categories in the DB
-    let convertedLangs = langs.map(c => {
+    let convertedLangs = langs.map(lang => {
         return {
-            code: c.Code,
-            codeFull: c.CodeFull,
-            date: c.Date,
-            dateUpdated: c.DateUpdated,
-            flagId: c.FlagID,
-            id: c.LanguageID,
-            name: c.Name,
-            title: c.Title
+            code: lang.Code,
+            codeFull: lang.CodeFull,
+            date: lang.Date,
+            dateUpdated: lang.DateUpdated,
+            flagId: lang.FlagID,
+            id: lang.LanguageID,
+            name: lang.Name,
+            title: lang.Title
         };
     });
     //let languages = getMenuLanguages(ids);

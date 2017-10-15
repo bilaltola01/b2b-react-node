@@ -37,6 +37,22 @@ export function _menu(state = initialMenuState, action) {
         ...state,
         completed: true
       }
+    case 'DELETE_MENU_REQUEST':
+      return {
+        ...state,
+        completed: false
+      }
+    case 'DELETE_MENU_SUCCESS':
+      return {
+        ...state,
+        menu: action.result,
+        completed: true
+      }
+    case 'DELETE_MENU_FAILURE':
+      return {
+        ...state,
+        completed: true
+      }
     case 'SAVE_MENU_REQUEST':
       return {
         ...state,

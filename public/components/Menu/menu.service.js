@@ -215,7 +215,18 @@ export function translateMenu (opts, mode) {
             return opts.description === menu.Description && opts.title === menu.Title && parseInt(opts.price, 10) === parseInt(menu.Price, 10);
         }).MenuID;
 
-        return MenuCategory.translateMenuCategories(opts.languages, opts.categories)
+        return MenuCategory.translateMenuCategories(opts.languages.map(lang => {
+            return {
+                code: lang.Code,
+                codeFull: lang.CodeFull,
+                date: lang.Date,
+                dateUpdated: lang.DateUpdated,
+                flagId: lang.FlagID,
+                id: lang.LanguageID,
+                name: lang.Name,
+                title: lang.Title
+            };
+        }), opts.categories)
             .then((res) => {
                 console.log('translation request finished');
                 console.log(res);
@@ -260,6 +271,30 @@ function convertForTranslation (lang, obj) {
                 }
             };
     }
+}
+
+export function deleteMenu (menu) {
+    console.log('deletion!!!');
+    console.log(menu);
+
+    return new Promise((resolve, reject) => {
+        Ajax().delete('/menu', {
+            body: JSON.stringify({id: menu.id}),
+            headers: {
+                "content-type": "application/json",
+                "cache-control": "no-cache",
+                "x-access-token": StorageManagerInstance.read('token')
+            }
+        }).then(res => {
+            if (!res || !res.success) {
+                reject(res);
+            }
+
+            resolve(res.obj);
+        }).catch(err => {
+            reject(err);
+        });
+    });
 }
 
 
