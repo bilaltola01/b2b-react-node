@@ -80,7 +80,7 @@ class Popup extends Component {
             (this.props.popup && this.props.popup.isOpened) ? 'opened' : ''
         );
 
-        const buttonsComponent = (actions) ? (actions.map((action, index) => {
+        const buttonsComponent = (actions && actions.length > 0) ? (actions.map((action, index) => {
             return (
                 <button className={"button--action button--action-filled button--action--" + action.type} key={index} onClick={(e) => this.handlers.onButtonClick(action, component)}>{action.text}</button>
             );

@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npm run start:server",
-    "start:local": "HOST='localhost' JWT_SECRET='Q~&NvAHug*`3%M=T' CLOUDINARY_NAME='one-menu' CLOUDINARY_SECRET='VNjS8wLJW1x23xH_Sz364J4xfew' CLOUDINARY_API_KEY='834776295221634' DB_TYPE='mysql' DB_URL='localhost' DB_ENV='DEV' DB_NAME='oneme-5ru-u-121572' DB_USER='root' DB_PWD='root' DB_PORT=3306 DB_SSL_ENABLED=false STRAKEN_TOKEN_DEV='ACE563CA-FF89-4C7D-8DDF-35B5F11CFA21' node main.js",
+    "start:local": "HOST='localhost' JWT_SECRET='Q~&NvAHug*`3%M=T' CLOUDINARY_NAME='one-menu' CLOUDINARY_SECRET='VNjS8wLJW1x23xH_Sz364J4xfew' CLOUDINARY_API_KEY='834776295221634' DB_TYPE='mysql' DB_URL='localhost' DB_ENV='DEV' DB_NAME='oneme-5ru-u-121572' DB_USER='root' DB_PWD='root' DB_PORT=3306 DB_SSL_ENABLED=false STRAKER_DOMAIN='strakertranslations.com/v3/translate' STRAKER_TOKEN_DEV='ACE563CA-FF89-4C7D-8DDF-35B5F11CFA21' node main.js",
     "start:client": "webpack-dev-server --inline --progress --hot",
     "start:server": "npm run start:node",
     "start:node": "node main.js",

@@ -27,6 +27,7 @@ MenuTranslation.create = (obj) => {
   };
 
   console.log(menu);
+  console.log(constants);
 
   // Send a req to the Staker server to translate
   const options = {

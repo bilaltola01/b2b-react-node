@@ -215,7 +215,8 @@ export function translateMenu (opts, mode) {
             return opts.description === menu.Description && opts.title === menu.Title && parseInt(opts.price, 10) === parseInt(menu.Price, 10);
         }).MenuID;
 
-        return MenuCategory.translateMenuCategories(opts.languages.map(lang => {
+        // Convert to correct syntax
+        opts.languages = opts.languages.map(lang => {
             return {
                 code: lang.Code,
                 codeFull: lang.CodeFull,
@@ -226,7 +227,9 @@ export function translateMenu (opts, mode) {
                 name: lang.Name,
                 title: lang.Title
             };
-        }), opts.categories)
+        });
+
+        return MenuCategory.translateMenuCategories(opts.languages, opts.categories)
             .then((res) => {
                 console.log('translation request finished');
                 console.log(res);

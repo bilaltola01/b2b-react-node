@@ -78,6 +78,8 @@ class Dashboard extends Component {
 
     console.log(filteredMenus);
 
+    const lastMenu = filteredMenus;
+
     const sections = [{
         type: "visits",
         title: "Dashboard",

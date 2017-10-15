@@ -170,7 +170,7 @@ export function translateMeal (langs, meal) {
         let meals = res.obj;
 
         return meals.find((m) => {
-            return m.Description === meal.description && m.Title === meal.title;
+            return m.Description === meal.description && m.Title === meal.title && m.MenuCategoryID === meal.menuCategoryId;
         }).MealID;
     }).then((id) => {
         console.log(id);
