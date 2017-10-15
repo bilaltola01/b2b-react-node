@@ -25,6 +25,7 @@ const imageUploadController = require('../controllers/image-upload.controller');
 const mealTranslationController = require('../controllers/meal-translation.controller');
 const menuTranslationController = require('../controllers/menu-translation.controller');
 const menuCategoryTranslationController = require('../controllers/menu-category-translation.controller');
+const translationCallbackController = require('../controllers/translation-callback.controller');
 
 const authController = require('../controllers/auth.controller');
 
@@ -35,6 +36,7 @@ let Routes = class {
 		////////////
 		// Public Routes
 		////////////
+		router.post('/translation-callback', translationCallbackController.post);
 		router.post('/auth', authController.post);
 
 		router.use(authMiddleware);
