@@ -283,41 +283,59 @@ export function getMenuCategoryTranslations (ids) {
     });
 }
 
-export function translateMenuCategories (langs, categories) {
+export function translateMenuCategories (menuId, langs, categories) {
     return Promise.all(categories.map((cat) => {
         return Meal.translateMeals(langs, cat.meals).then((res) => {
-            return translateMenuCategory(langs, cat);
+            return translateMenuCategory(menuId, langs, cat);
         });
     }));
 }
 
-export function translateMenuCategory (langs, cat) {
-    if (!cat.id) {
-        console.error('Category id is not specified!');
-        return;
-    }
+export function translateMenuCategory (menuId, langs, cat) {
+    return Ajax().get('/menu-category', {
+        headers: {
+            "content-type": "application/json",
+            "cache-control": "no-cache",
+            "x-access-token": StorageManagerInstance.read('token')
+        }
+    }).then((res) => {
+        if (!res || !res.success) {
+            return Promise.reject(res);
+        }
 
-    let propsToTranslate = Object.keys(cat).filter((key) => {
-        return (key === 'title') && (cat[key] && cat[key].length > 0);
-    }).map((key) => {
-        return {
-            key: key,
-            value: cat[key]
-        };
-    });
+        let cats = res.obj;
 
-    return Promise.all(langs.map((lang) => {
-        return propsToTranslate.map((prop) => {
-            return Ajax().post('/translate-menu-category', {
-                body: JSON.stringify(convertForTranslation(lang, {type: 'category', id: cat.id, prop: prop})),
-                headers: {
-                    "content-type": "application/json",
-                    "cache-control": "no-cache",
-                    "x-access-token": StorageManagerInstance.read('token')
-                }
-            });
+        return cats.find((c) => {
+            return c.CategoryID === cat.id && c.MenuID === menuId;
+        }).MenuCategoryID;
+    }).then(id => {
+        if (!id) {
+            console.error('Category id is not specified!');
+            return;
+        }
+
+        let propsToTranslate = Object.keys(cat).filter((key) => {
+            return (key === 'title') && (cat[key] && cat[key].length > 0);
+        }).map((key) => {
+            return {
+                key: key,
+                value: cat[key]
+            };
         });
-    }));
+
+        return Promise.all(langs.map(lang => {
+            return propsToTranslate.map(prop => {
+                return Ajax().post('/translate-menu-category', {
+                    body: JSON.stringify(convertForTranslation(lang, {type: 'category', id: id, prop: prop})),
+                    headers: {
+                        "content-type": "application/json",
+                        "cache-control": "no-cache",
+                        "x-access-token": StorageManagerInstance.read('token')
+                    }
+                });
+            });
+        }));
+    });
 }
 
 

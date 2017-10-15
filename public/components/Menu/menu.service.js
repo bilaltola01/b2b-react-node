@@ -56,55 +56,6 @@ export function updateMenu (opts) {
     }
 }
 
-//
-// TRANSLATE
-//
-
-export function getMenuTranslation (id, translations) {
-    let menuCategoryTranslations;
-    let menuTranslations = translations;
-    let mealTranslations;
-
-    console.log(menuTranslations);
-
-    return MenuCategory.getMenuCategoryTranslations([id]).then((res) => {
-        console.log(res);
-
-        menuCategoryTranslations = res;
-
-        return Promise.all(res.map((cat) => {
-            return Meal.getMealTranslations([cat.MenuCategoryID]);
-        }));
-    }).then((res) => {
-        console.log(res);
-
-        mealTranslations = res;
-
-        let menu = menuTranslations.filter((menuTranslation) => {
-            return menuTranslation.MenuID === id;
-        }).reduce((acc, menuTranslation) => {
-            acc['original' + menuTranslation.PropKey] = menuTranslation.OriginalText;
-            acc[menuTranslation.PropKey] = menuTranslation.Text;
-            return acc;
-        }, {
-            // Generate random id here
-            id: 987248947
-        });
-
-        menu.categories = menuCategoryTranslations.map((cat) => {
-            let finalCat = cat;
-            finalCat.meals = Array.prototype.concat(...mealTranslations).filter((meal, index) => {
-                return meal.MenuCategoryID === cat.MenuCategoryID;
-            });
-            return finalCat;
-        });
-
-        console.log(menu);
-
-        return menu;
-    });
-}
-
 
 export function getMenus () {
     let menus;
@@ -162,6 +113,10 @@ export function getMenus () {
 }
 
 
+//
+// TRANSLATE
+//
+
 export function getMenuTranslations () {
     return Ajax().get('/translate-menu', {
         headers: {
@@ -183,6 +138,51 @@ export function getMenuTranslations () {
         return Promise.all(ids.map((id) => {
             return getMenuTranslation(id, res.obj);
         }));
+    });
+}
+
+export function getMenuTranslation (id, translations) {
+    let menuCategoryTranslations;
+    let menuTranslations = translations;
+    let mealTranslations;
+
+    console.log(menuTranslations);
+
+    return MenuCategory.getMenuCategoryTranslations([id]).then((res) => {
+        console.log(res);
+
+        menuCategoryTranslations = res;
+
+        return Promise.all(res.map((cat) => {
+            return Meal.getMealTranslations([cat.MenuCategoryID]);
+        }));
+    }).then((res) => {
+        console.log(res);
+
+        mealTranslations = res;
+
+        let menu = menuTranslations.filter((menuTranslation) => {
+            return menuTranslation.MenuID === id;
+        }).reduce((acc, menuTranslation) => {
+            acc['original' + menuTranslation.PropKey] = menuTranslation.OriginalText;
+            acc[menuTranslation.PropKey] = menuTranslation.Text;
+            return acc;
+        }, {
+            // Generate random id here
+            id: 987248947
+        });
+
+        menu.categories = menuCategoryTranslations.map((cat) => {
+            let finalCat = cat;
+            finalCat.meals = Array.prototype.concat(...mealTranslations).filter((meal, index) => {
+                return meal.MenuCategoryID === cat.MenuCategoryID;
+            });
+            return finalCat;
+        });
+
+        console.log(menu);
+
+        return menu;
     });
 }
 
@@ -229,7 +229,7 @@ export function translateMenu (opts, mode) {
             };
         });
 
-        return MenuCategory.translateMenuCategories(opts.languages, opts.categories)
+        return MenuCategory.translateMenuCategories(menuId, opts.languages, opts.categories)
             .then((res) => {
                 console.log('translation request finished');
                 console.log(res);
