@@ -10,7 +10,7 @@ let DBConnecter = class {
 			    user: constants.DB_USER,
 			    password: constants.DB_PWD,
 			    database: constants.DB_NAME
-			} : process.env.DATABASE_URL,
+			} : constants.DATABASE_URL,
 	  		acquireConnectionTimeout: 10000,
 			ssl: has_ssl,
 			//pool: { min: 0, max: 7 }
