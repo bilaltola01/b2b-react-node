@@ -26,6 +26,10 @@ MenuTranslation.create = (obj) => {
     payload: obj.payload
   };
 
+  if (constants.STRAKER_CALLBACK_URL) {
+    menu.callback_uri = constants.STRAKER_CALLBACK_URL + '?type=menu';
+  }
+
   console.log(menu);
   console.log(constants);
 

@@ -7,10 +7,6 @@ const DBLayer = require('../DBLayer');
 const db = DBLayer.connection;
 const dateUtils = require('../shared/date-utils');
 
-const SANDBOX_TOKEN = 'ACE563CA-FF89-4C7D-8DDF-35B5F11CFA21';
-const TRANSLATION_ENV = 'sandbox';
-const TRANSLATION_URL = 'https://' + TRANSLATION_ENV + '.strakertranslations.com/v3/translate';
-
 // Create new category in the database
 // Returns a resolved Promise containing its id
 let MenuCategoryTranslation = class {
@@ -24,6 +20,10 @@ MenuCategoryTranslation.create = (obj) => {
     tl: obj.tl,
     payload: obj.payload
   };
+
+  if (constants.STRAKER_CALLBACK_URL) {
+    category.callback_uri = constants.STRAKER_CALLBACK_URL + '?type=menucategory';
+  }
 
   console.log(category);
   console.log(constants);
