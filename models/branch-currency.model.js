@@ -17,7 +17,7 @@ BranchCurrency.create = (obj) => {
   currency.Date = dateUtils.toMysqlDate(new Date());
 
   console.log(currency);
-  return db('BranchCurrency').insert(currency);
+  return db('BranchCurrency').insert(currency).returning('BranchCurrencyID');
 };
 
 BranchCurrency.createAll = (currencies) => {

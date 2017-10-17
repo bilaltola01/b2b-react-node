@@ -30,7 +30,7 @@ Branch.create = (obj) => {
       (branch.City ? ' ' + branch.City : '');
 
     if (!address) {
-      return db('Branch').insert(branch);
+      return db('Branch').insert(branch).returning('BranchID');
     }
 
     return geoUtils.convertToLatLong(address).then(({ latitude, longitude }) => {
@@ -41,15 +41,15 @@ Branch.create = (obj) => {
       }
 
       console.log(branch);
-      return db('Branch').insert(branch);
+      return db('Branch').insert(branch).returning('BranchID');
     }).catch(err => {
       console.log(err);
-      return db('Branch').insert(branch);
+      return db('Branch').insert(branch).returning('BranchID');
     });
   }
 
   console.log(branch);
-  return db('Branch').insert(branch);
+  return db('Branch').insert(branch).returning('BranchID');
 };
 
 Branch.createWithDetails = (obj) => {

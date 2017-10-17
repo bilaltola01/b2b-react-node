@@ -16,7 +16,7 @@ Meal.create = (obj) => {
   meal.Date = dateUtils.toMysqlDate(new Date());
 
   console.log(meal);
-  return db('Meal').insert(meal);
+  return db('Meal').insert(meal).returning('MealID');
 };
 
 

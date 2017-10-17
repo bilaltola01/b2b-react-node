@@ -15,7 +15,7 @@ BranchContact.create = (obj) => {
   contact.Date = dateUtils.toMysqlDate(new Date());
 
   console.log(contact);
-  return db('BranchContact').insert(contact);
+  return db('BranchContact').insert(contact).returning('BranchContactID');
 };
 
 BranchContact.createAll = (contacts) => {

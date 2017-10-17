@@ -17,7 +17,7 @@ BranchCuisine.create = (obj) => {
   cuisine.Date = dateUtils.toMysqlDate(new Date());
 
   console.log(cuisine);
-  return db('BranchCuisine').insert(cuisine);
+  return db('BranchCuisine').insert(cuisine).returning('BranchCuisineID');
 };
 
 BranchCuisine.createAll = (cuisines) => {

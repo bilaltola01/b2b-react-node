@@ -61,7 +61,7 @@ MenuCategoryTranslation.create = (obj) => {
       Date: dateUtils.toMysqlDate(new Date())
     };
 
-    return db('MenuCategoryTranslation').insert(dbObj);
+    return db('MenuCategoryTranslation').insert(dbObj).returning('MenuCategoryTranslationID');
   }).catch((err) => {
     console.error(err);
   });

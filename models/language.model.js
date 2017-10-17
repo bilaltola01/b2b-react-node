@@ -22,7 +22,7 @@ Language.create = (obj) => {
   language.Date = dateUtils.toMysqlDate(new Date());
 
   console.log(language);
-  return db('Language').insert(language);
+  return db('Language').insert(language).returning('LanguageID');
 };
 
 

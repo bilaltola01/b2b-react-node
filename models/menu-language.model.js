@@ -15,7 +15,7 @@ MenuLanguage.create = (obj) => {
   language.Date = dateUtils.toMysqlDate(new Date());
 
   console.log(language);
-  return db('MenuLanguage').insert(language);
+  return db('MenuLanguage').insert(language).returning('MenuLanguageID');
 };
 
 

@@ -25,7 +25,7 @@ CategoryCustom.create = (obj) => {
     category.Date = dateUtils.toMysqlDate(new Date());
 
     console.log(category);
-    return db('CategoryCustom').insert(category);
+    return db('CategoryCustom').insert(category).returning('CategoryCustomID');
   });
 };
 

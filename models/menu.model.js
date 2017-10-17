@@ -20,7 +20,7 @@ Menu.create = (obj) => {
   menu.Date = dateUtils.toMysqlDate(new Date());
 
   console.log(menu);
-  return db('Menu').insert(menu);
+  return db('Menu').insert(menu).returning('MenuID');
 };
 
 

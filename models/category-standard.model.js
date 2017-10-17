@@ -25,7 +25,7 @@ CategoryStandard.create = (obj) => {
     category.Date = dateUtils.toMysqlDate(new Date());
 
     console.log(category);
-    return db('CategoryStandard').insert(category);
+    return db('CategoryStandard').insert(category).returning('CategoryStandardID');
   });
 };
 

@@ -15,7 +15,7 @@ BranchImage.create = (obj) => {
   image.Date = dateUtils.toMysqlDate(new Date());
 
   console.log(image);
-  return db('BranchImage').insert(image);
+  return db('BranchImage').insert(image).returning('BranchImageID');
 };
 
 BranchImage.createAll = (images) => {

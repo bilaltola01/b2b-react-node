@@ -20,7 +20,7 @@ Currency.create = (obj) => {
   currency.Date = dateUtils.toMysqlDate(new Date());
 
   console.log(currency);
-  return db('Currency').insert(currency);
+  return db('Currency').insert(currency).returning('CurrencyID');
 };
 
 

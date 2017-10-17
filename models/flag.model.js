@@ -20,7 +20,7 @@ Flag.create = (obj) => {
   flag.Date = dateUtils.toMysqlDate(new Date());
 
   console.log(flag);
-  return db('Flag').insert(flag);
+  return db('Flag').insert(flag).returning('FlagID');
 };
 
 // Get a flag by id

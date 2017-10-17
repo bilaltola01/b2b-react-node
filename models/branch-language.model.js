@@ -17,7 +17,7 @@ BranchLanguage.create = (obj) => {
   language.Date = dateUtils.toMysqlDate(new Date());
 
   console.log(language);
-  return db('BranchLanguage').insert(language);
+  return db('BranchLanguage').insert(language).returning('BranchLanguageID');
 };
 
 BranchLanguage.createAll = (languages) => {

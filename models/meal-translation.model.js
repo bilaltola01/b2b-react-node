@@ -61,7 +61,7 @@ MealTranslation.create = (obj) => {
       Date: dateUtils.toMysqlDate(new Date())
     };
 
-    return db('MealTranslation').insert(dbObj);
+    return db('MealTranslation').insert(dbObj).returning('MealTranslationID');
   }).catch((err) => {
     console.error(err);
   });
