@@ -19,5 +19,5 @@ exports.STRAKER_TOKEN_DEV = process.env.STRAKER_TOKEN_DEV;
 exports.STRAKER_TOKEN_PROD = process.env.STRAKER_TOKEN_PROD;
 exports.STRAKER_TOKEN = (process.env.DB_ENV === 'DEV') ? process.env.STRAKER_TOKEN_DEV : process.env.STRAKER_TOKEN_PROD;
 exports.STRAKER_DOMAIN = process.env.STRAKER_DOMAIN;
-exports.STRAKER_TRANSLATION_URL = (process.env.DB_ENV === 'DEV') ? 'https://sandbox.' + process.env.STRAKER_DOMAIN : 'https://api.' + STRAKER_DOMAIN;
+exports.STRAKER_TRANSLATION_URL = (process.env.DB_ENV === 'DEV') ? 'https://sandbox.' + process.env.STRAKER_DOMAIN : 'https://api.' + process.env.STRAKER_DOMAIN;
 exports.STRAKER_CALLBACK_URL = (process.env.DB_ENV === 'DEV') ? '' : process.env.STRAKER_CALLBACK_URL;
