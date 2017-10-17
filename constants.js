@@ -14,7 +14,7 @@ exports.DB_USER = process.env.DB_USER;
 exports.DB_PWD = process.env.DB_PWD;
 exports.DB_SSL_ENABLED = process.env.DB_SSL_ENABLED;
 exports.DB_STRING = process.env.DB_STRING;
-exports.DATABASE_URL = (process.env.DB_ENV === 'DEV') ? process.env.DATABASE_URL : process.env.HEROKU_POSTGRESQL_MAUVE_URL;
+exports.DATABASE_URL = (process.env.DB_ENV === 'DEV') ? process.env.HEROKU_POSTGRESQL_ROSE_URL : process.env.HEROKU_POSTGRESQL_MAUVE_URL;
 exports.STRAKER_TOKEN_DEV = process.env.STRAKER_TOKEN_DEV;
 exports.STRAKER_TOKEN_PROD = process.env.STRAKER_TOKEN_PROD;
 exports.STRAKER_TOKEN = (process.env.DB_ENV === 'DEV') ? process.env.STRAKER_TOKEN_DEV : process.env.STRAKER_TOKEN_PROD;
