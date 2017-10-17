@@ -13,7 +13,7 @@ var knex = require('knex')({
 	    database: constants.DB_NAME
 	} : constants.DATABASE_URL,
 		acquireConnectionTimeout: 10000,
-	ssl: has_ssl,
+	ssl: true,
 	//pool: { min: 0, max: 7 }
 });
 
