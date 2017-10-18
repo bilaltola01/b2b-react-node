@@ -38,7 +38,7 @@ let createHandlers = (ctx) => {
 
 				if (prevCategory.id === cat.id ||
 					prevCategory.id === 1 /*&& prevState.allCategories.length === 1*/ ||
-					(cat.oldId && cat.id !== cat.oldId)) {
+					(cat.oldId && prevCategory.id === cat.oldId)) {
 					let obj = prevCategory;
 					obj.title = cat.title;
 					obj.id = cat.id;
