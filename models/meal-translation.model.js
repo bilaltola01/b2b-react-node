@@ -26,7 +26,6 @@ MealTranslation.create = (obj) => {
   }
 
   console.log(meal);
-  console.log(constants);
 
   // Send a req to the Staker server to translate
   const options = {
