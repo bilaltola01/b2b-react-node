@@ -36,7 +36,9 @@ let createHandlers = (ctx) => {
 			categories = prevState.allCategories.map((prevCategory, index) => {
 				console.log(prevCategory);
 
-				if (prevCategory.id === cat.id || (prevCategory.id === 1 /*&& prevState.allCategories.length === 1*/)) {
+				if (prevCategory.id === cat.id ||
+					prevCategory.id === 1 /*&& prevState.allCategories.length === 1*/ ||
+					(cat.oldId && cat.id !== cat.oldId)) {
 					let obj = prevCategory;
 					obj.title = cat.title;
 					obj.id = cat.id;
@@ -132,7 +134,7 @@ class MenuCategoriesEdit extends Component {
 		console.log(totalCategories);
 
 		const categoriesComponent = (this.state.allCategories && this.state.allCategories.length > 0) ? this.state.allCategories.map((category, index) => {
-			return <MenuCategoryEdit id={category.CategoryStandardID} totalCategories={totalCategories} isCustom={false} title={category.Title} description={category.Description} meals={category.meals || []} onChange={this.handlers.onCategoryChange} onCategoryRemove={this.handlers.onCategoryRemove} key={category.CategoryStandardID} />;
+			return <MenuCategoryEdit id={category.CategoryStandardID} totalCategories={totalCategories} isCustom={false} title={category.Title} description={category.Description} meals={category.meals || []} onChange={this.handlers.onCategoryChange} onCategoryRemove={this.handlers.onCategoryRemove} key={index} />;
 		}) : null;
 
 		return (
