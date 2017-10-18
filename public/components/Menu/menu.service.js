@@ -44,16 +44,30 @@ export function updateMenu (opts) {
         }).then((id) => {
             return MenuCategory.postMenuCategories(id, opts.categories)
                 .then(MenuLanguage.postMenuLanguages(id, opts.languages))
-                .then(Ajax().post('/menu', {
-                  body: JSON.stringify(convertOpts(opts, false)),
-                  headers: {
-                    "content-type": "application/json",
-                    "cache-control": "no-cache",
-                    "x-access-token": StorageManagerInstance.read('token')
-                  }
-                }));
+                .then(res => {
+                    let obj = opts;
+                    return Promise.all(opts.branches.map(branch => {
+                        obj.branchId = branch.BranchID;
+                        return postMenu(obj);
+                    }))
+                }).then(ids => {
+                    console.log('last modif');
+                    console.log([].concat.apply([], ids));
+                    return [].concat.apply([], ids);
+                });
         });
     }
+}
+
+function postMenu (obj) {
+    return Ajax().post('/menu', {
+        body: JSON.stringify(convertOpts(obj, false)),
+        headers: {
+            "content-type": "application/json",
+            "cache-control": "no-cache",
+            "x-access-token": StorageManagerInstance.read('token')
+        }
+    });
 }
 
 
