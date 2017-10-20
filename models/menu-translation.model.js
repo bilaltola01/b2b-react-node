@@ -60,6 +60,7 @@ MenuTranslation.create = (obj) => {
       JobNumber: res.job_key,
       WordCount: parseInt(res.wordcount, 10),
       BranchLanguageName: menu.tl,
+      BranchLanguageID: obj.branchLanguageId,
       Status: 'PENDING',
       OriginalText: menu.payload,
       Date: dateUtils.toMysqlDate(new Date())

@@ -60,15 +60,14 @@ function updateTranslation (translation, component, idStr, job) {
   }
 
   if (job.translation_type === 'text') {
-    if (job.translated_text && job.translated_text.length > 0 && job.translated_text.download_url) {
-      dbObj.Url = job.translated_text.download_url;
-      dbObj.Text = job.translated_text.download_text;
+    if (job.translated_text && job.translated_text.length > 0 && job.translated_text[0].translation) {
+      dbObj.Text = job.translated_text[0].translation;
     }
   }
 
   if (job.translation_type === 'file') {
-    if (job.translated_file && job.translated_file.length > 0 && job.translated_file.download_url) {
-      dbObj.Url = job.translated_file.download_url;
+    if (job.translated_file && job.translated_file.length > 0 && job.translated_file[0].download_url) {
+      dbObj.Url = job.translated_file[0].download_url;
     }
   }
 

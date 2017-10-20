@@ -10,6 +10,7 @@ const BranchCuisine = require('./branch-cuisine.model');
 const BranchCurrency = require('./branch-currency.model');
 const BranchLanguage = require('./branch-language.model');
 const BranchImage = require('./branch-image.model');
+const Menu = require('./menu.model');
 
 // Create new branch in the database
 // Returns a resolved Promise containing its id
@@ -213,7 +214,8 @@ function createBranchContainer (branch) {
       BranchCuisine.getWithDetails({BranchID: branch.BranchID}),
       BranchCurrency.getWithDetails({BranchID: branch.BranchID}),
       BranchLanguage.getWithDetails({BranchID: branch.BranchID}),
-      BranchImage.get({BranchID: branch.BranchID})
+      BranchImage.get({BranchID: branch.BranchID}),
+      Menu.getWithDetails({BranchID: branch.BranchID})
     ]).then(res => {
       console.log(res);
       let obj = branch;
@@ -222,6 +224,7 @@ function createBranchContainer (branch) {
       obj.currency = res[2];
       obj.languages = res[3];
       obj.images = res[4];
+      obj.menus = res[5];
 
       resolve(obj);
     }).catch(err => {

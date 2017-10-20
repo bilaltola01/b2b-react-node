@@ -4,6 +4,10 @@ const DBLayer = require('../DBLayer');
 const db = DBLayer.connection;
 const dateUtils = require('../shared/date-utils');
 
+const MenuCategory = require('./menu-category.model');
+const MenuLanguage = require('./menu-language.model');
+const MenuTranslation = require('./menu-translation.model');
+
 ///////////////////
 // TODO: Menu
 // Add a menu should only be accessible from OM admins
@@ -60,6 +64,35 @@ Menu.getById = (id) => {
 Menu.get = (conditions) => {
   return db('Menu').where(conditions).select('*');
 };
+
+Menu.getWithDetails = (conditions) => {
+  return db('Menu').where(conditions).select('*').then(menus => {
+    return Promise.all(menus.map(menu => {
+      return createMenuContainer(menu);
+    }));
+  });
+};
+
+
+function createMenuContainer (menu) {
+  return new Promise((resolve, reject) => {
+    Promise.all([
+      MenuCategory.getWithDetails({MenuID: menu.MenuID}),
+      MenuLanguage.get({MenuID: menu.MenuID}),
+      MenuTranslation.get({MenuID: menu.MenuID})
+    ]).then(res => {
+      console.log(res);
+      let obj = menu;
+      obj.categories = res[0];
+      obj.languages = res[1];
+      obj.translations = res[2];
+
+      resolve(obj);
+    }).catch(err => {
+      reject(err);
+    });
+  });
+}
 
 // Get all menus
 // Returns a Promise

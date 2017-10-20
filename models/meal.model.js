@@ -4,6 +4,7 @@ const DBLayer = require('../DBLayer');
 const db = DBLayer.connection;
 const dateUtils = require('../shared/date-utils');
 
+const MealTranslation = require('./meal-translation.model');
 
 // Create new meal in the database
 // Returns a resolved Promise containing its id
@@ -56,6 +57,30 @@ Meal.getById = (id) => {
 Meal.get = (conditions) => {
   return db('Meal').where(conditions).select('*');
 };
+
+Meal.getWithDetails = (conditions) => {
+  return db('Meal').where(conditions).select('*').then(meals => {
+    return Promise.all(meals.map(meal => {
+      return createMealCategoryContainer(meal);
+    }));
+  });
+};
+
+function createMealCategoryContainer (meal) {
+  return new Promise((resolve, reject) => {
+    Promise.all([
+      MealTranslation.get({MealID: meal.MealID})
+    ]).then(res => {
+      console.log(res);
+      let obj = meal;
+      obj.translations = res[0];
+
+      resolve(obj);
+    }).catch(err => {
+      reject(err);
+    });
+  });
+}
 
 // Get all meals
 // Returns a Promise

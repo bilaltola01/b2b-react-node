@@ -93,7 +93,7 @@ BranchLanguage.getWithDetails = (conditions) => {
     }
 
     return Promise.all(branchLanguages.map(branchLanguage => {
-      return createBranchLanguage(branchLanguage, Language.get({LanguageID: branchLanguage.LanguageID}));
+      return createBranchLanguage(branchLanguage);
     }));
   });
 };
@@ -104,11 +104,14 @@ BranchLanguage.getAll = () => {
   return db.select('*').from('BranchLanguage');
 };
 
-function createBranchLanguage (branchLanguage, languagePromise) {
+function createBranchLanguage (branchLanguage) {
   return new Promise((resolve, reject) => {
-    languagePromise.then(lang => {
+    Promise.all([
+      Language.getWithDetails({LanguageID: branchLanguage.LanguageID})
+    ]).then(res => {
+      console.log(res);
       let obj = branchLanguage;
-      obj.Language = lang[0];
+      obj.Language = res[0];
       resolve(obj);
     }).catch(err => {
       reject(err);

@@ -55,6 +55,12 @@ Language.get = (conditions) => {
   return db('Language').where(conditions).select('*');
 };
 
+Language.getWithDetails = (conditions) => {
+  return db('Language').where(conditions).first('*').then(language => {
+    return createLanguageContainer(language);
+  });
+}
+
 // Get all languages
 // Returns a Promise
 Language.getAll = () => {
@@ -68,6 +74,23 @@ Language.getAllWithDetails = () => {
     }));
   });
 };
+
+
+function createLanguageContainer (language) {
+  return new Promise((resolve, reject) => {
+    Promise.all([
+      Flag.getById(language.FlagID)
+    ]).then(res => {
+      console.log(res);
+      let obj = language;
+      obj.Flag = res[0];
+
+      resolve(obj);
+    }).catch(err => {
+      reject(err);
+    });
+  });
+}
 
 function createLanguage (languageObj, flagsPromise) {
   return new Promise((resolve, reject) => {

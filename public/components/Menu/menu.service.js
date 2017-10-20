@@ -274,6 +274,7 @@ function convertForTranslation (lang, obj) {
                     title: 'Menu ' + obj.id + ', translation: ' + obj.prop.key,
                     sl: 'English',
                     tl: lang.title || lang.name,
+                    branchLanguageId: lang.id,
                     payload: obj.prop.value
                 }
         });
@@ -284,6 +285,7 @@ function convertForTranslation (lang, obj) {
                     title: 'Menu ' + obj.id + ', translation: ' + obj.prop.key,
                     sl: 'English',
                     tl: lang.title || lang.name,
+                    branchLanguageId: lang.id,
                     payload: obj.prop.value
                 }
             };

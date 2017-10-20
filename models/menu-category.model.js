@@ -4,6 +4,9 @@ const DBLayer = require('../DBLayer');
 const db = DBLayer.connection;
 const dateUtils = require('../shared/date-utils');
 
+const Meal = require('./meal.model');
+const MenuCategoryTranslation = require('./menu-category-translation.model');
+
 // Create new category in the database
 // Returns a resolved Promise containing its id
 let MenuCategory = class {
@@ -55,6 +58,34 @@ MenuCategory.getById = (id) => {
 MenuCategory.get = (conditions) => {
   return db('MenuCategory').where(conditions).select('*');
 };
+
+
+MenuCategory.getWithDetails = (conditions) => {
+  return db('MenuCategory').where(conditions).select('*').then(categories => {
+    return Promise.all(categories.map(category => {
+      return createMenuCategoryContainer(category);
+    }));
+  });
+};
+
+
+function createMenuCategoryContainer (menu) {
+  return new Promise((resolve, reject) => {
+    Promise.all([
+      Meal.getWithDetails({MenuCategoryID: menu.MenuCategoryID}),
+      MenuCategoryTranslation.get({MenuCategoryID: menu.MenuCategoryID})
+    ]).then(res => {
+      console.log(res);
+      let obj = menu;
+      obj.meals = res[0];
+      obj.translations = res[1];
+
+      resolve(obj);
+    }).catch(err => {
+      reject(err);
+    });
+  });
+}
 
 // Get all categories
 // Returns a Promise

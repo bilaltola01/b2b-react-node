@@ -26,11 +26,15 @@ let authToken = (req, res, next) => {
   } else {
     // if there is no token
     // return an error
-    return res.status(403).send({
-        success: false,
-        message: 'No token provided.'
-    });
-
+    console.log(req.path);
+    if (req.path === '/profile') {
+      next();
+    } else {
+      return res.status(403).send({
+          success: false,
+          message: 'No token provided.'
+      });
+    }
   }
 };
 
