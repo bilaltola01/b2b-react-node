@@ -15,6 +15,9 @@ let TranslationCallback = class {
 };
 
 TranslationCallback.create = (query, obj) => {
+  console.log(query);
+  console.log(obj);
+
   let job = obj[0];
   let type = query ? query.type : '';
 

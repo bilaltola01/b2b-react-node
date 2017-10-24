@@ -24,6 +24,9 @@ TranslationCallbackController.get = (req, res) => {
 TranslationCallbackController.post = (req, res) => {
     res.setHeader('Content-Type', 'application/json');
 
+    console.log(req);
+    console.log(req.body);
+
     TranslationCallback.create(req.query, req.body.job).then(output => {
         console.log(output);
         res.status(201).json({ success: true, message: 'TranslationCallback successfully created', obj: output });
