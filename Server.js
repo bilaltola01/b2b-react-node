@@ -49,7 +49,7 @@ let Server = class {
             res.header('X-XSS-Protection', '1; mode=block');
             res.header('X-Content-Type-Options', 'nosniff');
             res.header('X-Frame-Options', 'deny');
-            res.header('Access-Control-Allow-Headers', 'Content-type,Accept,X-Access-Token,X-Key');
+            res.header('Access-Control-Allow-Headers', 'Content-type,Cache-Control,Accept,X-Access-Token,X-Key');
 
             if (req.method === 'OPTIONS') {
                 res.status(200).end();
