@@ -27,7 +27,7 @@ TranslationCallbackController.post = (req, res) => {
     console.log(req);
     console.log(req.body);
 
-    TranslationCallback.create(req.query, req.body.job).then(output => {
+    TranslationCallback.create(req.query, req.body).then(output => {
         console.log(output);
         res.status(201).json({ success: true, message: 'TranslationCallback successfully created', obj: output });
     }).catch(err => {

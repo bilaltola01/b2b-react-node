@@ -18,14 +18,45 @@ TranslationCallback.create = (query, obj) => {
   console.log(query);
   console.log(obj);
 
-  let job = obj[0];
   let type = query ? query.type : '';
 
-  console.log(job);
   console.log(type);
 
-  return update(type, job);
+  // Check first key of object
+  let key = Object.keys(obj)[0];
+
+  // If translation is finished
+  if (key === 'job') {
+    let job = obj.job[0];
+    console.log(job);
+
+    return update(type, job);
+  }
+
+  // If quote is ready
+  if (key.includes('event')) {
+    let obj = parseJson(key);
+    if (obj) {
+      let strakerEvent = obj['event'];
+    }
+
+    return ;
+  }
+
+  // Other events here...
 };
+
+function parseJson (obj) {
+  let parsed;
+
+  try {
+    parsed = JSON.parse(obj);
+  } catch (err) {
+    console.log(err);
+  }
+
+  return parsed;
+}
 
 function update (type, job) {
   switch (type) {
