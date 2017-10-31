@@ -6,6 +6,7 @@ const dateUtils = require('../shared/date-utils');
 
 const Meal = require('./meal.model');
 const MenuCategoryTranslation = require('./menu-category-translation.model');
+const CategoryStandard = require('./category-standard.model');
 
 // Create new category in the database
 // Returns a resolved Promise containing its id
@@ -73,12 +74,14 @@ function createMenuCategoryContainer (menu) {
   return new Promise((resolve, reject) => {
     Promise.all([
       Meal.getWithDetails({MenuCategoryID: menu.MenuCategoryID}),
-      MenuCategoryTranslation.get({MenuCategoryID: menu.MenuCategoryID})
+      MenuCategoryTranslation.get({MenuCategoryID: menu.MenuCategoryID}),
+      CategoryStandard.getById(menu.CategoryID)
     ]).then(res => {
       console.log(res);
       let obj = menu;
       obj.meals = res[0];
       obj.translations = res[1];
+      obj.Category = res[2];
 
       resolve(obj);
     }).catch(err => {

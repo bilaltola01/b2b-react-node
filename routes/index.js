@@ -36,6 +36,7 @@ let Routes = class {
 		////////////
 		// Public Routes
 		////////////
+		router.get('/language', languageController.get);
 		router.post('/translation-callback', translationCallbackController.post);
 		router.post('/auth', authController.post);
 
@@ -55,7 +56,6 @@ let Routes = class {
 		router.post('/company', companyController.post);
 		router.put('/company', companyController.put);
 
-		router.get('/language', languageController.get);
 		router.post('/language', languageController.post);
 		router.put('/language', languageController.put);
 
