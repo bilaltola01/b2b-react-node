@@ -93,7 +93,7 @@ Branch.createWithDetails = (obj) => {
     return Promise.all([
       BranchContact.createAll(insertNewId(id, branch.contacts)),
       BranchCuisine.createAll(insertNewId(id, branch.cuisines)),
-      BranchCurrency.createAll(insertNewId(id, branch.currency)),
+      BranchCurrency.createAll(insertNewId(id, branch.currencies)),
       BranchLanguage.createAll(insertNewId(id, branch.languages)),
       BranchImage.createAll(insertNewId(id, branch.images))
     ]).then(res => {
@@ -102,7 +102,7 @@ Branch.createWithDetails = (obj) => {
       let tmp = branch;
       tmp.contacts = res[0][0];
       tmp.cuisines = res[0][1];
-      tmp.currency = res[0][2];
+      tmp.currencies = res[0][2];
       tmp.languages = res[0][3];
       tmp.images = res[0][4];
 
@@ -131,6 +131,27 @@ Branch.update = (id, obj) => {
 
 // Returns a resolved Promise containing the new branch
 Branch.updateWithDetails = (id, obj) => {
+  let insertNewId = (id, arr) => {
+    if (!id) {
+      return arr;
+    }
+
+    let newObject = arr.map(item => {
+      if (!item.BranchID) {
+        let newItem = item;
+        newItem.BranchID = id;
+        return newItem;
+      }
+
+      return item;
+    });
+
+    console.log('insertNewId');
+    console.log(newObject);
+
+    return newObject;
+  };
+
   console.log('BRANCH UPDATE WITH DETAILS');
   console.log(id, obj);
   let branch = obj;
@@ -138,16 +159,16 @@ Branch.updateWithDetails = (id, obj) => {
 
   return Promise.all([
     BranchContact.updateAll(branch.contacts),
-    BranchCuisine.updateAll(branch.cuisines),
-    BranchCurrency.updateAll(branch.currency),
-    BranchLanguage.updateAll(branch.languages),
+    BranchCuisine.updateAll(insertNewId(id, branch.cuisines)),
+    BranchCurrency.updateAll(insertNewId(id, branch.currencies)),
+    BranchLanguage.updateAll(insertNewId(id, branch.languages)),
     BranchImage.updateAll(branch.images)
   ]).then(res => {
     console.log(res);
     let tmp = branch;
     tmp.contacts = res[0][0];
     tmp.cuisines = res[0][1];
-    tmp.currency = res[0][2];
+    tmp.currencies = res[0][2];
     tmp.languages = res[0][3];
     tmp.images = res[0][4];
 
@@ -221,7 +242,7 @@ function createBranchContainer (branch) {
       let obj = branch;
       obj.contacts = res[0];
       obj.cuisines = res[1];
-      obj.currency = res[2];
+      obj.currencies = res[2];
       obj.languages = res[3];
       obj.images = res[4];
       obj.menus = res[5];

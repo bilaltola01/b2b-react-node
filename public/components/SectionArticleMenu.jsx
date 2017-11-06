@@ -52,7 +52,13 @@ class SectionArticleMenu extends Component {
 
 		console.log(this.props);
 
-		const ownProps = { title, description, price, categories };
+		const ownProps = {
+			id,
+			Title: title,
+			Description: description,
+			Price: price,
+			categories
+		};
 
 		/*
 		Menu:
@@ -153,7 +159,7 @@ class SectionArticleMenu extends Component {
 							<p className="menu--title">
 								Menu
 							</p>
-							<Menu ownProps={ownProps} />
+							<Menu id={id} title={title} ownProps={ownProps} />
 						</div>
 					</div>
 				</div>

@@ -61,7 +61,7 @@ class Popup extends Component {
     }
 
     componentDidMount() {
-        
+
     }
 
     render () {

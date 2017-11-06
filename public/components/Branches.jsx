@@ -12,9 +12,11 @@ let createHandlers = (ctx) => {
 
     let profile = obj;
 
+/*
     ctx.setState({
       branches: profile.branches
     });
+*/
   };
 
   return {
@@ -40,7 +42,7 @@ class Branches extends Component {
 
     const profile = (this.props.profile) ? this.props.profile : {};
 
-    const branchRoot = (this.state.branches && this.state.branches.length > 0) ? this.state.branches.find(branch => {
+    const branchRoot = (profile.branches && profile.branches.length > 0) ? profile.branches.find(branch => {
       return branch.HasHeadquarters == 1;
     }) : null;
 
@@ -48,10 +50,6 @@ class Branches extends Component {
       branchRoot.mainContact = (branchRoot.contacts && branchRoot.contacts.length > 0) ? branchRoot.contacts.find(contact => {
         return contact.IsAdmin == 1;
       }) : null;
-    }
-
-    if (!profile.branches || profile.branches.length <= 0) {
-      profile.branches = this.state.branches;
     }
 
     console.log(branchRoot);

@@ -70,6 +70,17 @@ class ContactEdit extends Component {
                         		</div>
 	                        </div>
 	                    </div>
+	                    <div className="contact--details clearfix">
+	                   		<h4 className="icon--contact icon--mail" style={{visibility: "hidden"}}>Phone</h4>
+	                        <div className="news--text">
+	                            <div className="content--edit branch--address--edit">
+					            	<div className="edit--block">
+	                            		<label className="label--edit">Is Admin?</label>
+	                        			<input className="input--edit" type="checkbox" name="branch-IsAdmin" defaultChecked={!!isAdmin} onChange={(e) => this.handlers.onChanges('contacts', {target: e, key: 'IsAdmin'}, id)} />
+	                        		</div>
+	                    		</div>
+	                        </div>
+	                    </div>
 	                </div>
 	            </div>
 	        </div>

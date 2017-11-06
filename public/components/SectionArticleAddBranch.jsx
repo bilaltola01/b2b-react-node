@@ -8,7 +8,8 @@ import * as actionCreators from '../action-creators';
 import ContactAdd from './ContactAdd';
 import BranchContactsEdit from './BranchContactsEdit';
 import BranchCuisinesEdit from './BranchCuisinesEdit';
-import BranchLanguagesEdit from './BranchLanguagesEdit';
+import BranchCurrenciesEdit from './BranchCurrenciesEdit';
+import LanguagesEdit from './LanguagesEdit';
 import ImageUpload from './ImageUpload';
 
 let createHandlers = (ctx) => {
@@ -22,6 +23,10 @@ let createHandlers = (ctx) => {
 
     let getAvailableCuisines = () => {
         ctx.props.dispatch(actionCreators.getCuisines());
+    };
+
+    let getAvailableCurrencies = () => {
+        ctx.props.dispatch(actionCreators.getCurrencies());
     };
 
 	let onImageUpload = () => {
@@ -58,7 +63,11 @@ let createHandlers = (ctx) => {
 
 				ctx.setState((prevState) => {
 					newBranch = prevState.branch;
-					newBranch[key] = obj.target.value;
+					if (obj.target.type === 'checkbox') {
+						newBranch[key] = obj.target.checked;
+					} else {
+						newBranch[key] = obj.target.value;
+					}
 
 					console.log(newBranch);
 
@@ -90,6 +99,7 @@ let createHandlers = (ctx) => {
 		getProfile,
 		getAvailableCuisines,
 		getAvailableLanguages,
+		getAvailableCurrencies,
 		onImageUpload,
 		onSaveBranch,
 		onChanges
@@ -111,7 +121,7 @@ class SectionArticleAddBranch extends Component {
 				HasHeadquarters: false,
 				contacts: [],
 				cuisines: [],
-				currency: [],
+				currencies: [],
 				images: [],
 				languages: []
 			},
@@ -124,6 +134,7 @@ class SectionArticleAddBranch extends Component {
         this.handlers.getProfile();
         this.handlers.getAvailableLanguages();
         this.handlers.getAvailableCuisines();
+        this.handlers.getAvailableCurrencies();
     }
 
 	render() {
@@ -133,6 +144,7 @@ class SectionArticleAddBranch extends Component {
 
 		const availableCuisines = this.props.availableCuisines || [];
 		const availableLanguages = this.props.availableLanguages || [];
+		const availableCurrencies = this.props.availableCurrencies || [];
 
 		const contactComponents = (
 			<BranchContactsEdit contacts={[]} onChange={this.handlers.onChanges} />
@@ -143,7 +155,11 @@ class SectionArticleAddBranch extends Component {
 		);
 
 		const branchLanguages = (
-			<BranchLanguagesEdit languages={[]} onChange={this.handlers.onChanges} />
+			<LanguagesEdit languages={[]} availableLanguages={availableLanguages} onChange={this.handlers.onChanges} />
+		);
+
+		const currencyComponents = (
+			<BranchCurrenciesEdit currencies={[]} availableCurrencies={availableCurrencies} onChange={this.handlers.onChanges} />
 		);
 
 		const allImagesComponent = (
@@ -191,11 +207,25 @@ class SectionArticleAddBranch extends Component {
 			                        		</div>
 			                        	</div>
 									</div>
+									<div className="branch--hq">
+										<p className="menu--title">Branch Type</p>
+										<div className="content--edit">
+											<div className="edit--block">
+			                            		<label className="label--edit">Is it your Main Branch?</label>
+			                        			<input className="input--edit" type="checkbox" name="branch-HasHeadquarters" onChange={(e) => this.handlers.onChanges('main', e)} />
+			                        		</div>
+			                        	</div>
+									</div>
+									<div className="branch--currencies">
+										<p className="menu--title">Currency</p>
+										{currencyComponents}
+									</div>
 									<div className="branch--cuisines">
 										<p className="menu--title">Cuisine Types</p>
 										{cuisineComponents}
 									</div>
 									<div className="branch--languages">
+										<p className="menu--title">Languages</p>
 										{branchLanguages}
 									</div>
 									<div className="branch--address">
@@ -231,7 +261,7 @@ class SectionArticleAddBranch extends Component {
 								</div>
 							</div>
 							<div className="profile-save">
-			                    <button id="profile-save" onClick={(e) => this.handlers.onSaveBranch(this.state)}>Save Menu</button>
+			                    <button id="profile-save" onClick={(e) => this.handlers.onSaveBranch(this.state)}>Save Branch</button>
 			                </div>
 						</div>
                     </div>
@@ -255,7 +285,8 @@ const mapStateToProps = (state) => {
   		branches: state._branches.branches,
     	profile: state._profile.profile,
     	availableLanguages: state._languages.languages,
-    	availableCuisines: state._cuisines.cuisines
+    	availableCuisines: state._cuisines.cuisines,
+    	availableCurrencies: state._currencies.currencies
   	};
 };
 

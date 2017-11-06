@@ -19,13 +19,22 @@ let createHandlers = (ctx) => {
         ctx.props.dispatch(actionCreators.getCuisines());
     };
 
+    let getAvailableCurrencies = () => {
+        ctx.props.dispatch(actionCreators.getCurrencies());
+    };
+
     let onChanges = (branchId, type, obj) => {
 		let dataToUpdate = {};
 		switch (type) {
 			case 'main':
 				let name = obj.target.getAttribute('name');
 				let key = name.substring(name.indexOf('branch-') + 7, name.length);
-				dataToUpdate[key] = obj.target.value;
+				if (obj.target.type === 'checkbox') {
+					dataToUpdate[key] = obj.target.checked;
+				} else {
+					dataToUpdate[key] = obj.target.value;
+				}
+
 				ctx.props.dispatch(actionCreators.setBranches(ctx.props.profile.branches, dataToUpdate, branchId));
 			default:
 				dataToUpdate[type] = obj.data;
@@ -35,6 +44,9 @@ let createHandlers = (ctx) => {
 
 	let onBranchesSaved = (res) => {
 		console.log('branhes saved!');
+
+		// Set profile in the global store here
+
 		ctx.setState({
 			isSaved: true
 		});
@@ -49,6 +61,7 @@ let createHandlers = (ctx) => {
         getProfile,
         getAvailableLanguages,
         getAvailableCuisines,
+        getAvailableCurrencies,
         onChanges,
         onSaveChanges
     };
@@ -67,6 +80,7 @@ class SectionArticleEditBranches extends Component {
         this.handlers.getProfile();
         this.handlers.getAvailableLanguages();
         this.handlers.getAvailableCuisines();
+        this.handlers.getAvailableCurrencies();
     }
 
 	render() {
@@ -83,9 +97,10 @@ class SectionArticleEditBranches extends Component {
 				city={branch.City}
 				contacts={branch.contacts}
 				country={branch.Country}
-				currency={branch.currency}
+				currencies={branch.currencies}
+				availableCurrencies={this.props.availableCurrencies}
 				email={branch.Email}
-				hasHeadquarters={branch.HasHeadquarters}
+				hasHeadquarters={parseInt(branch.HasHeadquarters, 10)}
 				images={branch.images}
 				languages={branch.languages}
 				availableLanguages={this.props.availableLanguages}
@@ -131,7 +146,8 @@ const mapStateToProps = (state) => {
   return {
     profile: state._profile.profile,
     availableLanguages: state._languages.languages,
-    availableCuisines: state._cuisines.cuisines
+    availableCuisines: state._cuisines.cuisines,
+    availableCurrencies: state._currencies.currencies
   };
 };
 

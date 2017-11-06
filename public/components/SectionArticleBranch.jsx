@@ -8,6 +8,7 @@ import Contact from './Contact';
 import BranchCuisine from './BranchCuisine';
 import BranchLanguage from './BranchLanguage';
 import BranchImage from './BranchImage';
+import BranchCurrency from './BranchCurrency';
 
 let createHandlers = (ctx) => {
   let headerOnClick = () => {
@@ -48,7 +49,7 @@ class SectionArticleBranch extends Component {
 			zipcode,
 			country,
 			cuisines,
-			currency,
+			currencies,
 			email,
 			hasHeadquarters,
 			images,
@@ -60,35 +61,57 @@ class SectionArticleBranch extends Component {
 			return <Redirect push to={"/branch/get/" + id} />;
 		}
 
-		let contactComponents = (contacts.length > 0) ? contacts.map((contact, index) => {
-			return <Contact id={contact.BranchContactID} imgPath={contact.ImagePath} altDesc={contact.ImageAltDesc} firstname={contact.Firstname} lastname={contact.Lastname} hasHeadquarters={contact.HasHeadquarters} email={contact.Email} tel={contact.Tel} key={contact.BranchContactID} />;
+		const contactComponents = (contacts.length > 0) ? contacts.map((contact, index) => {
+			return <Contact id={contact.BranchContactID} imgPath={contact.ImagePath} altDesc={contact.ImageAltDesc} firstname={contact.Firstname} lastname={contact.Lastname} isAdmin={contact.IsAdmin} email={contact.Email} tel={contact.Tel} key={contact.BranchContactID} />;
 		}) : '';
 
-		let cuisineComponents = (cuisines.length > 0) ? cuisines.map((cuisine, index) => {
+		const cuisineComponents = (cuisines.length > 0) ? cuisines.map((cuisine, index) => {
+			const finalCuisine = (cuisine.Cuisine && Object.keys(cuisine.Cuisine).length > 0) ? cuisine.Cuisine : cuisine;
 			return (index < cuisines.length - 1)
 				? (
 					<div key={cuisine.BranchCuisineID}>
-						<BranchCuisine id={cuisine.BranchCuisineID} description={cuisine.Cuisine.Description} title={cuisine.Cuisine.Title} key={cuisine.BranchCuisineID} />
+						<BranchCuisine id={cuisine.BranchCuisineID} description={finalCuisine.Description} title={finalCuisine.Title} key={cuisine.BranchCuisineID} />
 						,&nbsp;
 					</div>
 				) : (
 					<div key={cuisine.BranchCuisineID}>
-						<BranchCuisine id={cuisine.BranchCuisineID} description={cuisine.Cuisine.Description} title={cuisine.Cuisine.Title} key={cuisine.BranchCuisineID} />
+						<BranchCuisine id={cuisine.BranchCuisineID} description={finalCuisine.Description} title={finalCuisine.Title} key={cuisine.BranchCuisineID} />
 					</div>
 				)
 		}) : '';
 
-		let languageComponents = (languages.length > 0) ? languages.map((language, index) => {
-			return <BranchLanguage id={language.BranchLanguageID} code={language.Language.Code} codeFull={language.Language.CodeFull} name={language.Language.Name} title={language.Language.Title} key={language.BranchLanguageID} />;
+		const languageComponents = (languages.length > 0) ? languages.map((language, index) => {
+			const finalLanguage = (language.Language && Object.keys(language.Language).length > 0) ? language.Language : language;
+			return <BranchLanguage id={language.BranchLanguageID} code={finalLanguage.Code} codeFull={finalLanguage.CodeFull} name={finalLanguage.Name} title={finalLanguage.Title} key={language.BranchLanguageID} />;
 		}) : '';
 
-		let imageComponents = (images.length > 0) ? images.map((image, index) => {
+		const currencyComponents = (currencies && currencies.length > 0) ? currencies.map((currency, index) => {
+			const finalCurrency = (currency.Currency && Object.keys(currency.Currency).length > 0) ? currency.Currency : currency;
+			return (index < currencies.length - 1)
+				? (
+					<div key={currency.BranchCurrencyID}>
+						<BranchCurrency id={currency.BranchCurrencyID} name={finalCurrency.Name} nameShort={finalCurrency.NameShort} symbol={finalCurrency.Symbol} description={finalCurrency.Description} />
+						,&nbsp;
+					</div>
+				) : (
+					<div key={currency.BranchCurrencyID}>
+						<BranchCurrency id={currency.BranchCurrencyID} name={finalCurrency.Name} nameShort={finalCurrency.NameShort} symbol={finalCurrency.Symbol} description={finalCurrency.Description} />
+					</div>
+				)
+		}) : '';
+
+		const imageComponents = (images.length > 0) ? images.map((image, index) => {
 			return (
 				<li key={image.BranchImageID}>
 					<BranchImage id={image.BranchImageID} imgPath={image.Path} altDesc={image.AltDesc} key={image.BranchImageID} />
 				</li>
 			)
 		}) : '';
+
+		const isHqComponent = (hasHeadquarters)
+			? <span className="label--value">Main Branch</span>
+			: <span className="label--value">Normal Branch</span>
+		;
 
 		const classes = classNames(
 			'branch--contact--header',
@@ -120,6 +143,14 @@ class SectionArticleBranch extends Component {
 									<p>Menus</p>
 									<img src="assets/images/icon-menu-white.svg" alt={"Icon of " + name + " branch menus"} />
 								</Link>
+							</div>
+							<div className="branch--hq">
+								<p className="menu--title">Branch Type</p>
+								{isHqComponent}
+							</div>
+							<div className="branch--currencies">
+								<p className="menu--title">Currency</p>
+								{currencyComponents}
 							</div>
 							<div className="branch--cuisines">
 								<p className="menu--title">Cuisine Types</p>

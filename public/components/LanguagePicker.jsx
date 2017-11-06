@@ -10,6 +10,8 @@ class LanguagePicker extends Component {
 					return (data.items && data.items.length > 0) ? data.items[0].Name : '';
 				case 'branches':
 					return (data.items && data.items.length > 0) ? data.items[0].Name : '';
+				case 'currencies':
+					return (data.items && data.items.length > 0) ? data.items[0].Name + ' (' + data.items[0].Symbol + ')' : '';
 				default:
 					return (data.items && data.items.length > 0) ? data.items[0].Title : '';
 			}
@@ -25,6 +27,10 @@ class LanguagePicker extends Component {
 				case 'cuisines':
 					return (
 						<option value={item.Title} key={item.CuisineID}>{item.Title}</option>
+					);
+				case 'currencies':
+					return (
+						<option value={item.Name} key={item.CurrencyID}>{item.Name}</option>
 					);
 				case 'branches':
 					return (
@@ -51,6 +57,10 @@ class LanguagePicker extends Component {
 				case 'cuisines':
 					return (
 						<li data-id={item.CuisineID} rel={item.Title} onClick={(e) => onPickerItemClick(e)} key={item.CuisineID}>{item.Title}</li>
+					);
+				case 'currencies':
+					return (
+						<li data-id={item.CurrencyID} rel={item.Name} onClick={(e) => onPickerItemClick(e)} key={item.CurrencyID}>{item.Name + ' (' + item.Symbol + ')'}</li>
 					);
 				case 'branches':
 					return (

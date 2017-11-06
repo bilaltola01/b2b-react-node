@@ -17,15 +17,19 @@ class SectionArticleBranches extends Component {
 				contacts={branch.contacts}
 				zipcode={branch.zipcode}
 				country={branch.Country}
-				currency={branch.currency}
+				currencies={branch.currencies}
 				email={branch.email}
-				hasHeadquarters={branch.HasHeadquarters}
+				hasHeadquarters={parseInt(branch.HasHeadquarters, 10)}
 				images={branch.images}
 				languages={branch.languages}
 				cuisines={branch.cuisines}
 				name={branch.Name}
 				key={index} />;
 		}) : null;
+
+		const noItemsComponent = (!branchComponents || branchComponents.length <= 0) ? (
+			<h2 className="no-items--headline">Oh no! It looks like you have not added any branches yet.</h2>
+		) : null;
 
 		return (
 			<article className="content--module module--item-details no-metadata content--branches">
@@ -34,6 +38,7 @@ class SectionArticleBranches extends Component {
                         {title}
                     </h2>
                     <div className="branch--add">
+                    	{noItemsComponent}
                     	<Link to="/branch/add/1" >
 							<div className="add-item dashed">
 								<span>Add a Branch <strong>+</strong></span>

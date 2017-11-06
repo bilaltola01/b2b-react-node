@@ -30,7 +30,7 @@ let createHandlers = (ctx) => {
 	let onRemove = (obj) => {
 		ctx.setState((prevState) => {
 			let cuisines = prevState.allCuisines.reduce((acc, current) => {
-				return (current.id !== obj.id) ? acc.concat([current]) : acc;
+				return (current.CuisineID !== obj.id) ? acc.concat([current]) : acc;
 			}, []);
 
 			console.log(prevState.allCuisines);
@@ -56,15 +56,23 @@ let createHandlers = (ctx) => {
 		let id = parseInt(e.target.getAttribute('data-id'), 10);
 		let target = e.target.parentNode.previousElementSibling;
 		target.setAttribute('data-rel', rel);
-		target.textContent = text;
-		DomUtils.toggleClass(target, 'active');
 
-		// Then add the new cuisine
-		onAdd({
-			id,
-			rel,
-			title: text
+		let isItemAlreadyAdded = !!ctx.state.allCuisines.find(cuisine => {
+			return cuisine.CuisineID === id;
 		});
+
+		// If item has not been added yet, add it
+		if (!isItemAlreadyAdded) {
+			target.textContent = text;
+			DomUtils.toggleClass(target, 'active');
+
+			// Then add the new cuisine
+			onAdd({
+				id,
+				rel,
+				title: text
+			});
+		}
 	};
 
 	return {
@@ -79,7 +87,7 @@ class BranchCuisinesEdit extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			allCuisines: []
+			allCuisines: props.cuisines
 		};
 		this.handlers = createHandlers(this);
 	}
@@ -102,12 +110,12 @@ class BranchCuisinesEdit extends Component {
 			return (index < this.state.allCuisines.length - 1)
 				? (
 					<span key={cuisine.CuisineID}>
-						<BranchCuisineEdit id={cuisine.CuisineID} description={cuisine.Description} title={cuisine.Title} onRemove={this.handlers.onRemove} key={cuisine.CuisineID} />
+						<BranchCuisineEdit id={cuisine.CuisineID} description={cuisine.Description} title={cuisine.Title} onRemove={(e) => this.handlers.onRemove({id: cuisine.CuisineID})} />
 						,&nbsp;
 					</span>
 				) : (
 					<span key={cuisine.CuisineID}>
-						<BranchCuisineEdit id={cuisine.CuisineID} description={cuisine.Description} title={cuisine.Title} onRemove={this.handlers.onRemove} key={cuisine.CuisineID} />
+						<BranchCuisineEdit id={cuisine.CuisineID} description={cuisine.Description} title={cuisine.Title} onRemove={(e) => this.handlers.onRemove({id: cuisine.CuisineID})} />
 					</span>
 				)
 		}) : null;

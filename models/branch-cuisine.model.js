@@ -48,13 +48,36 @@ BranchCuisine.update = (id, obj) => {
 
 BranchCuisine.updateAll = (cuisines) => {
   if (!cuisines || cuisines.length <= 0) {
-    return Promise.reject('No cuisines specified');
+    console.error('No cuisines specified');
+    return Promise.resolve([]);
   }
 
   return Promise.all(cuisines.map(cuisine => {
-    return BranchCuisine.update(cuisine.BranchCuisineID, {
-      BranchID: cuisine.BranchID,
-      CuisineID: cuisine.CuisineID
+    //
+    // If the item is not already is in the db check if
+    // the same values are already somewhere
+    //
+
+    return BranchCuisine.get({
+      BranchID: cuisine.BranchID
+    }).then(branchCuisines => {
+      if (!branchCuisines || branchCuisines.length <= 0) {
+        return BranchCuisine.create({
+          BranchID: cuisine.BranchID,
+          CuisineID: cuisine.CuisineID
+        });
+      }
+
+      return Promise.all(branchCuisines.map(branchCuisine => {
+        return BranchCuisine.remove(branchCuisine.BranchCuisineID);
+      })).then(res => {
+        console.log(res);
+
+        return BranchCuisine.create({
+          BranchID: cuisine.BranchID,
+          CuisineID: cuisine.CuisineID
+        });
+      });
     });
   }));
 };
@@ -94,7 +117,7 @@ BranchCuisine.getWithDetails = (conditions) => {
     }
 
     return Promise.all(branchCuisines.map(branchCuisine => {
-      return createBranchCuisine(branchCuisine, Cuisine.get({CuisineID: branchCuisine.CuisineID}));
+      return createBranchCuisine(branchCuisine);
     }));
   });
 };
@@ -105,11 +128,14 @@ BranchCuisine.getAll = () => {
   return db.select('*').from('BranchCuisine');
 };
 
-function createBranchCuisine (branchCuisine, cuisinePromise) {
+function createBranchCuisine (branchCuisine) {
   return new Promise((resolve, reject) => {
-    cuisinePromise.then(cuisine => {
+    Promise.all([
+      Cuisine.getById(branchCuisine.CuisineID)
+    ]).then(res => {
+      console.log(res);
       let obj = branchCuisine;
-      obj.Cuisine = cuisine[0];
+      obj.Cuisine = res[0];
       resolve(obj);
     }).catch(err => {
       reject(err);

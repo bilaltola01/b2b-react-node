@@ -96,7 +96,7 @@ class ImageUpload extends Component {
 		console.log(this.state);
 
 		const imageComponents = (this.state.allImages.length > 0) ? this.state.allImages.map((image, index) => {
-			return <BranchImageEdit id={image.id} newlyAdded={image.newlyAdded} imgPath={image.imgPath} altDesc={image.altDesc} onRemove={this.handlers.onImageRemove} key={image.id} />
+			return <BranchImageEdit id={image.id} newlyAdded={image.newlyAdded} imgPath={image.imgPath} altDesc={image.altDesc} onRemove={this.handlers.onImageRemove} key={index} />
 		}) : '';
 
 		return (

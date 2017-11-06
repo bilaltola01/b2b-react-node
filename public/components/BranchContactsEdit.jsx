@@ -66,7 +66,11 @@ let createHandlers = (ctx) => {
 							return newContact;
 						default:
 							console.log('enters default!!!!!!!!!');
-							newContact[obj.key] = obj.target.target.value;
+							if (obj.target.target.type === 'checkbox') {
+								newContact[obj.key] = obj.target.target.checked;
+							} else {
+								newContact[obj.key] = obj.target.target.value;
+							}
 
 							return newContact;
 					}
@@ -125,7 +129,7 @@ class BranchContactsEdit extends Component {
 		console.log(this.state.allContacts);
 
 		const contactComponents = (this.state.allContacts && this.state.allContacts.length > 0) ? this.state.allContacts.map((contact, index) => {
-			return <ContactEdit id={contact.BranchContactID} imgPath={contact.ImagePath} altDesc={contact.ImageAltDesc} firstname={contact.Firstname} lastname={contact.Lastname} isAdmin={contact.IsAdmin} email={contact.Email} tel={contact.Tel} key={index} onChanges={this.handlers.onChanges} />;
+			return <ContactEdit id={contact.BranchContactID} imgPath={contact.ImagePath} altDesc={contact.ImageAltDesc} firstname={contact.Firstname} lastname={contact.Lastname} isAdmin={parseInt(contact.IsAdmin, 10)} email={contact.Email} tel={contact.Tel} key={index} onChanges={this.handlers.onChanges} />;
 		}) : null;
 
 		return (

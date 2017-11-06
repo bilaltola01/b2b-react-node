@@ -28,6 +28,7 @@ import * as ImageService from './components/Image/image.service';
 import * as ProfileService from './components/Profile/profile.service';
 import * as LanguageService from './components/Language/language.service';
 import * as CuisineService from './components/Cuisine/cuisine.service';
+import * as CurrencyService from './components/Currency/currency.service';
 import * as BranchService from './components/Profile/branch.service';
 import * as MenuCategoryService from './components/Menu/menu-category.service';
 
@@ -234,6 +235,7 @@ export function saveBranches (branches, cb) {
         Promise.all(branches.map(branch => {
           return BranchService.updateBranch(branch).then((res) => {
             console.log('request succeeded with JSON response', res);
+            return res;
           });
         })).then(res => {
           console.log(res);
@@ -294,8 +296,8 @@ export function deleteBranch (branch, cb) {
     types: ['DELETE_BRANCH_REQUEST', 'DELETE_BRANCH_SUCCESS', 'DELETE_BRANCH_FAILURE'],
     promise: () => {
       return new Promise((resolve, reject) => {
-        console.log('WHY DOES IT DELETE DIRECTLY???');
-        /*
+        console.log('SHOULD DELETE BRANCH HERE');
+
         BranchService.deleteBranch(branch).then((res) => {
           console.log('request succeeded with JSON response', res);
 
@@ -305,7 +307,6 @@ export function deleteBranch (branch, cb) {
 
           resolve(res);
         });
-        */
       });
     }
   }
@@ -396,6 +397,25 @@ export function getCuisines (cb) {
     promise: () => {
       return new Promise((resolve, reject) => {
         CuisineService.getCuisines().then((res) => {
+          console.log('request succeeded with JSON response', res);
+
+          if (res && typeof cb === 'function') {
+            cb(res);
+          }
+
+          resolve(res);
+        });
+      });
+    }
+  }
+};
+
+export function getCurrencies (cb) {
+  return {
+    types: ['GET_CURRENCIES_REQUEST', 'GET_CURRENCIES_SUCCESS', 'GET_CURRENCIES_FAILURE'],
+    promise: () => {
+      return new Promise((resolve, reject) => {
+        CurrencyService.getCurrencies().then((res) => {
           console.log('request succeeded with JSON response', res);
 
           if (res && typeof cb === 'function') {

@@ -4,8 +4,10 @@ class ContactImage extends Component {
 	render() {
 		const { imgPath, altDesc } = this.props;
 
-		return (
+		return (imgPath && imgPath.length > 0) ? (
 			<img src={imgPath} alt={altDesc} />
+		) : (
+			<img src="assets/images/icon-anonymous.svg" alt="" />
 		)
 	}
 };

@@ -5,11 +5,10 @@ import MealDetail from './MealDetail';
 class Meal extends Component {
 	render() {
 		const { id, title, description, price, enableDetails, detail } = this.props;
-		let detailComponents = '';
 
-		if (Object.keys(detail).length > 0 && enableDetails) {
-			detailComponents = <MealDetail id={detail.id} title={detail.title} description={detail.description} medias={detail.medias} />;
-		}
+		const detailComponents = (detail && Object.keys(detail).length > 0 && enableDetails) ? (
+			<MealDetail id={detail.id} title={detail.title} description={detail.description} medias={detail.medias} />
+		) : null;
 
 		return (
 			<div>

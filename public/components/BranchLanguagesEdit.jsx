@@ -17,7 +17,7 @@ let createHandlers = (ctx) => {
 			const selectedBranches = (ctx.props.menu && ctx.props.menu.branches && ctx.props.menu.branches.length > 0) ? ctx.props.menu.branches : [];
 			const branchLanguages = (selectedBranches && selectedBranches.length > 0) ? selectedBranches.reduce((acc, current) => {
 				return acc.concat(current.languages.map(lang => lang.Language));
-			}, []) : languages || [];
+			}, []) : ctx.props.availableLanguages || [];
 
 			let newLang = branchLanguages.find(lang => {
 				return lang.LanguageID === obj.id;
@@ -41,7 +41,7 @@ let createHandlers = (ctx) => {
 		let languages;
 		ctx.setState((prevState) => {
 			languages = prevState.allLanguages.reduce((acc, current) => {
-				return (current.id !== obj.id) ? acc.concat([current]) : acc;
+				return (current.LanguageID !== obj.id) ? acc.concat([current]) : acc;
 			}, []);
 
 			console.log(prevState.allLanguages);
@@ -70,12 +70,22 @@ let createHandlers = (ctx) => {
 		target.textContent = text;
 		DomUtils.toggleClass(target, 'active');
 
-		// Then add the new language
-		onAdd({
-			id,
-			rel,
-			name: text
+		let isItemAlreadyAdded = !!ctx.state.allLanguages.find(language => {
+			return language.LanguageID === id;
 		});
+
+		// If item has not been added yet, add it
+		if (!isItemAlreadyAdded) {
+			target.textContent = text;
+			DomUtils.toggleClass(target, 'active');
+
+			// Then add the new language
+			onAdd({
+				id,
+				rel,
+				name: text
+			});
+		}
 	};
 
 	return {
@@ -90,18 +100,18 @@ class BranchLanguagesEdit extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			allLanguages: []
+			allLanguages: props.languages
 		};
 		this.handlers = createHandlers(this);
 	}
 
 	render() {
-		const { languages, onChange } = this.props;
+		const { languages, availableLanguages, onChange } = this.props;
 
 		const selectedBranches = (this.props.menu && this.props.menu.branches && this.props.menu.branches.length > 0) ? this.props.menu.branches : [];
 		const branchLanguages = (selectedBranches && selectedBranches.length > 0) ? selectedBranches.reduce((acc, current) => {
 			return acc.concat(current.languages.map(lang => lang.Language));
-		}, []) : languages || [];
+		}, []) : availableLanguages || [];
 
 		console.log(branchLanguages);
 
@@ -114,7 +124,7 @@ class BranchLanguagesEdit extends Component {
 		console.log(this.state);
 
 		const languageComponents = (this.state.allLanguages && this.state.allLanguages.length > 0) ? this.state.allLanguages.map((language, index) => {
-			return <BranchLanguageEdit id={language.LanguageID} code={language.Code} codeFull={language.CodeFull} name={language.Name} title={language.Title} onRemove={this.handlers.onRemove} key={language.LanguageID} />;
+			return <BranchLanguageEdit id={language.LanguageID} code={language.Code} codeFull={language.CodeFull} name={language.Name} title={language.Title} onRemove={(e) => this.handlers.onRemove({id: language.LanguageID})} key={language.LanguageID} />;
 		}) : null;
 
 		return (branchLanguages && branchLanguages.length > 0) ? (
@@ -137,14 +147,14 @@ class BranchLanguagesEdit extends Component {
 
 BranchLanguagesEdit.propTypes = {
 	languages: PropTypes.array,
+	availableLanguages: PropTypes.array,
 	onChange: PropTypes.func
 };
 
 const mapStateToProps = (state) => {
 	console.log(state);
   return {
-    menu: state._menu.menu,
-    languages: state._languages.languages
+    menu: state._menu.menu
   };
 };
 

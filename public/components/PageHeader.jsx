@@ -14,9 +14,13 @@ class PageHeader extends Component {
 				<img src={company.branchRoot.mainContact.ImagePath} alt={company.branchRoot.mainContact.ImageAltDesc} />
 			</div>
 		) : (
-			<h4 className="login">
-				<span>Admin</span>
-			</h4>
+			<div>
+				<h4 className="login">
+					Admin
+					<span>Profile</span>
+				</h4>
+				<img src="assets/images/icon-anonymous.svg" alt="" />
+			</div>
 		);
 
 		return (

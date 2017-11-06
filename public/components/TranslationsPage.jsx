@@ -35,50 +35,58 @@ class TranslationsPage extends Component {
   }
 
   componentDidMount() {
-    this.props.dispatch(actionCreators.getMenuTranslations(this.handlers.onMenuTranslationsFetched));
+    //this.props.dispatch(actionCreators.getMenuTranslations(this.handlers.onMenuTranslationsFetched));
   }
 
   render () {
     const action = this.props.match.params.action;
 
-    const translations = (this.state.component && this.state.component.translations && this.state.component.translations) ? this.state.component.translations : [];
+    const profile = (this.props.profile) ? this.props.profile : {};
+
+    const branchRoot = (profile.branches && profile.branches.length > 0) ? profile.branches.find(branch => {
+      return branch.HasHeadquarters == 1;
+    }) : null;
+
+    if (branchRoot) {
+      branchRoot.mainContact = (branchRoot.contacts && branchRoot.contacts.length > 0) ? branchRoot.contacts.find(contact => {
+        return contact.IsAdmin == 1;
+      }) : null;
+    }
+
+    const menus = (profile.branches && profile.branches.length > 0) ? profile.branches.reduce((acc, branch) => {
+      return acc.concat(branch.menus);
+    }, []) : [];
+
+    console.log(menus);
+
+    const translations = (menus && menus.length > 0) ? menus.reduce((acc, menu) => {
+      return acc.concat(menu.translations);
+    }, []) : [];
 
     const company = {
-        name: 'Cafe Mediterranean',
-        description: '',
-        logo: {
-          imgPath: 'assets/images/logo-cafe-med-white.png',
-          altDesc: 'The Cafe Mediterranean Logo'
-        },
-        website: 'http://thecafemediterranean.com',
-        tel: '+63-917-842-5222',
-        email: 'contact@thecafemediterranean.com',
-        social: {
-          twitter: 'https://twitter.com/thecafemediterranean',
-          facebook: 'https://facebook.com/thecafemediterranean',
-          instagram: 'https://instagram.com/thecafemediterranean'
-        },
-        branchRoot: {
-          contact: {
-            name: {
-              first: 'Marla',
-              last: 'Moran'
-            },
-            avatar: {
-              imgPath: 'assets/images/avatar-admin@2x.png',
-              altDesc: 'Image of Marla Moran'
-            },
-            tel: '+63-917-842-5222',
-            email: 'marla@thecafemediterranean.com'
-          }
-        }
+      name: profile.Name,
+      description: profile.Description,
+      logo: {
+        imgPath: profile.LogoPath,
+        altDesc: profile.LogoAltDesc
+      },
+      website: profile.Website,
+      tel: profile.Tel,
+      email: profile.Email,
+      social: {
+        twitter: profile.Twitter,
+        facebook: profile.Facebook,
+        instagram: profile.Instagram,
+        youtube: profile.Youtube
+      },
+      branchRoot: branchRoot
     };
 
 
     let sections = [{
-        type: "branches",
-        title: "All Translations",
-        articles: [{
+      type: "branches",
+      title: "All Translations",
+      articles: [{
         type: "translations",
         title: "Translations",
         component: {
@@ -107,7 +115,8 @@ class TranslationsPage extends Component {
 const mapStateToProps = (state) => {
   console.log(state);
   return {
-    menu: state._menu.menu
+    menu: state._menu.menu,
+    profile: state._profile.profile
   }
 };
 

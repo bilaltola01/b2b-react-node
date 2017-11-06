@@ -25,9 +25,11 @@ let createHandlers = (ctx) => {
 
     let profile = obj;
 
+    /*
     ctx.setState({
       branches: profile.branches
     });
+*/
   };
 
   return {
@@ -47,7 +49,7 @@ class MenusPage extends Component {
   }
 
   componentDidMount() {
-    this.props.dispatch(actionCreators.getMenus(this.handlers.onMenusFetched));
+    //this.props.dispatch(actionCreators.getMenus(this.handlers.onMenusFetched));
     this.props.dispatch(actionCreators.getProfile(this.handlers.onProfileFetched));
   }
 
@@ -56,7 +58,7 @@ class MenusPage extends Component {
 
     const profile = (this.props.profile) ? this.props.profile : {};
 
-    const branchRoot = (this.state.branches && this.state.branches.length > 0) ? this.state.branches.find(branch => {
+    const branchRoot = (profile.branches && profile.branches.length > 0) ? profile.branches.find(branch => {
       return branch.HasHeadquarters == 1;
     }) : null;
 
@@ -66,11 +68,15 @@ class MenusPage extends Component {
       }) : null;
     }
 
+    /*
     if (!profile.branches || profile.branches.length <= 0) {
       profile.branches = this.state.branches;
     }
+    */
 
-    const menus = (this.state.component && this.state.component.menus && this.state.component.menus) ? this.state.component.menus : [];
+    const menus = (profile.branches && profile.branches.length > 0) ? profile.branches.reduce((acc, branch) => {
+      return acc.concat(branch.menus);
+    }, []) : [];
 
     console.log(menus);
 
@@ -94,9 +100,9 @@ class MenusPage extends Component {
     };
 
     const sections = [{
-        type: "branches",
-        title: "All Menus",
-        articles: [{
+      type: "branches",
+      title: "All Menus",
+      articles: [{
         type: "menus",
         title: "Menus",
         component: {
@@ -104,124 +110,7 @@ class MenusPage extends Component {
           id: 2,
           title: "",
           props: {
-            menus: menus/*[
-              {
-                id: 2,
-                title: "Menu d'été",
-                description: "Des saveurs estivales, provencales et fraîches",
-                price: 30.99,
-                dateUpdate: {
-                  date: "2017-06-15 10:47:58"
-                },
-                translations: [
-
-                ],
-                languages: [
-                  {
-                    id: 1,
-                    code: "de",
-                    codeFull: "de-CH",
-                    title: "Swiss_German",
-                    name: "German (Switzerland)",
-                    flag: {
-                      id: 1,
-                      title: "Germany Flag",
-                      imgPath: "",
-                      altDesc: "Image of the Germany flag"
-                    }
-                  }
-                ],
-                categories: [
-                  {
-                    id: 2,
-                    isCustom: false,
-                    title: "Starters",
-                    description: "First meal of the menu",
-                    meals: [
-                      {
-                        id: 1,
-                        title: "Carpaccio de saumon au citron confit et aneth",
-                        description: "Saumon sauvage de Norvège pêché à l'ours domestique suivant une technique ancestrale",
-                        enableDetails: false,
-                        detail: {}
-                      },
-                      {
-                        id: 2,
-                        title: "Escargots à la Douzaine",
-                        description: "Escargots et sa traditionelle sauce au beurre persillé",
-                        enableDetails: false,
-                        detail: {}
-                      },
-                      {
-                        id: 3,
-                        title: "Pâté en croûte maison",
-                        description: "",
-                        enableDetails: false,
-                        detail: {}
-                      }
-                    ]
-                  },
-                  {
-                    id: 3,
-                    isCustom: false,
-                    title: "Mains",
-                    description: "Main meal of the menu",
-                    meals: [
-                      {
-                        id: 4,
-                        title: "Boeuf bourguignon",
-                        description: "",
-                        enableDetails: false,
-                        detail: {}
-                      },
-                      {
-                        id: 5,
-                        title: "Coq au vin",
-                        description: "",
-                        enableDetails: false,
-                        detail: {}
-                      },
-                      {
-                        id: 6,
-                        title: "Escalope de poulet et sa julienne de légumes",
-                        description: "",
-                        enableDetails: false,
-                        detail: {}
-                      }
-                    ]
-                  },
-                  {
-                    id: 4,
-                    isCustom: false,
-                    title: "Desserts",
-                    description: "last meal of the menu",
-                    meals: [
-                      {
-                        id: 7,
-                        title: "Charlotte aux framboises maison",
-                        description: "",
-                        enableDetails: false,
-                        detail: {}
-                      },
-                      {
-                        id: 8,
-                        title: "Eclair à la pistache, éclats de noix de coco",
-                        description: "",
-                        enableDetails: false,
-                        detail: {}
-                      },
-                      {
-                        id: 9,
-                        title: "Salade de fruits frais",
-                        description: "",
-                        enableDetails: false,
-                        detail: {}
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]*/
+            menus: menus
           }
         }
       }]

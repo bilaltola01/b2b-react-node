@@ -28,7 +28,7 @@ BranchCurrency.createAll = (currencies) => {
 
   return Promise.all(currencies.map(currency => {
     return BranchCurrency.create({
-      BranchID: currency.branchID,
+      BranchID: currency.BranchID,
       CurrencyID: currency.CurrencyID
     });
   }));
@@ -48,13 +48,36 @@ BranchCurrency.update = (id, obj) => {
 
 BranchCurrency.updateAll = (currencies) => {
   if (!currencies || currencies.length <= 0) {
-    return Promise.reject('No currencies specified');
+    console.error('No currencies specified');
+    return Promise.resolve([]);
   }
 
   return Promise.all(currencies.map(currency => {
-    return BranchCurrency.update(currency.BranchCurrencyID, {
-      BranchID: currency.BranchID,
-      CurrencyID: currency.CurrencyID
+    //
+    // If the item is not already is in the db check if
+    // the same values are already somewhere
+    //
+
+    return BranchCurrency.get({
+      BranchID: currency.BranchID
+    }).then(branchCurrencies => {
+      if (!branchCurrencies || branchCurrencies.length <= 0) {
+        return BranchCurrency.create({
+          BranchID: currency.BranchID,
+          CurrencyID: currency.CurrencyID
+        });
+      }
+
+      return Promise.all(branchCurrencies.map(branchCurrency => {
+        return BranchCurrency.remove(branchCurrency.BranchCurrencyID);
+      })).then(res => {
+        console.log(res);
+
+        return BranchCurrency.create({
+          BranchID: currency.BranchID,
+          CurrencyID: currency.CurrencyID
+        });
+      });
     });
   }));
 };
@@ -94,7 +117,7 @@ BranchCurrency.getWithDetails = (conditions) => {
     }
 
     return Promise.all(currencies.map(currency => {
-      return createBranchCurrency(currency, Currency.get({CurrencyID: currency.CurrencyID}));
+      return createBranchCurrency(currency);
     }));
   });
 };
@@ -114,13 +137,16 @@ BranchCurrency.getAllByBranch = (id) => {
 };
 
 
-function createBranchCurrency (branchCurrency, currencyPromise) {
+function createBranchCurrency (branchCurrency) {
   return new Promise((resolve, reject) => {
-    currencyPromise.then(currency => {
+    Promise.all([
+      Currency.getById(branchCurrency.CurrencyID)
+    ]).then(res => {
+      console.log(res);
       let obj = branchCurrency;
-      obj.Currency = currency[0];
+      obj.Currency = res[0];
       resolve(obj);
-    }).catch(err =>{
+    }).catch(err => {
       reject(err);
     });
   });

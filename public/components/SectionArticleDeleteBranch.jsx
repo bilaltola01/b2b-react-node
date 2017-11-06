@@ -21,10 +21,18 @@ let createHandlers = (ctx) => {
 	});
   };
 
-  let goToBranches = () => {
+  let redirect = () => {
   	ctx.setState({
         redirect: true
     });
+  };
+
+  let goToBranches = () => {
+  	redirect();
+  };
+
+  let onAfterDeleteBranch = () => {
+  	redirect();
   };
 
   let deleteBranch = (component, cb) => {
@@ -47,7 +55,7 @@ let createHandlers = (ctx) => {
   				type: 'submit',
   				text: 'Delete',
   				fn: (comp, cb) => {
-  					deleteBranch(comp, cb);
+  					deleteBranch(comp, onAfterDeleteBranch);
   				}
   			},
   			{
@@ -97,7 +105,7 @@ class SectionArticleDeleteBranch extends Component {
 		const currency = branchComponent ? branchComponent.currency : null;
 		const email = branchComponent ? branchComponent.Email : '';
 		const name = branchComponent ? branchComponent.Name : '';
-		const hasHeadquarters = branchComponent ? branchComponent.HasHeadquarters : 'No';
+		const hasHeadquarters = branchComponent ? branchComponent.HasHeadquarters : false;
 
 		console.log(component);
 		console.log(branchComponent);
@@ -107,7 +115,7 @@ class SectionArticleDeleteBranch extends Component {
 		}
 
 		let contactComponents = (branchComponent && branchComponent.contacts && branchComponent.contacts.length > 0) ? branchComponent.contacts.map((contact, index) => {
-			return <Contact id={contact.BranchContactID} imgPath={contact.ImagePath} altDesc={contact.ImageAltDesc} firstname={contact.Firstname} lastname={contact.Lastname} hasHeadquarters={contact.HasHeadquarters} email={contact.Email} tel={contact.Tel} key={contact.BranchContactID} />;
+			return <Contact id={contact.BranchContactID} imgPath={contact.ImagePath} altDesc={contact.ImageAltDesc} firstname={contact.Firstname} lastname={contact.Lastname} isAdmin={contact.IsAdmin} email={contact.Email} tel={contact.Tel} key={contact.BranchContactID} />;
 		}) : null;
 
 		let cuisineComponents = (branchComponent && branchComponent.cuisines && branchComponent.cuisines.length > 0) ? branchComponent.cuisines.map((cuisine, index) => {

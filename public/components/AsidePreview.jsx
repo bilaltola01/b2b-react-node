@@ -1,20 +1,45 @@
 import React, { Component, PropTypes } from 'react';
 
 import { connect } from 'react-redux';
+import * as DomUtils from '../shared/dom.utils';
 import * as actionCreators from '../action-creators';
 
 import Menu from './Menu';
 import Save from './Save';
 
+let createHandlers = (ctx) => {
+	let onPageScroll = () => {
+		if (ctx.el) {
+			if (window.scrollY >= 64) {
+				DomUtils.addClass(ctx.el, 'on-scroll');
+			} else {
+				DomUtils.removeClass(ctx.el, 'on-scroll');
+			}
+		}
+	};
+
+	return {
+		onPageScroll
+	}
+};
+
 class AsidePreview extends Component {
 	constructor(props) {
 		super(props);
+
+		this.handlers = createHandlers(this);
 	}
 
 	componentDidMount() {
 		//access to this.props.menu;
 		console.log('in the preview aside ');
 		console.log(this.props.menu);
+
+		window.addEventListener('scroll', this.handlers.onPageScroll);
+	}
+
+	componentWillUnmount() {
+		window.removeEventListener('scroll', this.handlers.onPageScroll);
 	}
 
 	render() {
@@ -31,7 +56,7 @@ class AsidePreview extends Component {
 		) : null;
 
 		return (
-			<aside className="aside aside--preview">
+			<aside ref={(ref) => this.el = ref} id="aside-preview" className="aside aside--preview">
 	            <section className="aside--section contacts--excellence">
 	                <h1 className="aside--title">Preview</h1>
 

@@ -1,24 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 
-class ContactImage extends Component {
-	render() {
-		const { imgPath, altDesc } = this.props;
-
-		return (
-			<img src={imgPath} alt={altDesc} />
-		)
-	}
-};
-
-ContactImage.propTypes = {
-	imgPath: PropTypes.string,
-	altDesc: PropTypes.string
-};
-
+import ContactImage from './ContactImage';
 
 class Contact extends Component {
 	render() {
-		const { imgPath, altDesc, firstname, lastname, hasHeadquarters, tel, email } = this.props;
+		const { imgPath, altDesc, firstname, lastname, isAdmin, tel, email } = this.props;
 
 		const contactImage = <ContactImage imgPath={imgPath} altDesc={altDesc} />;
 
@@ -57,7 +43,7 @@ Contact.propTypes = {
 	altDesc: PropTypes.string,
 	firstname: PropTypes.string,
 	lastname: PropTypes.string,
-	hasHeadquarters: PropTypes.number,
+	isAdmin: PropTypes.number,
 	email: PropTypes.string,
 	tel: PropTypes.string
 };

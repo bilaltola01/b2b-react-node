@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { Link } from 'react-router-dom';
 
 import ChartPie from './ChartPie';
 import Menu from './Menu';
@@ -6,6 +7,21 @@ import Menu from './Menu';
 class SectionArticleMain extends Component {
 	render() {
 		const { title, dateUpdate, component } = this.props;
+
+		const menuComponent = (component.props) ? (
+			<Menu id={component.id} title={component.title} ownProps={component.props} />
+		) : (
+			<div className="global-padding-wrapper branches-container">
+				<h2 className="no-items--headline">Oh no! It looks like you have not entered any menus yet.</h2>
+				<div className="branch--add">
+	            	<Link to="/menu/add/1" >
+						<div className="add-item dashed">
+							<span>Add a Menu <strong>+</strong></span>
+						</div>
+					</Link>
+	            </div>
+            </div>
+		);
 
 		return (
 			<article className="content--module module--failed-assets">
@@ -27,7 +43,7 @@ class SectionArticleMain extends Component {
 
 	            {component.type === "Menu" &&
 	            	<div className="content--container">
-	                	<Menu id={component.id} title={component.title} ownProps={component.props} />
+	            		{menuComponent}
 	                </div>
 	            }
             </article>

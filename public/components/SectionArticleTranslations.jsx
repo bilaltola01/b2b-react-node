@@ -20,12 +20,25 @@ class SectionArticleTranslations extends Component {
 				key={index} />;
 		}) : null;
 
+
+		const noItemsComponent = (!menuComponents || menuComponents.length <= 0) ? (
+			<div className="branch--add">
+				<h2 className="no-items--headline">Oh no! It looks like you have no menu translations yet.</h2>
+				<Link to="/menus" >
+					<div className="add-item dashed">
+						<span>Go to your Menus</span>
+					</div>
+				</Link>
+			</div>
+		) : null;
+
 		return (
 			<article className="content--module module--item-details no-metadata content--branches">
 				<div className="content--container global-padding-wrapper branches-container">
 					<h2 className="asset--subtitle">
                         {title}
                     </h2>
+                    {noItemsComponent}
                     <div className="branches menus">
                     	{menuComponents}
                     </div>

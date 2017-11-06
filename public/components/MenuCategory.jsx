@@ -6,8 +6,17 @@ class MenuCategory extends Component {
 	render() {
 		const { id, isCustom, title, description, meals } = this.props;
 
+		console.log(this.props);
+
 		const mealComponents = (meals && meals.length > 0) ? meals.map((meal, index) => {
-			return <Meal id={meal.id} title={meal.title} description={meal.description} price={meal.price} enableDetails={meal.enableDetails} detail={meal.detail} key={index} />;
+			return <Meal
+				id={meal.MealID || meal.id}
+				title={meal.Title || meal.title}
+				description={meal.Description || meal.description}
+				price={meal.Price || meal.price}
+				enableDetails={!!meal.EnableDetails || !!meal.enableDetails}
+				detail={meal.MealDetail || meal.mealDetail}
+				key={index} />;
 		}) : '';
 
 		return (

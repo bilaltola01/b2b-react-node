@@ -7,6 +7,7 @@ import ContactEdit from './ContactEdit';
 import BranchCuisinesEdit from './BranchCuisinesEdit';
 import BranchLanguagesEdit from './BranchLanguagesEdit';
 import BranchContactsEdit from './BranchContactsEdit';
+import BranchCurrenciesEdit from './BranchCurrenciesEdit';
 import ImageUpload from './ImageUpload';
 
 let createHandlers = (ctx) => {
@@ -61,7 +62,8 @@ class SectionArticleEditBranch extends Component {
 			country,
 			cuisines,
 			availableCuisines,
-			currency,
+			currencies,
+			availableCurrencies,
 			email,
 			hasHeadquarters,
 			images,
@@ -91,6 +93,10 @@ class SectionArticleEditBranch extends Component {
 
 		const branchLanguages = (
 			<BranchLanguagesEdit languages={languages.map(lang => lang.Language)} availableLanguages={availableLanguages} onChange={this.handlers.onChanges} />
+		);
+
+		const currencyComponents = (
+			<BranchCurrenciesEdit currencies={(currencies && currencies.length > 0) ? currencies.map(currency => currency.Currency) : []} availableCurrencies={availableCurrencies} onChange={this.handlers.onChanges} />
 		);
 
 		const allImages = images.map(img => {
@@ -128,6 +134,10 @@ class SectionArticleEditBranch extends Component {
 							}
 						</div>
 
+						<div className="branch--currencies">
+							<p className="menu--title">Currency</p>
+							{currencyComponents}
+						</div>
 						<div className="branch--cuisines">
 							<p className="menu--title">Cuisine Types</p>
 							{cuisineComponents}
@@ -144,6 +154,15 @@ class SectionArticleEditBranch extends Component {
                         		</div>
                         	</div>
                        	</div>
+                       	<div className="branch--hq">
+							<p className="menu--title">Branch Type</p>
+							<div className="content--edit">
+								<div className="edit--block">
+                            		<label className="label--edit">Is it your Main Branch?</label>
+                        			<input className="input--edit" type="checkbox" name="branch-HasHeadquarters" defaultChecked={!!hasHeadquarters} onChange={(e) => this.handlers.onChanges('main', e)} />
+                        		</div>
+                        	</div>
+						</div>
 						<div className="branch--address">
 				            <p className="menu--title">Address</p>
 				            <div className="content--edit branch--address--edit">

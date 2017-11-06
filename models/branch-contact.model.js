@@ -42,18 +42,36 @@ BranchContact.createAll = (contacts) => {
 
 BranchContact.updateAll = (contacts) => {
   if (!contacts || contacts.length <= 0) {
-    return Promise.reject('No contacts specified');
+    console.error('No contacts specified');
+    return Promise.resolve([]);
   }
 
   return Promise.all(contacts.map(contact => {
-    return BranchContact.update(contact.BranchContactID, {
-      BranchID: contact.BranchID,
-      Email: contact.Email,
-      Firstname: contact.Firstname,
-      Lastname: contact.Lastname,
-      IsAdmin: contact.IsAdmin,
-      Tel: contact.Tel
-    });
+    return BranchContact.getById(contact.BranchContactID).then(res => {
+      if (!res || res.length <= 0) {
+        return BranchContact.create({
+          BranchID: contact.BranchID,
+          Firstname: contact.Firstname,
+          Lastname: contact.Lastname,
+          ImagePath: contact.ImagePath,
+          ImageAltDesc: contact.ImageAltDesc,
+          Email: contact.Email,
+          Tel: contact.Tel,
+          IsAdmin: contact.IsAdmin
+        });
+      }
+
+      return BranchContact.update(contact.BranchContactID, {
+        BranchID: contact.BranchID,
+        Email: contact.Email,
+        Firstname: contact.Firstname,
+        Lastname: contact.Lastname,
+        ImagePath: contact.ImagePath,
+        ImageAltDesc: contact.ImageAltDesc,
+        IsAdmin: contact.IsAdmin,
+        Tel: contact.Tel
+      });
+    })
   }));
 };
 

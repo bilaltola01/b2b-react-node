@@ -26,7 +26,7 @@ export function updateProfile (opts) {
             console.log(imageRes);
 
             let finalOpts = opts;
-            finalOpts.imgPath = imageRes.url
+            finalOpts.imgPath = imageRes.secure_url || imageRes.url;
 
             return Ajax().put('/profile', {
                 body: JSON.stringify(convertOpts(finalOpts, true)),

@@ -5,12 +5,17 @@ import MenuCategory from './MenuCategory';
 class Menu extends Component {
 	render() {
 		const { id, title, ownProps } = this.props;
+
+		console.log(this.props);
+
 		const categoryComponents = (ownProps && ownProps.categories && ownProps.categories.length > 0) ? ownProps.categories.map((cat, index) => {
+			const categoryDesc = (cat.Category) ? cat.Category.Description : cat.description;
+			const categoryTitle = (cat.Category) ? cat.Category.Title : cat.title;
 			return <MenuCategory 
-				id={cat.id} 
-				isCustom={cat.isCustom} 
-				title={cat.title} 
-				description={cat.description} 
+				id={cat.MenuCategoryID || cat.catId} 
+				isCustom={cat.IsCustom || cat.isCustom} 
+				title={categoryTitle} 
+				description={categoryDesc} 
 				meals={cat.meals} 
 				key={index} />;
 		}) : null;
@@ -18,15 +23,15 @@ class Menu extends Component {
 		return (
 			<div className="content--container">
                 <div className="food-menu">
-	                {ownProps && ownProps.title &&
-	                    <h3 className="food-menu--title">{ownProps.title}</h3>
+	                {ownProps && ownProps.Title &&
+	                    <h3 className="food-menu--title">{ownProps.Title}</h3>
 	                }
-                    {ownProps && ownProps.description &&
-	                    <p className="food-menu--description">{ownProps.description}</p>
+                    {ownProps && ownProps.Description &&
+	                    <p className="food-menu--description">{ownProps.Description}</p>
 	                }
 
-	                {ownProps && ownProps.price && ownProps.price > 0 &&
-	                	<p className="food-menu--price">{ownProps.price}</p>
+	                {ownProps && ownProps.Price && ownProps.Price > 0 &&
+	                	<p className="food-menu--price">{ownProps.Price}</p>
 	                }
 
 	                {categoryComponents}
