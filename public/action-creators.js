@@ -391,6 +391,46 @@ export function getLanguages (cb) {
   }
 };
 
+/*
+export function getCurrentLanguage (nav, location, cb) {
+  return {
+    types: ['GET_CURRENT_LANGUAGE_REQUEST', 'GET_CURRENT_LANGUAGE_SUCCESS', 'GET_CURRENT_LANGUAGE_FAILURE'],
+    promise: () => {
+      return new Promise((resolve, reject) => {
+        LanguageService.getCurrentLanguage(nav, location).then((res) => {
+          console.log('Language successfully retrieved', res);
+
+          if (res && typeof cb === 'function') {
+            cb(res);
+          }
+
+          resolve(res);
+        });
+      });
+    }
+  }
+};
+*/
+
+export function setCurrentLanguage (lang, cb) {
+  return {
+    types: ['SET_CURRENT_LANGUAGE_REQUEST', 'SET_CURRENT_LANGUAGE_SUCCESS', 'SET_CURRENT_LANGUAGE_FAILURE'],
+    promise: () => {
+      return new Promise((resolve, reject) => {
+        console.log(lang);
+
+        if (typeof cb === 'function') {
+          cb(lang);
+        }
+
+        resolve(lang);
+      });
+    }
+  }
+};
+
+
+
 export function getCuisines (cb) {
   return {
     types: ['GET_CUISINES_REQUEST', 'GET_CUISINES_SUCCESS', 'GET_CUISINES_FAILURE'],

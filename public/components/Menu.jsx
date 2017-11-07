@@ -8,7 +8,15 @@ class Menu extends Component {
 
 		console.log(this.props);
 
-		const categoryComponents = (ownProps && ownProps.categories && ownProps.categories.length > 0) ? ownProps.categories.map((cat, index) => {
+		const currency = (ownProps.currencies && ownProps.currencies.length > 0) ? ownProps.currencies : null;
+		const symbol = (currency && currency.Currency) ? currency.Currency : '£';
+
+		const menu = (ownProps.menu) ? ownProps.menu : ownProps;
+		const finalTitle = (menu) ? (menu.Title || menu.title) : null;
+		const finalPrice = (menu) ? (menu.Price || menu.price) : null;
+		const finalDescription = (menu) ? (menu.Description || menu.description) : null;
+
+		const categoryComponents = (menu && menu.categories && menu.categories.length > 0) ? menu.categories.map((cat, index) => {
 			const categoryDesc = (cat.Category) ? cat.Category.Description : cat.description;
 			const categoryTitle = (cat.Category) ? cat.Category.Title : cat.title;
 			return <MenuCategory 
@@ -23,15 +31,15 @@ class Menu extends Component {
 		return (
 			<div className="content--container">
                 <div className="food-menu">
-	                {ownProps && ownProps.Title &&
-	                    <h3 className="food-menu--title">{ownProps.Title}</h3>
+	                {ownProps && finalTitle &&
+	                    <h3 className="food-menu--title">{finalTitle}</h3>
 	                }
-                    {ownProps && ownProps.Description &&
-	                    <p className="food-menu--description">{ownProps.Description}</p>
+                    {ownProps && finalDescription &&
+	                    <p className="food-menu--description">{finalDescription}</p>
 	                }
 
-	                {ownProps && ownProps.Price && ownProps.Price > 0 &&
-	                	<p className="food-menu--price">{ownProps.Price}</p>
+	                {ownProps && finalPrice && finalPrice > 0 &&
+	                	<p className="food-menu--price">{symbol} {finalPrice}</p>
 	                }
 
 	                {categoryComponents}

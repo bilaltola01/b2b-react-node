@@ -47,7 +47,7 @@ class SectionArticleMenu extends Component {
 			categories,
 			languages,
 			translations,
-			currency
+			currencies
 		} = this.props;
 
 		console.log(this.props);
@@ -177,7 +177,7 @@ SectionArticleMenu.propTypes = {
 	categories: PropTypes.array,
 	languages: PropTypes.array,
 	translations: PropTypes.array,
-	currency: PropTypes.object
+	currencies: PropTypes.array
 };
 
 export default SectionArticleMenu;

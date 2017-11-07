@@ -9,8 +9,10 @@ class SectionAdd extends Component {
 
 		console.log(data);
 
+		const { type = '', title = '', component = {}} = data || {};
+
 		return (
-			<SectionArticleAdd type={data.type} title={data.title} component={data.component} />
+			<SectionArticleAdd type={type} title={title} component={component} />
 		)
 	}
 };

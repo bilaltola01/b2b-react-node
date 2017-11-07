@@ -84,6 +84,15 @@ class Dashboard extends Component {
 
     console.log(filteredMenus);
 
+    const currentBranch = (profile.branches && profile.branches.length > 0) ? profile.branches.find(branch => {
+      const menu = filteredMenus[0] || filteredMenus;
+      return branch.BranchID === menu.BranchID;
+    }) : null;
+
+    const currencies = (currentBranch && currentBranch.currencies && currentBranch.currencies.length > 0) ? currentBranch.currencies : [];
+
+    console.log(currentBranch);
+
     const lastMenu = filteredMenus;
 
     const sections = [{
@@ -132,7 +141,10 @@ class Dashboard extends Component {
           type: "Menu",
           id: 2,
           title: "",
-          props: filteredMenus
+          props: {
+            menu: filteredMenus,
+            currencies: currencies
+          }
         }
       }]
     }];

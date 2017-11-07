@@ -12,6 +12,7 @@ let createHandlers = (ctx) => {
 
     let menus = obj;
 
+
     ctx.setState({
       component: {
         type: 'menu',
@@ -25,9 +26,11 @@ let createHandlers = (ctx) => {
 
     let profile = obj;
 
+    /*
     ctx.setState({
       branches: profile.branches
     });
+*/
   };
 
   return {
@@ -47,7 +50,7 @@ class MenuPage extends Component {
   }
 
   componentDidMount() {
-    this.props.dispatch(actionCreators.getMenus(this.handlers.onMenusFetched));
+    //this.props.dispatch(actionCreators.getMenus(this.handlers.onMenusFetched));
     this.props.dispatch(actionCreators.getProfile(this.handlers.onProfileFetched));
   }
 
@@ -56,7 +59,7 @@ class MenuPage extends Component {
 
     const profile = (this.props.profile) ? this.props.profile : {};
 
-    const branchRoot = (this.state.branches && this.state.branches.length > 0) ? this.state.branches.find(branch => {
+    const branchRoot = (profile.branches && profile.branches.length > 0) ? profile.branches.find(branch => {
       return branch.HasHeadquarters == 1;
     }) : null;
 
@@ -66,19 +69,32 @@ class MenuPage extends Component {
       }) : null;
     }
 
-    if (!profile.branches || profile.branches.length <= 0) {
-      profile.branches = this.state.branches;
-    }
-
     const actionType = (typeof this.props.match.params.action !== 'undefined') ? 'menu-' + action : 'menu';
 
-    const menus = (this.state.component && this.state.component.menus && this.state.component.menus) ? this.state.component.menus : [];
+    const menus = (profile.branches && profile.branches.length > 0) ? profile.branches.reduce((acc, branch) => {
+      return acc.concat(branch.menus);
+    }, []) : [];
 
     console.log(menus);
 
+    const currentBranchMenu = (menus) ? menus.find(menu => {
+      return parseInt(menu.MenuID, 10) === parseInt(id, 10);
+    }) : null;
+    const currentBranchMenuId = (currentBranchMenu) ? currentBranchMenu.BranchID : 0;
+
+    const currentBranch = (profile.branches && profile.branches.length > 0) ? profile.branches.find(branch => {
+      return branch.BranchID === currentBranchMenuId;
+    }) : null;
+
+    const currencies = (currentBranch && currentBranch.currencies && currentBranch.currencies.length > 0) ? currentBranch.currencies : [];
+    const languages = (currentBranch && currentBranch.languages && currentBranch.languages.length > 0) ? currentBranch.languages : [];
+
     const filteredMenus = (menus && menus.length > 0) ? menus.filter(menu => {
-      return parseInt(menu.id, 10) === parseInt(id, 10);
-    }): null;
+      return parseInt(menu.MenuID, 10) === parseInt(id, 10);
+    }) : null;
+
+    const currentMenu = (filteredMenus && filteredMenus.length > 0) ? filteredMenus[0] : {};
+    const menuTitle = (currentMenu && currentMenu.Title) ? currentMenu.Title : ("Menu " + id);
 
     const company = {
       name: profile.Name,
@@ -101,15 +117,17 @@ class MenuPage extends Component {
 
     const sections = [{
         type: actionType,
-        title: "Menu " + id,
+        title: menuTitle,
         articles: [{
-          type: "menus",
+          type: "menus-detail",
           title: "Menu",
           component: {
-            type: "Menu",
+            type: "menus-detail",
             title: "",
             props: {
-              menus: filteredMenus
+              menus: filteredMenus,
+              currencies: currencies,
+              languages: languages
             }
           }
         }]

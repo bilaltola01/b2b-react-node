@@ -18,6 +18,8 @@ class SectionArticleEdit extends Component {
 					return <SectionArticleEditBranches title={title} dateUpdate={dateUpdate} component={component} />
 				case 'menus':
 					return <SectionArticleEditMenus title={title} dateUpdate={dateUpdate} component={component} />
+				case 'menus-detail':
+					return <SectionArticleEditMenus title={title} dateUpdate={dateUpdate} component={component} />
 				default:
 					return <SectionArticleEditCompany title={title} dateUpdate={dateUpdate} component={component} />
 			}

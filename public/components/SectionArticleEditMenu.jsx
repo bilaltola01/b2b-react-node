@@ -66,12 +66,13 @@ class SectionArticleEditMenu extends Component {
 			title,
 			description,
 			price,
-			dateUpdate,
 			categories,
 			languages,
 			translations,
 			currency
 		} = this.props;
+
+		console.log(this.props);
 
 		let languagesList = (translations && translations.length > 0) ? translations.map((translation, index) => {
 			return (index < translations.length - 1)
@@ -161,7 +162,6 @@ SectionArticleEditMenu.propTypes = {
 	title: PropTypes.string,
 	description: PropTypes.string,
 	price: PropTypes.number,
-	dateUpdate: PropTypes.object,
 	categories: PropTypes.array,
 	languages: PropTypes.array,
 	translations: PropTypes.array,

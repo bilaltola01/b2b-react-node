@@ -130,10 +130,12 @@ class MenuCategoriesEdit extends Component {
 		const { categories, onChange } = this.props;
 
 		const totalCategories = (this.props && this.props.availableCategories) ? this.props.availableCategories : [];
+		const stateCategories = (this.state.allCategories && this.state.allCategories.length > 0) ? this.state.allCategories : categories;
 
 		console.log(totalCategories);
+		console.log(stateCategories);
 
-		const categoriesComponent = (this.state.allCategories && this.state.allCategories.length > 0) ? this.state.allCategories.map((category, index) => {
+		const categoriesComponent = (stateCategories && stateCategories.length > 0) ? stateCategories.map((category, index) => {
 			return <MenuCategoryEdit id={category.CategoryStandardID} totalCategories={totalCategories} isCustom={false} title={category.Title} description={category.Description} meals={category.meals || []} onChange={this.handlers.onCategoryChange} onCategoryRemove={this.handlers.onCategoryRemove} key={index} />;
 		}) : null;
 

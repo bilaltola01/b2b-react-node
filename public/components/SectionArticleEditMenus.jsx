@@ -10,11 +10,10 @@ class SectionArticleEditMenus extends Component {
 
 		const menuComponents = (component.props.menus && component.props.menus.length > 0) ? component.props.menus.map((menu, index) => {
 			return <SectionArticleEditMenu 
-				id={menu.id}
-				title={menu.title}
-				description={menu.description}
-				price={menu.price}
-				dateUpdate={menu.dateUpdate}
+				id={menu.id || menu.MenuID}
+				title={menu.title || menu.Title}
+				description={menu.description || menu.Description}
+				price={menu.price || menu.Price}
 				categories={menu.categories}
 				currency={menu.currency}
 				languages={menu.languages}

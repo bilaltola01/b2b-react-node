@@ -8,6 +8,7 @@ import SectionArticleMain from './SectionArticleMain';
 import SectionArticleCompany from './SectionArticleCompany';
 import SectionArticleBranches from './SectionArticleBranches';
 import SectionArticleMenus from './SectionArticleMenus';
+import SectionArticleMenusDetail from './SectionArticleMenusDetail';
 import SectionArticleTranslations from './SectionArticleTranslations';
 import SectionArticleTranslate from './SectionArticleTranslate';
 
@@ -26,6 +27,8 @@ class SectionArticle extends Component {
 					return <SectionArticleBranches title={title} dateUpdate={dateUpdate} component={component} />
 				case 'menus':
 					return <SectionArticleMenus title={title} dateUpdate={dateUpdate} component={component} />
+				case 'menus-detail':
+					return <SectionArticleMenusDetail title={title} dateUpdate={dateUpdate} component={component} />
 				case 'translations':
 					return <SectionArticleTranslations title={title} dateUpdate={dateUpdate} component={component} />
 				case 'translate':

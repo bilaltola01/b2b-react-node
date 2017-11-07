@@ -20,7 +20,7 @@ class PageSection extends Component {
 			}
 
 			if (str === 'menu') {
-				return article.type === 'menus' || article.type === str;
+				return article.type === 'menus' || article.type === 'menus-detail' || article.type === str;
 			}
 
 			return article.type === str;

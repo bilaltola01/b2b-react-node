@@ -16,6 +16,8 @@ class SectionArticleAdd extends Component {
 					return <SectionArticleAddBranch title={title} dateUpdate={dateUpdate} component={component} />
 				case 'menus':
 					return <SectionArticleAddMenu title={title} dateUpdate={dateUpdate} component={component} />
+				case 'menus-detail':
+					return <SectionArticleAddMenu title={title} dateUpdate={dateUpdate} component={component} />
 				default:
 					return <SectionArticleAddBranch title={title} dateUpdate={dateUpdate} component={component} />
 			}
