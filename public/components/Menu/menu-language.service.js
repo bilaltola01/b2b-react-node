@@ -28,7 +28,8 @@ export function postMenuLanguages (nextId, langs) {
 }
 
 export function postMenuLanguage (nextId, lang) {
-    if (!lang.id) {
+    let id = lang.id || lang.LanguageID;
+    if (!id) {
         console.error('Menu language id is not specified!');
         return;
     }
@@ -37,7 +38,7 @@ export function postMenuLanguage (nextId, lang) {
         body: JSON.stringify({
             obj: {
                 MenuID: nextId,
-                BranchLanguageID: lang.id,
+                BranchLanguageID: id,
             }
         }),
         headers: {
@@ -67,16 +68,17 @@ export function updateMenuLanguages (menuId, langs) {
 }
 
 export function updateMenuLanguage (lang) {
-    if (!lang.id) {
+    let id = lang.id || lang.LanguageID;
+    if (!id) {
         console.error('Menu language id is not specified!');
         return;
     }
 
     // Get the branchlanguage ID then
-    return getMenuLanguage(lang.id).then((menuLanguage) => {
+    return getMenuLanguage(id).then((menuLanguage) => {
         return Ajax().put('/menu-language', {
             body: JSON.stringify({
-                id: lang.id,
+                id: id,
                 updates: {
                     BranchLanguageID: menuLanguage.BranchLanguageID
                 }
@@ -140,7 +142,7 @@ function convertOpts (opts, isUpdate) {
     }
     */
 
-    let id = opts.id;
+    let id = opts.id || opts.LanguageID;
     let obj = Object.keys(opts).reduce((acc, current) => {
         let matchingKeys = [];
         for (let key of Mapping.getTableMap('Language', true).keys()) {

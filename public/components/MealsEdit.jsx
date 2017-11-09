@@ -53,14 +53,14 @@ let createHandlers = (ctx) => {
 			//ctx.props.category.id === obj.catId
 
 			let meals = prevState.allMeals.map((meal) => {
-				if ((ctx.props.category.id === obj.catId && meal.id === obj.id)
-					|| (meal.id === 1 && prevState.allMeals.length === 1)) {
+				if ((ctx.props.category.id === obj.catId && (meal.id === obj.id || meal.MealID === obj.id))
+					|| ((meal.id === 1 || meal.MealID === 1) && prevState.allMeals.length === 1)) {
 					let tmp = meal;
-					tmp.id = obj.id;
+					tmp.MealID = obj.id || obj.MealID;
 					tmp.catId = obj.catId;
-					tmp.title = obj.title;
-					tmp.description = obj.description;
-					tmp.price = parseFloat(obj.price) || null;
+					tmp.Title = obj.title || obj.Title;
+					tmp.Description = obj.description || obj.Description;
+					tmp.Price = parseFloat(obj.price) || null;
 					return tmp;
 				}
 				/*

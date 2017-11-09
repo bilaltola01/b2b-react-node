@@ -62,7 +62,7 @@ export function updateMenuCategories (cats) {
 }
 
 export function updateMenuCategory (cat) {
-    if (!cat.id) {
+    if (!cat.id && !cat.CategoryID) {
         console.error('Category id is not specified!');
         return;
     }
@@ -306,7 +306,7 @@ export function translateMenuCategory (menuId, langs, cat) {
         let cats = res.obj;
 
         return cats.find((c) => {
-            return c.CategoryID === cat.id && c.MenuID === menuId;
+            return (c.CategoryID === cat.id || c.CategoryID === cat.CategoryID) && c.MenuID === menuId;
         }).MenuCategoryID;
     }).then(id => {
         if (!id) {
@@ -352,21 +352,22 @@ export function removeMenuCategory () {
 
 
 function convertForTranslation (lang, obj) {
+    let id = obj.id || obj.CategoryID;
     switch (obj.type) {
         case 'category':
         console.log({obj: {
-                    categoryId: obj.id,
+                    categoryId: id,
                     key: obj.prop.key,
-                    title: 'Menu Category ' + obj.id + ', translation: ' + obj.prop.key,
+                    title: 'Menu Category ' + id + ', translation: ' + obj.prop.key,
                     sl: 'English',
                     tl: lang.title || lang.name,
                     payload: obj.prop.value
                 }});
             return {
                 obj: {
-                    categoryId: obj.id,
+                    categoryId: id,
                     key: obj.prop.key,
-                    title: 'Menu Category ' + obj.id + ', translation: ' + obj.prop.key,
+                    title: 'Menu Category ' + id + ', translation: ' + obj.prop.key,
                     sl: 'English',
                     tl: lang.title || lang.name,
                     payload: obj.prop.value
@@ -391,12 +392,14 @@ function convertFromDB (cat) {
 function convertOpts (cat, isUpdate) {
     console.log(cat);
 
+    /*
     if (!cat.id) {
         console.error('The menu category id to update is not specified!');
         return;
     }
+    */
 
-    let id = cat.id;
+    let id = cat.id || cat.CategoryID;
     let obj = Object.keys(cat).reduce((acc, current) => {
         let matchingKeys = [];
         for (let key of Mapping.getTableMap('menucategory').keys()) {

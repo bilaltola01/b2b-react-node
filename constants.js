@@ -21,3 +21,4 @@ exports.STRAKER_TOKEN = (process.env.DB_ENV === 'DEV') ? process.env.STRAKER_TOK
 exports.STRAKER_DOMAIN = process.env.STRAKER_DOMAIN;
 exports.STRAKER_TRANSLATION_URL = (process.env.DB_ENV === 'DEV') ? 'https://sandbox.' + process.env.STRAKER_DOMAIN : 'https://api.' + process.env.STRAKER_DOMAIN;
 exports.STRAKER_CALLBACK_URL = (process.env.DB_ENV === 'DEV') ? '' : process.env.STRAKER_CALLBACK_URL;
+exports.GOOGLE_MAPS_API_KEY = process.env.GOOGLE_MAPS_API_KEY;

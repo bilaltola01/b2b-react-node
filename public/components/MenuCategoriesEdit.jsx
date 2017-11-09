@@ -36,12 +36,15 @@ let createHandlers = (ctx) => {
 			categories = prevState.allCategories.map((prevCategory, index) => {
 				console.log(prevCategory);
 
-				if (prevCategory.id === cat.id ||
-					prevCategory.id === 1 /*&& prevState.allCategories.length === 1*/ ||
-					(cat.oldId && prevCategory.id === cat.oldId)) {
+				if ((prevCategory.id === cat.id || prevCategory.CategoryID === cat.id) ||
+					(prevCategory.id === 1 || prevCategory.CategoryID === 1) /*&& prevState.allCategories.length === 1*/ ||
+					(cat.oldId && (prevCategory.id === cat.oldId || prevCategory.CategoryID === cat.oldId))) {
 					let obj = prevCategory;
-					obj.title = cat.title;
-					obj.id = cat.id;
+					obj.CategoryID = cat.id || cat.CategoryID;
+					if (obj.Category) {
+						obj.Category.Title = (cat.Category && cat.Category.Title) ? cat.Category.Title : cat.title;
+						obj.Category.CategoryStandardID = cat.id || cat.CategoryID;
+					}
 
 					if (cat.meals && cat.meals.length > 0) {
 						obj.meals = cat.meals;
@@ -117,7 +120,7 @@ class MenuCategoriesEdit extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			allCategories: []
+			allCategories: props.categories
 		};
 		this.handlers = createHandlers(this);
 	}

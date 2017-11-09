@@ -89,6 +89,8 @@ class MenuPage extends Component {
     const currencies = (currentBranch && currentBranch.currencies && currentBranch.currencies.length > 0) ? currentBranch.currencies : [];
     const languages = (currentBranch && currentBranch.languages && currentBranch.languages.length > 0) ? currentBranch.languages : [];
 
+    console.log(languages);
+
     const filteredMenus = (menus && menus.length > 0) ? menus.filter(menu => {
       return parseInt(menu.MenuID, 10) === parseInt(id, 10);
     }) : null;

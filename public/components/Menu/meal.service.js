@@ -29,6 +29,10 @@ export function postMeal (meal, newCatId) {
         delete meal.id;
     }
 
+    if (meal.MealID) {
+        delete meal.MealID;
+    }
+
     meal.menuCategoryId = newCatId;
 
     return Ajax().post('/meal', {
@@ -57,7 +61,7 @@ export function updateMeals (meals) {
 }
 
 export function updateMeal (meal) {
-    if (!meal.id) {
+    if (!meal.id && !meal.MealID) {
         console.error('meal id is not specified!');
         return;
     }
@@ -209,21 +213,22 @@ export function translateMeal (langs, meal) {
 
 
 function convertForTranslation (lang, obj) {
+    let id = obj.id || obj.MealID;
     switch (obj.type) {
         case 'meal':
         console.log({obj: {
-                    mealId: obj.id,
+                    mealId: id,
                     key: obj.prop.key,
-                    title: 'Meal ' + obj.id + ', translation: ' + obj.prop.key,
+                    title: 'Meal ' + id + ', translation: ' + obj.prop.key,
                     sl: 'English',
                     tl: lang.title || lang.name,
                     payload: obj.prop.value
                 }});
             return {
                 obj: {
-                    mealId: obj.id,
+                    mealId: id,
                     key: obj.prop.key,
-                    title: 'Meal ' + obj.id + ', translation: ' + obj.prop.key,
+                    title: 'Meal ' + id + ', translation: ' + obj.prop.key,
                     sl: 'English',
                     tl: lang.title || lang.name,
                     payload: obj.prop.value
@@ -253,7 +258,7 @@ function convertOpts (meal, isUpdate) {
         return;
     }
 */
-    let id = meal.id;
+    let id = meal.id || meal.MealID;
     let obj = Object.keys(meal).reduce((acc, current) => {
         let matchingKeys = [];
         for (let key of Mapping.getTableMap('meal').keys()) {

@@ -55,7 +55,8 @@ class Alert extends Component {
 		console.log(this.props);
 
 		const languages = (component.props.languages.length > 0) ? component.props.languages.map((lang, index) => {
-			return <BranchLanguage id={lang.LanguageID} code={lang.Code} codeFull={lang.CodeFull} name={lang.Name} title={lang.Title} key={lang.LanguageID} />;
+			const finalLanguage = (lang.Language) ? lang.Language : lang;
+			return <BranchLanguage id={finalLanguage.LanguageID} code={finalLanguage.Code} codeFull={finalLanguage.CodeFull} name={finalLanguage.Name} title={finalLanguage.Title} key={index} />;
 		}): null;
 
 		const alertComponent = (this.state.isTranslateRequestDone)

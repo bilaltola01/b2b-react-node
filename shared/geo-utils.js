@@ -1,7 +1,10 @@
 "use strict";
 
+const constants = require('../constants');
+
 const geocoder = require('node-geocoder')({
-	provider: 'google'
+	provider: 'google',
+	apiKey: constants.GOOGLE_MAPS_API_KEY
 });
 
 let GeoUtils = {
