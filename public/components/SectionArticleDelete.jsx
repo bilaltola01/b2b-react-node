@@ -16,6 +16,8 @@ class SectionArticleDelete extends Component {
 					return <SectionArticleDeleteBranch title={title} dateUpdate={dateUpdate} component={component} />
 				case 'menus':
 					return <SectionArticleDeleteMenu title={title} dateUpdate={dateUpdate} component={component} />
+				case 'menus-detail':
+					return <SectionArticleDeleteMenu title={title} dateUpdate={dateUpdate} component={component} />
 				default:
 					return <SectionArticleDeleteBranch title={title} dateUpdate={dateUpdate} component={component} />
 			}

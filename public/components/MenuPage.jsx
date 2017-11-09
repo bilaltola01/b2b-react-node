@@ -133,7 +133,7 @@ class MenuPage extends Component {
         }]
     }];
 
-    const asideType = 'preview';
+    const asideType = 'preview-menu-' + action;
 
 
     return (

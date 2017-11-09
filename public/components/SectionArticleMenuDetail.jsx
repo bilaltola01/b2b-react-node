@@ -38,6 +38,115 @@ let createHandlers = (ctx) => {
 		});
 	};
 
+	let getTranslatedItems = (lang, translations) => {
+		if (!lang || !translations || translations.length <= 0) {
+      		return null;
+    	}
+
+    	const finalLang = (lang.Language) ? lang.Language : lang;
+    	if (finalLang.LanguageID && finalLang.LanguageID === 23) {
+			return translations;
+		}
+
+    	const langTranslations = translations.filter(t => {
+    		console.log(t, finalLang);
+      		return (t.BranchLanguageID === finalLang.BranchLanguageID) || (t.BranchLanguageName === finalLang.Title);
+    	});
+
+    	return langTranslations;
+	};
+
+	let setMenu = (menu, lang) => {
+		const getDataToUpdate = (props, language) => {
+			const textKey = (language.LanguageID && language.LanguageID === 23) ? 'OriginalText' : 'Text';
+			const capitalizeFirstLetter = (str) => {
+			    return str.charAt(0).toUpperCase() + str.slice(1);
+			};
+
+			const injectWithTranslatedProps = (arr, options) => {
+				return arr.map(item => {
+					const obj = getTranslatedItems(language, item.translations);
+					console.log(obj);
+					if (!obj || obj.length <= 0) {
+						return item;
+					}
+
+					let newProps = {};
+
+					if (options && options.parent) {
+						newProps[options.parent] = {
+							Description: obj.find(item => item.PropKey === 'description')[textKey],
+							Title: obj.find(item => item.PropKey === 'title')[textKey]
+						};
+					} else {
+						newProps = {
+							Description: obj.find(item => item.PropKey === 'description')[textKey],
+							Title: obj.find(item => item.PropKey === 'title')[textKey]
+						};
+					}
+
+					if (options && options.key && options.key.length > 0) {
+						newProps[options.key] = injectWithTranslatedProps(item[options.key]);
+					}
+
+					return Object.assign({}, item, newProps);
+				})
+			};
+
+			const replaceArray = (arr, translations, key) => {
+				if (!translations || translations.length <= 0) {
+					return arr;
+				}
+
+				return Object.assign(arr, arr.map(item => {
+					let mealsObj = {};
+					if (item.meals && item.meals.length > 0) {
+						mealsObj = {
+							meals: item.meals.map(meal => {
+								return replaceArray(meal.translations, getTranslatedItems(language, meal.translations), 'MealID');
+							})
+						};
+					}
+
+					console.log(mealsObj);
+
+					const newItem = ['title', 'description'].reduce((acc, propKey) => {
+						let obj = {};
+						const translation = translations.find(lang => lang.PropKey === propKey);
+						console.log(translation);
+						if (translation && translation.length > 0 && item[key] === translation[key]) {
+							obj[capitalizeFirstLetter(propKey)] = translation[textKey];
+						}
+						return Object.assign(acc, item, obj);
+					}, {});
+
+					return Object.assign(newItem, newItem, mealsObj);
+				}));
+			};
+
+			// Could use same funciton as newItem = ...
+			let obj = getTranslatedItems(language, props.translations);
+			console.log(obj);
+			if (!obj || obj.length <= 0) {
+				return props;
+			}
+
+			let newMenu = Object.assign({}, props, {
+				title: obj.find(item => item.PropKey === 'title')[textKey],
+				description: obj.find(item => item.PropKey === 'description')[textKey],
+				categories: injectWithTranslatedProps(props.categories, {parent: 'Category', key: 'meals'})
+			});
+
+			console.log(newMenu);
+
+			return newMenu;
+		};
+
+		ctx.props.dispatch(actionCreators.setMenu(getDataToUpdate(menu, lang)));
+	};
+
+
+
 	let onLanguageClick = (e, lang, index) => {
 	    ctx.props.dispatch(actionCreators.setCurrentLanguage(lang, (res) => {
 	    	console.log('changed current language!');
@@ -47,11 +156,37 @@ let createHandlers = (ctx) => {
 	    		currentLanguage: lang,
 	    		currentLanguageItem: index
 	    	});
+
+	    	const newMenu = ctx.props.menu || ctx.props;
+	    	setMenu(newMenu, lang);
 	    }));
 	 };
 
+	let onTranslateClick = () => {
+	 	console.log('menu to be translated!');
+	 	ctx.props.dispatch(actionCreators.translateMenu(ctx.props.menu, onMenuTranslateRequestDone));
+	};
+
+	let onMenuTranslateRequestDone = (obj) => {
+		console.log('translation request done! ');
+		console.log(obj);
+
+		ctx.setState({
+			redirect: true,
+			/*
+			isTranslateRequestDone: true,
+			component: {
+				type: 'menu',
+				obj: ctx.props.component
+			}
+			*/
+		});
+	};
+
   	return {
   		onLanguageClick,
+  		onTranslateClick,
+  		setMenu,
     	onNavItemClick
   	};
 };
@@ -60,11 +195,16 @@ class SectionArticleMenuDetail extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			redirect: false,
 			currentSubNavItem: 0,
 			currentLanguageItem: 0,
 			currentLanguage: props.currentLanguage || DEFAULT_LANGUAGE
 		};
 		this.handlers = createHandlers(this);
+	}
+
+	componentDidMount() {
+		this.handlers.setMenu(this.props, this.state.currentLanguage);
 	}
 
 	getNavItemClasses(index) {
@@ -138,11 +278,14 @@ class SectionArticleMenuDetail extends Component {
 			</ul>
 		);
 
-		const noTranslationsComponent = (translations || translations.length <= 0) ? (
+		const noTranslationsComponent = (!translations || translations.length <= 0) ? (
 			<div className="global-padding-wrapper">
 				<div className="branch--add">
 					<div className="add-item dashed">
 						<h2 className="no-items--headline">It looks like your menu translations are pending or your menu is not translated yet.</h2>
+						<div className="button-translate-menu">
+							<span onClick={this.handlers.onTranslateClick}>Translate this menu</span>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -165,8 +308,26 @@ class SectionArticleMenuDetail extends Component {
 		) : '0%';
 
 
-		return (
+		return (this.state.redirect) ? (
+			<Redirect to={{
+				pathname: '/translate/' + type,
+				state: { component: this.state.component }
+			}} />
+		) : (
 			<div className="article--menu-detail">
+				<div className="branch--contact--header">
+					<div className="header--title-container">
+						<h1 className="aside--title collapsable--title">
+							{title}
+						</h1>
+					</div>
+					<div className="header--actions">
+						<ul>
+							<li><Link to={"/menu/edit/" + id} className="action--edit">Edit</Link></li>
+							<li><Link to={"/menu/delete/" + id} className="action--delete">Delete</Link></li>
+						</ul>
+					</div>
+				</div>
 				<header className="menu-detail--header">
 					<h1 className="menu-detail--title">
 						{title}
@@ -190,7 +351,7 @@ class SectionArticleMenuDetail extends Component {
 					</div>
 				</div>
 			</div>
-		)
+		);
 	}
 };
 
@@ -210,7 +371,8 @@ SectionArticleMenuDetail.propTypes = {
 const mapStateToProps = (state) => {
     console.log(state);
     return {
-        currentLanguage: state._currentLanguage.currentLanguage
+        currentLanguage: state._currentLanguage.currentLanguage,
+        menu: state._menu.menu
     };
 };
 

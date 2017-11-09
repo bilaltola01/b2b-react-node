@@ -25,6 +25,7 @@ class Menu extends Component {
 				title={categoryTitle} 
 				description={categoryDesc} 
 				meals={cat.meals} 
+				symbol={symbol} 
 				key={index} />;
 		}) : null;
 

@@ -4,7 +4,7 @@ import MealDetail from './MealDetail';
 
 class Meal extends Component {
 	render() {
-		const { id, title, description, price, enableDetails, detail } = this.props;
+		const { id, title, description, price, symbol, enableDetails, detail } = this.props;
 
 		const detailComponents = (detail && Object.keys(detail).length > 0 && enableDetails) ? (
 			<MealDetail id={detail.id} title={detail.title} description={detail.description} medias={detail.medias} />
@@ -17,7 +17,7 @@ class Meal extends Component {
 	                <span className="food-menu--description">{description}</span>
 
 	                {price && price > 0 &&
-	                	<span className="food-meal--price">{price}</span>
+	                	<span className="food-meal--price">{symbol} {price}</span>
 	                }
 	            </p>
 	            {detailComponents}
@@ -31,6 +31,7 @@ Meal.propTypes = {
 	title: PropTypes.string,
 	description: PropTypes.string,
 	price: PropTypes.number,
+	symbol: PropTypes.string,
 	enableDetails: PropTypes.bool,
 	detail: PropTypes.object
 };

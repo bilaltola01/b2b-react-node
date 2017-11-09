@@ -127,7 +127,7 @@ class MealsEdit extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			allMeals: []
+			allMeals: props.meals
 		};
 		this.handlers = createHandlers(this);
 	}
@@ -135,10 +135,20 @@ class MealsEdit extends Component {
 	render() {
 		const { meals, onChange, category } = this.props;
 
-		console.log(category);
+		console.log(this.props);
 
 		const mealComponents = (this.state.allMeals && this.state.allMeals.length > 0) ? this.state.allMeals.map((meal, index) => {
-			return <MealEdit id={meal.id} catId={category.id} title={meal.title} description={meal.description} price={meal.price} enableDetails={meal.enableDetails} detail={meal.detail} key={index} onChange={this.handlers.onChange} onRemove={this.handlers.onRemove} />;
+			return <MealEdit 
+				id={meal.id || meal.MealID} 
+				catId={category.id} 
+				title={meal.title || meal.Title} 
+				description={meal.description || meal.Description} 
+				price={meal.price || meal.Price} 
+				enableDetails={meal.enableDetails} 
+				detail={meal.detail} 
+				onChange={this.handlers.onChange} 
+				onRemove={this.handlers.onRemove} 
+				key={index} />;
 		}) : null;
 
 		return (

@@ -4,7 +4,7 @@ import Meal from './Meal';
 
 class MenuCategory extends Component {
 	render() {
-		const { id, isCustom, title, description, meals } = this.props;
+		const { id, isCustom, title, description, symbol, meals } = this.props;
 
 		console.log(this.props);
 
@@ -14,6 +14,7 @@ class MenuCategory extends Component {
 				title={meal.Title || meal.title}
 				description={meal.Description || meal.description}
 				price={meal.Price || meal.price}
+				symbol={symbol}
 				enableDetails={!!meal.EnableDetails || !!meal.enableDetails}
 				detail={meal.MealDetail || meal.mealDetail}
 				key={index} />;
@@ -36,6 +37,7 @@ MenuCategory.propTypes = {
 	isCustom: PropTypes.bool,
 	title: PropTypes.string,
 	description: PropTypes.string,
+	symbol: PropTypes.string,
 	meals: PropTypes.array
 };
 

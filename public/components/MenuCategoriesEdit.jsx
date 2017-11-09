@@ -136,7 +136,8 @@ class MenuCategoriesEdit extends Component {
 		console.log(stateCategories);
 
 		const categoriesComponent = (stateCategories && stateCategories.length > 0) ? stateCategories.map((category, index) => {
-			return <MenuCategoryEdit id={category.CategoryStandardID} totalCategories={totalCategories} isCustom={false} title={category.Title} description={category.Description} meals={category.meals || []} onChange={this.handlers.onCategoryChange} onCategoryRemove={this.handlers.onCategoryRemove} key={index} />;
+			const finalCategory = (category.Category) ? category.Category : category;
+			return <MenuCategoryEdit id={finalCategory.CategoryStandardID} totalCategories={totalCategories} isCustom={false} title={finalCategory.Title} description={finalCategory.Description} meals={category.meals || []} onChange={this.handlers.onCategoryChange} onCategoryRemove={this.handlers.onCategoryRemove} key={index} />;
 		}) : null;
 
 		return (

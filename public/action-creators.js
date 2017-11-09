@@ -137,14 +137,19 @@ export function getMenuTranslations (cb) {
 };
 
 export function setMenu (menu, data) {
-  let finalMenu = Object.assign({}, menu);
-  let dataKey = Object.keys(data)[0];
-  let isValid = Object.keys(finalMenu).filter((key) => {
-    return key === Object.keys(data)[0];
-  }).length > 0;
+  let finalMenu;
 
+  if (!data || data.length <= 0) {
+    finalMenu = menu;
+  } else {
+    finalMenu = Object.assign({}, menu);
+    let dataKey = Object.keys(data)[0];
+    let isValid = Object.keys(finalMenu).filter((key) => {
+      return key === Object.keys(data)[0];
+    }).length > 0;
 
-  finalMenu[dataKey] = data[dataKey];
+    finalMenu[dataKey] = data[dataKey];
+  }
 
   console.log(finalMenu);
 

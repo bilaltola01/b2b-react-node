@@ -84,16 +84,23 @@ class SectionArticleMenu extends Component {
 			return <Redirect push to={"/menu/get/" + id} />;
 		}
 
-		let languagesList = (translations && translations.length > 0) ? translations.map((translation, index) => {
-			return (index < translations.length - 1)
+		const uniqueLanguages = (translations && translations.length > 0) ? translations.reduce((acc, lang) => {
+			if (!acc.find(item => item.BranchLanguageName === lang.BranchLanguageName)) {
+				return acc.concat(lang);
+			}
+			return acc;
+		}, []) : [];
+
+		let languagesList = (uniqueLanguages && uniqueLanguages.length > 0) ? uniqueLanguages.map((translation, index) => {
+			return (index < uniqueLanguages.length - 1)
 				? (
-					<span className="language--name">
-						<span>{translation.language.name}</span>
+					<span className="language--name" key={index}>
+						<span>{translation.BranchLanguageName}</span>
 						,&nbsp;
 					</span>
 				) : (
-					<span className="language--name">
-						<span>{translation.language.name}</span>
+					<span className="language--name" key={index}>
+						<span>{translation.BranchLanguageName}</span>
 					</span>
 				);
 		}) : null;
@@ -120,7 +127,7 @@ class SectionArticleMenu extends Component {
 					<div>
 						<div className="content--label">
 							<h3 className="label--key">Total:</h3>
-							<span className="label--value">{translations.length}</span>
+							<span className="label--value">{uniqueLanguages.length}</span>
 						</div>
 						<div className="content--label">
 							<h3 className="label--key">Languages:</h3>

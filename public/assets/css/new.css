@@ -4591,6 +4591,13 @@ a.button--share.button--action-outline:hover {
 	margin-left: 5px;
 }
 
+.button-translate-menu {
+  margin-top: 20px;
+}
+.button-translate-menu span {
+  cursor: pointer;
+}
+
 .branch--images {
 	margin-top: 20px;
 }
@@ -4673,11 +4680,19 @@ a.button--share.button--action-outline:hover {
 MENU DETAIL
 //////////
 */
+
+.module--item-details .branch--see-all .button--action{
+  margin-top: 0;
+}
+.menus.menu-detail {
+  padding-bottom: 20px;
+  border-bottom: 1px solid #E9F1FA;
+}
 .article--menu-detail {
   position: relative;
 }
 .menu-detail--header {
-  padding: 20px;
+  padding: 40px 20px;
   border-bottom: 1px solid #E9F1FA;
   text-align: center;
 }
@@ -4734,6 +4749,10 @@ MENU DETAIL
 }
 .menu-detail--languages ul li .language--item.selected img {
   border: 4px solid #cedcec;
+}
+
+.article--menu-detail .no-items--headline {
+  margin: 0;
 }
 
 
@@ -4810,7 +4829,7 @@ MENU DETAIL
     border-left: 1px solid #E9F1FA;
 }
 .subnav ul li:first-child {
-  border-left: 1px solid transparent;
+  /*border-left: 1px solid transparent;*/
 }
 .subnav ul li a,
 .subnav ul li div {

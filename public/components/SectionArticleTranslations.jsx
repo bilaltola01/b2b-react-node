@@ -23,7 +23,7 @@ class SectionArticleTranslations extends Component {
 
 		const noItemsComponent = (!menuComponents || menuComponents.length <= 0) ? (
 			<div className="branch--add">
-				<h2 className="no-items--headline">Oh no! It looks like you have no menu translations yet.</h2>
+				<h2 className="no-items--headline">Oh no! It looks like you have no menus translations yet.</h2>
 				<Link to="/menus" >
 					<div className="add-item dashed">
 						<span>Go to your Menus</span>

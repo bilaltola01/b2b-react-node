@@ -77,13 +77,13 @@ class SectionArticleEditMenu extends Component {
 		let languagesList = (translations && translations.length > 0) ? translations.map((translation, index) => {
 			return (index < translations.length - 1)
 				? (
-					<span className="language--name">
-						<span>{translation.language.name}</span>
+					<span className="language--name" key={index}>
+						<span>{translation.BranchLanguageName}</span>
 						,&nbsp;
 					</span>
 				) : (
-					<span className="language--name">
-						<span>{translation.language.name}</span>
+					<span className="language--name" key={index}>
+						<span>{translation.BranchLanguageName}</span>
 					</span>
 				);
 		}) : null;
