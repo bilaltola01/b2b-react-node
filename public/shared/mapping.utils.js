@@ -114,11 +114,17 @@ const MAP_TABLE = [
         key: 'meal',
         table: new Map([
             ['id', 'MealID'],
+            ['MealID', 'MealID'],
             ['menuCategoryId', 'MenuCategoryID'],
+            ['MenuCategoryID', 'MenuCategoryID'],
             ['title', 'Title'],
+            ['Title', 'Title'],
             ['description', 'Description'],
+            ['Description', 'Description'],
             ['price', 'Price'],
-            ['enableDetails', 'EnableDetails']
+            ['Price', 'Price'],
+            ['enableDetails', 'EnableDetails'],
+            ['EnableDetails', 'EnableDetails']
         ])
     },
     {
@@ -136,9 +142,14 @@ const MAP_TABLE = [
         key: 'menucategory',
         table: new Map([
             ['id', 'CategoryID'],
+            ['CategoryID', 'CategoryID'],
+            ['CategoryStandardID', 'CategoryID'],
+            ['Title', 'Title'],
+            ['Description', 'Description'],
             ['categoryId', 'CategoryID'],
             ['catId', 'CategoryID'],
-            ['menuId', 'MenuID']
+            ['menuId', 'MenuID'],
+            ['MenuID', 'MenuID']
         ])
     },
     {

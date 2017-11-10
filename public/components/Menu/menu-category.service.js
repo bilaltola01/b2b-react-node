@@ -62,7 +62,7 @@ export function updateMenuCategories (cats) {
 }
 
 export function updateMenuCategory (cat) {
-    if (!cat.id && !cat.CategoryID) {
+    if (!cat.id && !cat.MenuCategoryID) {
         console.error('Category id is not specified!');
         return;
     }
@@ -352,7 +352,7 @@ export function removeMenuCategory () {
 
 
 function convertForTranslation (lang, obj) {
-    let id = obj.id || obj.CategoryID;
+    let id = obj.id || obj.MenuCategoryID;
     switch (obj.type) {
         case 'category':
         console.log({obj: {
@@ -399,7 +399,7 @@ function convertOpts (cat, isUpdate) {
     }
     */
 
-    let id = cat.id || cat.CategoryID;
+    let id = cat.id || cat.MenuCategoryID;
     let obj = Object.keys(cat).reduce((acc, current) => {
         let matchingKeys = [];
         for (let key of Mapping.getTableMap('menucategory').keys()) {
