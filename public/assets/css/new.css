@@ -4755,6 +4755,12 @@ MENU DETAIL
   margin: 0;
 }
 
+.article--menu-detail .no-items--disclaimer {
+  margin: 6px 0 0 0;
+  font-size: 0.8em;
+  font-weight: 500;
+}
+
 
 .subnav {
     width: 100%;

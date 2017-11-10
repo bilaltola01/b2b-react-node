@@ -272,6 +272,8 @@ class SectionArticleMenuDetail extends Component {
 			</li>;
 		}) : null;
 
+		const nbLanguages = (finalLanguages && finalLanguages.length > 0) ? finalLanguages.length - 1 : '';
+
 		const languagesComponent = (
 			<ul>
 				{languageItems}
@@ -289,7 +291,19 @@ class SectionArticleMenuDetail extends Component {
 					</div>
 				</div>
 			</div>
-		) : null;
+		) : (
+			<div className="global-padding-wrapper">
+				<div className="branch--add">
+					<div className="add-item dashed">
+						<h2 className="no-items--headline">Do you want to reset this menu translation?</h2>
+						<p className="no-items--disclaimer">(This will re-translate your menu in all {nbLanguages} target languages.)</p>
+						<div className="button-translate-menu">
+							<span onClick={this.handlers.onTranslateClick}>Translate this menu again</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		);
 
 		const categoriesComponent = (categories && categories.length > 0) ? categories.map((category, index) => {
 			return <ArticleMenuDetailListItem nbItems={categories.length} currentItem={currentItem} category={category} currency={currency} language={this.props.currentLanguage} key={index} />;
