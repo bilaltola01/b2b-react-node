@@ -54,7 +54,7 @@ class SectionArticleAddMenu extends Component {
 
 		console.log(this.props);
 
-		const profileBranches = this.props.profile.branches;
+		const profileBranches = (this.props.profile && this.props.profile.branches && this.props.profile.branches.length > 0) ? this.props.profile.branches : [];
 
 		const menuBranches = (
 			<MenuBranchesEdit branches={branches} onChange={this.handlers.onChanges} />
@@ -133,6 +133,7 @@ SectionArticleAddMenu.propTypes = {
 const mapStateToProps = (state) => {
 	console.log(state);
   return {
+  	profile: state._profile.profile,
     menu: state._menu.menu
   };
 };
