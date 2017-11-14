@@ -8,7 +8,7 @@ class SectionArticleMain extends Component {
 	render() {
 		const { title, dateUpdate, component } = this.props;
 
-		const menuComponent = (component.props) ? (
+		const menuComponent = (component.props && component.props.menu) ? (
 			<Menu id={component.id} title={component.title} ownProps={component.props} />
 		) : (
 			<div className="global-padding-wrapper branches-container">

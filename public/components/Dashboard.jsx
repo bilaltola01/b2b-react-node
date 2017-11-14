@@ -95,7 +95,7 @@ class Dashboard extends Component {
 
     const lastMenu = filteredMenus;
 
-    const sections = [{
+    const sections = [/*{
         type: "visits",
         title: "Dashboard",
         articles: [{
@@ -131,7 +131,7 @@ class Dashboard extends Component {
             }
           }
         }]
-    }, {
+    }, */{
       type: "menus",
       title: "Latest Menus",
       articles: [{
