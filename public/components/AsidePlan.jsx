@@ -19,9 +19,6 @@ class AsidePlan extends Component {
 	                        Dedicated support
 	                    </h3>
 	                </div>
-	                <footer className="aside--section--footer global-padding-wrapper">
-	                    <a href="#," className="button--action button--action-blue">Upgrade Plan</a>
-	                </footer>
 	            </section>
 	        </aside>
 		)
