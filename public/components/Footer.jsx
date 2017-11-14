@@ -9,11 +9,13 @@ class Footer extends Component {
                     <img src="assets/images/logo-one-menu-bluegrey.png" alt="Logo of One Menu" />
                 </div>
                 <div className="footer--menu clearfix">
+                    {/*
                     <ul>
                         <li><a href="#,">one-menu.com</a></li>
                         <li><a href="#,">Terms &amp; Conditions</a></li>
                         <li><a href="#,">Contact</a></li>
                     </ul>
+                    */}
                 </div>
             </footer>
 		)

@@ -28,19 +28,23 @@ class Navbar extends Component {
                         <li><Link to="/branches">Branches</Link></li>
                     </ul>
                 </li>
+                {/*
                 <li>
                     <a href="#,">Statistics</a>
                 </li>
                 <li>
                     <a href="#,">Support</a>
                 </li>
+                */
+                }
             </ul>
         </nav>
-
+        {/*
         <ul className="navigation--secondary">
             <li><a className="link-icon icon--configuration" href="#,">Settings</a></li>
             <li><a className="link-icon icon--faq" href="faqs.html">FAQS</a></li>
         </ul>
+        */}
     </header>
     )
   }
