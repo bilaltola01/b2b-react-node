@@ -13,6 +13,10 @@ let createHandlers = (ctx) => {
 		let categories;
 		ctx.setState((prevState) => {
 			categories = prevState.allCategories.reduce((acc, current) => {
+				if (current.CategoryID) {
+					return (current.CategoryID !== obj.id) ? acc.concat([current]) : acc;
+				}
+
 				return (current.id !== obj.id) ? acc.concat([current]) : acc;
 			}, []);
 
@@ -40,10 +44,10 @@ let createHandlers = (ctx) => {
 					(prevCategory.id === 1 || prevCategory.CategoryID === 1) /*&& prevState.allCategories.length === 1*/ ||
 					(cat.oldId && (prevCategory.id === cat.oldId || prevCategory.CategoryID === cat.oldId))) {
 					let obj = prevCategory;
-					obj.CategoryID = cat.id || cat.CategoryID;
+					obj.CategoryID = cat.CategoryID || cat.id;
 					if (obj.Category) {
 						obj.Category.Title = (cat.Category && cat.Category.Title) ? cat.Category.Title : cat.title;
-						obj.Category.CategoryStandardID = cat.id || cat.CategoryID;
+						obj.Category.CategoryStandardID = cat.CategoryID || cat.id;
 					}
 
 					if (cat.meals && cat.meals.length > 0) {
@@ -57,7 +61,7 @@ let createHandlers = (ctx) => {
 				return prevCategory;
 			});
 
-			lastSelectedCategory = cat.id;
+			lastSelectedCategory = cat.CategoryID || cat.id;
 
 			console.log(categories);
 			ctx.props.onChange('categories', {data: categories});
