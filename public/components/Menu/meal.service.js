@@ -174,7 +174,7 @@ export function translateMeal (langs, meal) {
         let meals = res.obj;
 
         return meals.find((m) => {
-            return (m.Description === meal.description || m.Description === meal.Description) && (m.Title === meal.title || m.Title === meal.Title) && m.MenuCategoryID === meal.menuCategoryId;
+            return (m.Description === meal.description || m.Description === meal.Description) && (m.Title === meal.title || m.Title === meal.Title) && (m.MenuCategoryID === meal.menuCategoryId || m.MenuCategoryID === meal.MenuCategoryID);
         }).MealID;
     }).then((id) => {
         console.log(id);
