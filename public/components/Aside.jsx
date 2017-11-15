@@ -15,6 +15,8 @@ class Aside extends Component {
 					return <AsidePreview save={true} />
 				case 'preview-menu-get':
 					return <AsidePreview save={false} />
+				case 'preview-menu-add':
+					return <AsidePreview save={true} />
 				case 'preview-menu-edit':
 					return <AsidePreview save={true} />
 				default:

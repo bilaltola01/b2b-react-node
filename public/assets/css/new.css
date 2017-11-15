@@ -2583,9 +2583,13 @@ ol.calendar--week {
 }
 
 .layout--dashboard .admin-nav img {
-  display: inline-block;
+  /*display: inline-block;*/
   width: 36px;
   height: auto;
+
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
 }
 
 .comment,
