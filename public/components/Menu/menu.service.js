@@ -231,15 +231,16 @@ export function translateMenu (opts, mode) {
 
         // Convert to correct syntax
         opts.languages = opts.languages.map(lang => {
+            const finalLang = (lang.Language) ? lang.Language : lang;
             return {
-                code: lang.Code,
-                codeFull: lang.CodeFull,
-                date: lang.Date,
-                dateUpdated: lang.DateUpdated,
-                flagId: lang.FlagID,
-                id: lang.LanguageID,
-                name: lang.Name,
-                title: lang.Title
+                code: finalLang.Code,
+                codeFull: finalLang.CodeFull,
+                date: finalLang.Date,
+                dateUpdated: finalLang.DateUpdated,
+                flagId: finalLang.FlagID,
+                id: finalLang.LanguageID,
+                name: finalLang.Name,
+                title: finalLang.Title
             };
         });
 
