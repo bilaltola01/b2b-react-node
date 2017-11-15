@@ -230,7 +230,7 @@ export function translateMenu (opts, mode) {
         }).MenuID;
 
         // Convert to correct syntax
-        opts.languages = opts.languages.map(lang => {
+        const finalLanguages = opts.languages.map(lang => {
             const finalLang = (lang.Language) ? lang.Language : lang;
             return {
                 code: finalLang.Code,
@@ -244,12 +244,12 @@ export function translateMenu (opts, mode) {
             };
         });
 
-        return MenuCategory.translateMenuCategories(menuId, opts.languages, opts.categories)
+        return MenuCategory.translateMenuCategories(menuId, finalLanguages, opts.categories)
             .then((res) => {
                 console.log('translation request finished');
                 console.log(res);
 
-                return Promise.all(opts.languages.map((lang) => {
+                return Promise.all(finalLanguages.map((lang) => {
                     return propsToTranslate.map((prop) => {
                         return Ajax().post('/translate-menu', {
                             body: JSON.stringify(convertForTranslation(lang, {type: 'menu', id: menuId, prop: prop})),
