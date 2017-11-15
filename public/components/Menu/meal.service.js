@@ -184,7 +184,7 @@ export function translateMeal (langs, meal) {
         }
 
         let propsToTranslate = Object.keys(meal).filter((key) => {
-            return (key === 'title' || key === 'description') && (meal[key] && meal[key].length > 0);
+            return ((key === 'title' || key === 'Title') || (key === 'description' || key === 'Description')) && (meal[key] && meal[key].length > 0);
         }).map((key) => {
             return {
                 key: key,
