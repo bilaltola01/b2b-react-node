@@ -314,12 +314,15 @@ export function translateMenuCategory (menuId, langs, cat) {
             return;
         }
 
-        let propsToTranslate = Object.keys(cat).filter((key) => {
-            return (key === 'title') && (cat[key] && cat[key].length > 0);
+        // Must change to cat.Category
+        const finalCat = (cat.Category) ? cat.Category: cat;
+
+        let propsToTranslate = Object.keys(finalCat).filter((key) => {
+            return (key === 'title' || key === 'Title') && (finalCat[key] && finalCat[key].length > 0);
         }).map((key) => {
             return {
                 key: key,
-                value: cat[key]
+                value: finalCat[key]
             };
         });
 
