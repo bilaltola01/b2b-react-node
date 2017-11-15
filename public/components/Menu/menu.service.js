@@ -226,7 +226,8 @@ export function translateMenu (opts, mode) {
         console.log(res);
 
         let menuId = res.obj.find((menu) => {
-            return opts.description === menu.Description && opts.title === menu.Title && parseInt(opts.price, 10) === parseInt(menu.Price, 10);
+            return opts.id === menu.MenuID;
+            //return opts.description === menu.Description && opts.title === menu.Title && parseFloat(opts.price, 10) === parseFloat(menu.Price, 10);
         }).MenuID;
 
         // Convert to correct syntax
@@ -296,10 +297,11 @@ function convertForTranslation (lang, obj) {
 export function deleteMenu (menu) {
     console.log('deletion!!!');
     console.log(menu);
+    const id = menu.MenuID || menu.id;
 
     return new Promise((resolve, reject) => {
         Ajax().delete('/menu', {
-            body: JSON.stringify({id: menu.id}),
+            body: JSON.stringify({id: id}),
             headers: {
                 "content-type": "application/json",
                 "cache-control": "no-cache",
