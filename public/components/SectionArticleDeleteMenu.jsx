@@ -27,12 +27,8 @@ let createHandlers = (ctx) => {
   let deleteMenu = (component, cb) => {
   	console.log('component?');
   	console.log(component);
-
+  	
   	ctx.props.dispatch(actionCreators.deleteMenu(component, (res) => {
-  		ctx.popupObj = Object.assign({}, ctx.popupObj, {
-	  		isOpened: false
-	  	});
-  		dispatchPopup(ctx.popupObj);
   		goToMenus();
   	}));
   };
@@ -98,10 +94,23 @@ class SectionArticleDeleteMenu extends Component {
     componentWillReceiveProps(nextProps) {
     	if (nextProps.component.props.menus && nextProps.component.props.menus.length > 0) {
 			let menuComponent = nextProps.component.props.menus[0] || null;
-
-			this.popupObj = Object.assign({}, this.popupObj, {
-		  		isOpened: true
-		  	});
+			this.popupObj.isOpened = true;
+			this.popupObj.actions = [
+	  			{
+	  				type: 'submit',
+	  				text: 'Delete',
+	  				fn: (comp, cb) => {
+	  					this.handlers.deleteMenu(menuComponent, cb);
+	  				}
+	  			},
+	  			{
+	  				type: 'cancel',
+	  				text: 'Cancel',
+	  				fn: (comp, cb) => {
+	  					this.handlers.goToMenus();
+	  				}
+	  			}
+	  		];
 	  		this.handlers.dispatchPopup(this.popupObj);
     	}
     }
