@@ -27,6 +27,12 @@ let createHandlers = (ctx) => {
   let deleteMenu = (component, cb) => {
   	console.log('component?');
   	console.log(component);
+
+  	ctx.popupObj = Object.assign({}, ctx.popupObj, {
+  		isOpened: false
+  	});
+  	dispatchPopup(ctx.popupObj);
+
   	ctx.props.dispatch(actionCreators.deleteMenu(component, (res) => {
   		goToMenus();
   	}));
@@ -93,23 +99,10 @@ class SectionArticleDeleteMenu extends Component {
     componentWillReceiveProps(nextProps) {
     	if (nextProps.component.props.menus && nextProps.component.props.menus.length > 0) {
 			let menuComponent = nextProps.component.props.menus[0] || null;
-			this.popupObj.isOpened = true;
-			this.popupObj.actions = [
-	  			{
-	  				type: 'submit',
-	  				text: 'Delete',
-	  				fn: (comp, cb) => {
-	  					this.handlers.deleteMenu(menuComponent, cb);
-	  				}
-	  			},
-	  			{
-	  				type: 'cancel',
-	  				text: 'Cancel',
-	  				fn: (comp, cb) => {
-	  					this.handlers.goToMenus();
-	  				}
-	  			}
-	  		];
+
+			this.popupObj = Object.assign({}, this.popupObj, {
+		  		isOpened: true
+		  	});
 	  		this.handlers.dispatchPopup(this.popupObj);
     	}
     }
@@ -121,10 +114,10 @@ class SectionArticleDeleteMenu extends Component {
 		const menuComponent = (component.props.menus && component.props.menus.length > 0) ? component.props.menus[0] : null;
 
 		const ownProps = {
-			title: menuComponent ? menuComponent.title : '',
-			price: menuComponent ? menuComponent.price : '',
+			title: menuComponent ? (menuComponent.Title || menuComponent.title) : '',
+			price: menuComponent ? (menuComponent.Price || menuComponent.price) : '',
 			categories: menuComponent ? menuComponent.categories : [],
-			description: menuComponent ? menuComponent.description : ''
+			description: menuComponent ? (menuComponent.Description || menuComponent.description) : ''
 		};
 
 		const translationsContainer = '';
