@@ -31,9 +31,9 @@ let createHandlers = (ctx) => {
   	ctx.popupObj = Object.assign({}, ctx.popupObj, {
   		isOpened: false
   	});
-  	dispatchPopup(ctx.popupObj);
 
   	ctx.props.dispatch(actionCreators.deleteMenu(component, (res) => {
+  		dispatchPopup(ctx.popupObj);
   		goToMenus();
   	}));
   };
