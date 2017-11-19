@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { Redirect, Route } from 'react-router';
 
+import FormData from 'formdata-polyfill';
+
 import * as actionCreators from '../action-creators';
 
 let createHandlers = (ctx) => {

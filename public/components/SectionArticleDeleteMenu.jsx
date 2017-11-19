@@ -27,7 +27,7 @@ let createHandlers = (ctx) => {
   let deleteMenu = (component, cb) => {
   	console.log('component?');
   	console.log(component);
-  	
+
   	ctx.props.dispatch(actionCreators.deleteMenu(component, (res) => {
   		goToMenus();
   	}));
@@ -92,9 +92,10 @@ class SectionArticleDeleteMenu extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-    	if (nextProps.component.props.menus && nextProps.component.props.menus.length > 0) {
+    	if (nextProps.component.props.menus && nextProps.component.props.menus.length > 0 && this.state.redirect === false) {
 			let menuComponent = nextProps.component.props.menus[0] || null;
-			this.popupObj.isOpened = true;
+			console.log('menus changed so popup goes to true!!!!');
+			this.popupObj.isOpened = !this.popupObj.isOpened;
 			this.popupObj.actions = [
 	  			{
 	  				type: 'submit',

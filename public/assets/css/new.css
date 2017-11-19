@@ -2355,6 +2355,8 @@ ol.calendar--week {
 
 .group-buttons .button--action {
   margin-right: 15px;
+  background-color: #727B9C;
+  color: #fff;
 }
 
 .group-buttons .button--action:last-child {
@@ -4698,7 +4700,7 @@ MENU DETAIL
 //////////
 */
 
-.module--item-details .branch--see-all .button--action{
+.module--item-details.content--menus .branch--see-all .button--action{
   margin-top: 0;
 }
 .menus.menu-detail {

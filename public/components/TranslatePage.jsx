@@ -1,5 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 
+import { connect } from 'react-redux';
+import * as actionCreators from '../action-creators';
+
 import Navbar from './Navbar';
 import PageContent from './PageContent';
 
@@ -12,38 +15,38 @@ class TranslatePage extends Component {
     const { component } = this.props.match.params;
     const actionType = (typeof component !== 'undefined') ? 'translate-menu' : 'translate';
 
+    const profile = (this.props.profile) ? this.props.profile : {};
+
+    const branchRoot = (profile.branches && profile.branches.length > 0) ? profile.branches.find(branch => {
+      return branch.HasHeadquarters == 1;
+    }) : null;
+
+    if (branchRoot) {
+      branchRoot.mainContact = (branchRoot.contacts && branchRoot.contacts.length > 0) ? branchRoot.contacts.find(contact => {
+        return contact.IsAdmin == 1;
+      }) : null;
+    }
+
     const type = (typeof this.props.location.state.component !== 'undefined') ? this.props.location.state.component.type : '';
     const obj = (typeof this.props.location.state.component !== 'undefined') ? this.props.location.state.component.obj : '';
 
     const company = {
-        name: 'Cafe Mediterranean',
-        description: '',
-        logo: {
-          imgPath: 'assets/images/logo-cafe-med-white.png',
-          altDesc: 'The Cafe Mediterranean Logo'
-        },
-        website: 'http://thecafemediterranean.com',
-        tel: '+63-917-842-5222',
-        email: 'contact@thecafemediterranean.com',
-        social: {
-          twitter: 'https://twitter.com/thecafemediterranean',
-          facebook: 'https://facebook.com/thecafemediterranean',
-          instagram: 'https://instagram.com/thecafemediterranean'
-        },
-        branchRoot: {
-          contact: {
-            name: {
-              first: 'Marla',
-              last: 'Moran'
-            },
-            avatar: {
-              imgPath: 'assets/images/avatar-admin@2x.png',
-              altDesc: 'Image of Marla Moran'
-            },
-            tel: '+63-917-842-5222',
-            email: 'marla@thecafemediterranean.com'
-          }
-        }
+      name: profile.Name,
+      description: profile.Description,
+      logo: {
+        imgPath: profile.LogoPath,
+        altDesc: profile.LogoAltDesc
+      },
+      website: profile.Website,
+      tel: profile.Tel,
+      email: profile.Email,
+      social: {
+        twitter: profile.Twitter,
+        facebook: profile.Facebook,
+        instagram: profile.Instagram,
+        youtube: profile.Youtube
+      },
+      branchRoot: branchRoot
     };
 
     const sections = [{
@@ -72,4 +75,11 @@ class TranslatePage extends Component {
   }
 };
 
-export default TranslatePage;
+const mapStateToProps = (state) => {
+  console.log(state);
+  return {
+    profile: state._profile.profile
+  }
+};
+
+export default connect(mapStateToProps)(TranslatePage);

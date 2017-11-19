@@ -22,7 +22,7 @@ class SectionArticleEditMenus extends Component {
 		}) : null;
 
 		return (
-			<article className="content--module module--item-details no-metadata content--branches">
+			<article className="content--module module--item-details no-metadata content--menus">
 				<div className="content--container global-padding-wrapper branches-container">
 					<h2 className="asset--subtitle">
                         Edit Menus

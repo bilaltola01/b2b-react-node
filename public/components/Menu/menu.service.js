@@ -21,40 +21,25 @@ export function updateMenu (opts) {
               }
             }));
     } else {
-        return Ajax().get('/menu', {
-            headers: {
-                "content-type": "application/json",
-                "cache-control": "no-cache",
-                "x-access-token": StorageManagerInstance.read('token')
-            }
-        }).then(res => {
-            console.log(res);
-            if (!res || !res.success) {
-                return Promise.reject(res);
-            }
+        let obj = opts;
+        return Promise.all(obj.branches.map(branch => {
+            obj.branchId = branch.BranchID;
+            return postMenu(obj).then(res => {
+                if (!res || !res.success) {
+                    return Promise.reject(res);
+                }
 
-            let menus = res.obj;
-            let ids = menus.map(menu => menu.MenuID);
-            let nextID = Math.max(...ids) + 1;
+                console.log(res.obj);
 
+                let id = res.obj[0];
+                return MenuCategory.postMenuCategories(id, obj.categories)
+                    .then(MenuLanguage.postMenuLanguages(id, obj.languages));
+            });
+        })).then(ids => {
+            console.log('last modif');
             console.log(ids);
-            console.log(nextID);
-
-            return nextID;
-        }).then((id) => {
-            return MenuCategory.postMenuCategories(id, opts.categories)
-                .then(MenuLanguage.postMenuLanguages(id, opts.languages))
-                .then(res => {
-                    let obj = opts;
-                    return Promise.all(opts.branches.map(branch => {
-                        obj.branchId = branch.BranchID;
-                        return postMenu(obj);
-                    }))
-                }).then(ids => {
-                    console.log('last modif');
-                    console.log([].concat.apply([], ids));
-                    return [].concat.apply([], ids);
-                });
+            console.log([].concat.apply([], ids));
+            return [].concat.apply([], ids);
         });
     }
 }

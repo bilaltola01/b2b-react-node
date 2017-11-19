@@ -33,7 +33,7 @@ class SectionArticleMenusDetail extends Component {
 		) : null;
 
 		return (
-			<article className="content--module module--item-details no-metadata content--branches">
+			<article className="content--module module--item-details no-metadata content--menus">
 				<div className="content--container branches-container">
                    	{noItemsComponent}
 
