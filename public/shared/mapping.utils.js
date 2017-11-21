@@ -104,10 +104,15 @@ const MAP_TABLE = [
         key: 'menu',
         table: new Map([
             ['id', 'MenuID'],
+            ['MenuID', 'MenuID'],
             ['branchId', 'BranchID'],
+            ['BranchID', 'BranchID'],
             ['title', 'Title'],
+            ['Title', 'Title'],
             ['description', 'Description'],
-            ['price', 'Price']
+            ['Description', 'Description'],
+            ['price', 'Price'],
+            ['Price', 'Price']
         ])
     },
     {

@@ -142,18 +142,8 @@ export function updateBranch (branch) {
 
         // No new branch images
         if (!newImages || newImages.length <= 0) {
-            Ajax().put('/branch', {
-                body: JSON.stringify({id: branch.BranchID, updates: branch}), // data: {file: file, url: url}
-                headers: {
-                    "content-type": "application/json",
-                    "cache-control": "no-cache",
-                    "x-access-token": StorageManagerInstance.read('token')
-                }
-            }).then(res => {
+            updateOrCreateBranch(branch).then(res => {
                 console.log(res);
-                if (!res || !res.success) {
-                    reject(res);
-                }
 
                 //
                 //resolve(res.obj);
@@ -163,7 +153,7 @@ export function updateBranch (branch) {
                 // that we can have no branchImages but contact images to update
 
                 if (!hasContactImages(branch.contacts)) {
-                    resolve(res.obj);
+                    resolve(res);
                 } else {
                     console.log('no branchImages but contact images to update');
                     ImageService.updateContactImages(branch.contacts.reduce((acc, contact) => {

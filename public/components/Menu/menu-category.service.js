@@ -49,14 +49,19 @@ export function postMenuCategory (nextId, cat) {
 //
 // UPDATE
 //
-export function updateMenuCategories (cats) {
+export function updateMenuCategories (menuId, cats) {
     if (cats.length <= 0) {
         return removeMenuCategories();
     }
 
     return Promise.all(cats.map((cat) => {
-        return Meal.updateMeals(cat.meals).then((res) => {
-            return updateMenuCategory(cat);
+        let catId = cat.MenuCategoryID || cat.menuCategoryId;
+        if (catId) {
+            return Meal.updateMeals(cat.meals, catId);
+        }
+
+        return postMenuCategory(menuId, cat).then((newCatId) => {
+            return Meal.updateMeals(cat.meals, newCatId);
         });
     }));
 }

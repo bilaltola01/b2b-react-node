@@ -20,9 +20,11 @@ let createHandlers = (ctx) => {
 
 	let onChanges = (type, obj) => {
 		let dataToUpdate = {};
+		console.log(ctx.props.menu);
 		switch (type) {
 			case 'main':
 				dataToUpdate[obj.key] = obj.target.target.value;
+				console.log(dataToUpdate);
 
 				ctx.props.dispatch(actionCreators.setMenu(ctx.props.menu, dataToUpdate));
 			default:

@@ -27,8 +27,8 @@ class TranslatePage extends Component {
       }) : null;
     }
 
-    const type = (typeof this.props.location.state.component !== 'undefined') ? this.props.location.state.component.type : '';
-    const obj = (typeof this.props.location.state.component !== 'undefined') ? this.props.location.state.component.obj : '';
+    const type = (this.props.location.state && this.props.location.state.component) ? this.props.location.state.component.type : '';
+    const obj = (this.props.location.state && this.props.location.state.component) ? this.props.location.state.component.obj : '';
 
     const company = {
       name: profile.Name,

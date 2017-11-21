@@ -49,13 +49,16 @@ export function postMeal (meal, newCatId) {
 //
 // UPDATE
 //
-export function updateMeals (meals) {
+export function updateMeals (meals, catId) {
     if (meals.length <= 0) {
         return removeMeals();
     }
     // Compare meals in the object to the meals in the DB
     let ids = meals.map(c => c.id);
     return Promise.all(meals.map((meal) => {
+        if (!meal.MenuCategoryID) {
+            return postMeal(meal, catId);
+        }
         return updateMeal(meal);
     }));
 }
