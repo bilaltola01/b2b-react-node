@@ -137,13 +137,17 @@ class SectionArticleBranch extends Component {
 						</div>
 					</header>
 					<div className="global-padding-wrapper">
-						<div className="goto" onClick={this.handlers.goToBranch}>
-							<div className="branch--menus">
-								<Link to={"/menu/branch/" + id}>
-									<p>Menus</p>
-									<img src="assets/images/icon-menu-white.svg" alt={"Icon of " + name + " branch menus"} />
-								</Link>
-							</div>
+						<div>
+							{
+								/*
+								<div className="branch--menus">
+									<Link to={"/menu/branch/" + id}>
+										<p>Menus</p>
+										<img src="assets/images/icon-menu-white.svg" alt={"Icon of " + name + " branch menus"} />
+									</Link>
+								</div>
+								*/
+							}
 							<div className="branch--hq">
 								<p className="menu--title">Branch Type</p>
 								{isHqComponent}

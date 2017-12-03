@@ -40,10 +40,95 @@ let createHandlers = (ctx) => {
 		});
 	};
 
+	let validateState = (state, cb) => {
+		console.log(state);
+
+		let errors = [];
+		let branch = state.branch;
+
+		if (!branch.Address) {
+			errors.push({
+				name: 'Address',
+				message: 'Branch Address is required.'
+			});
+		}
+
+		if (!branch.City) {
+			errors.push({
+				name: 'City',
+				message: 'Branch City is required.'
+			});
+		}
+
+		if (!branch.Country) {
+			errors.push({
+				name: 'Country',
+				message: 'Branch Country is required.'
+			});
+		}
+
+		if (!branch.Name) {
+			errors.push({
+				name: 'Name',
+				message: 'Branch Name is required.'
+			});
+		}
+
+		if (!branch.currencies || branch.currencies.length <= 0) {
+			errors.push({
+				name: 'currencies',
+				message: 'Please choose at least one currency for your branch.'
+			});
+		}
+
+		if (!branch.cuisines || branch.cuisines.length <= 0) {
+			errors.push({
+				name: 'cuisines',
+				message: 'Please choose at least one type of cuisine for your branch.'
+			});
+		}
+
+		if (!branch.languages || branch.languages.length <= 0) {
+			errors.push({
+				name: 'languages',
+				message: 'Please choose at least one translation language for your branch.'
+			});
+		}
+
+		if (!branch.images || branch.images.length <= 0) {
+			errors.push({
+				name: 'images',
+				message: 'Please upload at least one image for your branch.'
+			});
+		}
+
+		if (!branch.contacts || branch.contacts.length <= 0 ||
+			(!branch.contacts[0].Firstname || !branch.contacts[0].Lastname || !branch.contacts[0].Tel || !branch.contacts[0].Email)
+		) {
+			errors.push({
+				name: 'contacts',
+				message: 'Please provide at least one contact point that is not empty for your branch.'
+			});
+		}
+
+		ctx.setState({
+			validationErrors: errors,
+			isValid: !errors.length
+		}, () => {
+			if (cb && typeof cb === 'function') {
+				cb();
+			}
+		});
+	};
+
 	let onSaveBranch = (state) => {
-		// save menu to db and use 'onBranchSaved' as callback
-		console.log('should save all changes to the db and redirect');
-		ctx.props.dispatch(actionCreators.saveBranch(state.branch, onBranchSaved));
+		validateState(state, () => {
+			if (ctx.state.isValid) {
+				// save menu to db and use 'onBranchSaved' as callback
+				console.log('should save all changes to the db and redirect');
+				ctx.props.dispatch(actionCreators.saveBranch(state.branch, onBranchSaved));
+			}
+		});
 	};
 
 	let onChanges = (type, obj) => {
@@ -96,6 +181,7 @@ let createHandlers = (ctx) => {
 	};
 
 	return {
+		validateState,
 		getProfile,
 		getAvailableCuisines,
 		getAvailableLanguages,
@@ -125,6 +211,8 @@ class SectionArticleAddBranch extends Component {
 				images: [],
 				languages: []
 			},
+			validationErrors: [],
+			isValid: true,
 			isSaved: false
 		};
 		this.handlers = createHandlers(this);
@@ -205,6 +293,12 @@ class SectionArticleAddBranch extends Component {
 			                            		<label className="label--edit">Enter new Branch Name:</label>
 			                        			<input className="input--edit" type="text" name="branch-Name" placeholder="New name..." onChange={(e) => this.handlers.onChanges('main', e)} />
 			                        		</div>
+			                        		{
+			                        			!!this.state.validationErrors.find(err => err.name === 'Name') &&
+			                        			<div className="error">
+			                        				{this.state.validationErrors.find(err => err.name === 'Name').message}
+			                        			</div>
+			                        		}
 			                        	</div>
 									</div>
 									<div className="branch--hq">
@@ -219,14 +313,32 @@ class SectionArticleAddBranch extends Component {
 									<div className="branch--currencies">
 										<p className="menu--title">Currency</p>
 										{currencyComponents}
+										{
+		                        			!!this.state.validationErrors.find(err => err.name === 'currencies') &&
+		                        			<div className="error">
+		                        				{this.state.validationErrors.find(err => err.name === 'currencies').message}
+		                        			</div>
+		                        		}
 									</div>
 									<div className="branch--cuisines">
 										<p className="menu--title">Cuisine Types</p>
 										{cuisineComponents}
+										{
+		                        			!!this.state.validationErrors.find(err => err.name === 'cuisines') &&
+		                        			<div className="error">
+		                        				{this.state.validationErrors.find(err => err.name === 'cuisines').message}
+		                        			</div>
+		                        		}
 									</div>
 									<div className="branch--languages">
 										<p className="menu--title">Languages</p>
 										{branchLanguages}
+										{
+		                        			!!this.state.validationErrors.find(err => err.name === 'languages') &&
+		                        			<div className="error">
+		                        				{this.state.validationErrors.find(err => err.name === 'languages').message}
+		                        			</div>
+		                        		}
 									</div>
 									<div className="branch--address">
 							            <p className="menu--title">Address</p>
@@ -235,6 +347,12 @@ class SectionArticleAddBranch extends Component {
 			                            		<label className="label--edit">Enter new Address:</label>
 			                        			<input className="input--edit" type="text" name="branch-Address" placeholder="New address..." onChange={(e) => this.handlers.onChanges('main', e)} />
 			                        		</div>
+			                        		{
+			                        			!!this.state.validationErrors.find(err => err.name === 'Address') &&
+			                        			<div className="error">
+			                        				{this.state.validationErrors.find(err => err.name === 'Address').message}
+			                        			</div>
+			                        		}
 			                        		<div className="edit--block">
 			                            		<label className="label--edit">Enter new Zipcode:</label>
 			                        			<input className="input--edit" type="text" name="branch-Zipcode" placeholder="New zipcode..." onChange={(e) => this.handlers.onChanges('main', e)} />
@@ -243,26 +361,56 @@ class SectionArticleAddBranch extends Component {
 			                            		<label className="label--edit">Enter new City:</label>
 			                        			<input className="input--edit" type="text" name="branch-City" placeholder="New city..." onChange={(e) => this.handlers.onChanges('main', e)} />
 			                        		</div>
+			                        		{
+			                        			!!this.state.validationErrors.find(err => err.name === 'City') &&
+			                        			<div className="error">
+			                        				{this.state.validationErrors.find(err => err.name === 'City').message}
+			                        			</div>
+			                        		}
 			                        		<div className="edit--block">
 			                            		<label className="label--edit">Enter new Country:</label>
 			                        			<input className="input--edit" type="text" name="branch-Country" placeholder="New country..." onChange={(e) => this.handlers.onChanges('main', e)} />
 			                        		</div>
+			                        		{
+			                        			!!this.state.validationErrors.find(err => err.name === 'Country') &&
+			                        			<div className="error">
+			                        				{this.state.validationErrors.find(err => err.name === 'Country').message}
+			                        			</div>
+			                        		}
 							            </div>
 							        </div>
 							        <div className="branch--images">
 							        	<p className="menu--title">Images</p>
 
 										{allImagesComponent}
+										{
+		                        			!!this.state.validationErrors.find(err => err.name === 'images') &&
+		                        			<div className="error">
+		                        				{this.state.validationErrors.find(err => err.name === 'images').message}
+		                        			</div>
+		                        		}
 									</div>
 									<div className="branch--contacts">
 										<h3 className="branch--contacts--name">Contacts</h3>
 										{contactComponents}
+										{
+		                        			!!this.state.validationErrors.find(err => err.name === 'contacts') &&
+		                        			<div className="error">
+		                        				{this.state.validationErrors.find(err => err.name === 'contacts').message}
+		                        			</div>
+		                        		}
 									</div>
 								</div>
 							</div>
 							<div className="profile-save">
 			                    <button id="profile-save" onClick={(e) => this.handlers.onSaveBranch(this.state)}>Save Branch</button>
 			                </div>
+			                {
+			                	!this.state.isValid &&
+			                	<div className="error">
+				                	Please check that all the above fields are filled before saving your branch (image, contact).
+				                </div>
+			                }
 						</div>
                     </div>
                 </div>

@@ -137,9 +137,19 @@ let createHandlers = (ctx) => {
 				return props;
 			}
 
+			if (!!obj.find(prop => prop.Status === 'PENDING')) {
+				return props;
+			}
+
+			let desc = obj.find(item => item.PropKey === 'description' || item.PropKey === 'Description');
+			let title = obj.find(item => item.PropKey === 'title' || item.PropKey === 'Title');
+
+			let propsDesc = (desc) ? desc[textKey] : '';
+			let propsTitle = (title) ? title[textKey] : '';
+
 			let newMenu = Object.assign({}, props, {
-				title: obj.find(item => item.PropKey === 'title')[textKey],
-				description: obj.find(item => item.PropKey === 'description')[textKey],
+				title: propsTitle,
+				description: propsDesc,
 				categories: injectWithTranslatedProps(props.categories, {parent: 'Category', key: 'meals'})
 			});
 
@@ -293,6 +303,9 @@ class SectionArticleMenuDetail extends Component {
 		const noTranslationsMessage = (!finishedTranslations || finishedTranslations.length <= 0 && translations && translations.length > 0) ? (
 			<div className="add-item dashed">
 				<h2 className="no-items--headline">It looks like your menu translations are pending, please come back in a little bit.</h2>
+				<div className="button-translate-menu">
+					<span><Link to={"/translations"}>Check translation status</Link></span>
+				</div>
 			</div>
 		) : (
 			<div className="add-item dashed">

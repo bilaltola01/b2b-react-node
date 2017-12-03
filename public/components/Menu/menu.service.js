@@ -212,9 +212,10 @@ export function translateMenu (opts, mode) {
         }
 
         console.log(res);
+        let id = opts.MenuID || opts.id;
 
         let menuId = res.obj.find((menu) => {
-            return opts.id === menu.MenuID;
+            return id === menu.MenuID;
             //return opts.description === menu.Description && opts.title === menu.Title && parseFloat(opts.price, 10) === parseFloat(menu.Price, 10);
         }).MenuID;
 

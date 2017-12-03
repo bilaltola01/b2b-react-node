@@ -435,6 +435,7 @@ a:hover, a:active, a:focus {
   position: relative;
   width: 100%;
   min-width: 320px;
+  min-width: 1024px;
 }
 
 .wrapper {
@@ -4583,6 +4584,9 @@ a.button--share.button--action-outline:hover {
 .section--type-menu-get .branch--add{
   margin-top: 0;
 }
+.section--type-menu-add .content--container {
+  min-height: 600px;
+}
 .branch--add.category--add,
 .branch--add.contact--add {
 	cursor: pointer;
@@ -5120,6 +5124,12 @@ MENU DETAIL
 }
 .branch--contact--header.status--failed {
 	background-color: #cc0000;
+}
+
+.error {
+  color: #cc0000;
+  font-size: 0.9em;
+  margin-top: 10px;
 }
 
 .translation--status .food-menu.pending {

@@ -40,7 +40,7 @@ class Alert extends Component {
 		super(props);
 		this.state = {
 			isTranslateRequestDone: false,
-			requestComesFromMenuCreation: (props.menu && props.menu.languages && props.menu.languages.length > 0) ? false : true,
+			requestComesFromMenuCreation: (props.component.props && props.component.props.languages && props.component.props.languages.length > 0) ? true : false,
 			component: {}
 		};
 		this.handlers = createHandlers(this);
