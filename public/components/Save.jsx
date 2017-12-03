@@ -8,6 +8,7 @@ import * as actionCreators from '../action-creators';
 let createHandlers = (ctx) => {
 	let onMenuSaved = (obj) => {
 		console.log('menu saved!');
+		console.log(obj);
 
 		ctx.setState({
 			isSaved: true,

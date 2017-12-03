@@ -75,7 +75,9 @@ export function saveMenu (data, cb) {
           console.log('request succeeded with JSON response', res);
 
           if (res && typeof cb === 'function') {
-            cb(data);
+            cb(Object.assign({}, data, {
+              MenuID: parseInt(res, 10)
+            }));
           }
         }).catch(err => {
           console.log(err);

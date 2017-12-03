@@ -41,7 +41,7 @@ class SectionArticleTranslation extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			expanded: true,
+			expanded: false,
 			mealExpanded: false
 		};
 		this.handlers = createHandlers(this);
@@ -55,28 +55,26 @@ class SectionArticleTranslation extends Component {
 		const {
 			id,
 			title,
-			originaltitle,
-			description,
-			originaldescription,
-			categories
+			type,
+			originalText,
+			translatedText,
+			languageName,
+			propKey,
+			status
 		} = this.props;
 
-		const status = (categories && categories.length > 0) ? categories[0].Status : 'PENDING';
+		console.log(this.props);
 
-		const languageName = (categories && categories.length > 0) ? categories[0].BranchLanguageName : '';
-
-		const menuObj = {
-			id: id,
-			title: "",
-			ownProps: {
-				title: title + '(' + originaltitle + ')',
-				description: description + '(' + originaldescription + ')',
-				categories: this.convertToMenu(categories)
-			}
-		};
-
-		const translatedMenu = (status === 'PENDING') ? 
+		const translationStatus = (status === 'COMPLETED') ? 
 			(
+				<div className="translation--status">
+					<div className="content--container">
+                		<div className="food-menu completed">
+							Translation is complete!
+						</div>
+					</div>
+				</div>
+			) : (
 				<div className="translation--status">
 					<div className="content--container">
                 		<div className="food-menu pending">
@@ -84,8 +82,6 @@ class SectionArticleTranslation extends Component {
 						</div>
 					</div>
 				</div>
-			) : (
-				<Menu ownProps={menuObj} />
 			);
 
 		const classes = classNames(
@@ -95,125 +91,15 @@ class SectionArticleTranslation extends Component {
 			(this.state.expanded) ? 'opened' : ''
 		);
 
-		const classesMeal = classNames(
-			'branch--contact--header',
-			'collapsable',
-			'translation--meals',
-			(this.state.mealExpanded) ? 'opened' : ''
-		);
-
 		if (this.state.redirect) {
 			return <Redirect push to={"/menu/get/" + id} />;
 		}
 
-		let languageComponent = (categories && categories.length > 0) ?
+		let languageComponent = (
 			<span className="language--name">
 				<span>{languageName}</span>
 			</span>
-		: null;
-
-		let categoriesComponent = (categories && categories.length > 0) ? categories.map((category, index) => {
-			let mealComponents = (category.meals && category.meals.length > 0) ? category.meals.map((meal, mindex) => {
-				return <div id={"meal-id-" + meal.MealID} key={mindex} >
-					<h4 className="meal--edit--title">
-						Meal n°{meal.MealID}
-					</h4>
-					<div className="content--edit">
-			            <div className="edit--block">
-		                    <label className="label--edit">Original {meal.PropKey}:</label>
-		                    <p className="input--edit">{meal.OriginalText}</p>
-		                    <label className="label--edit">Translated {meal.PropKey}:</label>
-		                    <p className="input--edit">{meal.Text || 'Pending...'}</p>
-		                </div>
-		            </div>
-	            </div>;
-			}) : null;
-
-			return <div className="food-menu--part" key={index}>
-        		<h4>
-        			Category n°{category.MenuCategoryID}
-        		</h4>
-        		<div className="food-menu-meals translation">
-        			<div className="branch--contact aside--section contacts--support">
-						<header className={classesMeal} onClick={this.handlers.mealHeaderOnClick}>
-							<div className="header--title-container">
-								<h1 className="aside--title collapsable--title">
-									Meals ({category.OriginalText})
-								</h1>
-							</div>
-						</header>
-						<div className="global-padding-wrapper">
-							<div className="food-menu--meal">
-			                	{mealComponents}
-			                </div>
-						</div>
-					</div>
-                </div>
-            </div>;
-		}) : null;
-
-		let translationMeals = (categories && categories.length > 0) ?
-			<div>
-				<header className="article--menu--translations--header">
-					<p className="menu--title">
-						Translated Meals
-					</p>
-					<div>
-						<div className="content--label">
-							<h3 className="label--key">Status:</h3>
-							<span className="label--value">{status}</span>
-						</div>
-						<div className="content--label">
-							<h3 className="label--key">Total:</h3>
-							<span className="label--value">{categories.length}</span>
-						</div>
-						<div className="content--label">
-							<h3 className="label--key">Language:</h3>
-							<span className="label--value">{languageComponent}</span>
-						</div>
-
-					</div>
-				</header>
-
-				<div className="translation--categories">
-					{categoriesComponent}
-				</div>
-			</div>
-		: null;
-
-		let translationCategories = (categories && categories.length > 0) ?
-			<div>
-				<header className="article--menu--translations--header">
-					<p className="menu--title">
-						Translated Categories
-					</p>
-					<div>
-						<div className="content--label">
-							<h3 className="label--key">Status:</h3>
-							<span className="label--value">{status}</span>
-						</div>
-						<div className="content--label">
-							<h3 className="label--key">Total:</h3>
-							<span className="label--value">{categories.length}</span>
-						</div>
-						<div className="content--label">
-							<h3 className="label--key">Language:</h3>
-							<span className="label--value">{languageComponent}</span>
-						</div>
-					</div>
-				</header>
-
-				<div className="translation--categories">
-					<div className="article--menu--translations">
-						{translationMeals}
-					</div>
-				</div>
-			</div>
-		: null;
-
-		let translatedTitle = (title) ? title : 'PENDING';
-		let translatedDescription = (description) ? description : 'PENDING';
-
+		);
 
 		return (
 			<div className="article--menu">
@@ -221,7 +107,7 @@ class SectionArticleTranslation extends Component {
 					<header className={classes} onClick={this.handlers.headerOnClick}>
 						<div className="header--title-container">
 							<h1 className="aside--title collapsable--title">
-								Menu: {originaltitle} - {languageName}
+								{type}: {originalText} - {languageName}
 							</h1>
 						</div>
 					</header>
@@ -229,28 +115,27 @@ class SectionArticleTranslation extends Component {
 						<div className="article--menu--translations">
 							<header className="article--menu--translations--header">
 								<p className="menu--title">
-									{originaltitle} - {originaldescription}
+									Translation of your {type} {propKey} in {languageName} :
 								</p>
 								<div>
 									<div className="content--label">
-										<h3 className="label--key">Translated Title:</h3>
-										<span className="label--value">{translatedTitle}</span>
+										<h3 className="label--key">Original {propKey}:</h3>
+										<span className="label--value">{originalText}</span>
 									</div>
+								</div>
+								<div>
 									<div className="content--label">
-										<h3 className="label--key">Translated Description:</h3>
-										<span className="label--value">{translatedDescription}</span>
+										<h3 className="label--key">Translated {propKey}:</h3>
+										<span className="label--value">{translatedText}</span>
 									</div>
 								</div>
 							</header>
 						</div>
-						<div className="article--menu--translations">
-							{translationCategories}
-						</div>
 						<div className="goto">
 							<p className="menu--title">
-								Translated Menu
+								Translation Status
 							</p>
-							{translatedMenu}
+							{translationStatus}
 						</div>
 					</div>
 				</div>
@@ -262,10 +147,12 @@ class SectionArticleTranslation extends Component {
 SectionArticleTranslation.propTypes = {
 	id: PropTypes.number,
 	title: PropTypes.string,
-	originaltitle: PropTypes.string,
-	description: PropTypes.string,
-	originaldescription: PropTypes.string,
-	categories: PropTypes.array
+	type: PropTypes.string,
+	originalText: PropTypes.string,
+	translatedText: PropTypes.string,
+	languageName: PropTypes.string,
+	propKey: PropTypes.string,
+	status: PropTypes.string
 };
 
 export default SectionArticleTranslation;

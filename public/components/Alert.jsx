@@ -40,6 +40,7 @@ class Alert extends Component {
 		super(props);
 		this.state = {
 			isTranslateRequestDone: false,
+			requestComesFromMenuCreation: (props.menu && props.menu.languages && props.menu.languages.length > 0) ? false : true,
 			component: {}
 		};
 		this.handlers = createHandlers(this);
@@ -54,12 +55,14 @@ class Alert extends Component {
 
 		console.log(this.props);
 
-		const languages = (component.props.languages.length > 0) ? component.props.languages.map((lang, index) => {
+		const languageProps = (component.props && component.props.languages && component.props.languages.length > 0) ? component.props.languages : (this.props.menu && this.props.menu.languages && this.props.menu.languages.length > 0) ? this.props.menu.languages : [];
+
+		const languages = (languageProps && languageProps.length > 0) ? languageProps.map((lang, index) => {
 			const finalLanguage = (lang.Language) ? lang.Language : lang;
 			return <BranchLanguage id={finalLanguage.LanguageID} code={finalLanguage.Code} codeFull={finalLanguage.CodeFull} name={finalLanguage.Name} title={finalLanguage.Title} key={index} />;
-		}): null;
+		}) : null;
 
-		const alertComponent = (this.state.isTranslateRequestDone)
+		const alertComponent = (this.state.isTranslateRequestDone || !this.state.requestComesFromMenuCreation)
 			? (
 				<Redirect to={{
 					pathname: '/translations'

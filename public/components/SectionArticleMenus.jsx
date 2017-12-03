@@ -1,4 +1,6 @@
 import React, { Component, PropTypes } from 'react';
+
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import SectionArticleMenu from './SectionArticleMenu';
@@ -11,15 +13,52 @@ class SectionArticleMenus extends Component {
 
 		console.log(component.props);
 
-		const menuComponents = (component.props.menus && component.props.menus.length > 0) ? component.props.menus.map((menu, index) => {
+		const branches = (this.props.profile && this.props.profile.branches && this.props.profile.branches.length > 0) ? this.props.profile.branches : [];
+
+		let duplicates = [];
+		const uniqueMenus = (component.props.menus && component.props.menus.length > 0) ? component.props.menus.filter(function (menu, index) {
+			const finalTitle = (menu.Title) ? 'Title' : 'title';
+			const finalDescription = (menu.Description) ? 'Description' : 'description';
+			const finalPrice = (menu.Price) ? 'Price' : 'price';
+
+			if (!this[menu[finalTitle]] || !this[menu[finalDescription]] || !this[menu[finalPrice]]) {
+				this[menu[finalTitle]] = true;
+				this[menu[finalDescription]] = true;
+				this[menu[finalPrice]] = true;
+				return true;
+			} else {
+				duplicates.push({
+					id: index,
+					MenuID: menu.MenuID,
+					BranchID: menu.BranchID,
+					Title: menu[finalTitle],
+					Description: menu[finalDescription],
+					Price: menu[finalPrice]
+				});
+			}
+		}, Object.create(null)) : null;
+
+		console.log(uniqueMenus);
+		console.log(duplicates);
+
+		const menuComponents = (uniqueMenus && uniqueMenus.length > 0) ? uniqueMenus.map((menu, index) => {
+			const finalTitle = menu.Title || menu.title;
+			const finalDescription = menu.Description || menu.description;
+			const finalPrice = menu.Price || menu.price;
+
+			const menuDuplicates = duplicates.filter(d => d.Title === finalTitle && d.Description === finalDescription && d.Price === finalPrice);
+			const finalDuplicates = (menuDuplicates) ? menuDuplicates : [];
 			return <SectionArticleMenu 
 				id={menu.MenuID || menu.id}
-				title={menu.Title || menu.title}
-				description={menu.Description || menu.description}
-				price={menu.Price || menu.price}
+				branchId={menu.BranchID}
+				title={finalTitle}
+				description={finalDescription}
+				price={finalPrice}
 				dateUpdate={menu.dateUpdate}
 				categories={menu.categories}
 				currencies={currencies}
+				branches={branches}
+				duplicates={finalDuplicates}
 				languages={menu.languages}
 				translations={menu.translations}
 				key={index} />;
@@ -63,4 +102,11 @@ SectionArticleMenus.propTypes = {
     component: PropTypes.object
 };
 
-export default SectionArticleMenus;
+const mapStateToProps = (state) => {
+    console.log(state);
+  return {
+    profile: state._profile.profile,
+  };
+};
+
+export default connect(mapStateToProps)(SectionArticleMenus);

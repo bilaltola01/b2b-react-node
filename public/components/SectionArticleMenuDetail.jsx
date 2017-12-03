@@ -73,15 +73,21 @@ let createHandlers = (ctx) => {
 
 					let newProps = {};
 
+					let desc = obj.find(item => item.PropKey === 'description' || item.PropKey === 'Description');
+					let title = obj.find(item => item.PropKey === 'title' || item.PropKey === 'Title');
+
+					let propsDesc = (desc) ? desc[textKey] : '';
+					let propsTitle = (title) ? title[textKey] : '';
+
 					if (options && options.parent) {
 						newProps[options.parent] = {
-							Description: obj.find(item => item.PropKey === 'description')[textKey],
-							Title: obj.find(item => item.PropKey === 'title')[textKey]
+							Description: propsDesc,
+							Title: propsTitle
 						};
 					} else {
 						newProps = {
-							Description: obj.find(item => item.PropKey === 'description')[textKey],
-							Title: obj.find(item => item.PropKey === 'title')[textKey]
+							Description: propsDesc,
+							Title: propsTitle
 						};
 					}
 
@@ -280,26 +286,43 @@ class SectionArticleMenuDetail extends Component {
 			</ul>
 		);
 
-		const noTranslationsComponent = (!translations || translations.length <= 0) ? (
+		const finishedTranslations = (translations && translations.length > 0) ? translations.find(translation => {
+			return translation.Status === 'COMPLETED';
+		}) : [];
+
+		const noTranslationsMessage = (!finishedTranslations || finishedTranslations.length <= 0 && translations && translations.length > 0) ? (
+			<div className="add-item dashed">
+				<h2 className="no-items--headline">It looks like your menu translations are pending, please come back in a little bit.</h2>
+			</div>
+		) : (
+			<div className="add-item dashed">
+				<h2 className="no-items--headline">It looks like your menu translations are pending or your menu is not translated yet.</h2>
+				<div className="button-translate-menu">
+					<span onClick={this.handlers.onTranslateClick}>Translate this menu</span>
+				</div>
+			</div>
+		);
+
+		const noTranslationsComponent = (!finishedTranslations || finishedTranslations.length <= 0) ? (
 			<div className="global-padding-wrapper">
 				<div className="branch--add">
-					<div className="add-item dashed">
-						<h2 className="no-items--headline">It looks like your menu translations are pending or your menu is not translated yet.</h2>
-						<div className="button-translate-menu">
-							<span onClick={this.handlers.onTranslateClick}>Translate this menu</span>
-						</div>
-					</div>
+					{noTranslationsMessage}
 				</div>
 			</div>
 		) : (
 			<div className="global-padding-wrapper">
 				<div className="branch--add">
 					<div className="add-item dashed">
+						{
+						/*
 						<h2 className="no-items--headline">Do you want to reset this menu translation?</h2>
 						<p className="no-items--disclaimer">(This will re-translate your menu in all {nbLanguages} target languages.)</p>
 						<div className="button-translate-menu">
 							<span onClick={this.handlers.onTranslateClick}>Translate this menu again</span>
 						</div>
+						*/
+						}
+						<h2 className="no-items--headline">Here are your menu translations below</h2>
 					</div>
 				</div>
 			</div>
@@ -324,7 +347,7 @@ class SectionArticleMenuDetail extends Component {
 
 		return (this.state.redirect) ? (
 			<Redirect to={{
-				pathname: '/translate/' + type,
+				pathname: '/translate/menu',
 				state: { component: this.state.component }
 			}} />
 		) : (

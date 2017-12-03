@@ -40,11 +40,14 @@ class SectionArticleMenu extends Component {
 	render() {
 		const {
 			id,
+			branchId,
 			title,
 			description,
 			price,
 			dateUpdate,
 			categories,
+			branches,
+			duplicates,
 			languages,
 			translations,
 			currencies
@@ -91,7 +94,7 @@ class SectionArticleMenu extends Component {
 			return acc;
 		}, []) : [];
 
-		let languagesList = (uniqueLanguages && uniqueLanguages.length > 0) ? uniqueLanguages.map((translation, index) => {
+		const languagesList = (uniqueLanguages && uniqueLanguages.length > 0) ? uniqueLanguages.map((translation, index) => {
 			return (index < uniqueLanguages.length - 1)
 				? (
 					<span className="language--name" key={index}>
@@ -118,7 +121,57 @@ class SectionArticleMenu extends Component {
 			);
 		}) : '';
 */
-		let translationsContainer = (translations && translations.length > 0) ?
+
+		const initialBranch = branches.filter(b => b.BranchID === branchId);
+
+		console.log(duplicates);
+
+		const finalBranches = (duplicates && duplicates.length > 0) ? duplicates.reduce((acc, dup) => {
+			const branch = branches.filter(b => b.BranchID === dup.BranchID);
+			console.log(branch);
+			return (branch && branch.length > 0) ? acc.concat(branch) : acc;
+		}, initialBranch) : initialBranch;
+
+		console.log(finalBranches);
+
+		const branchesList = (finalBranches && finalBranches.length > 0) ? finalBranches.map((branch, index) => {
+			return (index < finalBranches.length - 1)
+				? (
+					<span className="language--name" key={index}>
+						<span>{branch.Name}</span>
+						,&nbsp;
+					</span>
+				) : (
+					<span className="language--name" key={index}>
+						<span>{branch.Name}</span>
+					</span>
+				);
+		}) : null;
+
+		const branchesContainer = (branches && branches.length > 0) ? 
+			<div>
+				<header className="article--menu--translations--header">
+					<p className="menu--title">
+						Branches
+					</p>
+					<div>
+						<div className="content--label">
+							<h3 className="label--key">Total:</h3>
+							<span className="label--value">{finalBranches.length}</span>
+						</div>
+						<div className="content--label">
+							<h3 className="label--key">Branches:</h3>
+							<span className="label--value">{branchesList}</span>
+						</div>
+					</div>
+				</header>
+				<Link to="/branches" >
+					<button className="button--action button--action-filled">See Branches</button>
+				</Link>
+			</div>
+			: null;
+
+		const translationsContainer = (translations && translations.length > 0) ?
 			<div>
 				<header className="article--menu--translations--header">
 					<p className="menu--title">
@@ -136,7 +189,7 @@ class SectionArticleMenu extends Component {
 					</div>
 				</header>
 				<Link to="/translations" >
-					<button className="button--action button--action-filled">See translations</button>
+					<button className="button--action button--action-filled">See Translations</button>
 				</Link>
 			</div>
 			: null;
@@ -159,7 +212,10 @@ class SectionArticleMenu extends Component {
 						</div>
 					</header>
 					<div className="global-padding-wrapper">
-						<div className="article--menu--translations">
+						<div className="article--menu--translations clearfix">
+							{branchesContainer}
+						</div>
+						<div className="article--menu--translations clearfix">
 							{translationsContainer}
 						</div>
 						<div className="goto" onClick={this.handlers.goToMenu}>
@@ -177,12 +233,15 @@ class SectionArticleMenu extends Component {
 
 SectionArticleMenu.propTypes = {
 	id: PropTypes.number,
+	branchId: PropTypes.number,
 	title: PropTypes.string,
 	description: PropTypes.string,
 	price: PropTypes.number,
 	dateUpdate: PropTypes.object,
 	categories: PropTypes.array,
 	languages: PropTypes.array,
+	branches: PropTypes.array,
+	duplicates:PropTypes.array,
 	translations: PropTypes.array,
 	currencies: PropTypes.array
 };

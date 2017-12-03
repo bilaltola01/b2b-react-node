@@ -16,8 +16,11 @@ class ArticleMenuDetailListItemMeal extends Component {
     		return (t.BranchLanguageID === lang.BranchLanguageID) || (t.BranchLanguageName === lang.Title);
   	});
 
-  	const title = (langTranslations && langTranslations.length > 0) ? langTranslations.find(lang => lang.PropKey === 'title').Text : null;
-  	const description = (langTranslations && langTranslations.length > 0) ? langTranslations.find(lang => lang.PropKey === 'description').Text : null;
+    const propTitle = langTranslations.find(lang => lang.PropKey === 'title' || lang.PropKey === 'Title');
+    const propDesc = langTranslations.find(lang => lang.PropKey === 'description' || lang.PropKey === 'Description');
+
+  	const title = (langTranslations && langTranslations.length > 0) ? (propTitle) ? propTitle.Text : null : null;
+  	const description = (langTranslations && langTranslations.length > 0) ? (propDesc) ? propDesc.Text : null : null;
 
   	if (!title && !description) {
   		return null;

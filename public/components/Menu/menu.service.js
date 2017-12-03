@@ -21,6 +21,7 @@ export function updateMenu (opts) {
               }
             }));
     } else {
+        let id;
         let obj = opts;
         return Promise.all(obj.branches.map(branch => {
             obj.branchId = branch.BranchID;
@@ -31,7 +32,7 @@ export function updateMenu (opts) {
 
                 console.log(res.obj);
 
-                let id = res.obj[0];
+                id = res.obj[0];
                 return MenuCategory.postMenuCategories(id, obj.categories)
                     .then(MenuLanguage.postMenuLanguages(id, obj.languages));
             });
@@ -40,6 +41,8 @@ export function updateMenu (opts) {
             console.log(ids);
             console.log([].concat.apply([], ids));
             return [].concat.apply([], ids);
+        }).then(() => {
+            return id;
         });
     }
 }
@@ -219,6 +222,7 @@ export function translateMenu (opts, mode) {
         const finalLanguages = opts.languages.map(lang => {
             const finalLang = (lang.Language) ? lang.Language : lang;
             return {
+                branchLanguageId: finalLang.BranchLanguageID,
                 code: finalLang.Code,
                 codeFull: finalLang.CodeFull,
                 date: finalLang.Date,
@@ -229,6 +233,8 @@ export function translateMenu (opts, mode) {
                 title: finalLang.Title
             };
         });
+
+        console.log(finalLanguages);
 
         return MenuCategory.translateMenuCategories(menuId, finalLanguages, opts.categories)
             .then((res) => {

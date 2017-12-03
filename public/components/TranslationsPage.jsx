@@ -59,9 +59,31 @@ class TranslationsPage extends Component {
 
     console.log(menus);
 
-    const translations = (menus && menus.length > 0) ? menus.reduce((acc, menu) => {
+    const menuTranslations = (menus && menus.length > 0) ? menus.reduce((acc, menu) => {
       return acc.concat(menu.translations);
     }, []) : [];
+
+    console.log(menuTranslations);
+
+    const menuCategoryTranslations = (menus && menus.length > 0) ? menus.reduce((acc, menu) => {
+      return acc.concat(menu.categories.reduce((catAcc, cat) => {
+        return catAcc.concat(cat.translations);
+      }, [])).filter(translation => {
+        return !!translation.MenuCategoryID;
+      });
+    }, []) : [];
+
+    console.log(menuCategoryTranslations);
+
+    const mealTranslations = (menus && menus.length > 0) ? menus.reduce((acc, menu) => {
+      return acc.concat(menu.categories.reduce((catAcc, cat) => {
+        return catAcc.concat(cat.meals.reduce((mealAcc, meal) => {
+          return mealAcc.concat(meal.translations);
+        }, []));
+      }, []));
+    }, []) : [];
+
+    console.log(mealTranslations);
 
     const company = {
       name: profile.Name,
@@ -94,7 +116,11 @@ class TranslationsPage extends Component {
           id: 2,
           title: "",
           props: {
-            translations: translations
+            translations: {
+              menus: menuTranslations,
+              menuCategories: menuCategoryTranslations,
+              meals: mealTranslations
+            }
           }
         }
       }]

@@ -25,6 +25,11 @@ export function postMeals (meals, newCatId) {
 export function postMeal (meal, newCatId) {
     console.log(meal);
 
+    if (!meal.Price && !meal.price) {
+        meal.Price = 0;
+        meal.price = 0;
+    }
+
     if (meal.id) {
         delete meal.id;
     }
@@ -67,6 +72,11 @@ export function updateMeal (meal) {
     if (!meal.id && !meal.MealID) {
         console.error('meal id is not specified!');
         return;
+    }
+
+    if (!meal.Price && !meal.price) {
+        meal.Price = 0;
+        meal.price = 0;
     }
 
     return Ajax().put('/meal', {

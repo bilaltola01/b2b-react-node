@@ -121,9 +121,9 @@ class MenuCategoryEdit extends Component {
 		const stateId = this.state.category.id;
 		const stateTitle = this.state.category.title;
 
-		const mealComponents = (
+		const mealComponents = (stateId && stateId > 0 && stateId !== 1) ? (
 			<MealsEdit meals={meals} category={{id: stateId, title: stateTitle}} onChange={this.handlers.onMealsChange} />
-		);
+		) : null;
 
 		console.log(id, totalCategories);
 
@@ -148,7 +148,10 @@ class MenuCategoryEdit extends Component {
 						<header className={classes} onClick={this.handlers.headerOnClick}>
 							<div className="header--title-container">
 								<h1 className="aside--title collapsable--title">
-									Meals ({this.state.category.title})
+									Meals
+									{this.state.category.title &&
+										' (' + this.state.category.title + ')'
+									}
 								</h1>
 							</div>
 						</header>
