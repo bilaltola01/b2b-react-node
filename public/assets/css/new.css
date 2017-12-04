@@ -4584,7 +4584,7 @@ a.button--share.button--action-outline:hover {
 .section--type-menu-get .branch--add{
   margin-top: 0;
 }
-.section--type-menu-add .content--container {
+.section--type-menu-add .content--container.global-padding-wrapper.no-border-top {
   min-height: 600px;
 }
 .branch--add.category--add,

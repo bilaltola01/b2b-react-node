@@ -405,12 +405,6 @@ class SectionArticleAddBranch extends Component {
 							<div className="profile-save">
 			                    <button id="profile-save" onClick={(e) => this.handlers.onSaveBranch(this.state)}>Save Branch</button>
 			                </div>
-			                {
-			                	!this.state.isValid &&
-			                	<div className="error">
-				                	Please check that all the above fields are filled before saving your branch (image, contact).
-				                </div>
-			                }
 						</div>
                     </div>
                 </div>
