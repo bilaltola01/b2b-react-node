@@ -5,6 +5,7 @@ import { Redirect } from 'react-router';
 import { connect } from 'react-redux';
 import * as actionCreators from '../action-creators';
 
+import { MAP_CONSTANTS } from  '../shared/mapping.utils';
 const classNames = require('classnames');
 
 import Menu from './Menu';
@@ -247,7 +248,7 @@ class SectionArticleMenuDetail extends Component {
 		console.log(this.props);
 
 		const currency = (currencies && currencies.length > 0) ? currencies[0] : {};
-		const currencySymbol = (currency && currency.Currency) ? currency.Currency.Symbol : '£';
+		const currencySymbol = (currency && currency.Currency) ? currency.Currency.Symbol : MAP_CONSTANTS.DEFAULT_LANGUAGE_SYMBOL;
 
 		const ownProps = {
 			id,

@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 
+import { MAP_CONSTANTS } from  '../shared/mapping.utils';
 import MenuCategory from './MenuCategory';
 
 class Menu extends Component {
@@ -9,7 +10,7 @@ class Menu extends Component {
 		console.log(this.props);
 
 		const currency = (ownProps.currencies && ownProps.currencies.length > 0) ? ownProps.currencies : null;
-		const symbol = (currency && currency.Currency) ? currency.Currency : '£';
+		const symbol = (currency && currency.Currency) ? currency.Currency : MAP_CONSTANTS.DEFAULT_LANGUAGE_SYMBOL;
 
 		const menu = (ownProps.menu) ? ownProps.menu : ownProps;
 		const finalTitle = (menu) ? (menu.Title || menu.title) : null;

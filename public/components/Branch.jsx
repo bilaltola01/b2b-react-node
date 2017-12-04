@@ -3,6 +3,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import * as actionCreators from '../action-creators';
 
+import { MAP_CONSTANTS } from  '../shared/mapping.utils';
 import Navbar from './Navbar';
 import PageContent from './PageContent';
 
@@ -104,7 +105,7 @@ class Branch extends Component {
                 id: 2,
                 name: "Sterling Pound",
                 nameShort: "GBP",
-                symbol: "£"
+                symbol: MAP_CONSTANTS.DEFAULT_LANGUAGE_SYMBOL
               }
             }
           }
