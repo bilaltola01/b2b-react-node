@@ -5039,6 +5039,16 @@ MENU DETAIL
     margin-left: 10px;
 }
 
+.branch--currencies .language--picker .custom-select {
+  z-index: 1020;
+}
+.branch--cuisines .language--picker .custom-select {
+  z-index: 1018;
+}
+.branch--languages .language--picker .custom-select {
+  z-index: 1016;
+}
+
 
 .language--add .button--action {
 	margin-top: 20px;
