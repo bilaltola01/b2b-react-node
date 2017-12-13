@@ -132,11 +132,6 @@ let createHandlers = (ctx) => {
 	};
 
 	let onChanges = (type, obj) => {
-		console.log('/////////////////');
-		console.log('MAIN ADD BRANCH HANDLER');
-		console.log('/////////////////');
-		// update store
-
 		let newBranch;
 		switch (type) {
 			case 'main':
@@ -230,7 +225,10 @@ class SectionArticleAddBranch extends Component {
 
 		console.log(this.props);
 
-		const availableCuisines = this.props.availableCuisines || [];
+		// FIXME:
+		// Hack to just show Mediterranean and french for the moment
+		//
+		const availableCuisines = (this.props.availableCuisines || []).filter(cuisine => cuisine.CuisineID === 1 || cuisine.CuisineID === 3);
 		const availableLanguages = this.props.availableLanguages || [];
 		const availableCurrencies = this.props.availableCurrencies || [];
 
@@ -287,11 +285,11 @@ class SectionArticleAddBranch extends Component {
 										}
 									</div>
 									<div className="branch--title">
-										<p className="menu--title">Name</p>
+										<p className="menu--title">Branch Name</p>
 										<div className="content--edit">
 											<div className="edit--block">
 			                            		<label className="label--edit">Enter new Branch Name:</label>
-			                        			<input className="input--edit" type="text" name="branch-Name" placeholder="New name..." onChange={(e) => this.handlers.onChanges('main', e)} />
+			                        			<input className="input--edit" type="text" name="branch-Name" placeholder="New Branch name..." onChange={(e) => this.handlers.onChanges('main', e)} />
 			                        		</div>
 			                        		{
 			                        			!!this.state.validationErrors.find(err => err.name === 'Name') &&

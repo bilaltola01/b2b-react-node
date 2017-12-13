@@ -157,7 +157,7 @@ class MealsEdit extends Component {
 				<div className="branch--add meal--add">
                 	<div onClick={(e) => this.handlers.onAdd()}>
 						<div className="add-item dashed">
-							<span>Add a Meal <strong>+</strong></span>
+							<span>Choose a Meal <strong>+</strong></span>
 						</div>
 					</div>
                 </div>

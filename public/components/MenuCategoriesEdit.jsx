@@ -164,7 +164,7 @@ class MenuCategoriesEdit extends Component {
                 <div className="branch--add category--add">
                 	<div onClick={(e) => this.handlers.onCategoryAdd()}>
 						<div className="add-item dashed">
-							<span>Add a Category <strong>+</strong></span>
+							<span>Choose a Category <strong>+</strong></span>
 						</div>
 					</div>
                 </div>

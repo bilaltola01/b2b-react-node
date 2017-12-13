@@ -72,16 +72,16 @@ class SectionArticleAddMenu extends Component {
 			<div className="content--container global-padding-wrapper no-border-top">
                 <form id="form-menu-content" className="content--edit">
                     <div className="edit--block">
-                        <label className="label--edit">Enter new Title:</label>
-                        <input className="input--edit" type="text" name="menu--price" id="menu-title" defaultValue={"New title..."} onChange={(e) => this.handlers.onChanges('main', {target: e, key: 'title'})} />
+                        <label className="label--edit">Enter new Menu Name:</label>
+                        <input className="input--edit" type="text" name="menu--price" id="menu-title" defaultValue={"New Menu title..."} onChange={(e) => this.handlers.onChanges('main', {target: e, key: 'title'})} />
                     </div>
                     <div className="edit--block">
-                        <label className="label--edit">Enter new Description:</label>
-                        <input className="input--edit" type="text" name="menu--description" id="menu-description" defaultValue={"New description..."} onChange={(e) => this.handlers.onChanges('main', {target: e, key: 'description'})} />
+                        <label className="label--edit">Enter new Menu Description:</label>
+                        <input className="input--edit" type="text" name="menu--description" id="menu-description" defaultValue={"New Menu description..."} onChange={(e) => this.handlers.onChanges('main', {target: e, key: 'description'})} />
                     </div>
                     <div className="edit--block">
-                        <label className="label--edit">Enter new Price:</label>
-                        <input className="input--edit" type="text" name="menu--price" id="menu-price" defaultValue={"New price..."} onChange={(e) => this.handlers.onChanges('main', {target: e, key: 'price'})} />
+                        <label className="label--edit">Enter new Menu Price:</label>
+                        <input className="input--edit" type="text" name="menu--price" id="menu-price" defaultValue={"New Menu price..."} onChange={(e) => this.handlers.onChanges('main', {target: e, key: 'price'})} />
                     </div>
                 </form>
 

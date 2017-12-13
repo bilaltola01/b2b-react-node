@@ -942,6 +942,11 @@ a.text-link:hover {
   opacity: 1;
 }
 
+.link-icon span {
+  color: #fff;
+  text-decoration: underline;
+}
+
 .article--title {
   margin: 0 0 5px 0;
   padding: 0;
@@ -1340,16 +1345,18 @@ a.text-link:hover {
 .food-menu--title {
   margin: 0;
   padding: 0 0 0 0;
-  font-family: "Pinyon Script", cursive;
-  font-size: 2.8em;
+  font-family: "Montserrat", Helvetica, sans-serif;
+  font-size: 2.0em;
   color: #4d5368;
+  text-transform: uppercase;
+  font-weight: 700;
 }
 
 .food-menu--subtitle {
   margin: 0;
   padding: 40px 0 0 0;
-  font-family: "Pinyon Script", cursive;
-  font-size: 1.8em;
+  font-family: "Montserrat", Helvetica, sans-serif;
+  font-size: 1.4em;
   color: #4d5368;
 }
 
@@ -1385,9 +1392,9 @@ a.text-link:hover {
 .food-menu--price {
   margin: 5px 0 20px 0;
   padding: 0;
-  font-family: "Pinyon Script", cursive;
-  font-size: 1.8em;
-  font-weight: 700;
+  font-family: "Montserrat", Helvetica, sans-serif;
+  font-size: 1.4em;
+  font-weight: normal;
 }
 
 .select-hidden {
@@ -1456,7 +1463,7 @@ a.text-link:hover {
 
 .text--select {
   color: #4d5368;
-  font-size: 0.75em;
+  font-size: 0.75rem;
   font-weight: 900;
   letter-spacing: 0.05em;
 }
@@ -3851,7 +3858,7 @@ a.button--share.button--action-outline:hover {
 .icon--faq {
   background-image: url("../images/icon-faq-grey.svg");
   background-repeat: no-repeat;
-  background-position: 20px 50%;
+  background-position: 20px 17px;
 }
 
 .icon--faq:after {
@@ -4723,10 +4730,11 @@ MENU DETAIL
 .menu-detail--header h1 {
   margin: 0;
   padding: 0;
-  font-size: 2.4em;
+  font-size: 2.0em;
   font-weight: 700;
-  font-family: "Pinyon Script", cursive;
+  font-family: "Montserrat", Helvetica, sans-serif;
   color: #4d5368;
+  text-transform: uppercase;
 }
 .menu-detail--header h2 {
   margin: 10px 0 0 0;
@@ -5023,7 +5031,7 @@ MENU DETAIL
 	margin-top: 20px;
 }
 .language--add label{
-	font-size: 0.9em;
+	font-size: 0.9rem;
 }
 .language--add .language--picker{
 	display: inline-block;

@@ -39,6 +39,16 @@ class Navbar extends Component {
                 }
             </ul>
         </nav>
+
+        <ul className="navigation--secondary">
+            <li>
+                <a className="link-icon icon--faq" href="mailto:contact@one-menu.com">
+                    Need help?
+                    Send us an email at: <br />
+                    <span>contact@one-menu.com</span>
+                </a>
+            </li>
+        </ul>
         {/*
         <ul className="navigation--secondary">
             <li><a className="link-icon icon--configuration" href="#,">Settings</a></li>

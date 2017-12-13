@@ -43,6 +43,13 @@ let createHandlers = (ctx) => {
 		});
 	};
 
+	let onPickerBlur = (e) => {
+		let select = e.target.querySelector('.select--styled.active');
+		if (select) {
+			DomUtils.toggleClass(select, 'active');
+		}
+	};
+
 	let onMealsChange = (obj) => {
 		console.log(obj);
 		let cat = {
@@ -84,6 +91,7 @@ let createHandlers = (ctx) => {
 	return {
 		headerOnClick,
 		onCategoryRemove,
+		onPickerBlur,
 		onAdd,
 		onMealsChange,
 		onPickerClick,
@@ -139,7 +147,7 @@ class MenuCategoryEdit extends Component {
 	        		<div id="menu-category-add" className="language--add">
 						<label>Enter new Category Title:</label>
 						<div id="language-picker" className="language--picker">
-							<LanguagePicker data={obj} onAdd={this.handlers.onAdd} onPickerClick={this.handlers.onPickerClick} onPickerItemClick={this.handlers.onPickerItemClick} />
+							<LanguagePicker data={obj} onAdd={this.handlers.onAdd} onPickerBlur={this.handlers.onPickerBlur} onPickerClick={this.handlers.onPickerClick} onPickerItemClick={this.handlers.onPickerItemClick} />
 	                    </div>
 					</div>
         		</div>

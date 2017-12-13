@@ -56,6 +56,13 @@ let createHandlers = (ctx) => {
 		});
 	};
 
+	let onPickerBlur = (e) => {
+		let select = e.target.querySelector('.select--styled.active');
+		if (select) {
+			DomUtils.toggleClass(select, 'active');
+		}
+	};
+
 	let onPickerClick = (e) => {
 		DomUtils.toggleClass(e.target, 'active');
 	};
@@ -77,7 +84,6 @@ let createHandlers = (ctx) => {
 		// If item has not been added yet, add it
 		if (!isItemAlreadyAdded) {
 			target.textContent = text;
-			DomUtils.toggleClass(target, 'active');
 
 			// Then add the new language
 			onAdd({
@@ -91,6 +97,7 @@ let createHandlers = (ctx) => {
 	return {
 		onAdd,
 		onRemove,
+		onPickerBlur,
 		onPickerClick,
 		onPickerItemClick
 	};
@@ -137,7 +144,7 @@ class BranchLanguagesEdit extends Component {
 				<div id="language-add" className="language--add">
 					<label>Add a Language:</label>
 					<div id="language-picker" className="language--picker">
-						<LanguagePicker data={obj} onAdd={this.handlers.onAdd} onPickerClick={this.handlers.onPickerClick} onPickerItemClick={this.handlers.onPickerItemClick} />
+						<LanguagePicker data={obj} onAdd={this.handlers.onAdd} onPickerClick={this.handlers.onPickerClick} onPickerBlur={this.handlers.onPickerBlur} onPickerItemClick={this.handlers.onPickerItemClick} />
                     </div>
 				</div>
 			</div>

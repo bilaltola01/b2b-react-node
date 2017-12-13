@@ -32,6 +32,13 @@ let createHandlers = (ctx) => {
 		});
 	};
 
+	let onPickerBlur = (e) => {
+		let select = e.target.querySelector('.select--styled.active');
+		if (select) {
+			DomUtils.toggleClass(select, 'active');
+		}
+	};
+
 	let onRemove = (obj) => {
 		console.log(obj);
 		let branches;
@@ -64,6 +71,7 @@ let createHandlers = (ctx) => {
 		let target = e.target.parentNode.previousElementSibling;
 		target.setAttribute('data-rel', rel);
 		target.textContent = text;
+
 		DomUtils.toggleClass(target, 'active');
 
 		// Then add the new branch
@@ -76,6 +84,7 @@ let createHandlers = (ctx) => {
 
 	return {
 		onAdd,
+		onPickerBlur,
 		onRemove,
 		onPickerClick,
 		onPickerItemClick
@@ -131,7 +140,7 @@ class MenuBranchesEdit extends Component {
 				<div id="menu-branch-add" className="language--add">
 					<label>Add a branch for this menu:</label>
 					<div id="branch-picker" className="language--picker">
-						<LanguagePicker data={obj} onAdd={this.handlers.onAdd} onPickerClick={this.handlers.onPickerClick} onPickerItemClick={this.handlers.onPickerItemClick} />
+						<LanguagePicker data={obj} onAdd={this.handlers.onAdd} onPickerBlur={this.handlers.onPickerBlur} onPickerClick={this.handlers.onPickerClick} onPickerItemClick={this.handlers.onPickerItemClick} />
                     </div>
 				</div>
             </div>

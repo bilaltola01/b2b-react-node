@@ -10,6 +10,8 @@ let createHandlers = (ctx) => {
 		console.log('menu saved!');
 		console.log(obj);
 
+		ctx.props.dispatch(actionCreators.setMenu({}));
+
 		ctx.setState({
 			isSaved: true,
 			component: {

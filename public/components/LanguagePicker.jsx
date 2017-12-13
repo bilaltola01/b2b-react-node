@@ -2,18 +2,22 @@ import React, { Component, PropTypes } from 'react';
 
 class LanguagePicker extends Component {
 	render() {
-		const { onPickerClick, onPickerItemClick, data } = this.props;
+		const { onPickerClick, onPickerItemClick, onPickerBlur, data } = this.props;
 
 		let firstItemTitle = (type => {
 			switch (type) {
 				case 'languages':
-					return (data.items && data.items.length > 0) ? data.items[0].Name : '';
+					return 'Choose a language...';
+				case 'categories':
+					return 'Choose a category...';
 				case 'branches':
-					return (data.items && data.items.length > 0) ? data.items[0].Name : '';
+					return 'Choose a branch...';
+				case 'cuisines':
+					return 'Choose a cuisine...';
 				case 'currencies':
-					return (data.items && data.items.length > 0) ? data.items[0].Name + ' (' + data.items[0].Symbol + ')' : '';
+					return 'Choose a currency...';
 				default:
-					return (data.items && data.items.length > 0) ? data.items[0].Title : '';
+					return 'Choose an item...';
 			}
 		})(data.type);
 
@@ -78,7 +82,7 @@ class LanguagePicker extends Component {
 		}) : null;
 
 		return (
-			<div className="custom-select">
+			<div tabIndex="1" className="custom-select" onBlur={(e) => onPickerBlur(e)}>
                 <select id="pick--language" className="select-hidden" onChange={(e) => onAdd()}>
                 	{options}
                 </select>
@@ -94,6 +98,7 @@ class LanguagePicker extends Component {
 LanguagePicker.propTypes = {
 	onPickerClick: PropTypes.func,
 	onPickerItemClick: PropTypes.func,
+	onPickerBlur: PropTypes.func,
 	data: PropTypes.object
 };
 

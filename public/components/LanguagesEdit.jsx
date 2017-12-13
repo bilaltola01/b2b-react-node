@@ -52,6 +52,13 @@ let createHandlers = (ctx) => {
 		DomUtils.toggleClass(e.target, 'active');
 	};
 
+	let onPickerBlur = (e) => {
+		let select = e.target.querySelector('.select--styled.active');
+		if (select) {
+			DomUtils.toggleClass(select, 'active');
+		}
+	};
+
 	let onPickerItemClick = (e) => {
 		// Change UI
 		let rel = e.target.getAttribute('rel');
@@ -60,6 +67,7 @@ let createHandlers = (ctx) => {
 		let target = e.target.parentNode.previousElementSibling;
 		target.setAttribute('data-rel', rel);
 		target.textContent = text;
+
 		DomUtils.toggleClass(target, 'active');
 
 		// Then add the new language
@@ -72,6 +80,7 @@ let createHandlers = (ctx) => {
 
 	return {
 		onAdd,
+		onPickerBlur,
 		onRemove,
 		onPickerClick,
 		onPickerItemClick
@@ -121,7 +130,7 @@ class LanguagesEdit extends Component {
 				<div id="language-add" className="language--add">
 					<label>Add a Language:</label>
 					<div id="language-picker" className="language--picker">
-						<LanguagePicker data={obj} onAdd={this.handlers.onAdd} onPickerClick={this.handlers.onPickerClick} onPickerItemClick={this.handlers.onPickerItemClick} />
+						<LanguagePicker data={obj} onAdd={this.handlers.onAdd} onPickerBlur={this.handlers.onPickerBlur} onPickerClick={this.handlers.onPickerClick} onPickerItemClick={this.handlers.onPickerItemClick} />
                     </div>
 				</div>
 			</div>
