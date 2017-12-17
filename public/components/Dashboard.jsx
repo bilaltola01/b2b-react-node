@@ -79,7 +79,7 @@ class Dashboard extends Component {
     console.log(menus);
 
     const filteredMenus = (menus && menus.length > 0) ? menus.reduce((prev, current) => {
-      return (prev.id > current.id) ? prev : current;
+      return (prev.MenuID > current.MenuID) ? prev : current;
     }) : null;
 
     console.log(filteredMenus);

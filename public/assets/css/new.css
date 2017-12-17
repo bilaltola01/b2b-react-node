@@ -435,7 +435,6 @@ a:hover, a:active, a:focus {
   position: relative;
   width: 100%;
   min-width: 320px;
-  min-width: 1024px;
 }
 
 .wrapper {
@@ -653,11 +652,107 @@ html[data-useragent*='MSIE 10.0'] .browser-outdated,
   z-index: 999;
 }
 
-.layout--login .layout--header-wrapper {
-  margin: 0 auto;
-  padding: 0 40px;
+.layout--login .header--small {
+  background-color: transparent;
+  border-bottom: 1px solid #fff;
 }
 
+.layout--login .header--small {
+  position: absolute;
+  top: -20px;
+  width: 100%;
+  z-index: 999;
+}
+.layout--login .header--small a {
+  display: block;
+  width: 80px;
+  height: 80px;
+  margin: 0 auto;
+}
+.layout--login .header--small img {
+  width: 80px;
+  height: 80px;
+  top: 40px;
+  background-color: #fcd230;
+  position: relative;
+  z-index: 999;
+  outline: 15px solid #fcd230;
+}
+
+.portal--desc {
+  width: 100%;
+  height: 100%;
+}
+.login-block {
+  width: 100%;
+  height: 100%;
+}
+
+.footer-nav {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  padding: 20px;
+  z-index: 605;
+  background-color: #fff;
+}
+
+.footer-nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-align: center;
+}
+
+.footer-nav ul li {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+.footer-nav ul li:last-child {
+  margin-right: 0;
+}
+
+.footer-nav ul li a {
+  color: #000;
+  font-size: 0.85em;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+}
+
+.footer-nav ul li a.one-menu {
+  /*
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  */
+  font-weight: 900;
+  /*color: #fcd230;*/
+}
+
+.footer-nav ul li a:hover {
+  color: #000;
+  text-decoration: underline;
+}
+.footer-nav ul li a.one-menu:hover {
+  color: #000;
+  text-decoration: none;
+}
+
+.layout--login .layout--header-wrapper {
+  position: relative;
+  margin: 0 auto;
+  padding: 0 40px;
+  z-index: 600;
+}
+
+.layout--login .login--title {
+  margin: 0;
+  padding: 0;
+  font-weight: 900;
+  text-align: center;
+  color: #fff;
+}
 .layout--login .header .login--title {
   margin: 0;
   padding: 0;
@@ -674,12 +769,13 @@ html[data-useragent*='MSIE 10.0'] .browser-outdated,
 }
 
 .layout--login .login--form {
-  margin: 100px 0 30px 0;
+  margin: 80px 0 20px 0;
 }
 
 .layout--login .login--input {
   margin: 0 0 30px 0;
   padding: 0;
+  color: #000;
   text-align: left;
   border-bottom: 1px solid #fff;
 }
@@ -712,6 +808,7 @@ html[data-useragent*='MSIE 10.0'] .browser-outdated,
   font-weight: 700;
   text-align: center;
   color: #fff;
+  cursor: pointer;
 }
 
 .layout--login .login--link:hover {
@@ -809,7 +906,7 @@ html[data-useragent*='MSIE 10.0'] .browser-outdated,
 }
 
 .layout--login {
-  background: #424242;
+  background: #fcd230;
 }
 
 .layout--login .main {
@@ -890,9 +987,13 @@ html[data-useragent*='MSIE 10.0'] .browser-outdated,
   color: #fff;
 }
 
+.layout--login + .layout--dashboard {
+  display: none;
+}
 .layout--dashboard {
   color: #4d5368;
   background: #4F5168;
+  min-width: 1024px;
 }
 
 .layout--dashboard a {
@@ -3375,26 +3476,26 @@ ol.calendar--week {
 
 .layout--login ::-webkit-input-placeholder {
   /* Chrome/Opera/Safari */
-  color: #fff;
+  color: #000;
   font-weight: 600;
 }
 
 .layout--login ::-moz-placeholder {
   /* Firefox 19+ */
-  color: #fff;
+  color: #000;
   font-weight: 600;
   opacity: 1;
 }
 
 .layout--login :-ms-input-placeholder {
   /* IE 10+ */
-  color: #fff;
+  color: #000;
   font-weight: 600;
 }
 
 .layout--login :-moz-placeholder {
   /* Firefox 18- */
-  color: #fff;
+  color: #000;
   font-weight: 600;
   opacity: 1;
 }
@@ -3457,11 +3558,11 @@ ol.calendar--week {
 
 .button--login-outline {
   width: 100%;
-  padding: 0.775em;
+  padding: 1.3em;
   font-size: 0.6875em;
   color: #fff;
   background: transparent;
-  font-weight: 700;
+  font-weight: 900;
   text-transform: uppercase;
   text-align: center;
   letter-spacing: 0.046em;
@@ -3472,7 +3573,7 @@ ol.calendar--week {
 }
 
 .button--login-outline:hover {
-  color: #2b76b8;
+  color: #000;
   background: #fff;
   border: 1px solid transparent;
 }
@@ -4014,10 +4115,25 @@ a.button--share.button--action-outline:hover {
 .overlay.overlay--white {
   background: rgba(255, 255, 255, 0.7);
 }
+.overlay.overlay--yellow {
+  background: rgba(252, 210, 48, 0.94);
+}
 
 .overlay.hidden {
   visibility: hidden;
   opacity: 0;
+}
+
+.giant-image {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+.giant-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .channel--image .overlay--image {
@@ -5149,7 +5265,10 @@ MENU DETAIL
   font-size: 0.9em;
   margin-top: 10px;
 }
-
+.login--form .error {
+  font-size: 0.85em;
+  text-align: left;
+}
 .translation--status .food-menu.pending {
 	color: #ffa600;
 }

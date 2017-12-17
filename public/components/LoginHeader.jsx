@@ -9,9 +9,16 @@ let createHandlers = (ctx) => {
 	let onLogin = (e) => {
 		e.preventDefault();
 		ctx.props.dispatch(actionCreators.getAuth(ctx.getDataFromEvent(e), (res) => {
+			console.log(res);
 			if (res && res.authenticated) {
 				ctx.setState({
 					hasToRedirect: true
+				});
+			}
+
+			if (res.error) {
+				ctx.setState({
+					errorMessage: res.error
 				});
 			}
 		}));
@@ -26,7 +33,8 @@ class LoginHeader extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			hasToRedirect: false
+			hasToRedirect: false,
+			errorMessage: ''
 		};
 		this.handlers = createHandlers(this);
 	}
@@ -49,33 +57,41 @@ class LoginHeader extends Component {
 	render () {
 		const { dispatch, token, isAuthenticated, completed } = this.props;
 
+		const renderErrorMessage = (this.state.errorMessage) ? (
+			<p className="error">
+				{this.state.errorMessage}
+			</p>
+		) : null;
+
 		return (!this.state.hasToRedirect) ? (
-			<header id="header" className="header">
+			<div className="login-block">
 			    <div className="layout--header-wrapper vertical-container">
 			        <div className="vertically-centered">
-			            <h1 className="login--title">
-			                <img style={{width: "100%"}} src="assets/images/logo-cafe-med-white.png" alt="The Cafe Mediterranean Logo" /><br />
-			                Management Portal
-			            </h1>
+			        	<div className="login-container">
+				            <h1 className="login--title">
+				                Management Portal
+				            </h1>
 
-			            <form id="login-form" className="login--form" action="#">
-			                <p className="login--input">
-			                    <label className="login--label label--username" htmlFor="login--username">Username</label>
-			                    <input type="text" name="Email" id="login--username" className="input--underline" placeholder="Username" />
-			                </p>
-			                <p className="login--input">
-			                    <label className="login--label label--password" htmlFor="login--password">Password</label>
-			                    <input type="password" name="Pwd" id="login--password" className="input--underline" placeholder="Password" />
-			                </p>
+				            <form id="login-form" className="login--form" action="#">
+				                <p className="login--input">
+				                    <label className="login--label label--username" htmlFor="login--username">Username</label>
+				                    <input type="text" name="Email" id="login--username" className="input--underline" placeholder="Username" />
+				                </p>
+				                <p className="login--input">
+				                    <label className="login--label label--password" htmlFor="login--password">Password</label>
+				                    <input type="password" name="Pwd" id="login--password" className="input--underline" placeholder="Password" />
+				                </p>
 
-			                <button id="button--login" className="button button--login-outline" onClick={this.handlers.onLogin}>Log In</button>
-			            </form>
-			            <a href="#," className="login--link">
-			                Forgotten your details?
-			            </a>
+				                {renderErrorMessage}
+				                <button id="button--login" className="button button--login-outline" onClick={this.handlers.onLogin}>Log In</button>
+				            </form>
+				            <a className="login--link">
+				                Forgotten your details?
+				            </a>
+			            </div>
 			        </div>
 			    </div>
-			</header>
+			</div>
 		) : (
 	    	<Redirect to={{
 	        	pathname: '/dashboard',

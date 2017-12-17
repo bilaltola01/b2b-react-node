@@ -583,7 +583,7 @@ export function getAuth (data, cb) {
           return;
         }
 
-        AuthService.auth({
+        AuthService.auth(data, {
           body: JSON.stringify(data),
           headers: {
             "content-type": "application/json",
@@ -609,12 +609,32 @@ export function getAuth (data, cb) {
             });
           } else {
             reject({
+              error: res.error,
               authenticated: false,
               completed: true
             });
           }
         }).catch((err) => {
           console.log('request failed', err);
+
+          let error = err.error;
+
+          if (err.error && err.error.response && err.error.response.status === 400) {
+            error = 'Invalid credentials';
+          }
+          if (typeof cb === 'function') {
+            cb({
+              authenticated: false,
+              completed: true,
+              error: error
+            });
+          }
+
+          reject({
+            error: error,
+            authenticated: false,
+            completed: true
+          })
         });
       });
     }

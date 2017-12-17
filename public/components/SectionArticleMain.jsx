@@ -9,7 +9,7 @@ class SectionArticleMain extends Component {
 		const { title, dateUpdate, component } = this.props;
 
 		const menuComponent = (component.props && component.props.menu) ? (
-			<Menu id={component.id} title={component.title} ownProps={component.props} />
+			<Menu id={component.id} title={component.title} ownProps={component.props.menu} />
 		) : (
 			<div className="global-padding-wrapper branches-container">
 				<h2 className="no-items--headline">Oh no! It looks like you have not entered any menus yet.</h2>

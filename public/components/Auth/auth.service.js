@@ -1,8 +1,33 @@
 import { Ajax } from '../../shared/ajax.utils';
 import { StorageManagerInstance } from  '../../shared/storage.utils';
 
-export function auth (opts) {
-    return Ajax().post('/auth', opts);
+export function auth (data, opts) {
+    return new Promise((resolve, reject) => {
+        if (!data.auth.Email || !data.auth.Pwd) {
+            reject({
+                success: false,
+                error: 'Please enter a valid Email/Password',
+            });
+
+            return;
+        }
+
+        Ajax().post('/auth', opts).then(res => {
+            if (!res || !res.success) {
+                reject({
+                    success: false,
+                    error: err
+                });
+            }
+
+            resolve(res);
+        }).catch(err => {
+            reject({
+                success: false,
+                error: err
+            });
+        });
+    });
 }
 
 export function isAuthenticated () {
