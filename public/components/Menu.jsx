@@ -12,7 +12,7 @@ class Menu extends Component {
 		const currency = (ownProps.currencies && ownProps.currencies.length > 0) ? ownProps.currencies : null;
 		const symbol = (currency && currency.Currency) ? currency.Currency : MAP_CONSTANTS.DEFAULT_LANGUAGE_SYMBOL;
 
-		const menu = (ownProps.menu) ? ownProps.menu : ownProps;
+		const menu = ownProps;//(ownProps.menu) ? ownProps.menu : ownProps;
 		const finalTitle = (menu) ? (menu.Title || menu.title) : null;
 		const finalPrice = (menu) ? (menu.Price || menu.price) : null;
 		const finalDescription = (menu) ? (menu.Description || menu.description) : null;

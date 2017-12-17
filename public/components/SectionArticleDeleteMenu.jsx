@@ -45,7 +45,7 @@ let createHandlers = (ctx) => {
 
 
 	ctx.popupObj = {
-  		isOpened: false,
+  		isOpened: true,
   		type: 'delete',
   		component: component,
   		text: 'Are you sure you want to delete this menu?',

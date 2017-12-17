@@ -24,7 +24,7 @@ export function updateMenu (opts) {
         let id;
         let obj = opts;
         return Promise.all(obj.branches.map(branch => {
-            obj.branchId = branch.BranchID;
+            obj.BranchID = branch.BranchID;
             return postMenu(obj).then(res => {
                 if (!res || !res.success) {
                     return Promise.reject(res);
@@ -48,6 +48,14 @@ export function updateMenu (opts) {
 }
 
 function postMenu (obj) {
+    if (obj.id) {
+        delete obj.id;
+    }
+
+    if (obj.MenuID) {
+        delete obj.MenuID;
+    }
+
     return Ajax().post('/menu', {
         body: JSON.stringify(convertOpts(obj, false)),
         headers: {

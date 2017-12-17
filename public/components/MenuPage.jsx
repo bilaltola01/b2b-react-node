@@ -33,9 +33,14 @@ let createHandlers = (ctx) => {
 */
   };
 
+  let setMenu = (data) => {
+    ctx.props.dispatch(actionCreators.setMenu(data));
+  };
+
   return {
     onMenusFetched,
-    onProfileFetched
+    onProfileFetched,
+    setMenu,
   };
 };
 
@@ -49,8 +54,46 @@ class MenuPage extends Component {
     this.handlers = createHandlers(this);
   }
 
+  getCurrentBranch(profile, currentBranchMenuId) {
+    return (profile.branches && profile.branches.length > 0) ? profile.branches.find(branch => {
+      return branch.BranchID === currentBranchMenuId;
+    }) : null;
+  }
+
+  getMenus(profile) {
+    return (profile.branches && profile.branches.length > 0) ? profile.branches.reduce((acc, branch) => {
+      return acc.concat(branch.menus);
+    }, []) : [];
+  }
+
+  getFilteredMenusById(menus, id) {
+    return (menus && menus.length > 0) ? menus.filter(menu => {
+      return parseInt(menu.MenuID, 10) === parseInt(id, 10);
+    }) : null;
+  }
+
+  getCurrentMenu(menus) {
+    return (menus && menus.length > 0) ? menus[0] : {};
+  }
+
+  getCurrencies(currentBranch) {
+    return (currentBranch && currentBranch.currencies && currentBranch.currencies.length > 0) ? currentBranch.currencies : [];
+  }
+
+  getLanguages(currentBranch) {
+    return (currentBranch && currentBranch.languages && currentBranch.languages.length > 0) ? currentBranch.languages : [];
+  }
+
   componentDidMount() {
+    const profile = (this.props.profile) ? this.props.profile : {};
     //this.props.dispatch(actionCreators.getMenus(this.handlers.onMenusFetched));
+    console.log(this.getCurrentMenu(this.getFilteredMenusById(this.getMenus(profile), this.props.match.params.id)));
+    if (this.props.match.params.action === 'add') {
+      this.props.dispatch(actionCreators.setMenu({}));
+    } else {
+      this.props.dispatch(actionCreators.setMenu(this.getCurrentMenu(this.getFilteredMenusById(this.getMenus(profile), this.props.match.params.id))));
+    }
+
     this.props.dispatch(actionCreators.getProfile(this.handlers.onProfileFetched));
   }
 
@@ -71,31 +114,14 @@ class MenuPage extends Component {
 
     const actionType = (typeof this.props.match.params.action !== 'undefined') ? 'menu-' + action : 'menu';
 
-    const menus = (profile.branches && profile.branches.length > 0) ? profile.branches.reduce((acc, branch) => {
-      return acc.concat(branch.menus);
-    }, []) : [];
-
-    console.log(menus);
-
-    const currentBranchMenu = (menus) ? menus.find(menu => {
-      return parseInt(menu.MenuID, 10) === parseInt(id, 10);
-    }) : null;
-    const currentBranchMenuId = (currentBranchMenu) ? currentBranchMenu.BranchID : 0;
-
-    const currentBranch = (profile.branches && profile.branches.length > 0) ? profile.branches.find(branch => {
-      return branch.BranchID === currentBranchMenuId;
-    }) : null;
-
-    const currencies = (currentBranch && currentBranch.currencies && currentBranch.currencies.length > 0) ? currentBranch.currencies : [];
-    const languages = (currentBranch && currentBranch.languages && currentBranch.languages.length > 0) ? currentBranch.languages : [];
-
-    console.log(languages);
-
-    const filteredMenus = (menus && menus.length > 0) ? menus.filter(menu => {
-      return parseInt(menu.MenuID, 10) === parseInt(id, 10);
-    }) : null;
-
-    const currentMenu = (filteredMenus && filteredMenus.length > 0) ? filteredMenus[0] : {};
+    const menus = this.getMenus(profile);
+    const currentBranchMenu = this.getFilteredMenusById(menus, id);
+    const currentBranchMenuId = (currentBranchMenu && currentBranchMenu.length > 0) ? currentBranchMenu[0].BranchID : 0;
+    const currentBranch = this.getCurrentBranch(profile, currentBranchMenuId);
+    const currencies = this.getCurrencies(currentBranch);
+    const languages = this.getLanguages(currentBranch);
+    const filteredMenus = this.getFilteredMenusById(menus, id);
+    const currentMenu = this.getCurrentMenu(filteredMenus);
     const menuTitle = (currentMenu && currentMenu.Title) ? currentMenu.Title : ("Menu " + id);
 
     const company = {

@@ -38,7 +38,7 @@ let createHandlers = (ctx) => {
 	};
 
 	let getMenu = (data) => {
-    	ctx.props.dispatch(actionCreators.getMenu(data));
+    	ctx.props.dispatch(actionCreators.setMenu(data));
   	};
 
 	return {
