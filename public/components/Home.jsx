@@ -12,7 +12,7 @@ class Home extends Component {
     return (
       <div className="global-container layout--login">
         <header id="header" className="header--small">
-          <a className="main-logo" href="#,">
+          <a className="main-logo" href="http://one-menu.com">
             <img src="assets/images/logo-one-menu-white.svg" alt="ONE-MENU Logo" />
           </a>
         </header>
