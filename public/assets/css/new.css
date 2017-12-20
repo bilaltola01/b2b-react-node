@@ -695,6 +695,10 @@ html[data-useragent*='MSIE 10.0'] .browser-outdated,
   padding: 20px;
   z-index: 605;
   background-color: #fff;
+
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
 }
 
 .footer-nav ul {
