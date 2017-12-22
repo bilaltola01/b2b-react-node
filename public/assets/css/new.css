@@ -659,8 +659,10 @@ html[data-useragent*='MSIE 10.0'] .browser-outdated,
 
 .layout--login .header--small {
   position: absolute;
+  left: 50%;
   top: -20px;
-  width: 100%;
+  width: 290px;
+  margin-left: -145px;
   z-index: 999;
 }
 .layout--login .header--small a {
