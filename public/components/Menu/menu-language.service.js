@@ -60,11 +60,14 @@ export function updateMenuLanguages (menuId, langs) {
     */
 
     // Compare menu categories in the object to the categories in the DB
-    let ids = langs.map(c => c.id)
+    //let ids = langs.map(c => c.id)
     //let languages = getMenuLanguages(ids);
+    return Promise.resolve();
+    /*
     return Promise.all(langs.map((lang) => {
         return updateMenuLanguage(lang);
     }));
+*/
 }
 
 export function updateMenuLanguage (lang) {

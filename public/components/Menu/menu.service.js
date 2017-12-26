@@ -9,9 +9,10 @@ import * as Meal from './meal.service';
 
 
 export function updateMenu (opts) {
-    if (opts.id) {
-        return MenuCategory.updateMenuCategories(opts.id, opts.categories)
-            .then(MenuLanguage.updateMenuLanguages(opts.id, opts.languages))
+    let menuId = opts.MenuID || opts.id;
+    if (menuId) {
+        return MenuCategory.updateMenuCategories(menuId, opts.categories)
+            .then(MenuLanguage.updateMenuLanguages(menuId, opts.languages))
             .then(Ajax().put('/menu', {
               body: JSON.stringify(convertOpts(opts, true)),
               headers: {

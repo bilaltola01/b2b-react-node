@@ -26,33 +26,35 @@ let createHandlers = (ctx) => {
 
 		let errors = [];
 
-		if (!menu.title) {
+		if (!menu.title && !menu.Title) {
 			errors.push({
 				name: 'title',
 				message: 'Menu Title is required.'
 			});
 		}
 
-		if (!menu.description) {
+		if (!menu.description && !menu.Description) {
 			errors.push({
 				name: 'description',
 				message: 'Menu Description is required.'
 			});
 		}
 
-		if (!menu.price) {
+		if (!menu.price && !menu.Price) {
 			errors.push({
 				name: 'price',
 				message: 'Menu Price is required.'
 			});
 		}
 
+		/*
 		if (!menu.branches || menu.branches.length <= 0) {
 			errors.push({
 				name: 'branches',
 				message: 'Please choose at least one Branch for your menu.'
 			});
 		}
+		*/
 
 		if (!menu.languages || menu.languages.length <= 0) {
 			errors.push({

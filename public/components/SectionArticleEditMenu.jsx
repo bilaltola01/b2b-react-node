@@ -26,13 +26,19 @@ let createHandlers = (ctx) => {
 				dataToUpdate[obj.key] = obj.target.target.value;
 				console.log(dataToUpdate);
 
-				ctx.props.dispatch(actionCreators.setMenu(ctx.props.menu, dataToUpdate));
+				ctx.props.dispatch(actionCreators.setMenu({
+					...ctx.props.menu,
+					languages: ctx.props.languages,
+				}, dataToUpdate));
 			default:
 				dataToUpdate[type] = obj.data;
 
 				console.log(obj);
 				console.log(dataToUpdate);
-				ctx.props.dispatch(actionCreators.setMenu(ctx.props.menu, dataToUpdate));
+				ctx.props.dispatch(actionCreators.setMenu({
+					...ctx.props.menu,
+					languages: ctx.props.languages,
+				}, dataToUpdate));
 
 		}
 	};
@@ -59,7 +65,10 @@ class SectionArticleEditMenu extends Component {
 	}
 
 	componentDidMount() {
-		this.handlers.getMenu(this.props);
+		this.handlers.getMenu({
+			...this.props,
+			languages: this.props.languages,
+		});
 	}
 
 	render() {
@@ -115,7 +124,7 @@ class SectionArticleEditMenu extends Component {
 
 
 		const menuLanguages = (languages && languages.length > 0) ? (
-			<BranchLanguagesEdit languages={languages} onChange={this.handlers.onChanges} />
+			<BranchLanguagesEdit languages={languages.map(language => language.Language)} onChange={this.handlers.onChanges} />
 		) : null;
 
 		const menuCategories = (categories && categories.length > 0) ? (
