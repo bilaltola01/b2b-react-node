@@ -619,6 +619,7 @@ html[data-useragent*='MSIE 10.0'] .browser-outdated,
 .layout--login {
   height: 100%;
   height: 100vh;
+  min-height: 600px;
 }
 
 .layout--login .header {
@@ -678,7 +679,7 @@ html[data-useragent*='MSIE 10.0'] .browser-outdated,
   background-color: #fcd230;
   position: relative;
   z-index: 999;
-  outline: 15px solid #fcd230;
+  /*outline: 15px solid #fcd230;*/
 }
 
 .portal--desc {
