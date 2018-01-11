@@ -181,7 +181,10 @@ let createHandlers = (ctx) => {
 
 	let onTranslateClick = () => {
 	 	console.log('menu to be translated!');
-	 	ctx.props.dispatch(actionCreators.translateMenu(ctx.props.menu, onMenuTranslateRequestDone));
+	 	ctx.props.dispatch(actionCreators.translateMenu({
+	 		...ctx.props.menu,
+	 		languages: ctx.props.languages,
+	 	}, onMenuTranslateRequestDone));
 	};
 
 	let onMenuTranslateRequestDone = (obj) => {
