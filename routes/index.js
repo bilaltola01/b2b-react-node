@@ -27,6 +27,8 @@ const menuTranslationController = require('../controllers/menu-translation.contr
 const menuCategoryTranslationController = require('../controllers/menu-category-translation.controller');
 const translationCallbackController = require('../controllers/translation-callback.controller');
 
+const analyticsController = require('../controllers/analytics.controller');
+
 const authController = require('../controllers/auth.controller');
 
 const authMiddleware = require('../middlewares/auth.middleware');
@@ -38,6 +40,7 @@ let Routes = class {
 		////////////
 		router.get('/language', languageController.get);
 		router.post('/translation-callback', translationCallbackController.post);
+		router.post('/analytics', analyticsController.post);
 		router.post('/auth', authController.post);
 
 		router.use(authMiddleware);
@@ -158,6 +161,8 @@ let Routes = class {
 		router.post('/translate-menu', menuTranslationController.post);
 		router.put('/translate-menu', menuTranslationController.put);
 		router.delete('/translate-menu', menuTranslationController.remove);
+
+		router.get('/analytics', analyticsController.get);
 
 		this.router = router;
 	}
