@@ -210,16 +210,65 @@ export function translateMeal (langs, meal) {
 
         return Promise.all(langs.map((lang) => {
             console.log(lang);
-            return propsToTranslate.map((prop) => {
-                return Ajax().post('/translate-meal', {
-                    body: JSON.stringify(convertForTranslation(lang, {type: 'meal', id: id, prop: prop})),
+            const translateLangs = (language, props, id) => {
+                return props.map((prop) => {
+                    return Ajax().post('/translate-meal', {
+                        body: JSON.stringify(convertForTranslation(language, {type: 'meal', id: id, prop: prop})),
+                        headers: {
+                            "content-type": "application/json",
+                            "cache-control": "no-cache",
+                            "x-access-token": StorageManagerInstance.read('token')
+                        }
+                    });
+                });
+            };
+
+            let currentBranchLangId;
+
+            if (!lang.name && !lang.title) {
+                return Ajax().get('/branch-language', {
                     headers: {
                         "content-type": "application/json",
                         "cache-control": "no-cache",
                         "x-access-token": StorageManagerInstance.read('token')
                     }
+                }).then((res) => {
+                    if (!res || !res.success) {
+                        return Promise.reject(res);
+                    }
+
+                    const branchLanguages = res.obj;
+                    const currentBranchLang = branchLanguages.find(l => l.BranchLanguageID === lang.branchLanguageId);
+                    currentBranchLangId = (currentBranchLang || {}).LanguageID;
+
+                    return Ajax().get('/language', {
+                        headers: {
+                            "content-type": "application/json",
+                            "cache-control": "no-cache",
+                            "x-access-token": StorageManagerInstance.read('token')
+                        }
+                    })
+                }).then((res) => {
+                    if (!res || !res.success) {
+                        return Promise.reject(res);
+                    }
+
+                    const languages = res.obj;
+                    const currentLanguage = languages.find(l => l.LanguageID === currentBranchLangId);
+                    const finalLang = {
+                        id: currentLanguage.LanguageID,
+                        flagId: currentLanguage.FlagID,
+                        code: currentLanguage.Code,
+                        codeFull: currentLanguage.CodeFull,
+                        name: currentLanguage.Name,
+                        title: currentLanguage.Title,
+                    };
+                    console.log(finalLang);
+                    return translateLangs(finalLang, propsToTranslate, id);
                 });
-            });
+            } else {
+                return translateLangs(lang, propsToTranslate, id);
+            }
         }));
     });
 }
@@ -227,6 +276,7 @@ export function translateMeal (langs, meal) {
 
 function convertForTranslation (lang, obj) {
     let id = obj.id || obj.MealID;
+    console.log(lang, obj);
     switch (obj.type) {
         case 'meal':
         console.log({obj: {

@@ -201,7 +201,7 @@ export function translateMenu (opts, mode) {
     console.log(opts);
 
     let propsToTranslate = Object.keys(opts).filter((key) => {
-        return (key === 'title' || key === 'description') && (opts[key] && opts[key].length > 0);
+        return ((key === 'title' || key === 'Title') || (key === 'description' || key === 'Description')) && (opts[key] && opts[key].length > 0);
     }).map((key) => {
         return {
             key: key,
@@ -252,22 +252,75 @@ export function translateMenu (opts, mode) {
                 console.log(res);
 
                 return Promise.all(finalLanguages.map((lang) => {
-                    return propsToTranslate.map((prop) => {
-                        return Ajax().post('/translate-menu', {
-                            body: JSON.stringify(convertForTranslation(lang, {type: 'menu', id: menuId, prop: prop})),
+                    console.log(lang);
+                    const translateLangs = (language, props, id) => {
+                        return props.map((prop) => {
+                            return Ajax().post('/translate-menu', {
+                                body: JSON.stringify(convertForTranslation(language, {type: 'menu', id: menuId, prop: prop})),
+                                headers: {
+                                    "content-type": "application/json",
+                                    "cache-control": "no-cache",
+                                    "x-access-token": StorageManagerInstance.read('token')
+                                }
+                            });
+                        });
+                    };
+
+                    let currentBranchLangId;
+
+                    if (!lang.name && !lang.title) {
+                        return Ajax().get('/branch-language', {
                             headers: {
                                 "content-type": "application/json",
                                 "cache-control": "no-cache",
                                 "x-access-token": StorageManagerInstance.read('token')
                             }
+                        }).then((res) => {
+                            if (!res || !res.success) {
+                                return Promise.reject(res);
+                            }
+
+                            const branchLanguages = res.obj;
+                            const currentBranchLang = branchLanguages.find(l => l.BranchLanguageID === lang.branchLanguageId);
+                            currentBranchLangId = (currentBranchLang || {}).LanguageID;
+
+                            return Ajax().get('/language', {
+                                headers: {
+                                    "content-type": "application/json",
+                                    "cache-control": "no-cache",
+                                    "x-access-token": StorageManagerInstance.read('token')
+                                }
+                            })
+                        }).then((res) => {
+                            if (!res || !res.success) {
+                                return Promise.reject(res);
+                            }
+
+                            const languages = res.obj;
+                            const currentLanguage = languages.find(l => l.LanguageID === currentBranchLangId);
+                            const finalLang = {
+                                id: currentLanguage.LanguageID,
+                                flagId: currentLanguage.FlagID,
+                                code: currentLanguage.Code,
+                                codeFull: currentLanguage.CodeFull,
+                                name: currentLanguage.Name,
+                                title: currentLanguage.Title,
+                            };
+                            console.log(finalLang);
+                            console.log(propsToTranslate);
+                            console.log(menuId);
+                            return translateLangs(finalLang, propsToTranslate, menuId);
                         });
-                    });
+                    } else {
+                        return translateLangs(lang, propsToTranslate, menuId);
+                    }
                 }));
             });
     });
 }
 
 function convertForTranslation (lang, obj) {
+    console.log(lang);
     switch (obj.type) {
         case 'menu':
         console.log({
