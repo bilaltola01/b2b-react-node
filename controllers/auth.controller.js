@@ -21,14 +21,14 @@ AuthController.post = (req, res) => {
     Company.emailExists(email).then(emailExists => {
         console.log(emailExists);
         if (!emailExists) {
-            res.status(400).json({ success: false, message: 'Authentication failed. Email not found.' });
+            res.status(400).json({ success: false, message: 'Invalid Email/Password.' });
             throw new Error(400);
         }
 
         return Company.auth(email, pwd);
     }).then((isPwdValid) => {
         if (!isPwdValid) {
-            res.status(400).json({ success: false, message: 'Authentication failed. Incorrect password.' });
+            res.status(400).json({ success: false, message: 'Invalid Email/Password.' });
             throw new Error(400);
         }
 
