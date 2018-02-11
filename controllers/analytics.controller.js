@@ -10,7 +10,7 @@ AnalyticsController.get = (req, res) => {
     //console.log(req.body);
     res.setHeader('Content-Type', 'application/json');
 
-    Analytics.getAll().then(output => {
+    Analytics.getAll(req.decoded).then(output => {
         console.log(output);
         res.status(200).json({ success: true, message: 'Analytics successfully fetched', obj: output });
     }).catch(err => {
