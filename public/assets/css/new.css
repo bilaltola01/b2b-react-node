@@ -3453,6 +3453,74 @@ ol.calendar--week {
   text-transform: uppercase;
 }
 
+.analytics--container.wrapper h2 {
+  margin: 0 0 30px 0;
+  padding: 0;
+  font-size: 1.0em;
+}
+.analytics--types ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+}
+
+.analytics--types ul li {
+  box-sizing: border-box;
+  display: inline-block;
+  margin-bottom: 15px;
+  width: 180px;
+}
+
+.analytics--types ul li:nth-child(odd) {
+  padding-right: 15px;
+}
+
+.analytics--types ul li header {
+  border: 1px solid #E9F1FA;
+  padding: 15px;
+}
+
+.analytics--types ul li header h3 {
+  margin: 0;
+  padding: 0;
+  color: #4d5368;
+  font-size: 1.0em;
+  font-weight: normal;
+}
+
+.analytics--types ul li header h4 {
+  margin: 0;
+  padding: 0;
+  color: #2b75b8;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+
+ul.analytics--analytics_most_viewed li {
+  width: auto;
+}
+ul.analytics--analytics_most_viewed li:last-child {
+  padding-right: 0;
+}
+
+ul.analytics--analytics_most_viewed li header h4 {
+  margin: 0;
+  padding: 0;
+  color: grey;
+  font-size: 1.1em;
+  font-weight: normal;
+}
+
+ul.analytics--analytics_most_viewed li header h5 {
+  margin: 0;
+  padding: 0;
+  color: #2b75b8;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
 .logo--main--login {
   position: absolute;
   display: inline-block;

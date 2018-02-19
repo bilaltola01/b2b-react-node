@@ -8,8 +8,6 @@ import PageContent from './PageContent';
 
 let createHandlers = (ctx) => {
   let onMenusFetched = (obj) => {
-    console.log('menus fetched!');
-
     let menus = obj;
 
     ctx.setState({
@@ -21,19 +19,16 @@ let createHandlers = (ctx) => {
   };
 
   let onProfileFetched = (obj) => {
-    console.log('profile fetched!');
-
     let profile = obj;
+  };
 
-    /*
-    ctx.setState({
-      branches: profile.branches
-    });
-*/
+  const onAnalyticsFetched = (obj) => {
+    let analytics = obj;
   };
 
   return {
     onMenusFetched,
+    onAnalyticsFetched,
     onProfileFetched
   };
 };
@@ -43,18 +38,20 @@ class Dashboard extends Component {
     super(props);
     this.state = {
       component: {},
-      branches: []
+      branches: [],
+      analytics: [],
     };
     this.handlers = createHandlers(this);
   }
 
   componentDidMount() {
-    //this.props.dispatch(actionCreators.getMenus(this.handlers.onMenusFetched));
+    this.props.dispatch(actionCreators.getAnalytics(this.handlers.onAnalyticsFetched));
     this.props.dispatch(actionCreators.getProfile(this.handlers.onProfileFetched));
   }
 
   render () {
     const profile = (this.props.profile) ? this.props.profile : {};
+    const analytics = this.props.analytics || [];
 
     const branchRoot = (profile.branches && profile.branches.length > 0) ? profile.branches.find(branch => {
       return branch.HasHeadquarters == 1;
@@ -95,43 +92,23 @@ class Dashboard extends Component {
 
     const lastMenu = filteredMenus;
 
-    const sections = [/*{
-        type: "visits",
-        title: "Dashboard",
-        articles: [{
-          type: "main",
-          title: "Weekly Report - Unique Menu Visits",
-          dateUpdate: {
-            date: "26/04/2017 - 18:00",
-            timezone: "GMT"
-          },
-          component: {
-            type: "ChartPie",
-            title: "",
-            props: {
-              description: {
-                key: "visits",
-                value: 3000,
-                label: "Visits"
-              },
-              legends: [
-                {
-                  key: "visitsMobile",
-                  value: 1850,
-                  label: "Mobile",
-                  color: "purple"
-                },
-                {
-                  key: "visitsDesktop",
-                  value: 1150,
-                  label: "Desktop",
-                  color: "red"
-                }
-              ]
-            }
+    console.log(analytics);
+
+    const sections = [{
+      type: "analytics",
+      title: "Dashboard",
+      articles: [{
+        type: "analytics",
+        title: "Analytics - Views",
+        component: {
+          type: "AnalyticTotal",
+          title: "",
+          props: {
+            analytics: analytics
           }
-        }]
-    }, */{
+        }
+      }]
+    }, {
       type: "menus",
       title: "Latest Menus",
       articles: [{
@@ -183,7 +160,8 @@ const mapStateToProps = (state) => {
   console.log(state);
   return {
     menu: state._menu.menu,
-    profile: state._profile.profile
+    profile: state._profile.profile,
+    analytics: state._analytics.analytics,
   }
 };
 

@@ -9,6 +9,7 @@ import * as Currencies from './currencies.reducer';
 import * as Categories from './categories.reducer';
 import * as Branches from './branches.reducer';
 import * as Popup from './popup.reducer';
+import * as Analytics from './analytics.reducer';
 
 const _auth = Auth._auth;
 const _menu = Menu._menu;
@@ -21,6 +22,7 @@ const _currencies = Currencies._currencies;
 const _categories = Categories._categories;
 const _branches = Branches._branches;
 const _popup = Popup._popup;
+const _analytics = Analytics._analytics;
 
 export {
     _auth,
@@ -33,5 +35,6 @@ export {
     _currencies,
     _categories,
     _branches,
-    _popup
+    _popup,
+    _analytics
 }

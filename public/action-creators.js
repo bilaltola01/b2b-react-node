@@ -23,6 +23,7 @@
 // this value to verify that the delay correctly impacts our UI.
 
 import * as AuthService from './components/Auth/auth.service';
+import * as AnalyticsService from './components/Analytics/analytics.service';
 import * as MenuService from './components/Menu/menu.service';
 import * as ImageService from './components/Image/image.service';
 import * as ProfileService from './components/Profile/profile.service';
@@ -48,6 +49,25 @@ export function getTime (delay) {
           })
         }, delay)
       })
+    }
+  }
+};
+
+export function getAnalytics (cb) {
+  return {
+    types: ['GET_ANALYTICS_REQUEST', 'GET_ANALYTICS_SUCCESS', 'GET_ANALYTICS_FAILURE'],
+    promise: () => {
+      return new Promise((resolve, reject) => {
+        AnalyticsService.getAnalytics().then((res) => {
+          console.log('request succeeded with JSON response', res);
+
+          if (res && typeof cb === 'function') {
+            cb(res);
+          }
+
+          resolve(res);
+        });
+      });
     }
   }
 };

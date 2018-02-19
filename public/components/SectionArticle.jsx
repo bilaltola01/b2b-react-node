@@ -6,6 +6,7 @@ const classNames = require('classnames');
 
 import SectionArticleMain from './SectionArticleMain';
 import SectionArticleCompany from './SectionArticleCompany';
+import SectionArticleAnalytics from './SectionArticleAnalytics';
 import SectionArticleBranches from './SectionArticleBranches';
 import SectionArticleMenus from './SectionArticleMenus';
 import SectionArticleMenusDetail from './SectionArticleMenusDetail';
@@ -23,6 +24,8 @@ class SectionArticle extends Component {
 					return <SectionArticleMain title={title} dateUpdate={dateUpdate} component={component} />
 				case 'company':
 					return <SectionArticleCompany title={title} dateUpdate={dateUpdate} component={component} />
+				case 'analytics':
+					return <SectionArticleAnalytics title={title} dateUpdate={dateUpdate} component={component} />
 				case 'branches':
 					return <SectionArticleBranches title={title} dateUpdate={dateUpdate} component={component} />
 				case 'menus':
