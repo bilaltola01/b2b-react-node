@@ -6,7 +6,7 @@ const commonConfig = require('./webpack.common');
 const helpers = require('./helpers');
 
 const PORT = process.env.PORT || 8080;
-
+console.log(PORT, 'frontend')
 module.exports = webpackMerge(commonConfig, {
     devtool: 'cheap-module-eval-source-map',
 

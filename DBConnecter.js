@@ -2,7 +2,7 @@ const constants = require('./constants');
 
 var pg = require('pg');
 pg.types.setTypeParser(20, 'text', parseInt);
-
+console.log(constants, 'constants')
 var knex = require('knex')({
  	client: constants.DB_TYPE,
 	debug: true,
