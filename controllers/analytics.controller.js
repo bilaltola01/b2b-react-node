@@ -20,6 +20,7 @@ AnalyticsController.get = (req, res) => {
 };
 
 AnalyticsController.post = (req, res) => {
+    console.log(req, 'test')
     res.setHeader('Content-Type', 'application/json');
     Analytics.create(req.body.obj).then(output => {
         console.log(output);

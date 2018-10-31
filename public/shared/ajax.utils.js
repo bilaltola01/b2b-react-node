@@ -6,7 +6,7 @@ const BASE_URL = 'http://localhost:8080/api';
 
 export let Ajax = (url) => {
     let baseUrl = url || window.location.origin + '/api';
-
+    // let baseUrl = 'https://one-menu-b2b.herokuapp.com/api';
     //
     /** Generic method for AJAX calls */
     //

@@ -11,7 +11,22 @@ class TranslatePage extends Component {
     super(props);
   }
 
-  render () {
+  getCurrentBranch(profile, currentBranchMenuId, obj) {
+    const branch = profile.branches && profile.branches.length > 0 ? profile.branches.find(branch => {
+      return branch.BranchID === currentBranchMenuId;
+    }) : null;
+
+    if (branch && obj && obj.languages) {
+      const languages = obj.languages.map((lang, index) => {
+        var match = branch.languages.find(l => l.LanguageID == lang.BranchLanguageID);
+        lang.Language = (lang.Language) ? lang.Language : match ? match.Language : null;
+        lang.LanguageID = (lang.LanguageID) ? lang.LanguageID : match ? match.LanguageID : null;
+      });
+    }
+    return obj;
+  }
+
+  render() {
     const { component } = this.props.match.params;
     const actionType = (typeof component !== 'undefined') ? 'translate-menu' : 'translate';
 
@@ -28,7 +43,9 @@ class TranslatePage extends Component {
     }
 
     const type = (this.props.location.state && this.props.location.state.component) ? this.props.location.state.component.type : '';
-    const obj = (this.props.location.state && this.props.location.state.component) ? this.props.location.state.component.obj : '';
+    let obj = (this.props.location.state && this.props.location.state.component) ? this.props.location.state.component.obj : '';
+
+    obj = this.getCurrentBranch(profile, obj.BranchID, obj);
 
     const company = {
       name: profile.Name,
@@ -50,21 +67,20 @@ class TranslatePage extends Component {
     };
 
     const sections = [{
-        type: actionType,
-        title: "Translate",
-        articles: [{
-          type: "translate",
-          title: "Translate " + type,
-          component: {
-            type: "Alert",
-            title: "",
-            props: obj
-          }
-        }]
+      type: actionType,
+      title: "Translate",
+      articles: [{
+        type: "translate",
+        title: "Translate " + type,
+        component: {
+          type: "Alert",
+          title: "",
+          props: obj
+        }
+      }]
     }];
 
     const asideType = 'preview-nosave';
-
 
     return (
       <div>
