@@ -49,7 +49,7 @@ Analytics.create = (obj) => {
     Event: obj.event,
     EventType: obj.type,
     Title: obj.title,
-    EventIDType: obj.type + 'ID',
+    EventIDType: obj.id,
     EventID: obj.id,
     Date: dateUtils.toMysqlDate(new Date()),
   };
