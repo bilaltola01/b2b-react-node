@@ -44,13 +44,13 @@ let Analytics = class {
 
 Analytics.create = (obj) => {
   let companyId;
-  // EventIDType: obj.id,
+  // 
   let analytic = {
     CompanyID: obj.companyId,
     Event: obj.event,
     EventType: obj.type,
     Title: obj.title,
-    EventIDType: obj.type + 'ID',
+    EventIDType: obj.id,
     EventID: obj.id,
     Date: dateUtils.toMysqlDate(new Date()),
   };
