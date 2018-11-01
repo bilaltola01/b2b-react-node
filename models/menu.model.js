@@ -33,7 +33,7 @@ Menu.create = (obj) => {
 Menu.update = (id, obj) => {
   let menu = obj;
   menu.DateUpdated = dateUtils.toMysqlDate(new Date());
-
+  console.log(menu);
   return Menu.getById(id).update(menu).then(res => {
     return Menu.getById(id);
   });

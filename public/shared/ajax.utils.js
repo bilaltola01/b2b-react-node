@@ -11,7 +11,7 @@ export let Ajax = (url) => {
     /** Generic method for AJAX calls */
     //
     function query (obj) {
-        console.log(obj);
+        console.log(obj, 'query');
         return fetch(obj.path, obj.opts)
             .then(checkStatus)
             .then(parseJSON);
@@ -44,7 +44,8 @@ export let Ajax = (url) => {
     };
 
     function parseJSON (response) {
-        return response.json();
+        console.log(response, 'ttt' )
+        return  response.json();
     };
 
     return {
