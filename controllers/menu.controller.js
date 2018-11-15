@@ -33,8 +33,8 @@ MenuController.post = (req, res) => {
 
 MenuController.put = (req, res) => {
     res.setHeader('Content-Type', 'application/json');
-
-    Menu.update(req.body.id, req.body.updates).then(output => {
+    var MenuID = req.body.id || req.body.MenuID
+    Menu.update(MenuID, req.body.updates).then(output => {
         console.log(output);
         res.status(201).json({ success: true, message: 'Menu successfully updated', obj: output });
     }).catch(err => {

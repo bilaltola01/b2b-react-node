@@ -91,6 +91,7 @@ class SectionArticleEditBranches extends Component {
 		console.log(finalBranches);
 
 		const branchComponents = (finalBranches && finalBranches.length > 0) ? finalBranches.map((branch, index) => {
+			console.log(branch, 'branch')
 			return <SectionArticleEditBranch 
 				id={branch.BranchID}
 				address={branch.Address}

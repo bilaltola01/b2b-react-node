@@ -47,6 +47,19 @@ BranchImage.update = (id, obj) => {
   });
 };
 
+BranchImage.removeSelected = (images, branch) => {
+  images = images || [];
+  return BranchImage.get({BranchID: branch.BranchID}).then(res => {
+    console.log('res', res, 'res')
+    var deletedImages = res.filter(img=> !images.find(image=> (image.BranchImageID || image.id) == (img.BranchImageID || img.id)))
+    console.log('deletedImages', deletedImages)
+    return Promise.all(deletedImages.map(image => {
+      let id = image.BranchImageID || image.id;
+      return BranchImage.remove(id);
+    }));
+  });
+}
+
 BranchImage.updateAll = (images) => {
   if (!images || images.length <= 0) {
     return Promise.reject('No images specified');

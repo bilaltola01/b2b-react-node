@@ -95,6 +95,7 @@ export function saveMenu (data, cb) {
           console.log('request succeeded with JSON response', res);
 
           if (res && typeof cb === 'function') {
+            data.MenuID = data.MenuID ?  data.MenuID : res;
             cb(data);
           }
         }).catch(err => {

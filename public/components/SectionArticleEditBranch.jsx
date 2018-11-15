@@ -43,7 +43,7 @@ let createHandlers = (ctx) => {
 };
 
 class SectionArticleEditBranch extends Component {
-	constructor(props) {
+	constructor(props) {	
 		super(props);
 		this.state = {
 			expanded: false,
@@ -109,6 +109,7 @@ class SectionArticleEditBranch extends Component {
 			};
 		});
 
+		console.log(allImages, 'test')
 		const allImagesComponent = (
 			<ImageUpload onChanges={this.handlers.onChanges} images={allImages} />
 		);

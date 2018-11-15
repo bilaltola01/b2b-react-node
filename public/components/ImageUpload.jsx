@@ -60,11 +60,12 @@ let createHandlers = (ctx) => {
 			console.log(prevState.allImages);
 
 			console.log(images);
-
+			ctx.props.onChanges('images', {data: images})
 			return {
 				allImages: images
 			}
 		});
+		
 	};
 
 	return {

@@ -162,6 +162,7 @@ Branch.updateWithDetails = (id, obj) => {
     BranchCuisine.updateAll(insertNewId(id, branch.cuisines)),
     BranchCurrency.updateAll(insertNewId(id, branch.currencies)),
     BranchLanguage.updateAll(insertNewId(id, branch.languages)),
+    BranchImage.removeSelected(branch.images, branch),
     BranchImage.updateAll(branch.images)
   ]).then(res => {
     console.log(res);
@@ -170,7 +171,7 @@ Branch.updateWithDetails = (id, obj) => {
     tmp.cuisines = res[0][1];
     tmp.currencies = res[0][2];
     tmp.languages = res[0][3];
-    tmp.images = res[0][4];
+    tmp.images = res[0][5];
 
     console.log('finalobj');
     console.log(tmp);

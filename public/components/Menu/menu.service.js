@@ -384,7 +384,7 @@ function convertOpts (opts, isUpdate) {
     }
     */
 
-    let id = opts.id;
+    let id = opts.id || opts.MenuID;
     let obj = Object.keys(opts).reduce((acc, current) => {
         let matchingKeys = [];
         for (let key of Mapping.getTableMap('menu').keys()) {
