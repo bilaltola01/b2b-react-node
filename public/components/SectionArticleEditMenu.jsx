@@ -124,7 +124,6 @@ class SectionArticleEditMenu extends Component {
 
 
 		const menuLanguages = <BranchLanguagesEdit languages={(languages && languages.length > 0) ? languages.map(language => language.Language) : []} onChange={this.handlers.onChanges} />
-		console.log(categories, 'categoriescategories')
 		const menuCategories = <MenuCategoriesEdit categories={(categories && categories.length > 0) ? categories : []} onChange={this.handlers.onChanges} />
 	 
 		return (

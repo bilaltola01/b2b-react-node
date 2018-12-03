@@ -57,7 +57,6 @@ export function updateMeals(meals, catId) {
     if (meals.length <= 0) {
         return removeMeals([], catId);
     }
-    console.log('mmmmm', meals)
     // Compare meals in the object to the meals in the DB
     let ids = meals.map(c => c.id);
     return Promise.all(meals.map((meal) => {

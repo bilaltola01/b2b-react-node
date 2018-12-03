@@ -34,7 +34,6 @@ let createHandlers = (ctx) => {
 	};
 
 	let onCategoryChange = (cat) => {
-		console.log(cat, 'tttt');
 		let categories;
 		ctx.setState((prevState) => {
 			console.log(prevState.allCategories);

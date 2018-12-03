@@ -9,7 +9,6 @@ class SectionArticleEditMenusDetail extends Component {
 		const currencies = (component.props.currencies && component.props.currencies.length > 0) ? component.props.currencies : [];
 		const languages = (component.props.languages && component.props.languages.length > 0) ? component.props.languages : [];
 
-		console.log(component.props, 'component.props');
 
 		const menuComponents = (component.props.menus && component.props.menus.length > 0) ? component.props.menus.map((menu, index) => {
 			return <SectionArticleEditMenu 
