@@ -1564,6 +1564,10 @@ a.text-link:hover {
   padding-bottom: 10px;
 }
 
+.select--options li.disable {
+  cursor: not-allowed;
+}
+
 .select--options li:hover {
   color: #3c4153;
   font-weight: 500;

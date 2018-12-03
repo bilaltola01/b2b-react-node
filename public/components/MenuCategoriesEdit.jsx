@@ -12,7 +12,13 @@ let createHandlers = (ctx) => {
 		console.log(obj);
 		let categories;
 		ctx.setState((prevState) => {
+			console.log(prevState.allCategories, 'prevState.allCategories')
 			categories = prevState.allCategories.reduce((acc, current) => {
+				console.log(current, obj, 'mmmmmmmmm')
+				if (current.Category && (current.Category.CategoryStandardID || current.Category.id) ) {
+					return ((current.Category.CategoryStandardID || current.Category.id) !== obj.id) ? acc.concat([current]) : acc;
+				}
+
 				if (current.CategoryID) {
 					return (current.CategoryID !== obj.id) ? acc.concat([current]) : acc;
 				}
@@ -22,7 +28,7 @@ let createHandlers = (ctx) => {
 
 			console.log(prevState.allCategories);
 
-			console.log(categories);
+			console.log(categories, 'teststt.categories');
 			ctx.props.onChange('categories', {data: categories});
 
 			return {
@@ -108,7 +114,7 @@ let createHandlers = (ctx) => {
 			console.log(finalObj);
 
 			categories.push(finalObj);
-			console.log(categories);
+			console.log(categories, 'teststt.categories');
 			ctx.props.onChange('categories', {data: categories});
 
 			return {
@@ -140,22 +146,34 @@ class MenuCategoriesEdit extends Component {
 
 	componentDidMount() {
         this.handlers.getAvailableCategories('standard');
-    }
+	}
+	
+	componentWillReceiveProps (nextProps, prevProps) {
+		if(nextProps.categories !== prevProps.categories) {
+			
+		}
+	}
 
 	render() {
 		const { categories, onChange } = this.props;
 
 		const totalCategories = (this.props && this.props.availableCategories) ? this.props.availableCategories : [];
-		const stateCategories = (this.state.allCategories && this.state.allCategories.length > 0) ? this.state.allCategories : categories;
+		const stateCategories = this.state.allCategories;
 
 		console.log(totalCategories);
-		console.log(stateCategories);
+		console.log(stateCategories, 'stateCategories');
+
+		const categoriesAll = (stateCategories && stateCategories.length > 0) ? stateCategories.map((category, index) => {
+			const finalCategory = (category.Category) ? category.Category : category;
+			return finalCategory;
+		}) : [];
 
 		const categoriesComponent = (stateCategories && stateCategories.length > 0) ? stateCategories.map((category, index) => {
 			const finalCategory = (category.Category) ? category.Category : category;
-			return <MenuCategoryEdit id={finalCategory.CategoryStandardID} totalCategories={totalCategories} isCustom={false} title={finalCategory.Title} description={finalCategory.Description} meals={category.meals || []} onChange={this.handlers.onCategoryChange} onCategoryRemove={this.handlers.onCategoryRemove} key={index} />;
+			return <MenuCategoryEdit id={finalCategory.CategoryStandardID} categoriesAll={categoriesAll} totalCategories={totalCategories} isCustom={false} title={finalCategory.Title} description={finalCategory.Description} meals={category.meals || []} onChange={this.handlers.onCategoryChange} onCategoryRemove={this.handlers.onCategoryRemove} key={index} />;
 		}) : null;
 
+		console.log(categoriesComponent, 'categoriesComponent')
 		return (
 			<div>
 				<h3 className="asset--title">Categories</h3>

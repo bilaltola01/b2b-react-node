@@ -52,6 +52,7 @@ class LanguagePicker extends Component {
 		}) : null;
 
 		const selectOptions = (data.items && data.items.length > 0) ? data.items.map((item, index) => {
+			console.log(item, 'ttttt')
 			let finalCode = item.CodeFull ? item.CodeFull : item.Code;
 			switch (data.type) {
 				case 'languages':
@@ -72,11 +73,11 @@ class LanguagePicker extends Component {
 					);
 				case 'categories':
 					return (
-						<li data-id={item.CategoryStandardID} rel={item.Title} onClick={(e) => onPickerItemClick(e)} key={item.CategoryStandardID}>{item.Title}</li>
+						<li data-id={item.CategoryStandardID} className={item.disabled ? 'disable' : ''} rel={item.Title} onClick={(e) => !item.disabled ? onPickerItemClick(e) : null} key={item.CategoryStandardID}>{item.Title}</li>
 					);
 				default:
 					return (
-						<li data-id={item.id} rel={item.codeFull} onClick={(e) => onPickerItemClick(e)} key={item.id}>{item.title}</li>
+						<li data-id={item.id} rel={item.codeFull} onClick={(e) =>  onPickerItemClick(e)} key={item.id}>{item.title}</li>
 					);
 			}
 		}) : null;

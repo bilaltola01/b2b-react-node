@@ -97,12 +97,13 @@ let createHandlers = (ctx) => {
 	let onRemove = (obj) => {
 		ctx.setState((prevState) => {
 			let meals = prevState.allMeals.reduce((acc, current) => {
-				return (current.id !== obj.id) ? acc.concat([current]) : acc;
+				console.log(current, obj)
+				return ((current.id || current.MealID) !== obj.id) ? acc.concat([current]) : acc;
 			}, []);
 
 			console.log(prevState.allMeals);
 
-			console.log(meals);
+			console.log(meals , 'meals test');
 
 			ctx.props.onChange({
 				catId: ctx.props.category.id,

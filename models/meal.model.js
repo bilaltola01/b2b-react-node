@@ -66,6 +66,17 @@ Meal.getWithDetails = (conditions) => {
   });
 };
 
+Meal.removeSelected = (category, meals) => {
+  meals = meals || [];
+  return Meal.getWithDetails({MenuCategoryID: category.MenuCategoryID}).then(res => {
+    var deletedMeals = res.filter(ml=> !meals.find(meal=> (meal.MealID || meal.id) == (ml.MealID || ml.id)))
+    return Promise.all(deletedMeals.map(catMeal => {
+      let id = catMeal.MealID || catMeal.id;
+      return Meal.remove(id);
+    }));
+  });
+}
+
 function createMealCategoryContainer (meal) {
   return new Promise((resolve, reject) => {
     Promise.all([

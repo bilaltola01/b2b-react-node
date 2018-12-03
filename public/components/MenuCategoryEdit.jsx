@@ -113,11 +113,31 @@ class MenuCategoryEdit extends Component {
 		this.handlers = createHandlers(this);
 	}
 
+	componentWillReceiveProps (nextProps, prevProps) {
+		if(nextProps !== prevProps) {
+			this.setState({category: {
+				id: nextProps.id,
+				title: nextProps.title
+			}})
+		}
+	}
+
 	render() {
-		const { id, isCustom, title, description, meals, totalCategories, onCategoryRemove, onChange } = this.props;
+		const { id, isCustom, title, description, meals, categoriesAll, totalCategories, onCategoryRemove, onChange } = this.props;
+		
+		const stateId = this.state.category.id;
+		const stateTitle = this.state.category.title;
+
+		var calCategories = totalCategories ? JSON.parse(JSON.stringify(totalCategories)) : [];
+		const availableCategories = calCategories.map((cate, index) => {
+			var match = (cate.CategoryStandardID == stateId) || !(categoriesAll.find(a=>a.CategoryStandardID == cate.CategoryStandardID))
+			cate.disabled = match ? false : true;
+			return cate;
+		});
+
 		const obj = {
 			type: "categories",
-			items: totalCategories
+			items: availableCategories
 		};
 
 		const classes = classNames(
@@ -126,16 +146,11 @@ class MenuCategoryEdit extends Component {
 			(this.state.expanded) ? 'opened' : ''
 		);
 
-		const stateId = this.state.category.id;
-		const stateTitle = this.state.category.title;
+		
 
 		const mealComponents = (stateId && stateId > 0 && stateId !== 1) ? (
 			<MealsEdit meals={meals} category={{id: stateId, title: stateTitle}} onChange={this.handlers.onMealsChange} />
 		) : null;
-
-		console.log(id, totalCategories);
-
-		
 
 		return (
 			<div className="food-menu--part">

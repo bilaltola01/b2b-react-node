@@ -60,6 +60,17 @@ MenuCategory.get = (conditions) => {
   return db('MenuCategory').where(conditions).select('*');
 };
 
+MenuCategory.removeSelected = (menu, cats) => {
+  cats = cats || [];
+  return MenuCategory.getWithDetails({MenuID: (menu.MenuID || menu.id)}).then(res => {
+    var deletedCategories = res.filter(cat=> !cats.find(category=> (category.MenuCategoryID || category.id) == (cat.MenuCategoryID || cat.id)))
+    return Promise.all(deletedCategories.map(menucategory => {
+      let id = menucategory.MenuCategoryID || menucategory.id;
+      return MenuCategory.remove(id);
+    }));
+  });
+}
+
 
 MenuCategory.getWithDetails = (conditions) => {
   return db('MenuCategory').where(conditions).select('*').then(categories => {

@@ -130,6 +130,7 @@ let Routes = class {
 		router.get('/menu-category', menuCategoryController.get);
 		router.post('/menu-category', menuCategoryController.post);
 		router.put('/menu-category', menuCategoryController.put);
+		router.put('/menu-category-remove', menuCategoryController.removeAll);
 		router.delete('/menu-category', menuCategoryController.remove);
 
 		router.get('/menu-language', menuLanguageController.get);
@@ -140,6 +141,7 @@ let Routes = class {
 		router.get('/meal', mealController.get);
 		router.post('/meal', mealController.post);
 		router.put('/meal', mealController.put);
+		router.put('/meal-remove', mealController.removeAll);
 		router.delete('/meal', mealController.remove);
 
 		router.get('/flag', flagController.get);

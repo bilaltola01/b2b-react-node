@@ -55,4 +55,16 @@ MealController.remove = (req, res) => {
     });
 };
 
+MealController.removeAll = (req, res) => {
+    res.setHeader('Content-Type', 'application/json');
+
+    Meal.removeSelected(req.body, req.body.meals).then(output => {
+        console.log(output);
+        res.status(201).json({ success: true, message: 'Meal successfully removed', obj: output });
+    }).catch(err => {
+        console.error(err);
+        res.status(204).send({ success: false, message: 'Meal remove failed', obj: err });
+    });
+};
+
 module.exports = MealController;

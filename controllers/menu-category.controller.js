@@ -55,4 +55,17 @@ MenuCategoryController.remove = (req, res) => {
     });
 };
 
+MenuCategoryController.removeAll = (req, res) => {
+    res.setHeader('Content-Type', 'application/json');
+
+    MenuCategory.removeSelected(req.body, req.body.categories).then(output => {
+        console.log(output);
+        res.status(201).json({ success: true, message: 'MenuCategory successfully removed', obj: output });
+    }).catch(err => {
+        console.error(err);
+        res.status(204).send({ success: false, message: 'MenuCategory remove failed', obj: err });
+    });
+};
+
+
 module.exports = MenuCategoryController;

@@ -11,7 +11,8 @@ import * as Meal from './meal.service';
 export function updateMenu (opts) {
     let menuId = opts.MenuID || opts.id;
     if (menuId) {
-        return MenuCategory.updateMenuCategories(menuId, opts.categories)
+        return MenuCategory.removeSelectedMenuCategory(opts)
+            .then( MenuCategory.updateMenuCategories(menuId, opts.categories))
             .then(MenuLanguage.updateMenuLanguages(menuId, opts.languages))
             .then(Ajax().put('/menu', {
               body: JSON.stringify(convertOpts(opts, true)),

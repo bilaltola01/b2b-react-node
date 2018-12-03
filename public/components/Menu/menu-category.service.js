@@ -57,7 +57,9 @@ export function updateMenuCategories (menuId, cats) {
     return Promise.all(cats.map((cat) => {
         let catId = cat.MenuCategoryID || cat.menuCategoryId;
         if (catId) {
-            return Meal.updateMeals(cat.meals, catId);
+            return Meal.removeMeals(cat.meals, catId).then((newCatId) => {
+                return Meal.updateMeals(cat.meals, catId);
+            });
         }
 
         return postMenuCategory(menuId, cat).then((newCatId) => {
@@ -74,6 +76,17 @@ export function updateMenuCategory (cat) {
 
     return Ajax().put('/menu-category', {
         body: JSON.stringify(convertOpts(cat, true)),
+        headers: {
+            "content-type": "application/json",
+            "cache-control": "no-cache",
+            "x-access-token": StorageManagerInstance.read('token')
+        }
+    });
+}
+
+export function removeSelectedMenuCategory (menu) {
+    return Ajax().put('/menu-category-remove', {
+        body: JSON.stringify(menu),
         headers: {
             "content-type": "application/json",
             "cache-control": "no-cache",

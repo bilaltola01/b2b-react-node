@@ -1,7 +1,7 @@
 import { Ajax } from '../../shared/ajax.utils';
 
-import { Mapping } from  '../../shared/mapping.utils';
-import { StorageManagerInstance } from  '../../shared/storage.utils';
+import { Mapping } from '../../shared/mapping.utils';
+import { StorageManagerInstance } from '../../shared/storage.utils';
 
 const SANDBOX_TOKEN = 'ACE563CA-FF89-4C7D-8DDF-35B5F11CFA21';
 const TRANSLATION_ENV = 'sandbox';
@@ -10,10 +10,9 @@ const TRANSLATION_URL = 'https://' + TRANSLATION_ENV + '.strakertranslations.com
 //
 // POST
 //
-export function postMeals (meals, newCatId) {
-    console.log(meals);
+export function postMeals(meals, newCatId) {
     if (meals.length <= 0) {
-        return removeMeals();
+        return  Promise.resolve({});;
     }
     // Compare meals in the object to the meals in the DB
     let ids = meals.map(c => c.id);
@@ -22,7 +21,7 @@ export function postMeals (meals, newCatId) {
     }));
 }
 
-export function postMeal (meal, newCatId) {
+export function postMeal(meal, newCatId) {
     console.log(meal);
 
     if (!meal.Price && !meal.price) {
@@ -54,9 +53,9 @@ export function postMeal (meal, newCatId) {
 //
 // UPDATE
 //
-export function updateMeals (meals, catId) {
+export function updateMeals(meals, catId) {
     if (meals.length <= 0) {
-        return removeMeals();
+        return removeMeals([], catId);
     }
     // Compare meals in the object to the meals in the DB
     let ids = meals.map(c => c.id);
@@ -68,7 +67,23 @@ export function updateMeals (meals, catId) {
     }));
 }
 
-export function updateMeal (meal) {
+export function removeMeals(meals, catId) {
+    return Ajax().post('/meal-remove', {
+        body: JSON.stringify({
+            MenuCategoryID: catId,
+            meals: meals
+        }),
+        headers: {
+            "content-type": "application/json",
+            "cache-control": "no-cache",
+            "x-access-token": StorageManagerInstance.read('token')
+        }
+    }).then(res => {
+        return Promise.resolve(res);
+    });
+}
+
+export function updateMeal(meal) {
     if (!meal.id && !meal.MealID) {
         console.error('meal id is not specified!');
         return;
@@ -89,7 +104,7 @@ export function updateMeal (meal) {
     });
 }
 
-function getMeals (ids) {
+function getMeals(ids) {
     return Ajax().get('/meal', {
         headers: {
             "content-type": "application/json",
@@ -113,7 +128,7 @@ function getMeals (ids) {
 //
 
 
-export function getMealTranslations (ids) {
+export function getMealTranslations(ids) {
     return Ajax().get('/translate-meal', {
         headers: {
             "content-type": "application/json",
@@ -166,13 +181,13 @@ export function getMealTranslations (ids) {
     });
 }
 
-export function translateMeals (langs, meals) {
+export function translateMeals(langs, meals) {
     return Promise.all(meals.map((meal) => {
         return translateMeal(langs, meal);
     }));
 }
 
-export function translateMeal (langs, meal) {
+export function translateMeal(langs, meal) {
     return Ajax().get('/meal', {
         headers: {
             "content-type": "application/json",
@@ -197,7 +212,7 @@ export function translateMeal (langs, meal) {
         }
 
         let propsToTranslate = Object.keys(meal).filter((key) => {
-            return ((key === 'title' || key === 'Title') || (key === 'description' || key === 'Description')) && (meal[key] && meal[key].length > 0);
+            return ((key === 'title' ||  key === 'Title') || (key === 'description' || key === 'Description')) && (meal[key] && meal[key].length > 0);
         }).map((key) => {
             return {
                 key: key,
@@ -213,7 +228,7 @@ export function translateMeal (langs, meal) {
             const translateLangs = (language, props, id) => {
                 return props.map((prop) => {
                     return Ajax().post('/translate-meal', {
-                        body: JSON.stringify(convertForTranslation(language, {type: 'meal', id: id, prop: prop})),
+                        body: JSON.stringify(convertForTranslation(language, { type: 'meal', id: id, prop: prop })),
                         headers: {
                             "content-type": "application/json",
                             "cache-control": "no-cache",
@@ -274,19 +289,21 @@ export function translateMeal (langs, meal) {
 }
 
 
-function convertForTranslation (lang, obj) {
+function convertForTranslation(lang, obj) {
     let id = obj.id || obj.MealID;
     console.log(lang, obj);
     switch (obj.type) {
         case 'meal':
-        console.log({obj: {
+            console.log({
+                obj: {
                     mealId: id,
                     key: obj.prop.key,
                     title: 'Meal ' + id + ', translation: ' + obj.prop.key,
                     sl: 'English',
                     tl: lang.title || lang.name,
                     payload: obj.prop.value
-                }});
+                }
+            });
             return {
                 obj: {
                     mealId: id,
@@ -304,23 +321,20 @@ function convertForTranslation (lang, obj) {
 //
 // REMOVE
 //
-export function removeMeals () {
+
+export function removeMeal() {
 
 }
 
-export function removeMeal () {
 
-}
-
-
-function convertOpts (meal, isUpdate) {
+function convertOpts(meal, isUpdate) {
     console.log(meal);
-/*
-    if (!meal.id) {
-        console.error('The menu id to update is not specified!');
-        return;
-    }
-*/
+    /*
+        if (!meal.id) {
+            console.error('The menu id to update is not specified!');
+            return;
+        }
+    */
     let id = meal.id || meal.MealID;
     let obj = Object.keys(meal).reduce((acc, current) => {
         let matchingKeys = [];
@@ -341,14 +355,14 @@ function convertOpts (meal, isUpdate) {
     }, {});
     //
 
-    console.log({id: id, updates: obj});
+    console.log({ id: id, updates: obj });
 
     return (isUpdate) ? {
         id: id,
         updates: obj
     } : {
-        obj: obj
-    };
+            obj: obj
+        };
 }
 
 
