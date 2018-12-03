@@ -68,7 +68,7 @@ export function updateMeals(meals, catId) {
 }
 
 export function removeMeals(meals, catId) {
-    return Ajax().post('/meal-remove', {
+    return Ajax().put('/meal-remove', {
         body: JSON.stringify({
             MenuCategoryID: catId,
             meals: meals
@@ -93,7 +93,7 @@ export function updateMeal(meal) {
         meal.Price = 0;
         meal.price = 0;
     }
-
+    console.log(meal, 'hhhhh meal')
     return Ajax().put('/meal', {
         body: JSON.stringify(convertOpts(meal, true)),
         headers: {

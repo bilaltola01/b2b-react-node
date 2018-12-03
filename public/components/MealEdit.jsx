@@ -65,6 +65,7 @@ class MealEdit extends Component {
 			detailComponents = <MealDetail id={detail.id} title={detail.title} description={detail.description} medias={detail.medias} />;
 		}
 
+
 		return (
 			<div id={"meal-id-" + catId +'-' + id}>
 				<h4 className="meal--edit--title">
@@ -74,15 +75,15 @@ class MealEdit extends Component {
 				<div className="content--edit">
 		            <div className="edit--block">
 	                    <label className="label--edit">Enter new Title:</label>
-	                    <input className="input--edit" type="text" name="meal--title" id="meal-title" defaultValue={title} onChange={(e) => this.handlers.onChange({target: e, key: 'title'}, onChange)} />
+	                    <input className="input--edit" type="text" name="meal--title" id="meal-title" value={title} onChange={(e) => this.handlers.onChange({target: e, key: 'title'}, onChange)} />
 	                </div>
 	                <div className="edit--block">
 	                    <label className="label--edit">Enter new Description:</label>
-	                    <input className="input--edit" type="text" name="meal--description" id="meal-description" defaultValue={description} onChange={(e) => this.handlers.onChange({target: e, key: 'description'}, onChange)} />
+	                    <input className="input--edit" type="text" name="meal--description" id="meal-description" value={description} onChange={(e) => this.handlers.onChange({target: e, key: 'description'}, onChange)} />
 	                </div>
 	                <div className="edit--block">
 	                    <label className="label--edit">Enter new Price:</label>
-	                    <input className="input--edit" type="text" name="meal--price" id="meal-price" defaultValue={price > 0 ? price : ''} onChange={(e) => this.handlers.onChange({target: e, key: 'price'}, onChange)} />
+	                    <input className="input--edit" type="text" name="meal--price" id="meal-price" value={price > 0 ? price : ''} onChange={(e) => this.handlers.onChange({target: e, key: 'price'}, onChange)} />
 	                </div>
 		            {detailComponents}
 	            </div>

@@ -136,7 +136,6 @@ class MealsEdit extends Component {
 	render() {
 		const { meals, onChange, category } = this.props;
 
-		console.log(this.props);
 
 		const mealComponents = (this.state.allMeals && this.state.allMeals.length > 0) ? this.state.allMeals.map((meal, index) => {
 			return <MealEdit 

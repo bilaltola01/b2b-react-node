@@ -51,7 +51,6 @@ let createHandlers = (ctx) => {
 	};
 
 	let onMealsChange = (obj) => {
-		console.log(obj);
 		let cat = {
 			id: obj.catId,
 			title: obj.title,

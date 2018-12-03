@@ -14,8 +14,7 @@ let createHandlers = (ctx) => {
 		ctx.setState((prevState) => {
 			console.log(prevState.allCategories, 'prevState.allCategories')
 			categories = prevState.allCategories.reduce((acc, current) => {
-				console.log(current, obj, 'mmmmmmmmm')
-				if (current.Category && (current.Category.CategoryStandardID || current.Category.id) ) {
+				if (current.Category && (current.Category.CategoryStandardID || current.Category.id)) {
 					return ((current.Category.CategoryStandardID || current.Category.id) !== obj.id) ? acc.concat([current]) : acc;
 				}
 
@@ -26,10 +25,7 @@ let createHandlers = (ctx) => {
 				return (current.id !== obj.id) ? acc.concat([current]) : acc;
 			}, []);
 
-			console.log(prevState.allCategories);
-
-			console.log(categories, 'teststt.categories');
-			ctx.props.onChange('categories', {data: categories});
+			ctx.props.onChange('categories', { data: categories });
 
 			return {
 				allCategories: categories
@@ -61,10 +57,7 @@ let createHandlers = (ctx) => {
 						obj.Category.CategoryStandardID = cat.CategoryID || cat.id;
 					}
 
-					if (cat.meals && cat.meals.length > 0) {
-						obj.meals = cat.meals;
-					}
-
+					obj.meals = cat.meals;
 					console.log(obj);
 					return obj;
 				}
@@ -75,7 +68,7 @@ let createHandlers = (ctx) => {
 			lastSelectedCategory = cat.CategoryID || cat.id;
 
 			console.log(categories);
-			ctx.props.onChange('categories', {data: categories});
+			ctx.props.onChange('categories', { data: categories });
 
 			return {
 				allCategories: categories
@@ -115,7 +108,7 @@ let createHandlers = (ctx) => {
 
 			categories.push(finalObj);
 			console.log(categories, 'teststt.categories');
-			ctx.props.onChange('categories', {data: categories});
+			ctx.props.onChange('categories', { data: categories });
 
 			return {
 				allCategories: categories
@@ -124,8 +117,8 @@ let createHandlers = (ctx) => {
 	};
 
 	let getAvailableCategories = (type) => {
-        ctx.props.dispatch(actionCreators.getCategories(type));
-    };
+		ctx.props.dispatch(actionCreators.getCategories(type));
+	};
 
 	return {
 		onCategoryRemove,
@@ -145,12 +138,12 @@ class MenuCategoriesEdit extends Component {
 	}
 
 	componentDidMount() {
-        this.handlers.getAvailableCategories('standard');
+		this.handlers.getAvailableCategories('standard');
 	}
-	
-	componentWillReceiveProps (nextProps, prevProps) {
-		if(nextProps.categories !== prevProps.categories) {
-			
+
+	componentWillReceiveProps(nextProps, prevProps) {
+		if (nextProps.categories !== prevProps.categories) {
+
 		}
 	}
 
@@ -178,15 +171,15 @@ class MenuCategoriesEdit extends Component {
 			<div>
 				<h3 className="asset--title">Categories</h3>
 
-                {categoriesComponent}
-                <div className="branch--add category--add">
-                	<div onClick={(e) => this.handlers.onCategoryAdd()}>
+				{categoriesComponent}
+				<div className="branch--add category--add">
+					<div onClick={(e) => this.handlers.onCategoryAdd()}>
 						<div className="add-item dashed">
 							<span>Choose a Category <strong>+</strong></span>
 						</div>
 					</div>
-                </div>
-            </div>
+				</div>
+			</div>
 		)
 	}
 };
@@ -199,9 +192,9 @@ MenuCategoriesEdit.propTypes = {
 
 const mapStateToProps = (state) => {
 	console.log(state);
-  return {
-    availableCategories: state._categories.categories
-  };
+	return {
+		availableCategories: state._categories.categories
+	};
 };
 
 export default connect(mapStateToProps)(MenuCategoriesEdit);
