@@ -53,7 +53,7 @@ export function updateMenuCategories (menuId, cats) {
     if (cats.length <= 0) {
         return removeMenuCategories();
     }
-
+    console.log('cats',cats)
     return Promise.all(cats.map((cat) => {
         let catId = cat.MenuCategoryID || cat.menuCategoryId;
         if (catId) {

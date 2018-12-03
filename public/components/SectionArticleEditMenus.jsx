@@ -6,7 +6,7 @@ class SectionArticleEditMenus extends Component {
 	render() {
 		const { title, dateUpdate, component } = this.props;
 
-		console.log(component.props);
+		console.log(component.props, 'component.props');
 
 		const menuComponents = (component.props.menus && component.props.menus.length > 0) ? component.props.menus.map((menu, index) => {
 			return <SectionArticleEditMenu 

@@ -34,7 +34,7 @@ let createHandlers = (ctx) => {
 	};
 
 	let onCategoryChange = (cat) => {
-		console.log(cat);
+		console.log(cat, 'tttt');
 		let categories;
 		ctx.setState((prevState) => {
 			console.log(prevState.allCategories);
@@ -57,8 +57,8 @@ let createHandlers = (ctx) => {
 						obj.Category.CategoryStandardID = cat.CategoryID || cat.id;
 					}
 
-					obj.meals = cat.meals;
-					console.log(obj);
+					obj.meals = cat.meals ?  cat.meals : [];
+					
 					return obj;
 				}
 

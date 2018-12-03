@@ -128,11 +128,26 @@ class MenuCategoryEdit extends Component {
 		const stateTitle = this.state.category.title;
 
 		var calCategories = totalCategories ? JSON.parse(JSON.stringify(totalCategories)) : [];
+
+		var find = calCategories.find((cate) => { return cate.CategoryStandardID == stateId; });
 		const availableCategories = calCategories.map((cate, index) => {
-			var match = (cate.CategoryStandardID == stateId) || !(categoriesAll.find(a=>a.CategoryStandardID == cate.CategoryStandardID))
-			cate.disabled = match ? false : true;
+			if(find) {
+				if(cate.CategoryStandardID == stateId) {
+					cate.disabled = true;
+				}else {
+					cate.disabled = true;
+				}
+			} else {
+				cate.disabled = false;
+			}
 			return cate;
 		});
+
+		// const availableCategories = calCategories.map((cate, index) => {
+		// 	var match = (cate.CategoryStandardID == stateId) || !(categoriesAll.find(a=>a.CategoryStandardID == cate.CategoryStandardID))
+		// 	cate.disabled = match ? false : true;
+		// 	return cate;
+		// });
 
 		const obj = {
 			type: "categories",

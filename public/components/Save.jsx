@@ -75,7 +75,16 @@ let createHandlers = (ctx) => {
 				return acc.concat(cat.meals);
 			}, []);
 
-			if (!meals || meals.length <= 0) {
+			let noMeals = menu.categories.find((cat) => {
+				return !cat.meals || !cat.meals.length
+			}, []);
+
+			if (noMeals) {
+				errors.push({
+					name: 'meals',
+					message: 'Please choose at least one Meal for each Menu Category for your menu.'
+				});
+			} else if (!meals || meals.length <= 0) {
 				errors.push({
 					name: 'meals',
 					message: 'Please choose at least one Meal for each Menu Category for your menu.'
@@ -95,7 +104,6 @@ let createHandlers = (ctx) => {
 				}
 			}
 		}
-
 
 		ctx.setState({
 			validationErrors: errors,
@@ -157,16 +165,16 @@ class Save extends Component {
 					state: { component: this.state.component }
 				}} />
 			) : ((this.state.isValid) ? (
+				<div className="profile-save">
+					<button id="menu-save" onClick={(e) => this.handlers.onSave(this.props)}>Save Menu Changes</button>
+				</div>
+			) : (
 					<div className="profile-save">
-		                <button id="menu-save" onClick={(e) => this.handlers.onSave(this.props)}>Save Menu Changes</button>
-		            </div>
-				) : (
-					<div className="profile-save">
-		                <button id="menu-save" onClick={(e) => this.handlers.onSave(this.props)}>Save Menu Changes</button>
-		            	<div className="error">
-			            	Please check that all the fields are filled before saving your menu (Category, Meal, etc...).
+						<button id="menu-save" onClick={(e) => this.handlers.onSave(this.props)}>Save Menu Changes</button>
+						<div className="error">
+							Please check that all the fields are filled before saving your menu (Category, Meal, etc...).
 			            </div>
-		            </div>
+					</div>
 				)
 			);
 

@@ -60,11 +60,11 @@ class SectionArticleAddMenu extends Component {
 			<MenuBranchesEdit branches={branches} onChange={this.handlers.onChanges} />
 		);
 
-		const menuLanguages = (this.props.menu && this.props.menu.branches && this.props.menu.branches.length > 0) ? (
+		const menuLanguages = (this.props.menu && this.props.menu.languages && this.props.menu.languages.length > 0) ? (
 			<BranchLanguagesEdit languages={languages} onChange={this.handlers.onChanges} />
 		) : null;
 
-		const menuCategories = (this.props.menu && this.props.menu.languages && this.props.menu.languages.length > 0) ? (
+		const menuCategories = (this.props.menu && this.props.menu.categories && this.props.menu.categories.length > 0) ? (
 			<MenuCategoriesEdit categories={categories} onChange={this.handlers.onChanges} />
 		) : null;
 
