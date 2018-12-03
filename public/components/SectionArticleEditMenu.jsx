@@ -123,14 +123,10 @@ class SectionArticleEditMenu extends Component {
 		: null;
 
 
-		const menuLanguages = (languages && languages.length > 0) ? (
-			<BranchLanguagesEdit languages={languages.map(language => language.Language)} onChange={this.handlers.onChanges} />
-		) : null;
-
-		const menuCategories = (categories && categories.length > 0) ? (
-			<MenuCategoriesEdit categories={categories} onChange={this.handlers.onChanges} />
-		) : null;
-
+		const menuLanguages = <BranchLanguagesEdit languages={(languages && languages.length > 0) ? languages.map(language => language.Language) : []} onChange={this.handlers.onChanges} />
+		
+		const menuCategories = <MenuCategoriesEdit categories={(categories && categories.length > 0) ? categories : []} onChange={this.handlers.onChanges} />
+	 
 		return (
 			<div>
 	            <div className="content--container global-padding-wrapper">
