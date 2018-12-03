@@ -133,6 +133,12 @@ class MealsEdit extends Component {
 		this.handlers = createHandlers(this);
 	}
 
+	componentWillReceiveProps(nextProps, prevProps) {
+		if (nextProps.meals !== prevProps.meals) {
+			console.log(nextProps.meals, 'nextProps.meals');
+		}
+	}
+
 	render() {
 		const { meals, onChange, category } = this.props;
 

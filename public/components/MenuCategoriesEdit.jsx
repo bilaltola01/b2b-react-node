@@ -39,7 +39,7 @@ let createHandlers = (ctx) => {
 			console.log(prevState.allCategories);
 
 			categories = prevState.allCategories.map((prevCategory, index) => {
-				console.log(prevCategory);
+				console.log(prevCategory, cat);
 
 				if ((prevCategory.CategoryID === cat.id) ||
 					(prevCategory.id === 1 || prevCategory.CategoryID === 1) /*&& prevState.allCategories.length === 1*/ ||
@@ -56,7 +56,7 @@ let createHandlers = (ctx) => {
 						obj.Category.CategoryStandardID = cat.CategoryID || cat.id;
 					}
 
-					obj.meals = cat.meals ?  cat.meals : [];
+					obj.meals = cat.meals ?  cat.meals : prevCategory.meals;
 					
 					return obj;
 				}

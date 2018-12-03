@@ -56,8 +56,12 @@ export function updateMenuCategories (menuId, cats) {
     return Promise.all(cats.map((cat) => {
         let catId = cat.MenuCategoryID || cat.menuCategoryId;
         if (catId) {
-            return Meal.removeMeals(cat.meals, catId).then((newCatId) => {
-                return Meal.updateMeals(cat.meals, catId);
+            console.log(cat)
+            return updateMenuCategory(cat).then((newCatId) => {
+                console.log(newCatId, 'test')
+                return Meal.removeMeals(cat.meals, catId).then((newCatId) => {
+                    return Meal.updateMeals(cat.meals, catId);
+                });
             });
         }
 
@@ -72,7 +76,7 @@ export function updateMenuCategory (cat) {
         console.error('Category id is not specified!');
         return;
     }
-
+    console.log(JSON.stringify(convertOpts(cat, true)), 'jjjjjjj')
     return Ajax().put('/menu-category', {
         body: JSON.stringify(convertOpts(cat, true)),
         headers: {
@@ -472,7 +476,7 @@ function convertOpts (cat, isUpdate) {
     }
     */
 
-    let id = cat.id || cat.MenuCategoryID;
+    let id = cat.MenuCategoryID || cat.id;
     let obj = Object.keys(cat).reduce((acc, current) => {
         let matchingKeys = [];
         for (let key of Mapping.getTableMap('menucategory').keys()) {

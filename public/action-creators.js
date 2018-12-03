@@ -172,7 +172,7 @@ export function setMenu (menu, data) {
     finalMenu[dataKey] = data[dataKey];
   }
 
-  console.log(finalMenu);
+  console.log(finalMenu, 'finalMenu');
 
   return {
     types: ['SET_MENU_REQUEST', 'SET_MENU_SUCCESS', 'SET_MENU_FAILURE'],
