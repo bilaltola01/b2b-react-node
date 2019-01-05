@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router-dom';
-
+import axios from 'axios';
 import { connect } from 'react-redux';
 import * as actionCreators from '../action-creators';
 
@@ -8,6 +8,7 @@ import Menu from './Menu';
 import Translation from './Translation';
 import BranchLanguagesEdit from './BranchLanguagesEdit';
 import MenuCategoriesEdit from './MenuCategoriesEdit';
+import MenuBranchEdit from './MenuBranchEdit';
 
 let createHandlers = (ctx) => {
 	let onImageUpload = () => {
@@ -64,11 +65,20 @@ class SectionArticleEditMenu extends Component {
 		this.handlers = createHandlers(this);
 	}
 
+
 	componentDidMount() {
 		this.handlers.getMenu({
 			...this.props,
 			languages: this.props.languages,
 		});
+		var body  = {
+			CompanyID:this.state._profile.profile.CompanyID
+		}
+
+		axios.post("/menuBranch", body)
+		  .then(res => {
+			const branches = res.data;
+		})
 	}
 
 	render() {
@@ -125,7 +135,7 @@ class SectionArticleEditMenu extends Component {
 
 		const menuLanguages = <BranchLanguagesEdit languages={(languages && languages.length > 0) ? languages.map(language => language.Language) : []} onChange={this.handlers.onChanges} />
 		const menuCategories = <MenuCategoriesEdit categories={(categories && categories.length > 0) ? categories : []} onChange={this.handlers.onChanges} />
-	 
+		const menuBranches = <MenuBranchEdit/>;
 		return (
 			<div>
 	            <div className="content--container global-padding-wrapper">
@@ -157,6 +167,10 @@ class SectionArticleEditMenu extends Component {
 		            <div className="menu--categories">
 		                {menuCategories}
 		            </div>
+
+					<div className="menu--languages">
+						{menuBranches}
+					</div>
 	            </div>
 			</div>
 		)
@@ -171,7 +185,8 @@ SectionArticleEditMenu.propTypes = {
 	categories: PropTypes.array,
 	languages: PropTypes.array,
 	translations: PropTypes.array,
-	currency: PropTypes.object
+	currency: PropTypes.object,
+	companyID: PropTypes.number
 };
 
 const mapStateToProps = (state) => {

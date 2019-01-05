@@ -21,7 +21,9 @@ import MenuPage from './MenuPage';
 import TranslatePage from './TranslatePage';
 import TranslationsPage from './TranslationsPage';
 import TranslationPage from './TranslationPage';
-
+import Signup from './Signup'
+import ForgotPassword from './ForgotPassword'
+import ResetPassword from './ResetPassword'
 import Page from './Page';
 import PrivateRoute from './PrivateRoute';
 
@@ -59,12 +61,30 @@ class App extends Component {
         <Home dispatch={dispatch} />
       );
     };
+    const SignupRenderer = () => {
+      return (
+        <Signup dispatch={dispatch} />
+      );
+    };
+    const ForgotPasswordRenderer = () => {
+      return (
+        <ForgotPassword dispatch={dispatch} />
+      );
+    };
+    const ResetPasswordRenderer = () => {
+      return (
+        <ResetPassword dispatch={dispatch} />
+      );
+    };
 
     return (this.props.isAuthenticated !== undefined) ? (
       <Router>
         <div>
           <Route path="/" render={AuthRootRenderer} />
           <Route path="/home" render={HomeRenderer} />
+          <Route path="/signup" render={SignupRenderer} />
+          <Route path="/forgot" render={ForgotPasswordRenderer} />
+          <Route path="/reset/:code" render={ResetPasswordRenderer} />
           <Page>
             <PrivateRoute path="/dashboard" component={Dashboard} />
             <PrivateRoute path="/profile/:action" component={Profile} />

@@ -1,26 +1,26 @@
 import { Ajax } from '../../shared/ajax.utils';
 
-import { Mapping } from  '../../shared/mapping.utils';
-import { StorageManagerInstance } from  '../../shared/storage.utils';
+import { Mapping } from '../../shared/mapping.utils';
+import { StorageManagerInstance } from '../../shared/storage.utils';
 
 import * as MenuCategory from './menu-category.service';
 import * as MenuLanguage from './menu-language.service';
 import * as Meal from './meal.service';
 
 
-export function updateMenu (opts) {
+export function updateMenu(opts) {
     let menuId = opts.MenuID || opts.id;
     if (menuId) {
         return MenuCategory.removeSelectedMenuCategory(opts)
-            .then( MenuCategory.updateMenuCategories(menuId, opts.categories))
+            .then(MenuCategory.updateMenuCategories(menuId, opts.categories))
             .then(MenuLanguage.updateMenuLanguages(menuId, opts.languages))
             .then(Ajax().put('/menu', {
-              body: JSON.stringify(convertOpts(opts, true)),
-              headers: {
-                "content-type": "application/json",
-                "cache-control": "no-cache",
-                "x-access-token": StorageManagerInstance.read('token')
-              }
+                body: JSON.stringify(convertOpts(opts, true)),
+                headers: {
+                    "content-type": "application/json",
+                    "cache-control": "no-cache",
+                    "x-access-token": StorageManagerInstance.read('token')
+                }
             }));
     } else {
         let id;
@@ -49,7 +49,8 @@ export function updateMenu (opts) {
     }
 }
 
-function postMenu (obj) {
+function postMenu(obj) {
+    console.log(StorageManagerInstance.read('token'))
     if (obj.id) {
         delete obj.id;
     }
@@ -69,7 +70,7 @@ function postMenu (obj) {
 }
 
 
-export function getMenus () {
+export function getMenus() {
     let menus;
     return Ajax().get('/menu', {
         headers: {
@@ -129,7 +130,7 @@ export function getMenus () {
 // TRANSLATE
 //
 
-export function getMenuTranslations () {
+export function getMenuTranslations() {
     return Ajax().get('/translate-menu', {
         headers: {
             "content-type": "application/json",
@@ -153,7 +154,7 @@ export function getMenuTranslations () {
     });
 }
 
-export function getMenuTranslation (id, translations) {
+export function getMenuTranslation(id, translations) {
     let menuCategoryTranslations;
     let menuTranslations = translations;
     let mealTranslations;
@@ -198,11 +199,11 @@ export function getMenuTranslation (id, translations) {
     });
 }
 
-export function translateMenu (opts, mode) {
+export function translateMenu(opts, mode) {
     console.log(opts);
 
     let propsToTranslate = Object.keys(opts).filter((key) => {
-        return ((key === 'title' || key === 'Title') || (key === 'description' || key === 'Description')) && (opts[key] && opts[key].length > 0);
+        return ((key === 'title' ||  key === 'Title') || (key === 'description' || key === 'Description')) && (opts[key] && opts[key].length > 0);
     }).map((key) => {
         return {
             key: key,
@@ -257,7 +258,7 @@ export function translateMenu (opts, mode) {
                     const translateLangs = (language, props, id) => {
                         return props.map((prop) => {
                             return Ajax().post('/translate-menu', {
-                                body: JSON.stringify(convertForTranslation(language, {type: 'menu', id: menuId, prop: prop})),
+                                body: JSON.stringify(convertForTranslation(language, { type: 'menu', id: menuId, prop: prop })),
                                 headers: {
                                     "content-type": "application/json",
                                     "cache-control": "no-cache",
@@ -320,11 +321,11 @@ export function translateMenu (opts, mode) {
     });
 }
 
-function convertForTranslation (lang, obj) {
+function convertForTranslation(lang, obj) {
     console.log(lang);
     switch (obj.type) {
         case 'menu':
-        console.log({
+            console.log({
                 obj: {
                     menuId: obj.id,
                     key: obj.prop.key,
@@ -334,7 +335,7 @@ function convertForTranslation (lang, obj) {
                     branchLanguageId: lang.id,
                     payload: obj.prop.value
                 }
-        });
+            });
             return {
                 obj: {
                     menuId: obj.id,
@@ -349,14 +350,14 @@ function convertForTranslation (lang, obj) {
     }
 }
 
-export function deleteMenu (menu) {
+export function deleteMenu(menu) {
     console.log('deletion!!!');
     console.log(menu);
     const id = menu.MenuID || menu.id;
 
     return new Promise((resolve, reject) => {
         Ajax().delete('/menu', {
-            body: JSON.stringify({id: id}),
+            body: JSON.stringify({ id: id }),
             headers: {
                 "content-type": "application/json",
                 "cache-control": "no-cache",
@@ -375,15 +376,15 @@ export function deleteMenu (menu) {
 }
 
 
-function convertOpts (opts, isUpdate) {
+function convertOpts(opts, isUpdate) {
     console.log(opts);
 
-/*
-    if (!opts.id) {
-        console.error('The menu id to update is not specified!');
-        return;
-    }
-    */
+    /*
+        if (!opts.id) {
+            console.error('The menu id to update is not specified!');
+            return;
+        }
+        */
 
     let id = opts.id || opts.MenuID;
     let obj = Object.keys(opts).reduce((acc, current) => {
@@ -401,7 +402,7 @@ function convertOpts (opts, isUpdate) {
     }, {});
     //
 
-    console.log({id: id, updates: obj});
+    console.log({ id: id, updates: obj });
 
     return (isUpdate) ? {
         id: id,
@@ -410,4 +411,3 @@ function convertOpts (opts, isUpdate) {
         obj: obj
     };
 }
-

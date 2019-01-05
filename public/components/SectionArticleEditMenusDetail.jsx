@@ -5,7 +5,7 @@ import SectionArticleEditMenu from './SectionArticleEditMenu';
 class SectionArticleEditMenusDetail extends Component {
 	render() {
 		const { title, dateUpdate, component } = this.props;
-
+		console.log(component)
 		const currencies = (component.props.currencies && component.props.currencies.length > 0) ? component.props.currencies : [];
 		const languages = (component.props.languages && component.props.languages.length > 0) ? component.props.languages : [];
 

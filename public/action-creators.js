@@ -659,3 +659,220 @@ export function getAuth (data, cb) {
     }
   }
 };
+
+
+export function signupUser (data, cb) {
+  return {
+    types: ['SIGNUP_REQUEST', 'SIGNUP_SUCCESS', 'SIGNUP_FAILURE'],
+    promise: () => {
+      return new Promise((resolve, reject) => {
+
+        AuthService.signup(data, {
+          body: JSON.stringify(data),
+          headers: {
+            "content-type": "application/json",
+            "cache-control": "no-cache"
+          }
+        }).then((res) => {
+          console.log('request succeeded with JSON response', res);
+          // If user is successfully logged in, Store the auth token in localStorage for further usage
+          if (res.token && res.success) {
+            StorageManagerInstance.save('token', res.token);
+            if (typeof cb === 'function') {
+              cb({
+                authenticated: true,
+                completed: true,
+                token: res.token
+              });
+            }
+            resolve({
+              authenticated: true,
+              completed: true,
+              token: res.token
+            });
+          } else {
+            reject({
+              error: res.error,
+              authenticated: false,
+              completed: true
+            });
+          }
+        }).catch((err) => {
+          console.log('request failed', err);
+
+          let error = err.error;
+          
+          if (typeof cb === 'function') {
+            cb({
+              authenticated: false,
+              completed: true,
+              error: error
+            });
+          }
+
+          reject({
+            error: error,
+            authenticated: false,
+            completed: true
+          })
+        });
+      });
+    }
+  }
+};
+
+export function forgotPassword (data, cb) {
+  return {
+    types: ['FORGOT_REQUEST', 'FORGOT_SUCCESS', 'FORGOT_FAILURE'],
+    promise: () => {
+      return new Promise((resolve, reject) => {
+        AuthService.forgotPassword(data, {
+          body: JSON.stringify(data),
+          headers: {
+            "content-type": "application/json",
+            "cache-control": "no-cache"
+          }
+        }).then((res) => {
+          console.log(res);
+          // If user is successfully logged in, Store the auth token in localStorage for further usage
+          if (res.success) {
+            if (typeof cb === 'function') {
+              cb({
+                completed: true,
+                message: res.message
+              });
+            }
+
+            resolve({
+              completed: true,
+              message: res.message
+            });
+          } else {
+            reject({
+              error: res.error,
+              completed: true
+            });
+          }
+        }).catch((err) => {
+          console.log('request failed', err);
+          if (typeof cb === 'function') {
+            cb({
+              error: err.error,
+              authenticated: false,
+              completed: true
+            });
+          }
+          reject({
+            error: err.error,
+            authenticated: false,
+            completed: true
+          })
+        });
+      });
+    }
+  }
+};
+
+export function checkResetCode(data, cb) {
+  return {
+    types: ['CHECK_RESET_CODE_REQUEST', 'CHECK_RESET_CODE_SUCCESS', 'CHECK_RESET_CODE_FAILURE'],
+    promise: () => {
+      return new Promise((resolve, reject) => {
+        AuthService.checkResetCode(data, {
+          body: JSON.stringify(data),
+          headers: {
+            "content-type": "application/json",
+            "cache-control": "no-cache"
+          }
+        }).then((res) => {
+          console.log(res);
+          // If user is successfully logged in, Store the auth token in localStorage for further usage
+          if (res.success) {
+            if (typeof cb === 'function') {
+              cb({
+                completed: true,
+                message: res.message
+              });
+            }
+
+            resolve({
+              completed: true,
+              message: res.message
+            });
+          } else {
+            reject({
+              error: res.error,
+              completed: true
+            });
+          }
+        }).catch((err) => {
+          console.log('request failed', err);
+          if (typeof cb === 'function') {
+            cb({
+              error: err.error,
+              authenticated: false,
+              completed: true
+            });
+          }
+          reject({
+            error: err.error,
+            authenticated: false,
+            completed: true
+          })
+        });
+      });
+    }
+  }
+};
+
+export function updatePassword(data, cb) {
+  return {
+    types: ['UPDATE_PASSWORD_REQUEST', 'UPDATE_PASSWORD_SUCCESS', 'UPDATE_PASSWORD_FAILURE'],
+    promise: () => {
+      return new Promise((resolve, reject) => {
+        AuthService.updatePassword(data, {
+          body: JSON.stringify(data),
+          headers: {
+            "content-type": "application/json",
+            "cache-control": "no-cache"
+          }
+        }).then((res) => {
+          console.log(res);
+          // If user is successfully logged in, Store the auth token in localStorage for further usage
+          if (res.success) {
+            if (typeof cb === 'function') {
+              cb({
+                completed: true,
+                message: res.message
+              });
+            }
+
+            resolve({
+              completed: true,
+              message: res.message
+            });
+          } else {
+            reject({
+              error: res.error,
+              completed: true
+            });
+          }
+        }).catch((err) => {
+          console.log('request failed', err);
+          if (typeof cb === 'function') {
+            cb({
+              error: err.error,
+              authenticated: false,
+              completed: true
+            });
+          }
+          reject({
+            error: err.error,
+            authenticated: false,
+            completed: true
+          })
+        });
+      });
+    }
+  }
+};

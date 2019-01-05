@@ -4,6 +4,11 @@ const DBLayer = require('../DBLayer');
 const db = DBLayer.connection;
 const cryptUtils = require('../shared/crypt-utils');
 const dateUtils = require('../shared/date-utils');
+const bcrypt = require('bcrypt');
+const crypto = require('crypto');
+
+const SALT_ROUNDS = 10;
+
 
 // Create new company in the database
 // Returns a resolved Promise containing its id
@@ -33,6 +38,17 @@ Company.update = (id, obj) => {
   });
 };
 
+Company.updatePwd = (id, obj) => {
+  let company = obj;
+  company.DateUpdated = dateUtils.toMysqlDate(new Date());
+  return cryptUtils.generateHash(obj.Pwd).then(res => {
+    company.Pwd = res;
+    return Company.getById(id).update(company).then(res => {
+      return Company.getById(id);
+    });
+  });
+}
+
 // Get a company by id
 // Returns a Promise
 Company.getById = (id) => {
@@ -40,8 +56,10 @@ Company.getById = (id) => {
     CompanyID: id
   }).first('CompanyID',
     'Name',
+    'Username',
     'Website',
     'Email',
+    'country',
     'Description',
     'LogoPath',
     'LogoAltDesc',
@@ -49,7 +67,9 @@ Company.getById = (id) => {
     'Twitter',
     'Facebook',
     'Youtube',
-    'Instagram'
+    'Instagram',
+    'resetcode',
+    'resetcodevalidity'
   );
 };
 
@@ -60,8 +80,10 @@ Company.getByEmail = (email) => {
     Email: email
   }).first('CompanyID',
     'Name',
+    'Username',
     'Website',
     'Email',
+    'country',
     'Description',
     'LogoPath',
     'LogoAltDesc',
@@ -69,20 +91,22 @@ Company.getByEmail = (email) => {
     'Twitter',
     'Facebook',
     'Youtube',
-    'Instagram'
+    'Instagram',
+    'resetcode',
+    'resetcodevalidity'
   );
 };
 
 Company.getByEmailPwd = (email) => {
   return db('Company').where({
     Email: email
-  }).first('CompanyID', 'Name', 'Website', 'Email', 'Pwd');
+  }).first('CompanyID', 'Name', 'Username','Website', 'Email', 'Pwd');
 };
 
 Company.emailExists = (email) => {
   return db('Company').where({
     Email: email
-  }).first('CompanyID', 'Name', 'Website', 'Email').then(company => { return !!company; });
+  }).first('CompanyID', 'Name', 'Username','Website', 'Email').then(company => { return !!company; });
 };
 
 // Get a company by conditions object:
@@ -94,8 +118,10 @@ Company.get = (conditions) => {
   return db('Company').where(conditions).select(
     'CompanyID',
     'Name',
+    'Username',
     'Website',
     'Email',
+    'country',
     'Description',
     'LogoPath',
     'LogoAltDesc',
@@ -103,7 +129,9 @@ Company.get = (conditions) => {
     'Twitter',
     'Facebook',
     'Youtube',
-    'Instagram'
+    'Instagram',
+    'resetcode',
+    'resetcodevalidity'
   );
 };
 
@@ -113,8 +141,10 @@ Company.getAll = () => {
   return db.select(
     'CompanyID',
     'Name',
+    'Username',
     'Website',
     'Email',
+    'country',
     'Description',
     'LogoPath',
     'LogoAltDesc',
@@ -122,7 +152,9 @@ Company.getAll = () => {
     'Twitter',
     'Facebook',
     'Youtube',
-    'Instagram'
+    'Instagram',
+    'resetcode',
+    'resetcodevalidity'
   ).from('Company');
 };
 

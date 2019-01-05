@@ -1,18 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-
-import LoginHeader from './LoginHeader';
-import LoginContent from './LoginContent';
-import { Link } from 'react-router-dom';
-const cookies = true;
-class Home extends Component {
-  constructor(props) {
-    super(props);
-    this.state ={
-      cookies:true
-    }
-}
-  gotit(){
-    this.setState({cookies:!this.state.cookies})  }
+import ForgotPasswordHeader from './ForgotPasswordHeader';
+class ForgotPassword extends Component {
   render () {
     const { dispatch } = this.props;
 
@@ -33,7 +21,7 @@ class Home extends Component {
           </div>
 
           <div className="portal--desc">
-              <LoginHeader dispatch={dispatch} />
+              <ForgotPasswordHeader dispatch={dispatch} />
           </div>
         </main>
         <div className="footer-nav">
@@ -42,17 +30,13 @@ class Home extends Component {
               <li><a href="mailto:contact@one-menu.com">contact@one-menu.com</a></li>
             </ul>
           </div>
-          {this.state.cookies && <div className="cokkieBar" ref="cokkieBar">
-            We use cookies to ensure that we provide you with the best possible experience. If you continue to use our portal, we will assume that you are happy with it. <Link to="/signup">Create Account</Link>
-            <button onClick={()=>this.gotit()}>Got It</button>
-          </div>}
       </div>
     )
   }
 };
 
-Home.propTypes = {
+ForgotPassword.propTypes = {
   dispatch: PropTypes.func.isRequired
 };
 
-export default Home;
+export default ForgotPassword;

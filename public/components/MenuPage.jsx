@@ -61,6 +61,7 @@ class MenuPage extends Component {
   }
 
   getMenus(profile) {
+    console.log(profile)
     return (profile.branches && profile.branches.length > 0) ? profile.branches.reduce((acc, branch) => {
       return acc.concat(branch.menus);
     }, []) : [];
@@ -124,6 +125,10 @@ class MenuPage extends Component {
     const currentMenu = this.getCurrentMenu(filteredMenus);
     const menuTitle = (currentMenu && currentMenu.Title) ? currentMenu.Title : ("Menu " + id);
 
+    console.log(menus)
+    console.log("currentBranchMenuId " + currentBranchMenuId)
+    console.log(currentBranchMenu)
+    console.log(currentBranch)
     const company = {
       name: profile.Name,
       description: profile.Description,
