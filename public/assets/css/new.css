@@ -26,6 +26,24 @@ html {
     background: transparent
 }
 
+.inputError input::-webkit-input-placeholder {
+    color: red !important;
+}
+
+.inputError input:-moz-placeholder {
+    /* Firefox 18- */
+    color: red !important;
+}
+
+.inputError input::-moz-placeholder {
+    /* Firefox 19+ */
+    color: red !important;
+}
+
+.inputError input:-ms-input-placeholder {
+    color: red !important;
+}
+
 .cokkieBar {
     position: fixed;
     bottom: 0;

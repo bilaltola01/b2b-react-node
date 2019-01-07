@@ -252,7 +252,38 @@ const countries = [
 let createHandlers = (ctx) => {
 	let onSignup = (e) => {
 		e.preventDefault();
-		console.log(ctx.getDataFromEvent(e))
+		var data = ctx.getDataFromEvent(e)
+		console.log(data)
+		if(!data.auth.name){
+			ctx.setState({
+				nameError:true
+			})
+		}
+		if(!data.auth.surname){
+			ctx.setState({
+				surnameError:true
+			})
+		} 
+		if(!data.auth.company){
+			ctx.setState({
+				companyError:true
+			})
+		} 
+		if(!data.auth.country){
+			ctx.setState({
+				countryError:true
+			})
+		} 
+		if(!data.auth.email){
+			ctx.setState({
+				emailError:true
+			})
+		} 
+		if(!data.auth.pwd){
+			ctx.setState({
+				pwdError:true
+			})
+		} 
 		ctx.props.dispatch(actionCreators.signupUser(ctx.getDataFromEvent(e), (res) => {
 			console.log(res);
 			if (res && res.authenticated) {
@@ -262,9 +293,11 @@ let createHandlers = (ctx) => {
 			}
 
 			if (res.error) {
-				ctx.setState({
-					errorMessage: res.error
-				});
+				if(res.error!='missingValue'){
+					ctx.setState({
+						errorMessage: res.error
+					});
+				}
 			}
 		}));
 	};
@@ -279,17 +312,15 @@ class SignupHeader extends Component {
 		super(props);
 		this.state = {
 			hasToRedirect: false,
-			errorMessage: ''
+			errorMessage: '',
+			nameError:false,
+			surnameError:false,
+			emailError: false,
+			pwdError: false,
+			companyError: false,
+			countryError: false
 		};
 		this.handlers = createHandlers(this);
-	}
-
-	componentDidMount(){
-		axios.get("https://restcountries.eu/rest/v2/all").then(res=>{
-
-		}).catch(err=>{
-
-		})
 	}
 
 	getDataFromEvent(e) {
@@ -328,22 +359,22 @@ class SignupHeader extends Component {
 				            <form id="signup-form" className="signup--form" action="#">
 				                <div className="row">
                                     <div className="col-md-6">
-                                        <p className="login--input">
+                                        <p className={this.state.nameError?"login--input inputError":"login--input"}>
                                             <input type="text" name="Name" className="input--underline" placeholder="Name" />
                                         </p>
                                     </div>
                                     <div className="col-md-6">
-                                        <p className="login--input">
+                                        <p className={this.state.surnameError?"login--input inputError":"login--input"}>
                                             <input type="text" name="Surname"  className="input--underline" placeholder="Surname" />
                                         </p>
                                     </div>
                                     <div className="col-md-6">
-                                        <p className="login--input">
+                                        <p className={this.state.companyError?"login--input inputError":"login--input"}>
                                             <input type="text" name="CompanyName" className="input--underline" placeholder="Company Name" />
                                         </p>
                                     </div>
                                     <div className="col-md-6">
-                                        <p className="login--input">
+                                        <p className={this.state.countryError?"login--input inputError":"login--input"}>
 											<select name="Country" className="input--underline" placeholder="Country">
 												{
 													countries.map((item, i)=>(
@@ -354,28 +385,24 @@ class SignupHeader extends Component {
                                         </p>
                                     </div>
                                     <div className="col-md-6">
-                                        <p className="login--input">
+                                        <p className={this.state.emailError?"login--input inputError":"login--input"}>
                                             <input type="text" name="Email" className="input--underline" placeholder="Email" />
                                         </p>
                                     </div>
                                     <div className="col-md-6">
-                                        <p className="login--input">
+                                        <p className={this.state.pwdError?"login--input inputError":"login--input"}>
                                             <input type="password" name="Pwd" className="input--underline" placeholder="Password" />
                                         </p>
                                     </div>
-                                    <div className="col-md-10">
+                                    <div className="col-md-12">
                                         <label className="checkContainer signup-checkbox">I agree to the <Link to="/terms" style={{textDecoration:'underline', color:'black'}}>Terms of use</Link> to recieve emails and updates and acknowledge that i have read the <Link to="/terms" style={{textDecoration:'underline', color:'black'}}>Privacy Policy.</Link> 
                                             <input className="Agree" name="Agree" type="checkbox"/>
                                             <span className="checkmark"></span>
                                         </label>
                                     </div>
-									{renderErrorMessage}
                                 </div>
-								<div className="row">
-									<div className="col-md-6" style={{marginLeft:"25%"}}>
-										<button id="button--login" className="button button--login-outline" onClick={this.handlers.onSignup}>Sign Up</button>
-									</div>
-								</div>
+				                {renderErrorMessage}
+									<button id="button--login" className="button button--login-outline" onClick={this.handlers.onSignup} style={{marginLeft:"25%", width:'50%'}}>Sign Up</button>
 				            </form>
 			            </div>
 			        </div>

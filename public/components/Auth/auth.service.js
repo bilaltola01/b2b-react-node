@@ -36,7 +36,7 @@ export function signup(data, opts) {
         if (!data.auth.Name || !data.auth.CompanyName || !data.auth.Surname || !data.auth.Pwd || !data.auth.Email || !data.auth.Country) {
             reject({
                 success: false,
-                error: 'All fields are necessary',
+                error: 'missingValue',
             });
             return;
         }
