@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 
 import MealDetail from './MealDetail';
-
+import ImageUpload from './ImageUpload';
 let createHandlers = (ctx) => {
 	let onRemove = (obj, fn) => {
 		ctx.setState({
@@ -20,11 +20,11 @@ let createHandlers = (ctx) => {
 				let title = document.querySelector('#meal-id-' + ctx.props.catId + '-' + ctx.props.id + ' #meal-title').value;
 				let desc = document.querySelector('#meal-id-' + ctx.props.catId + '-' + ctx.props.id + ' #meal-description').value;
 				let price = document.querySelector('#meal-id-' + ctx.props.catId + '-' + ctx.props.id + ' #meal-price').value;
-
+				console.log(ctx.props)
 				console.log(title);
 				console.log(desc);
 				console.log(price);
-
+				console.log(obj)
 				let tmp = {
 					catId: ctx.props.catId,
 					id: ctx.props.id,
@@ -41,9 +41,12 @@ let createHandlers = (ctx) => {
 			}
 		}
 	};
-
+	let onImageUpload = () => {
+		console.log('uploaded image!!');
+	};
 	return {
 		onRemove,
+		onImageUpload,
 		onChange
 	};
 };
@@ -58,8 +61,12 @@ class MealEdit extends Component {
 	}
 
 	render() {
-		const { id, catId, title, description, price, enableDetails, detail, onRemove, onChange } = this.props;
+		const { id, catId, title, description, price, images, enableDetails, detail, onRemove, onChange } = this.props;
 		let detailComponents = '';
+
+		const allImagesComponent = (
+			<ImageUpload onChanges={this.handlers.onChange} onUploadSubmit={this.handlers.onImageUpload} images={[]} />
+		);
 
 		if (detail &&Object.keys(detail) && Object.keys(detail).length > 0 && enableDetails) {
 			detailComponents = <MealDetail id={detail.id} title={detail.title} description={detail.description} medias={detail.medias} />;
@@ -85,6 +92,11 @@ class MealEdit extends Component {
 	                    <label className="label--edit">Enter new Price:</label>
 	                    <input className="input--edit" type="text" name="meal--price" id="meal-price" value={price > 0 ? price : ''} onChange={(e) => this.handlers.onChange({target: e, key: 'price'}, onChange)} />
 	                </div>
+					<div className="branch--images">
+						<p className="menu--title">Upload Meal Images</p>
+						{allImagesComponent}
+					</div>
+					
 		            {detailComponents}
 	            </div>
             </div>

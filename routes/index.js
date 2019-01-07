@@ -3,6 +3,7 @@
 const profileController = require('../controllers/profile.controller');
 const companyController = require('../controllers/company.controller');
 const mealController = require('../controllers/meal.controller');
+const mealImageController = require('../controllers/meal-image.controller');
 const languageController = require('../controllers/language.controller');
 const branchController = require('../controllers/branch.controller');
 const subscriptionController = require('../controllers/subscription.controller');
@@ -149,10 +150,10 @@ let Routes = class {
         router.put('/meal-remove', mealController.removeAll);
         router.delete('/meal', mealController.remove);
 
-        router.get('/flag', flagController.get);
-        router.post('/flag', flagController.post);
-
-
+        router.get('/meal-image', mealImageController.get);
+        router.post('/meal-image', mealImageController.post);
+        router.put('/meal-image', mealImageController.put);
+        router.delete('/meal-image', mealImageController.remove);
 
         router.get('/translate-menu-category', menuCategoryTranslationController.get);
         router.post('/translate-menu-category', menuCategoryTranslationController.post);

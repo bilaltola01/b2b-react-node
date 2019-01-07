@@ -52,7 +52,6 @@ class LanguagePicker extends Component {
 		}) : null;
 
 		const selectOptions = (data.items && data.items.length > 0) ? data.items.map((item, index) => {
-			console.log(item, 'ttttt')
 			let finalCode = item.CodeFull ? item.CodeFull : item.Code;
 			switch (data.type) {
 				case 'languages':

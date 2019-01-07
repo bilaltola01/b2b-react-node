@@ -22,6 +22,7 @@ let createHandlers = (ctx) => {
 				title: "",
 				description: "",
 				price: null,
+				images:[],
 				enableDetails: false,
 				detail: {},
 				onRemove: onRemove
@@ -149,7 +150,8 @@ class MealsEdit extends Component {
 				catId={category.id} 
 				title={meal.title || meal.Title} 
 				description={meal.description || meal.Description} 
-				price={meal.price || meal.Price} 
+				price={meal.price || meal.Price}
+				images={meal.images || meal.Images} 
 				enableDetails={meal.enableDetails} 
 				detail={meal.detail} 
 				onChange={this.handlers.onChange} 

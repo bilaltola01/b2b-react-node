@@ -363,16 +363,19 @@ class SignupHeader extends Component {
                                             <input type="password" name="Pwd" className="input--underline" placeholder="Password" />
                                         </p>
                                     </div>
-                                    <div className="col-md-12">
-                                        <label className="checkContainer signup-checkbox">I agree to the Terms of use to recieve emails and updates and acknowledge that i have resd the Privacy Policy.
+                                    <div className="col-md-10">
+                                        <label className="checkContainer signup-checkbox">I agree to the <Link to="/terms" style={{textDecoration:'underline', color:'black'}}>Terms of use</Link> to recieve emails and updates and acknowledge that i have read the <Link to="/terms" style={{textDecoration:'underline', color:'black'}}>Privacy Policy.</Link> 
                                             <input className="Agree" name="Agree" type="checkbox"/>
                                             <span className="checkmark"></span>
-                                            
                                         </label>
                                     </div>
+									{renderErrorMessage}
                                 </div>
-				                {renderErrorMessage}
-				                <button id="button--login" className="button button--login-outline" onClick={this.handlers.onSignup}>Sign Up</button>
+								<div className="row">
+									<div className="col-md-6" style={{marginLeft:"25%"}}>
+										<button id="button--login" className="button button--login-outline" onClick={this.handlers.onSignup}>Sign Up</button>
+									</div>
+								</div>
 				            </form>
 			            </div>
 			        </div>

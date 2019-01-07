@@ -24,6 +24,7 @@ import TranslationPage from './TranslationPage';
 import Signup from './Signup'
 import ForgotPassword from './ForgotPassword'
 import ResetPassword from './ResetPassword'
+import Terms from './Terms'
 import Page from './Page';
 import PrivateRoute from './PrivateRoute';
 
@@ -85,6 +86,7 @@ class App extends Component {
           <Route path="/signup" render={SignupRenderer} />
           <Route path="/forgot" render={ForgotPasswordRenderer} />
           <Route path="/reset/:code" render={ResetPasswordRenderer} />
+          <Route path="/terms" component={Terms} />
           <Page>
             <PrivateRoute path="/dashboard" component={Dashboard} />
             <PrivateRoute path="/profile/:action" component={Profile} />

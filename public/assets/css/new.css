@@ -22,7 +22,8 @@ html {
 }
 
 .login--input select {
-    margin-bottom: 5px !important
+    margin-bottom: 5px !important;
+    background: transparent
 }
 
 .cokkieBar {
@@ -925,8 +926,8 @@ screen\9 {
 }
 
 .signup-container {
-    width: 60%;
-    margin-left: 20%
+    width: 50%;
+    margin-left: 25%
 }
 
 .layout--login .login--input {

@@ -110,7 +110,8 @@ let createHandlers = (ctx) => {
 				message: 'Please provide at least one contact point that is not empty for your branch.'
 			});
 		}
-
+		console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
+		console.log(branch)
 		ctx.setState({
 			validationErrors: errors,
 			isValid: !errors.length
@@ -159,7 +160,6 @@ let createHandlers = (ctx) => {
 				});
 			default:
 				console.log(type, obj);
-
 				ctx.setState((prevState) => {
 					newBranch = prevState.branch;
 					newBranch[type] = obj.data;
