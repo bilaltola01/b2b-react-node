@@ -857,7 +857,7 @@ screen\9 {
 }
 
 .footer-nav {
-    position: absolute;
+    position: fixed;
     width: 100%;
     bottom: 0;
     padding: 20px;
@@ -916,6 +916,7 @@ screen\9 {
     margin: 0 auto;
     padding: 0 40px;
     z-index: 600;
+    overflow: scroll;
 }
 
 .layout--login .login--title {
@@ -1181,6 +1182,8 @@ screen\9 {
     color: #4d5368;
     background: #4F5168;
     min-width: 1024px;
+    position: fixed !important;
+    bottom: 0 !important
 }
 
 .layout--dashboard a {
@@ -5751,8 +5754,7 @@ MENU DETAIL
     .signup-container {
         width: 90%;
         margin-left: 5%;
-        margin-top: 4rem;
-        height: 65vh;
-        overflow: scroll;
+        margin-top: 8rem;
+        padding-bottom: 4rem
     }
 }
