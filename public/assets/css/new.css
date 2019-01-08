@@ -5738,4 +5738,9 @@ MENU DETAIL
     padding: 0;
 }
 
-.popup.popup--delete {}
+@media (max-width:1000px) {
+    .signup-container {
+        width: 90%;
+        margin-left: 5%
+    }
+}

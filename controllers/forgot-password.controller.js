@@ -30,7 +30,7 @@ ForgotPasswordController.post = (req, res) => {
                 from: 'no-reply@one-menu.com',
                 to: com.Email,
                 subject: 'Account recovery link',
-                text: "Dear Customer\n\nWe've received your password reset request. Please, follow this link to create a new password:\n" +
+                text: "Dear Customer, \n\nWe've received your password reset request. Please, follow this link to create a new password:\n" +
                     'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
                     'http://' + req.headers.host + '#/reset/' + com.resetcode + '\n\n' +
                     "Important note (!!!). If you haven't requested password reset, just ignore this email.\nBest Regards,\nOne Menu team"

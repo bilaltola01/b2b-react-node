@@ -43,7 +43,7 @@ class Home extends Component {
             </ul>
           </div>
           {this.state.cookies && <div className="cokkieBar" ref="cokkieBar">
-            We use cookies to ensure that we provide you with the best possible experience. If you continue to use our portal, we will assume that you are happy with it. <Link style={{color:'black', textDecoration: 'underline'}}to="/terms">Read More</Link>
+            We use cookies to ensure that we provide you with the best possible experience. If you continue to use our portal, we will assume that you are happy with it. <a style={{color:'black', textDecoration: 'underline'}} target="blank" href="http://one-menu.com/OMDocs/legal/om_terms_and_conditions.pdf">Read More</a>
             <button onClick={()=>this.gotit()}>Got It</button>
           </div>}
       </div>

@@ -358,22 +358,22 @@ class SignupHeader extends Component {
 				            </h5>
 				            <form id="signup-form" className="signup--form" action="#">
 				                <div className="row">
-                                    <div className="col-md-6">
+                                    <div className="col-md-6 col-sm-12 col-xs-12">
                                         <p className={this.state.nameError?"login--input inputError":"login--input"}>
                                             <input type="text" name="Name" className="input--underline" placeholder="Name" />
                                         </p>
                                     </div>
-                                    <div className="col-md-6">
+                                    <div className="col-md-6 col-sm-12 col-xs-12">
                                         <p className={this.state.surnameError?"login--input inputError":"login--input"}>
                                             <input type="text" name="Surname"  className="input--underline" placeholder="Surname" />
                                         </p>
                                     </div>
-                                    <div className="col-md-6">
+                                    <div className="col-md-6 col-sm-12 col-xs-12">
                                         <p className={this.state.companyError?"login--input inputError":"login--input"}>
                                             <input type="text" name="CompanyName" className="input--underline" placeholder="Company Name" />
                                         </p>
                                     </div>
-                                    <div className="col-md-6">
+                                    <div className="col-md-6 col-sm-12 col-xs-12">
                                         <p className={this.state.countryError?"login--input inputError":"login--input"}>
 											<select name="Country" className="input--underline" placeholder="Country">
 												{
@@ -384,18 +384,18 @@ class SignupHeader extends Component {
 											</select>
                                         </p>
                                     </div>
-                                    <div className="col-md-6">
+                                    <div className="col-md-6 col-sm-12 col-xs-12">
                                         <p className={this.state.emailError?"login--input inputError":"login--input"}>
                                             <input type="text" name="Email" className="input--underline" placeholder="Email" />
                                         </p>
                                     </div>
-                                    <div className="col-md-6">
+                                    <div className="col-md-6 col-sm-12 col-xs-12">
                                         <p className={this.state.pwdError?"login--input inputError":"login--input"}>
                                             <input type="password" name="Pwd" className="input--underline" placeholder="Password" />
                                         </p>
                                     </div>
-                                    <div className="col-md-12">
-                                        <label className="checkContainer signup-checkbox">I agree to the <Link to="/terms" style={{textDecoration:'underline', color:'black'}}>Terms of use</Link> to recieve emails and updates and acknowledge that i have read the <Link to="/terms" style={{textDecoration:'underline', color:'black'}}>Privacy Policy.</Link> 
+                                    <div className="col-md-12 col-xs-12">
+                                        <label className="checkContainer signup-checkbox">I agree to the <a href="http://one-menu.com/OMDocs/legal/om_terms_and_conditions.pdf" taget="blank" style={{textDecoration:'underline', color:'black'}}>Terms of use</a> to recieve emails and updates and acknowledge that i have read the <a href="http://one-menu.com/OMDocs/legal/om_terms_and_conditions.pdf" target="blank" style={{textDecoration:'underline', color:'black'}}>Privacy Policy.</a> 
                                             <input className="Agree" name="Agree" type="checkbox"/>
                                             <span className="checkmark"></span>
                                         </label>
