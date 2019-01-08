@@ -22,8 +22,9 @@ html {
 }
 
 .login--input select {
-    margin-bottom: 5px !important;
-    background: transparent
+    background: transparent;
+    -webkit-appearance: none;
+    -moz-appearance: none;
 }
 
 .inputError input::-webkit-input-placeholder {
@@ -43,6 +44,11 @@ html {
 .inputError input:-ms-input-placeholder {
     color: red !important;
 }
+
+
+/* .inputError select {
+    color: red !important;
+} */
 
 .cokkieBar {
     position: fixed;
@@ -5745,6 +5751,8 @@ MENU DETAIL
     .signup-container {
         width: 90%;
         margin-left: 5%;
-        margin-top: 2rem;
+        margin-top: 4rem;
+        height: 65vh;
+        overflow: scroll;
     }
 }

@@ -33,7 +33,7 @@ ForgotPasswordController.post = (req, res) => {
                 text: "Dear Customer, \n\nWe've received your password reset request. Please, follow this link to create a new password:\n" +
                     'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
                     'http://' + req.headers.host + '#/reset/' + com.resetcode + '\n\n' +
-                    "Important note (!!!). If you haven't requested password reset, just ignore this email.\nBest Regards,\nOne Menu team"
+                    "Important note (!!!). If you haven't requested password reset, just ignore this email.\n\nBest Regards,\nOne Menu team"
             };
             transporter.sendMail(mailOptions, function(error, info) {
                 if (error) {

@@ -40,6 +40,13 @@ export function signup(data, opts) {
             });
             return;
         }
+        if (data.auth.Country == 'Select Country') {
+            reject({
+                success: false,
+                error: 'Please select the country',
+            });
+            return;
+        }
         if (!data.auth.Agree) {
             reject({
                 success: false,

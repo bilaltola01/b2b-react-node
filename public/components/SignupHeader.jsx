@@ -5,6 +5,7 @@ import FormData from 'formdata-polyfill';
 
 import * as actionCreators from '../action-creators';
 const countries = [
+	{"name": "Select Country", "code": "AF"},
 	{"name": "Afghanistan", "code": "AF"},
 	{"name": "Åland Islands", "code": "AX"},
 	{"name": "Albania", "code": "AL"},
@@ -254,34 +255,39 @@ let createHandlers = (ctx) => {
 		e.preventDefault();
 		var data = ctx.getDataFromEvent(e)
 		console.log(data)
-		if(!data.auth.name){
+		if(!data.auth.Name){
 			ctx.setState({
 				nameError:true
 			})
 		}
-		if(!data.auth.surname){
+		if(!data.auth.Surname){
 			ctx.setState({
 				surnameError:true
 			})
 		} 
-		if(!data.auth.company){
+		if(!data.auth.Company){
 			ctx.setState({
 				companyError:true
 			})
 		} 
-		if(!data.auth.country){
+		if(!data.auth.Country){
 			ctx.setState({
 				countryError:true
 			})
 		} 
-		if(!data.auth.email){
+		if(!data.auth.Email){
 			ctx.setState({
 				emailError:true
 			})
 		} 
-		if(!data.auth.pwd){
+		if(!data.auth.Pwd){
 			ctx.setState({
 				pwdError:true
+			})
+		} 
+		if(data.auth.Country=="Select Country"){
+			ctx.setState({
+				countryError:true
 			})
 		} 
 		ctx.props.dispatch(actionCreators.signupUser(ctx.getDataFromEvent(e), (res) => {
@@ -318,7 +324,8 @@ class SignupHeader extends Component {
 			emailError: false,
 			pwdError: false,
 			companyError: false,
-			countryError: false
+			countryError: false,
+			country:''
 		};
 		this.handlers = createHandlers(this);
 	}
@@ -375,7 +382,7 @@ class SignupHeader extends Component {
                                     </div>
                                     <div className="col-md-6 col-sm-12 col-xs-12">
                                         <p className={this.state.countryError?"login--input inputError":"login--input"}>
-											<select name="Country" className="input--underline" placeholder="Country">
+											<select name="Country" ref="country" className="input--underline" placeholder="Country" onChange={(country)=>this.setState(country)}>
 												{
 													countries.map((item, i)=>(
 														<option key={i} value={item.name}>{item.name}</option>
