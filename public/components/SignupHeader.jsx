@@ -395,7 +395,7 @@ class SignupHeader extends Component {
                                         </p>
                                     </div>
                                     <div className="col-md-12 col-xs-12">
-                                        <label className="checkContainer signup-checkbox">I agree to the <a href="http://one-menu.com/OMDocs/legal/om_terms_and_conditions.pdf" taget="blank" style={{textDecoration:'underline', color:'black'}}>Terms of use</a> to recieve emails and updates and acknowledge that i have read the <a href="http://one-menu.com/OMDocs/legal/om_terms_and_conditions.pdf" target="blank" style={{textDecoration:'underline', color:'black'}}>Privacy Policy.</a> 
+                                        <label className="checkContainer signup-checkbox">I agree to the <a href="http://one-menu.com/OMDocs/legal/om_terms_and_conditions.pdf" target="blank" style={{textDecoration:'underline', color:'black'}}>Terms of use</a> to recieve emails and updates and acknowledge that i have read the <a href="http://one-menu.com/OMDocs/legal/om_terms_and_conditions.pdf" target="blank" style={{textDecoration:'underline', color:'black'}}>Privacy Policy.</a> 
                                             <input className="Agree" name="Agree" type="checkbox"/>
                                             <span className="checkmark"></span>
                                         </label>
