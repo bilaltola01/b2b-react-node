@@ -5741,6 +5741,7 @@ MENU DETAIL
 @media (max-width:1000px) {
     .signup-container {
         width: 90%;
-        margin-left: 5%
+        margin-left: 5%;
+        margin-top: 7rem
     }
 }
