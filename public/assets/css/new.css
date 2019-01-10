@@ -1182,8 +1182,6 @@ screen\9 {
     color: #4d5368;
     background: #4F5168;
     min-width: 1024px;
-    position: fixed !important;
-    bottom: 0 !important
 }
 
 .layout--dashboard a {
