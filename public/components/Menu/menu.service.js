@@ -3,6 +3,7 @@ import { Ajax } from '../../shared/ajax.utils';
 import { Mapping } from '../../shared/mapping.utils';
 import { StorageManagerInstance } from '../../shared/storage.utils';
 
+import * as MenuBranch from './menu-branch.service';
 import * as MenuCategory from './menu-category.service';
 import * as MenuLanguage from './menu-language.service';
 import * as Meal from './meal.service';
@@ -26,22 +27,29 @@ export function updateMenu(opts) {
         let id;
         let obj = opts;
         return Promise.all(obj.branches.map(branch => {
-            obj.BranchID = branch.BranchID;
+            // obj.BranchID = branch.BranchID;
             return postMenu(obj).then(res => {
                 if (!res || !res.success) {
                     return Promise.reject(res);
                 }
 
-                console.log(res.obj);
+                // console.log(res.obj);
 
                 id = res.obj[0];
-                return MenuCategory.postMenuCategories(id, obj.categories)
-                    .then(MenuLanguage.postMenuLanguages(id, obj.languages));
+                const menuBranch = {
+                    MenuID: id,
+                    BranchID: branch.BranchID,
+                }
+                return Promise.all([
+                    MenuBranch.postMenuBranch({obj:menuBranch}),
+                    MenuCategory.postMenuCategories(id, obj.categories),
+                    MenuLanguage.postMenuLanguages(id, obj.languages)
+                ]);
             });
         })).then(ids => {
-            console.log('last modif');
-            console.log(ids);
-            console.log([].concat.apply([], ids));
+            // console.log('last modif');
+            // console.log(ids);
+            // console.log([].concat.apply([], ids));
             return [].concat.apply([], ids);
         }).then(() => {
             return id;
@@ -50,7 +58,7 @@ export function updateMenu(opts) {
 }
 
 function postMenu(obj) {
-    console.log(StorageManagerInstance.read('token'))
+    // console.log(StorageManagerInstance.read('token'))
     if (obj.id) {
         delete obj.id;
     }
@@ -89,14 +97,14 @@ export function getMenus() {
             return self.indexOf(id) === i;
         });
 
-        console.log(menus);
-        console.log(ids);
+        // console.log(menus);
+        // console.log(ids);
 
         return Promise.all(ids.map((id) => {
             return MenuCategory.getMenuCategory(id);
         }));
     }).then((res) => {
-        console.log(res);
+        // console.log(res);
 
         let categories = (res && res.length > 0) ? res.reduce((acc, current) => {
             return (current.categories && current.categories.length > 0) ? acc.concat([current]) : acc;
@@ -119,7 +127,7 @@ export function getMenus() {
             return cat;
         });
 
-        console.log(finalMenus);
+        // console.log(finalMenus);
 
         return finalMenus;
     });
@@ -146,7 +154,7 @@ export function getMenuTranslations() {
             return self.indexOf(id) === i;
         });
 
-        console.log(ids);
+        // console.log(ids);
 
         return Promise.all(ids.map((id) => {
             return getMenuTranslation(id, res.obj);
@@ -159,10 +167,10 @@ export function getMenuTranslation(id, translations) {
     let menuTranslations = translations;
     let mealTranslations;
 
-    console.log(menuTranslations);
+    // console.log(menuTranslations);
 
     return MenuCategory.getMenuCategoryTranslations([id]).then((res) => {
-        console.log(res);
+        // console.log(res);
 
         menuCategoryTranslations = res;
 
@@ -170,7 +178,7 @@ export function getMenuTranslation(id, translations) {
             return Meal.getMealTranslations([cat.MenuCategoryID]);
         }));
     }).then((res) => {
-        console.log(res);
+        // console.log(res);
 
         mealTranslations = res;
 
@@ -193,14 +201,14 @@ export function getMenuTranslation(id, translations) {
             return finalCat;
         });
 
-        console.log(menu);
+        // console.log(menu);
 
         return menu;
     });
 }
 
 export function translateMenu(opts, mode) {
-    console.log(opts);
+    // console.log(opts);
 
     let propsToTranslate = Object.keys(opts).filter((key) => {
         return ((key === 'title' ||  key === 'Title') || (key === 'description' || key === 'Description')) && (opts[key] && opts[key].length > 0);
@@ -222,7 +230,7 @@ export function translateMenu(opts, mode) {
             return Promise.reject(res);
         }
 
-        console.log(res);
+        // console.log(res);
         let id = opts.MenuID || opts.id;
 
         let menuId = res.obj.find((menu) => {
@@ -246,15 +254,15 @@ export function translateMenu(opts, mode) {
             };
         });
 
-        console.log(finalLanguages);
+        // console.log(finalLanguages);
 
         return MenuCategory.translateMenuCategories(menuId, finalLanguages, opts.categories)
             .then((res) => {
-                console.log('translation request finished');
-                console.log(res);
+                // console.log('translation request finished');
+                // console.log(res);
 
                 return Promise.all(finalLanguages.map((lang) => {
-                    console.log(lang);
+                    // console.log(lang);
                     const translateLangs = (language, props, id) => {
                         return props.map((prop) => {
                             return Ajax().post('/translate-menu', {
@@ -308,9 +316,9 @@ export function translateMenu(opts, mode) {
                                 name: currentLanguage.Name,
                                 title: currentLanguage.Title,
                             };
-                            console.log(finalLang);
-                            console.log(propsToTranslate);
-                            console.log(menuId);
+                            // console.log(finalLang);
+                            // console.log(propsToTranslate);
+                            // console.log(menuId);
                             return translateLangs(finalLang, propsToTranslate, menuId);
                         });
                     } else {
@@ -322,20 +330,20 @@ export function translateMenu(opts, mode) {
 }
 
 function convertForTranslation(lang, obj) {
-    console.log(lang);
+    // console.log(lang);
     switch (obj.type) {
         case 'menu':
-            console.log({
-                obj: {
-                    menuId: obj.id,
-                    key: obj.prop.key,
-                    title: 'Menu ' + obj.id + ', translation: ' + obj.prop.key,
-                    sl: 'English',
-                    tl: lang.title || lang.name,
-                    branchLanguageId: lang.id,
-                    payload: obj.prop.value
-                }
-            });
+            // console.log({
+            //     obj: {
+            //         menuId: obj.id,
+            //         key: obj.prop.key,
+            //         title: 'Menu ' + obj.id + ', translation: ' + obj.prop.key,
+            //         sl: 'English',
+            //         tl: lang.title || lang.name,
+            //         branchLanguageId: lang.id,
+            //         payload: obj.prop.value
+            //     }
+            // });
             return {
                 obj: {
                     menuId: obj.id,
@@ -351,8 +359,8 @@ function convertForTranslation(lang, obj) {
 }
 
 export function deleteMenu(menu) {
-    console.log('deletion!!!');
-    console.log(menu);
+    // console.log('deletion!!!');
+    // console.log(menu);
     const id = menu.MenuID || menu.id;
 
     return new Promise((resolve, reject) => {
@@ -377,7 +385,7 @@ export function deleteMenu(menu) {
 
 
 function convertOpts(opts, isUpdate) {
-    console.log(opts);
+    // console.log(opts);
 
     /*
         if (!opts.id) {
@@ -402,7 +410,7 @@ function convertOpts(opts, isUpdate) {
     }, {});
     //
 
-    console.log({ id: id, updates: obj });
+    // console.log({ id: id, updates: obj });
 
     return (isUpdate) ? {
         id: id,

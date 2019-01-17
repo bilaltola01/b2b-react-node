@@ -4,6 +4,7 @@ const DBLayer = require('../DBLayer');
 const db = DBLayer.connection;
 const dateUtils = require('../shared/date-utils');
 
+const MenuBranch = require('./menu-branch.model');
 const MenuCategory = require('./menu-category.model');
 const MenuLanguage = require('./menu-language.model');
 const MenuTranslation = require('./menu-translation.model');
@@ -23,7 +24,7 @@ Menu.create = (obj) => {
   let menu = obj;
   menu.Date = dateUtils.toMysqlDate(new Date());
 
-  console.log(menu);
+  // console.log(menu);
   return db('Menu').insert(menu).returning('MenuID');
 };
 
@@ -33,7 +34,7 @@ Menu.create = (obj) => {
 Menu.update = (id, obj) => {
   let menu = obj;
   menu.DateUpdated = dateUtils.toMysqlDate(new Date());
-  console.log(menu);
+  // console.log(menu);
   return Menu.getById(id).update(menu).then(res => {
     return Menu.getById(id);
   });
@@ -66,11 +67,13 @@ Menu.get = (conditions) => {
 };
 
 Menu.getWithDetails = (conditions) => {
-  return db('Menu').where(conditions).select('*').then(menus => {
-    return Promise.all(menus.map(menu => {
-      return createMenuContainer(menu);
-    }));
-  });
+  return db('Menu')
+    .innerJoin('MenuBranch', 'Menu.MenuID', 'MenuBranch.MenuID')
+    .where(conditions).select('*').then(menus => {
+      return Promise.all(menus.map(menu => {
+        return createMenuContainer(menu);
+      }));
+    });
 };
 
 
@@ -81,7 +84,7 @@ function createMenuContainer (menu) {
       MenuLanguage.get({MenuID: menu.MenuID}),
       MenuTranslation.get({MenuID: menu.MenuID})
     ]).then(res => {
-      console.log(res);
+      // console.log(res);
       let obj = menu;
       obj.categories = res[0];
       obj.languages = res[1];

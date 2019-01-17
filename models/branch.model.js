@@ -22,8 +22,8 @@ Branch.create = (obj) => {
   let branch = obj;
   branch.Date = dateUtils.toMysqlDate(new Date());
 
-  console.log('branch create');
-  console.log(branch);
+  // console.log('branch create');
+  // console.log(branch);
 
   if (branch.Address) {
     let address = branch.Address +
@@ -35,21 +35,21 @@ Branch.create = (obj) => {
     }
 
     return geoUtils.convertToLatLong(address).then(({ latitude, longitude }) => {
-      console.log(latitude, longitude);
+      // console.log(latitude, longitude);
       if (latitude && longitude) {
         branch.Latitude = latitude;
         branch.Longitude = longitude;
       }
 
-      console.log(branch);
+      // console.log(branch);
       return db('Branch').insert(branch).returning('BranchID');
     }).catch(err => {
-      console.log(err);
+      // console.log(err);
       return db('Branch').insert(branch).returning('BranchID');
     });
   }
 
-  console.log(branch);
+  // console.log(branch);
   return db('Branch').insert(branch).returning('BranchID');
 };
 
@@ -69,8 +69,8 @@ Branch.createWithDetails = (obj) => {
       return item;
     });
 
-    console.log('insertNewId');
-    console.log(newObject);
+    // console.log('insertNewId');
+    // console.log(newObject);
 
     return newObject;
   };
@@ -87,7 +87,7 @@ Branch.createWithDetails = (obj) => {
     Name: branch.Name,
     HasHeadquarters: branch.HasHeadquarters
   }).then(res => {
-    console.log(res);
+    // console.log(res);
     let id = res[0];
 
     return Promise.all([
@@ -97,7 +97,7 @@ Branch.createWithDetails = (obj) => {
       BranchLanguage.createAll(insertNewId(id, branch.languages)),
       BranchImage.createAll(insertNewId(id, branch.images))
     ]).then(res => {
-      console.log(res);
+      // console.log(res);
 
       let tmp = branch;
       tmp.contacts = res[0][0];
@@ -106,8 +106,8 @@ Branch.createWithDetails = (obj) => {
       tmp.languages = res[0][3];
       tmp.images = res[0][4];
 
-      console.log('finalobj created');
-      console.log(tmp);
+      // console.log('finalobj created');
+      // console.log(tmp);
 
       //return Promise.resolve(tmp);
       return Branch.getById(id);
@@ -146,14 +146,14 @@ Branch.updateWithDetails = (id, obj) => {
       return item;
     });
 
-    console.log('insertNewId');
-    console.log(newObject);
+    // console.log('insertNewId');
+    // console.log(newObject);
 
     return newObject;
   };
 
-  console.log('BRANCH UPDATE WITH DETAILS');
-  console.log(id, obj);
+  // console.log('BRANCH UPDATE WITH DETAILS');
+  // console.log(id, obj);
   let branch = obj;
   branch.DateUpdated = dateUtils.toMysqlDate(new Date());
 
@@ -165,7 +165,7 @@ Branch.updateWithDetails = (id, obj) => {
     BranchImage.removeSelected(branch.images, branch),
     BranchImage.updateAll(branch.images)
   ]).then(res => {
-    console.log(res);
+    // console.log(res);
     let tmp = branch;
     tmp.contacts = res[0][0];
     tmp.cuisines = res[0][1];
@@ -173,8 +173,8 @@ Branch.updateWithDetails = (id, obj) => {
     tmp.languages = res[0][3];
     tmp.images = res[0][5];
 
-    console.log('finalobj');
-    console.log(tmp);
+    // console.log('finalobj');
+    // console.log(tmp);
 
     return Branch.getById(id).update({
       Address: branch.Address,
@@ -239,7 +239,7 @@ function createBranchContainer (branch) {
       BranchImage.get({BranchID: branch.BranchID}),
       Menu.getWithDetails({BranchID: branch.BranchID})
     ]).then(res => {
-      console.log(res);
+      // console.log(res);
       let obj = branch;
       obj.contacts = res[0];
       obj.cuisines = res[1];
