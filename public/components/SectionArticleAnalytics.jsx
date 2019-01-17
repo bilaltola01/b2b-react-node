@@ -70,13 +70,13 @@ class SectionArticleAnalytics extends Component {
 			<article className="content--module module--item-details no-metadata content--company">
                 <div className="content--container global-padding-wrapper">
                     <section className="analytics--container wrapper">
-                        <h2 class="asset--subtitle">Analytics</h2>
+                        <h2 className="asset--subtitle">Analytics</h2>
                         <div className="analytics">
                             <div className="analytics--types">
                             <ul className={`analytics--${ANALYTICS_TOTAL.toLowerCase()}`}>
                                 {
-                                totalAnalytics.map(analytic => (
-                                    <li className="blocklist--item">
+                                totalAnalytics.map((analytic, i) => (
+                                    <li key={i} className="blocklist--item">
                                     {renderAnalytics(analytic)}
                                     </li>
                                 ))
@@ -84,8 +84,8 @@ class SectionArticleAnalytics extends Component {
                             </ul>
                             <ul className={`analytics--${ANALYTICS_MOST_VIEWED.toLowerCase()}`}>
                                 {
-                                mostViewedAnalytics.map(analytic => (
-                                    <li className="blocklist--item">
+                                mostViewedAnalytics.map((analytic, i) => (
+                                    <li key={i} className="blocklist--item">
                                     {renderAnalytics(analytic)}
                                     </li>
                                 ))
