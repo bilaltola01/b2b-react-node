@@ -12,7 +12,7 @@ export function getLanguages () {
             "x-access-token": StorageManagerInstance.read('token')
         }
     }).then(res => {
-    	console.log(res);
+    	// console.log(res);
         if (!res || !res.success) {
             return Promise.reject(res);
         }
@@ -31,7 +31,7 @@ export function getFlags () {
             "x-access-token": StorageManagerInstance.read('token')
         }
     }).then(res => {
-    	console.log(res);
+    	// console.log(res);
         if (!res || !res.success) {
             return Promise.reject(res);
         }

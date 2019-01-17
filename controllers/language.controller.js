@@ -11,7 +11,7 @@ LanguageController.get = (req, res) => {
     res.setHeader('Content-Type', 'application/json');
 
     Language.getAllWithDetails().then(output => {
-        console.log(output);
+        // console.log(output);
         res.status(200).json({ success: true, message: 'Language successfully fetched', obj: output });
     }).catch(err => {
         console.error(err);
@@ -23,7 +23,7 @@ LanguageController.post = (req, res) => {
     res.setHeader('Content-Type', 'application/json');
 
     Language.create(req.body.obj).then(output => {
-        console.log(output);
+        // console.log(output);
         res.status(201).json({ success: true, message: 'Language successfully created', obj: output });
     }).catch(err => {
         console.error(err);
@@ -35,7 +35,7 @@ LanguageController.put = (req, res) => {
     res.setHeader('Content-Type', 'application/json');
 
     Language.update(req.body.id, req.body.updates).then(output => {
-        console.log(output);
+        // console.log(output);
         res.status(201).json({ success: true, message: 'Language successfully updated', obj: output });
     }).catch(err => {
         console.error(err);

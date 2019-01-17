@@ -11,7 +11,7 @@ class ForgotPasswordController {
 
 ForgotPasswordController.post = (req, res) => {
     const data = JSON.parse(JSON.stringify(req.body));
-    console.log(data);
+    // console.log(data);
     res.setHeader('Content-Type', 'application/json');
     var transporter = nodemailer.createTransport({
         host: 'smtp.123-reg.co.uk',
@@ -24,7 +24,7 @@ ForgotPasswordController.post = (req, res) => {
         var data = company;
         data.resetcode = cryptr.encrypt(data.Email);
         data.resetcodevalidity = Date.now() + 3600000;
-        console.log(data)
+        // console.log(data)
         Company.update(data.CompanyID, data).then(com => {
             var mailOptions = {
                 from: 'no-reply@one-menu.com',
@@ -37,7 +37,7 @@ ForgotPasswordController.post = (req, res) => {
             };
             transporter.sendMail(mailOptions, function(error, info) {
                 if (error) {
-                    console.log(error);
+                    // console.log(error);
                 } else {
                     res.status(200).json({
                         success: true,
@@ -46,14 +46,14 @@ ForgotPasswordController.post = (req, res) => {
                 }
             });
         }).catch(err => {
-            console.log(err)
+            // console.log(err)
             res.status(400).json({
                 success: false,
                 error: err.error
             });
         })
     }).catch(err => {
-        console.log(err)
+        // console.log(err)
         res.status(400).json({
             success: false,
             error: err.error

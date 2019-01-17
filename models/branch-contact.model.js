@@ -14,7 +14,7 @@ BranchContact.create = (obj) => {
   let contact = obj;
   contact.Date = dateUtils.toMysqlDate(new Date());
 
-  console.log(contact);
+  // console.log(contact);
   return db('BranchContact').insert(contact).returning('BranchContactID');
 };
 
@@ -25,7 +25,7 @@ BranchContact.createAll = (contacts) => {
   }
 
   return Promise.all(contacts.map(contact => {
-    console.log(contact);
+    // console.log(contact);
     return BranchContact.create({
       BranchID: contact.BranchID,
       Firstname: contact.Firstname,

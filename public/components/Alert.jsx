@@ -10,7 +10,7 @@ import BranchLanguage from './BranchLanguage';
 
 let createHandlers = (ctx) => {
 	let onTranslate = (props) => {
-		console.log('menu to be translated!');
+		// console.log('menu to be translated!');
 
 		if (props.hasOwnProperty('menu')) {
 			ctx.props.dispatch(actionCreators.translateMenu(props.component.props, onMenuTranslateRequestDone));
@@ -18,7 +18,7 @@ let createHandlers = (ctx) => {
 	};
 
 	let onMenuTranslateRequestDone = (obj) => {
-		console.log('translation request done! ');
+		// console.log('translation request done! ');
 
 		ctx.setState({
 			isTranslateRequestDone: true,
@@ -53,7 +53,7 @@ class Alert extends Component {
 	render() {
 		const { type, component } = this.props;
 
-		console.log(this.props);
+		// console.log(this.props);
 
 		const languageProps = (component.props && component.props.languages && component.props.languages.length > 0) ? component.props.languages : (this.props.menu && this.props.menu.languages && this.props.menu.languages.length > 0) ? this.props.menu.languages : [];
 
@@ -100,7 +100,7 @@ Alert.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-	console.log(state);
+	// console.log(state);
 	return {
 		menu: state._menu.menu
 	}

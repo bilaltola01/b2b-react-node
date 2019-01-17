@@ -11,7 +11,7 @@ BranchCuisineController.get = (req, res) => {
     res.setHeader('Content-Type', 'application/json');
 
     BranchCuisine.getAll().then(output => {
-        console.log(output);
+        // console.log(output);
         res.status(200).json({ success: true, message: 'BranchCuisine successfully fetched', obj: output });
     }).catch(err => {
         console.error(err);
@@ -23,7 +23,7 @@ BranchCuisineController.post = (req, res) => {
     res.setHeader('Content-Type', 'application/json');
 
     BranchCuisine.create(req.body.obj).then(output => {
-        console.log(output);
+        // console.log(output);
         res.status(201).json({ success: true, message: 'BranchCuisine successfully created', obj: output });
     }).catch(err => {
         console.error(err);
@@ -35,7 +35,7 @@ BranchCuisineController.put = (req, res) => {
     res.setHeader('Content-Type', 'application/json');
 
     BranchCuisine.update(req.body.id, req.body.updates).then(output => {
-        console.log(output);
+        // console.log(output);
         res.status(201).json({ success: true, message: 'BranchCuisine successfully updated', obj: output });
     }).catch(err => {
         console.error(err);
@@ -47,7 +47,7 @@ BranchCuisineController.remove = (req, res) => {
     res.setHeader('Content-Type', 'application/json');
 
     BranchCuisine.remove(req.body.id).then(output => {
-        console.log(output);
+        // console.log(output);
         res.status(201).json({ success: true, message: 'BranchCuisine successfully removed', obj: output });
     }).catch(err => {
         console.error(err);

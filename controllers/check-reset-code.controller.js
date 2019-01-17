@@ -9,10 +9,10 @@ class CheckResetCodeController {
 }
 
 CheckResetCodeController.post = (req, res) => {
-    console.log(req.body);
+    // console.log(req.body);
     res.setHeader('Content-Type', 'application/json');
     var decrypted = cryptr.decrypt(req.body.code);
-    console.log(decrypted)
+    // console.log(decrypted)
     Company.getByEmail(decrypted).then(company => {
         if (!company) {
             res.status(400).json({
@@ -41,7 +41,7 @@ CheckResetCodeController.put = (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     var decrypted = cryptr.decrypt(req.body.code);
     Company.getByEmail(decrypted).then(company => {
-        console.log(company)
+        // console.log(company)
         if (!company) {
             res.status(400).json({
                 success: false,

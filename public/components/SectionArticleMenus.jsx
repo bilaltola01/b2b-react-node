@@ -11,7 +11,7 @@ class SectionArticleMenus extends Component {
 
 		const currencies = (component.props.currencies && component.props.currencies.length > 0) ? component.props.currencies : [];
 
-		console.log(component.props);
+		// console.log(component.props);
 
 		const branches = (this.props.profile && this.props.profile.branches && this.props.profile.branches.length > 0) ? this.props.profile.branches : [];
 
@@ -38,8 +38,8 @@ class SectionArticleMenus extends Component {
 			}
 		}, Object.create(null)) : null;
 
-		console.log(uniqueMenus);
-		console.log(duplicates);
+		// console.log(uniqueMenus);
+		// console.log(duplicates);
 
 		const menuComponents = (uniqueMenus && uniqueMenus.length > 0) ? uniqueMenus.map((menu, index) => {
 			const finalTitle = menu.Title || menu.title;
@@ -103,7 +103,7 @@ SectionArticleMenus.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-    console.log(state);
+    // console.log(state);
   return {
     profile: state._profile.profile,
   };

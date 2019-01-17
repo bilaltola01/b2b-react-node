@@ -15,7 +15,7 @@ let Meal = class {
 Meal.create = (obj) => {
     let meal = obj;
     meal.Date = dateUtils.toMysqlDate(new Date());
-    console.log(meal);
+    // console.log(meal);
     return db('Meal').insert(meal).returning('MealID');
 };
 
@@ -35,8 +35,8 @@ Meal.createWithDetails = (obj) => {
             return item;
         });
 
-        console.log('insertNewId');
-        console.log(newObject);
+        // console.log('insertNewId');
+        // console.log(newObject);
 
         return newObject;
     };
@@ -52,19 +52,19 @@ Meal.createWithDetails = (obj) => {
         EnableDetails: meal.EnableDetails,
         Date: dateUtils.toMysqlDate(new Date())
     }).then(res => {
-        console.log(res);
+        // console.log(res);
         let id = res[0];
 
         return Promise.all([
             MealImage.createAll(insertNewId(id, meal.images))
         ]).then(res => {
-            console.log(res);
+            // console.log(res);
 
             let tmp = branch;
             tmp.images = res[0][0];
 
-            console.log('finalobj created');
-            console.log(tmp);
+            // console.log('finalobj created');
+            // console.log(tmp);
 
             //return Promise.resolve(tmp);
             return Meal.getById(id);
@@ -135,7 +135,7 @@ function createMealCategoryContainer(meal) {
         Promise.all([
             MealTranslation.get({ MealID: meal.MealID })
         ]).then(res => {
-            console.log(res);
+            // console.log(res);
             let obj = meal;
             obj.translations = res[0];
 

@@ -15,12 +15,12 @@ let TranslationCallback = class {
 };
 
 TranslationCallback.create = (query, obj) => {
-  console.log(query);
-  console.log(obj);
+  // console.log(query);
+  // console.log(obj);
 
   let type = query ? query.type : '';
 
-  console.log(type);
+  // console.log(type);
 
   // Check first key of object
   let key = Object.keys(obj)[0];
@@ -28,7 +28,7 @@ TranslationCallback.create = (query, obj) => {
   // If translation is finished
   if (key === 'job') {
     let job = obj.job[0];
-    console.log(job);
+    // console.log(job);
 
     return update(type, job);
   }
@@ -52,7 +52,7 @@ function parseJson (obj) {
   try {
     parsed = JSON.parse(obj);
   } catch (err) {
-    console.log(err);
+    // console.log(err);
   }
 
   return parsed;

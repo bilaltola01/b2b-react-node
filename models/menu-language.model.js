@@ -16,7 +16,7 @@ MenuLanguage.create = (obj) => {
   let language = obj;
   language.Date = dateUtils.toMysqlDate(new Date());
 
-  console.log(language);
+  // console.log(language);
   return db('MenuLanguage').insert(language).returning('MenuLanguageID');
 };
 
@@ -89,7 +89,7 @@ function createMenuLanguage (menuLanguage) {
     Promise.all([
       Language.getWithDetails({LanguageID: menuLanguage.LanguageID})
     ]).then(res => {
-      console.log(res);
+      // console.log(res);
       let obj = menuLanguage;
       obj.Language = res[0];
       resolve(obj);

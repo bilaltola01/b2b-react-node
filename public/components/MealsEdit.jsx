@@ -6,7 +6,7 @@ let createHandlers = (ctx) => {
 	let lastSelectedMeal = 1;
 	let onAdd = () => {
 		ctx.setState((prevState) => {
-			console.log(prevState.allMeals);
+			// console.log(prevState.allMeals);
 			let meals = prevState.allMeals;
 
 			/*
@@ -30,7 +30,7 @@ let createHandlers = (ctx) => {
 
 			lastSelectedMeal++;
 
-			console.log(obj);
+			// console.log(obj);
 
 			meals.push(obj);
 
@@ -47,9 +47,9 @@ let createHandlers = (ctx) => {
 	};
 
 	let onChange = (obj) => {
-		console.log(obj);
+		// console.log(obj);
 		ctx.setState((prevState) => {
-			console.log(prevState.allMeals);
+			// console.log(prevState.allMeals);
 
 			//ctx.props.category.id === obj.catId
 
@@ -77,11 +77,11 @@ let createHandlers = (ctx) => {
 				return meal;
 			}, []);
 
-			console.log(prevState.allMeals);
+			// console.log(prevState.allMeals);
 
-			console.log(meals);
+			// console.log(meals);
 
-			console.log(ctx.props.category.title);
+			// console.log(ctx.props.category.title);
 
 			ctx.props.onChange({
 				catId: ctx.props.category.id,
@@ -98,13 +98,13 @@ let createHandlers = (ctx) => {
 	let onRemove = (obj) => {
 		ctx.setState((prevState) => {
 			let meals = prevState.allMeals.reduce((acc, current) => {
-				console.log(current, obj)
+				// console.log(current, obj)
 				return ((current.id || current.MealID) !== obj.id) ? acc.concat([current]) : acc;
 			}, []);
 
-			console.log(prevState.allMeals);
+			// console.log(prevState.allMeals);
 
-			console.log(meals , 'meals test');
+			// console.log(meals , 'meals test');
 
 			ctx.props.onChange({
 				catId: ctx.props.category.id,
@@ -136,7 +136,7 @@ class MealsEdit extends Component {
 
 	componentWillReceiveProps(nextProps, prevProps) {
 		if (nextProps.meals !== prevProps.meals) {
-			console.log(nextProps.meals, 'nextProps.meals');
+			// console.log(nextProps.meals, 'nextProps.meals');
 		}
 	}
 

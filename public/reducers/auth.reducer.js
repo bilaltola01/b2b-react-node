@@ -1,7 +1,8 @@
 var initialAuthState = {};
 
 export function _auth(state = initialAuthState, action) {
-    console.log('_auth reducer called with state ', state, ' and action ', action);
+    // please use redux devtools from chrome/firefox ext
+    // console.log('_auth reducer called with state ', state, ' and action ', action);
 
     switch (action.type) {
         case 'AUTH_REQUEST':

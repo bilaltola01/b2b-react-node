@@ -9,17 +9,17 @@ class AuthController {
 }
 
 AuthController.post = (req, res) => {
-    console.log(req.query);
-    console.log(req.body);
+    // console.log(req.query);
+    // console.log(req.body);
     res.setHeader('Content-Type', 'application/json');
 
     const data = JSON.parse(JSON.stringify(req.body));
-    console.log(data);
+    // console.log(data);
     const email = data.auth.Email;
     const pwd = data.auth.Pwd;
 
     Company.emailExists(email).then(emailExists => {
-        console.log(emailExists);
+        // console.log(emailExists);
         if (!emailExists) {
             res.status(400).json({ success: false, message: 'Invalid Email/Password.' });
             throw new Error(400);

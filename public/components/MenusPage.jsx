@@ -8,7 +8,7 @@ import PageContent from './PageContent';
 
 let createHandlers = (ctx) => {
   let onMenusFetched = (obj) => {
-    console.log('menus fetched!');
+    // console.log('menus fetched!');
 
     let menus = obj;
 
@@ -21,7 +21,7 @@ let createHandlers = (ctx) => {
   };
 
   let onProfileFetched = (obj) => {
-    console.log('profile fetched!');
+    // console.log('profile fetched!');
 
     let profile = obj;
 
@@ -78,7 +78,7 @@ class MenusPage extends Component {
       return acc.concat(branch.menus);
     }, []) : [];
 
-    console.log(menus);
+    // console.log(menus);
 
     const company = {
       name: profile.Name,
@@ -129,7 +129,7 @@ class MenusPage extends Component {
 };
 
 const mapStateToProps = (state) => {
-  console.log(state);
+  // console.log(state);
   return {
     menu: state._menu.menu,
     profile: state._profile.profile

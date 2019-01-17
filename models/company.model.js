@@ -22,7 +22,7 @@ Company.create = (obj) => {
 
   return cryptUtils.generateHash(obj.Pwd).then(res => {
     company.Pwd = res;
-    console.log(company);
+    // console.log(company);
     return db('Company').insert(company).returning('CompanyID');
   });
 };

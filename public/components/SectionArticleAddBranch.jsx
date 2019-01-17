@@ -30,18 +30,18 @@ let createHandlers = (ctx) => {
     };
 
 	let onImageUpload = () => {
-		console.log('uploaded image!!');
+		// console.log('uploaded image!!');
 	};
 
 	let onBranchSaved = (res) => {
-		console.log('branch saved!');
+		// console.log('branch saved!');
 		ctx.setState({
 			isSaved: true
 		});
 	};
 
 	let validateState = (state, cb) => {
-		console.log(state);
+		// console.log(state);
 
 		let errors = [];
 		let branch = state.branch;
@@ -110,8 +110,8 @@ let createHandlers = (ctx) => {
 				message: 'Please provide at least one contact point that is not empty for your branch.'
 			});
 		}
-		console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
-		console.log(branch)
+		// console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
+		// console.log(branch)
 		ctx.setState({
 			validationErrors: errors,
 			isValid: !errors.length
@@ -126,7 +126,7 @@ let createHandlers = (ctx) => {
 		validateState(state, () => {
 			if (ctx.state.isValid) {
 				// save menu to db and use 'onBranchSaved' as callback
-				console.log('should save all changes to the db and redirect');
+				// console.log('should save all changes to the db and redirect');
 				ctx.props.dispatch(actionCreators.saveBranch(state.branch, onBranchSaved));
 			}
 		});
@@ -137,7 +137,7 @@ let createHandlers = (ctx) => {
 		switch (type) {
 			case 'main':
 				obj.persist();
-				console.log(type, obj);
+				// console.log(type, obj);
 
 				let name = obj.target.getAttribute('name');
 				let key = name.substring(name.indexOf('branch-') + 7, name.length);
@@ -150,7 +150,7 @@ let createHandlers = (ctx) => {
 						newBranch[key] = obj.target.value;
 					}
 
-					console.log(newBranch);
+					// console.log(newBranch);
 
 					ctx.props.dispatch(actionCreators.setBranches(ctx.props.profile.branches, newBranch));
 
@@ -159,12 +159,12 @@ let createHandlers = (ctx) => {
 					};
 				});
 			default:
-				console.log(type, obj);
+				// console.log(type, obj);
 				ctx.setState((prevState) => {
 					newBranch = prevState.branch;
 					newBranch[type] = obj.data;
 
-					console.log(newBranch);
+					// console.log(newBranch);
 
 					ctx.props.dispatch(actionCreators.setBranches(ctx.props.profile.branches, newBranch));
 
@@ -223,7 +223,7 @@ class SectionArticleAddBranch extends Component {
 	render() {
 		const { title, dateUpdate, component } = this.props;
 
-		console.log(this.props);
+		// console.log(this.props);
 
 		// FIXME:
 		// Hack to just show Mediterranean and french for the moment
@@ -420,7 +420,7 @@ SectionArticleAddBranch.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-    console.log(state);
+    // console.log(state);
   	return {
   		branches: state._branches.branches,
     	profile: state._profile.profile,

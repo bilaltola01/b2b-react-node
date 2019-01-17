@@ -11,7 +11,7 @@ MealTranslationController.get = (req, res) => {
     res.setHeader('Content-Type', 'application/json');
 
     MealTranslation.getAll().then(output => {
-        console.log(output);
+        // console.log(output);
         res.status(200).json({ success: true, message: 'MealTranslation successfully fetched', obj: output });
     }).catch(err => {
         console.error(err);
@@ -23,7 +23,7 @@ MealTranslationController.post = (req, res) => {
     res.setHeader('Content-Type', 'application/json');
 
     MealTranslation.create(req.body.obj).then(output => {
-        console.log(output);
+        // console.log(output);
         res.status(201).json({ success: true, message: 'MealTranslation successfully created', obj: output });
     }).catch(err => {
         console.error(err);
@@ -35,7 +35,7 @@ MealTranslationController.put = (req, res) => {
     res.setHeader('Content-Type', 'application/json');
 
     MealTranslation.update(req.body.id, req.body.updates).then(output => {
-        console.log(output);
+        // console.log(output);
         res.status(201).json({ success: true, message: 'MealTranslation successfully updated', obj: output });
     }).catch(err => {
         console.error(err);
@@ -47,7 +47,7 @@ MealTranslationController.remove = (req, res) => {
     res.setHeader('Content-Type', 'application/json');
 
     MealTranslation.remove(req.body.id).then(output => {
-        console.log(output);
+        // console.log(output);
         res.status(201).json({ success: true, message: 'MealTranslation successfully removed', obj: output });
     }).catch(err => {
         console.error(err);

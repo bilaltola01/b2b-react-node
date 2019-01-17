@@ -31,8 +31,8 @@ export function updateBranches (branches) {
     return Promise.all(branches.map(branch => {
         return updateBranch(branch);
     })).then(res => {
-        console.log('promise all');
-        console.log(res);
+        // console.log('promise all');
+        // console.log(res);
 
         if (!res) {
             return Promise.reject(res);
@@ -46,7 +46,7 @@ export function updateBranches (branches) {
 }
 
 export function updateBranch (branch) {
-    console.log(branch);
+    // console.log(branch);
 
     return new Promise((resolve, reject) => {
         const updateOrCreateBranch = (branch) => {
@@ -59,8 +59,8 @@ export function updateBranch (branch) {
                         "x-access-token": StorageManagerInstance.read('token')
                     }
                 }).then(res => {
-                    console.log('UPDATE!!');
-                    console.log(res);
+                    // console.log('UPDATE!!');
+                    // console.log(res);
                     if (!res || !res.success) {
                         reject(res);
                     }
@@ -74,8 +74,8 @@ export function updateBranch (branch) {
                         "x-access-token": StorageManagerInstance.read('token')
                     }
                 }).then(res => {
-                    console.log('NEW!!');
-                    console.log(res);
+                    // console.log('NEW!!');
+                    // console.log(res);
                     if (!res || !res.success) {
                         reject(res);
                     }
@@ -86,12 +86,12 @@ export function updateBranch (branch) {
         };
 
         const findImage = (res, arr, isContactImage) => {
-            console.log('response from update images:');
-            console.log(res);
-            console.log('arr:');
-            console.log(arr);
-            console.log('propsHaveUppercase:');
-            console.log(isContactImage);
+            // console.log('response from update images:');
+            // console.log(res);
+            // console.log('arr:');
+            // console.log(arr);
+            // console.log('propsHaveUppercase:');
+            // console.log(isContactImage);
             if (!res || res.length <= 0) {
                 return arr;
             }
@@ -128,7 +128,7 @@ export function updateBranch (branch) {
                 return image;
             });
 
-            console.log(tmp);
+            // console.log(tmp);
 
             return tmp;
         };
@@ -137,13 +137,13 @@ export function updateBranch (branch) {
             return image.newlyAdded;
         }) : null;
 
-        console.log(newImages);
+        // console.log(newImages);
 
 
         // No new branch images
         if (!newImages || newImages.length <= 0) {
             updateOrCreateBranch(branch).then(res => {
-                console.log(res);
+                // console.log(res);
 
                 //
                 //resolve(res.obj);
@@ -155,7 +155,7 @@ export function updateBranch (branch) {
                 if (!hasContactImages(branch.contacts)) {
                     resolve(res);
                 } else {
-                    console.log('no branchImages but contact images to update');
+                    // console.log('no branchImages but contact images to update');
                     ImageService.updateContactImages(branch.contacts.reduce((acc, contact) => {
                         if (!contact.file || !contact.ImagePath) {
                             return acc;
@@ -166,15 +166,15 @@ export function updateBranch (branch) {
                             url: contact.ImagePath
                         }]);
                     }, [])).then(resContacts => {
-                        console.log('RES CONTACT');
-                        console.log(resContacts);
+                        // console.log('RES CONTACT');
+                        // console.log(resContacts);
                         let newContacts = findImage(resContacts, branch.contacts, true);
                         let newBranch = branch;
                         newBranch.contacts = newContacts;
 
                         updateOrCreateBranch(newBranch).then(contactImages => {
-                            console.log('result from updateorcreatebranch -> contactimages');
-                            console.log(contactImages);
+                            // console.log('result from updateorcreatebranch -> contactimages');
+                            // console.log(contactImages);
                             resolve(contactImages);
                         });
                     }).catch(err => {
@@ -196,15 +196,15 @@ export function updateBranch (branch) {
                 newBranch.images = newImages;
 
                 if (!hasContactImages(branch.contacts)) {
-                    console.log('DOESNT HAVE CONTACT IMAGES!!');
+                    // console.log('DOESNT HAVE CONTACT IMAGES!!');
                     updateOrCreateBranch(newBranch).then(res => {
                         resolve(res);
                     }).catch(err => {
                         reject(err);
                     });
                 } else {
-                    console.log('HAS CONTACT IMAGES!!');
-                    console.log(branch.contacts);
+                    // console.log('HAS CONTACT IMAGES!!');
+                    // console.log(branch.contacts);
                     ImageService.updateContactImages(branch.contacts.reduce((acc, contact) => {
                         if (!contact.file || !contact.ImagePath) {
                             return acc;
@@ -215,14 +215,14 @@ export function updateBranch (branch) {
                             url: contact.ImagePath
                         }]);
                     }, [])).then(resContacts => {
-                        console.log('RES CONTACT');
-                        console.log(resContacts);
+                        // console.log('RES CONTACT');
+                        // console.log(resContacts);
                         let newContacts = findImage(resContacts, branch.contacts, true);
                         newBranch.contacts = newContacts;
 
                         updateOrCreateBranch(newBranch).then(res => {
-                            console.log('result from updateorcreatebranch -> contactimages');
-                            console.log(res);
+                            // console.log('result from updateorcreatebranch -> contactimages');
+                            // console.log(res);
                             resolve(res);
                         });
                     }).catch(err => {
@@ -237,8 +237,8 @@ export function updateBranch (branch) {
 }
 
 export function deleteBranch (branch) {
-    console.log('deletion!!!');
-    console.log(branch);
+    // console.log('deletion!!!');
+    // console.log(branch);
     return new Promise((resolve, reject) => {
         Ajax().delete('/branch', {
             body: JSON.stringify({id: branch.BranchID}),
@@ -261,7 +261,7 @@ export function deleteBranch (branch) {
 
 
 function convertOpts (image, isUpdate) {
-    console.log(image);
+    // console.log(image);
 
     let id = image.BranchID;
     let obj = Object.keys(image).reduce((acc, current) => {
@@ -278,7 +278,7 @@ function convertOpts (image, isUpdate) {
         return acc;
     }, {});
 
-    console.log({id: id, updates: obj});
+    // console.log({id: id, updates: obj});
 
     return (isUpdate) ? {
         id: id,

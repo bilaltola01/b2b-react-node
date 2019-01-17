@@ -40,16 +40,16 @@ let createHandlers = (ctx) => {
 	};
 
 	let onRemove = (obj) => {
-		console.log(obj);
+		// console.log(obj);
 		let branches;
 		ctx.setState((prevState) => {
 			branches = prevState.allBranches.reduce((acc, current) => {
 				return (current.BranchID !== obj.id) ? acc.concat([current]) : acc;
 			}, []);
 
-			console.log(prevState.allBranches);
+			// console.log(prevState.allBranches);
 
-			console.log(branches);
+			// console.log(branches);
 
 			ctx.props.onChange('branches', {data: branches});
 
@@ -109,8 +109,8 @@ class MenuBranchesEdit extends Component {
 
 		const availableBranches = (this.props.profile && this.props.profile.branches) ? this.props.profile.branches : [];
 
-		console.log(branches);
-		console.log(availableBranches);
+		// console.log(branches);
+		// console.log(availableBranches);
 
 		// List of all branches availables is to retrieved dynamically from db
 		const obj = {
@@ -154,7 +154,7 @@ MenuBranchesEdit.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-	console.log(state);
+	// console.log(state);
   return {
     profile: state._profile.profile
   };

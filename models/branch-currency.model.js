@@ -16,7 +16,7 @@ BranchCurrency.create = (obj) => {
   let currency = obj;
   currency.Date = dateUtils.toMysqlDate(new Date());
 
-  console.log(currency);
+  // console.log(currency);
   return db('BranchCurrency').insert(currency).returning('BranchCurrencyID');
 };
 
@@ -71,7 +71,7 @@ BranchCurrency.updateAll = (currencies) => {
       return Promise.all(branchCurrencies.map(branchCurrency => {
         return BranchCurrency.remove(branchCurrency.BranchCurrencyID);
       })).then(res => {
-        console.log(res);
+        // console.log(res);
 
         return BranchCurrency.create({
           BranchID: currency.BranchID,
@@ -142,7 +142,7 @@ function createBranchCurrency (branchCurrency) {
     Promise.all([
       Currency.getById(branchCurrency.CurrencyID)
     ]).then(res => {
-      console.log(res);
+      // console.log(res);
       let obj = branchCurrency;
       obj.Currency = res[0];
       resolve(obj);

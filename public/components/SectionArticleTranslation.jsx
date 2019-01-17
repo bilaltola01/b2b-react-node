@@ -63,7 +63,7 @@ class SectionArticleTranslation extends Component {
 			status
 		} = this.props;
 
-		console.log(this.props);
+		// console.log(this.props);
 
 		const translationStatus = (status === 'COMPLETED') ? 
 			(

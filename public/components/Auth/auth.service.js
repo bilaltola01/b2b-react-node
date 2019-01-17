@@ -56,7 +56,7 @@ export function signup(data, opts) {
         }
 
         Ajax().post('/signup', opts).then(res => {
-            console.log(res)
+            // console.log(res)
             if (!res || !res.success) {
                 reject({
                     success: false,
@@ -84,7 +84,7 @@ export function forgotPassword(data, opts) {
             return;
         }
         Ajax().post('/forgotPassword', opts).then(res => {
-            console.log(res)
+            // console.log(res)
             if (!res || !res.success) {
                 reject({
                     success: false,
@@ -104,7 +104,7 @@ export function forgotPassword(data, opts) {
 export function checkResetCode(data, opts) {
     return new Promise((resolve, reject) => {
         Ajax().post('/checkResetCode', opts).then(res => {
-            console.log(res)
+            // console.log(res)
             if (!res || !res.success) {
                 reject({
                     success: false,
@@ -121,7 +121,7 @@ export function checkResetCode(data, opts) {
     })
 }
 export function updatePassword(data, opts) {
-    console.log(data)
+    // console.log(data)
     if (!data.auth.Pwd) {
         reject({
             success: false,
@@ -138,7 +138,7 @@ export function updatePassword(data, opts) {
     } else {
         return new Promise((resolve, reject) => {
             Ajax().put('/updatePassword', opts).then(res => {
-                console.log(res)
+                // console.log(res)
                 if (!res || !res.success) {
                     reject({
                         success: false,

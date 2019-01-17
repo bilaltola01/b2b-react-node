@@ -57,9 +57,9 @@ let createHandlers = (ctx) => {
 				return (current.id !== obj.id) ? acc.concat([current]) : acc;
 			}, []);
 
-			console.log(prevState.allImages);
+			// console.log(prevState.allImages);
 
-			console.log(images);
+			// console.log(images);
 			ctx.props.onChanges('images', {data: images})
 			return {
 				allImages: images
@@ -94,7 +94,7 @@ class ImageUpload extends Component {
 	render() {
 		const { onUploadSubmit, onChange, images } = this.props;
 
-		console.log(this.state);
+		// console.log(this.state);
 
 		const imageComponents = (this.state.allImages.length > 0) ? this.state.allImages.map((image, index) => {
 			return <BranchImageEdit id={image.id} newlyAdded={image.newlyAdded} imgPath={image.imgPath} altDesc={image.altDesc} onRemove={this.handlers.onImageRemove} key={index} />

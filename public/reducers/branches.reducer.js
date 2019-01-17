@@ -2,7 +2,8 @@
 var initialBranchesState = {};
 
 export function _branches(state = initialBranchesState, action) {
-  console.log('_branches reducer called with state ', state , ' and action ', action);
+  // please use redux devtools from chrome/firefox ext
+  // console.log('_branches reducer called with state ', state , ' and action ', action);
 
   switch (action.type) {
     case 'SET_BRANCHES_REQUEST':

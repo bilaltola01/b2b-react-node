@@ -8,7 +8,7 @@ import PageContent from './PageContent';
 
 let createHandlers = (ctx) => {
   let onProfileFetched = (obj) => {
-    console.log('profile fetched!');
+    // console.log('profile fetched!');
 
     let profile = obj;
 
@@ -73,7 +73,7 @@ class Profile extends Component {
       branchRoot: branchRoot
     };
 
-    console.log(company);
+    // console.log(company);
 
     const sections = [{
         type: profileType,
@@ -111,7 +111,7 @@ class Profile extends Component {
 
 
 const mapStateToProps = (state) => {
-  console.log(state);
+  // console.log(state);
   return {
     profile: state._profile.profile
   }

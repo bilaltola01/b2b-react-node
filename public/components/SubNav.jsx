@@ -55,7 +55,7 @@ class SubNav extends Component {
 	render() {
 		const { categories, currentItem, onNavItemClick } = this.props;
 
-		console.log(categories);
+		// console.log(categories);
 
 		const categoriesComponent = (categories && categories.length > 0) ? categories.map((category, index) => {
 			return (currentItem === index) ? (

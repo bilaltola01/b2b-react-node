@@ -2,7 +2,8 @@
 var initialCategoriesState = {};
 
 export function _categories(state = initialCategoriesState, action) {
-  console.log('_categories reducer called with state ', state , ' and action ', action);
+  // please use redux devtools from chrome/firefox ext
+  // console.log('_categories reducer called with state ', state , ' and action ', action);
 
   switch (action.type) {
     case 'GET_CATEGORIES_REQUEST':

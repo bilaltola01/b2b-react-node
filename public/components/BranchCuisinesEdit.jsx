@@ -33,9 +33,9 @@ let createHandlers = (ctx) => {
 				return (current.CuisineID !== obj.id) ? acc.concat([current]) : acc;
 			}, []);
 
-			console.log(prevState.allCuisines);
+			// console.log(prevState.allCuisines);
 
-			console.log(cuisines);
+			// console.log(cuisines);
 
 			ctx.props.onChange('cuisines', {data: cuisines});
 
@@ -103,8 +103,8 @@ class BranchCuisinesEdit extends Component {
 	render() {
 		const { cuisines, availableCuisines, onChange } = this.props;
 
-		console.log(cuisines);
-		console.log(availableCuisines);
+		// console.log(cuisines);
+		// console.log(availableCuisines);
 
 		// List of all cuisines availables is to retrieved dynamically from db
 		const obj = {
@@ -112,7 +112,7 @@ class BranchCuisinesEdit extends Component {
 			items: availableCuisines
 		};
 
-		console.log(this.state);
+		// console.log(this.state);
 
 		const cuisineComponents = (this.state.allCuisines && this.state.allCuisines.length > 0) ? this.state.allCuisines.map((cuisine, index) => {
 			return (index < this.state.allCuisines.length - 1)

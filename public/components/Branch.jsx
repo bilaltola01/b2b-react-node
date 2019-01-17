@@ -9,7 +9,7 @@ import PageContent from './PageContent';
 
 let createHandlers = (ctx) => {
   let onProfileFetched = (obj) => {
-    console.log('profile fetched!');
+    // console.log('profile fetched!');
 
     let profile = obj;
 
@@ -54,7 +54,7 @@ class Branch extends Component {
       }) : null;
     }
 
-    console.log(branchRoot);
+    // console.log(branchRoot);
 
     const currentBranch = (profile.branches && profile.branches.length > 0) ? profile.branches.find(branch => {
       return parseInt(branch.BranchID, 10) === parseInt(id, 10);
@@ -125,7 +125,7 @@ class Branch extends Component {
 };
 
 const mapStateToProps = (state) => {
-  console.log(state);
+  // console.log(state);
   return {
     profile: state._profile.profile
   }

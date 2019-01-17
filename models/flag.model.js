@@ -19,7 +19,7 @@ Flag.create = (obj) => {
   let flag = obj;
   flag.Date = dateUtils.toMysqlDate(new Date());
 
-  console.log(flag);
+  // console.log(flag);
   return db('Flag').insert(flag).returning('FlagID');
 };
 

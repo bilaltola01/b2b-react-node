@@ -10,7 +10,7 @@ let createHandlers = (ctx) => {
 	let onLogin = (e) => {
 		e.preventDefault();
 		ctx.props.dispatch(actionCreators.getAuth(ctx.getDataFromEvent(e), (res) => {
-			console.log(res);
+			// console.log(res);
 			if (res && res.authenticated) {
 				ctx.setState({
 					hasToRedirect: true

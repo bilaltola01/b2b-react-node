@@ -20,12 +20,12 @@ let createHandlers = (ctx) => {
 	};
 
 	let onImageUpload = (type, obj) => {
-		console.log('uploaded image!!');
+		// console.log('uploaded image!!');
 		ctx.props.onChange(ctx.props.id, type, obj);
 	};
 
 	let onSaveChanges = (changes) => {
-		console.log(changes);
+		// console.log(changes);
 	};
 
 	let onChanges = (type, obj) => {
@@ -73,9 +73,9 @@ class SectionArticleEditBranch extends Component {
 			onChange
 		} = this.props;
 
-		console.log(this.props);
+		// console.log(this.props);
 
-		console.log(this.state);
+		// console.log(this.state);
 
 		const classes = classNames(
 			'branch--contact--header',
@@ -109,7 +109,7 @@ class SectionArticleEditBranch extends Component {
 			};
 		});
 
-		console.log(allImages, 'test')
+		// console.log(allImages, 'test')
 		const allImagesComponent = (
 			<ImageUpload onChanges={this.handlers.onChanges} images={allImages} />
 		);

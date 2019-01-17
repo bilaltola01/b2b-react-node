@@ -41,7 +41,7 @@ class ArticleMenuDetailListItemMeal extends Component {
 	render() {
 		const { meal, currency, index, currentLanguage } = this.props;
 
-    console.log(this.props);
+    // console.log(this.props);
 
 		const symbol = (currency && currency.Currency) ? currency.Currency.Symbol : MAP_CONSTANTS.DEFAULT_LANGUAGE_SYMBOL;
 

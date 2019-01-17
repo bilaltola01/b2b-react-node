@@ -11,7 +11,7 @@ CategoryStandardController.get = (req, res) => {
     res.setHeader('Content-Type', 'application/json');
 
     CategoryStandard.getAll().then(output => {
-        console.log(output);
+        // console.log(output);
         res.status(200).json({ success: true, message: 'CategoryStandard successfully fetched', obj: output });
     }).catch(err => {
         console.error(err);
@@ -23,7 +23,7 @@ CategoryStandardController.post = (req, res) => {
     res.setHeader('Content-Type', 'application/json');
 
     CategoryStandard.create(req.body.obj).then(output => {
-        console.log(output);
+        // console.log(output);
         res.status(201).json({ success: true, message: 'CategoryStandard successfully created', obj: output });
     }).catch(err => {
         console.error(err);
@@ -35,7 +35,7 @@ CategoryStandardController.put = (req, res) => {
     res.setHeader('Content-Type', 'application/json');
 
     CategoryStandard.update(req.body.id, req.body.updates).then(output => {
-        console.log(output);
+        // console.log(output);
         res.status(201).json({ success: true, message: 'CategoryStandard successfully updated', obj: output });
     }).catch(err => {
         console.error(err);
@@ -47,7 +47,7 @@ CategoryStandardController.remove = (req, res) => {
     res.setHeader('Content-Type', 'application/json');
 
     CategoryStandard.remove(req.body.id).then(output => {
-        console.log(output);
+        // console.log(output);
         res.status(201).json({ success: true, message: 'CategoryStandard successfully removed', obj: output });
     }).catch(err => {
         console.error(err);

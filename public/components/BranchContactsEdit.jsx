@@ -30,7 +30,7 @@ let createHandlers = (ctx) => {
 				IsAdmin: 0
 			};
 
-			console.log(obj);
+			// console.log(obj);
 
 			contacts.push(obj);
 
@@ -43,7 +43,7 @@ let createHandlers = (ctx) => {
 	};
 
 	let onChanges = (type, obj, id) => {
-		console.log(type, obj, id);
+		// console.log(type, obj, id);
 
 		if (type !== 'contactimage') {
 			obj.target.persist();
@@ -65,7 +65,7 @@ let createHandlers = (ctx) => {
 
 							return newContact;
 						default:
-							console.log('enters default!!!!!!!!!');
+							// console.log('enters default!!!!!!!!!');
 							if (obj.target.target.type === 'checkbox') {
 								newContact[obj.key] = obj.target.target.checked;
 							} else {
@@ -79,7 +79,7 @@ let createHandlers = (ctx) => {
 				return prevContact;
 			});
 
-			console.log(contacts);
+			// console.log(contacts);
 
 			ctx.props.onChange('contacts', {data: contacts});
 
@@ -95,9 +95,9 @@ let createHandlers = (ctx) => {
 				return (current.id !== obj.id) ? acc.concat([current]) : acc;
 			}, []);
 
-			console.log(prevState.allContacts);
+			// console.log(prevState.allContacts);
 
-			console.log(contacts);
+			// console.log(contacts);
 
 			ctx.props.onChange('contacts', {data: contacts});
 
@@ -126,7 +126,7 @@ class BranchContactsEdit extends Component {
 	render() {
 		const { contacts, onChange, branchId } = this.props;
 
-		console.log(this.state.allContacts);
+		// console.log(this.state.allContacts);
 
 		const contactComponents = (this.state.allContacts && this.state.allContacts.length > 0) ? this.state.allContacts.map((contact, index) => {
 			return <ContactEdit id={contact.BranchContactID} imgPath={contact.ImagePath} altDesc={contact.ImageAltDesc} firstname={contact.Firstname} lastname={contact.Lastname} isAdmin={parseInt(contact.IsAdmin, 10)} email={contact.Email} tel={contact.Tel} key={index} onChanges={this.handlers.onChanges} />;

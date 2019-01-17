@@ -26,9 +26,9 @@ let createHandlers = (ctx) => {
 	};
 
 	let onAdd = (obj) => {
-		console.log(obj);
+		// console.log(obj);
 		ctx.setState((prevState) => {
-			console.log(prevState);
+			// console.log(prevState);
 			let cat = {
 				oldId: prevState.category.id,
 				id: obj.id,
@@ -77,7 +77,7 @@ let createHandlers = (ctx) => {
 		target.textContent = text;
 		DomUtils.toggleClass(target, 'active');
 
-		console.log(rel, text, id);
+		// console.log(rel, text, id);
 
 		// Then add the new language
 		onAdd({

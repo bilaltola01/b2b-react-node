@@ -254,7 +254,7 @@ let createHandlers = (ctx) => {
 	let onSignup = (e) => {
 		e.preventDefault();
 		var data = ctx.getDataFromEvent(e)
-		console.log(data)
+		// console.log(data)
 		if(!data.auth.Name){
 			ctx.setState({
 				nameError:true
@@ -291,7 +291,7 @@ let createHandlers = (ctx) => {
 			})
 		} 
 		ctx.props.dispatch(actionCreators.signupUser(ctx.getDataFromEvent(e), (res) => {
-			console.log(res);
+			// console.log(res);
 			if (res && res.authenticated) {
 				ctx.setState({
 					hasToRedirect: true

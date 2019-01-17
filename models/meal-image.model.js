@@ -14,7 +14,7 @@ MealImage.create = (obj) => {
     let image = obj;
     image.Date = dateUtils.toMysqlDate(new Date());
 
-    console.log(image);
+    // console.log(image);
     return db('MealImage').insert(image).returning('MealImageID');
 };
 
@@ -25,7 +25,7 @@ MealImage.createAll = (images) => {
     }
 
     return Promise.all(images.map(image => {
-        console.log(image);
+        // console.log(image);
         return MealImage.create({
             MealID: image.MealID || image.mealId,
             Path: image.Path || image.imgPath,
@@ -50,9 +50,9 @@ MealImage.update = (id, obj) => {
 MealImage.removeSelected = (images, meal) => {
     images = images || [];
     return MealImage.get({ MealID: meal.MealID }).then(res => {
-        console.log('res', res, 'res')
+        // console.log('res', res, 'res')
         var deletedImages = res.filter(img => !images.find(image => (image.MealImageID || image.id) == (img.MealImageID || img.id)))
-        console.log('deletedImages', deletedImages)
+        // console.log('deletedImages', deletedImages)
         return Promise.all(deletedImages.map(image => {
             let id = image.MealImageID || image.id;
             return MealImage.remove(id);
@@ -68,8 +68,8 @@ MealImage.updateAll = (images) => {
     return Promise.all(images.map(image => {
         let id = image.MealImageID || image.id;
         return MealImage.getById(id).then(res => {
-            console.log('mealimage get by id');
-            console.log(res);
+            // console.log('mealimage get by id');
+            // console.log(res);
             if (!res || res.length <= 0) {
                 return MealImage.create({
                     MealID: image.MealID || image.mealId,

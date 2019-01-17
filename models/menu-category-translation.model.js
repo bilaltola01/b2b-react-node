@@ -25,7 +25,7 @@ MenuCategoryTranslation.create = (obj) => {
     category.callback_uri = constants.STRAKER_CALLBACK_URL + '?type=menucategory';
   }
 
-  console.log(category);
+  // console.log(category);
 
   // Send a req to the Staker server to translate
   const options = {
@@ -41,7 +41,7 @@ MenuCategoryTranslation.create = (obj) => {
   };
 
   return rp(options).then((res) => {
-    console.log(res);
+    // console.log(res);
 
     if (!res || !res.success) {
       return Promise.reject(res);

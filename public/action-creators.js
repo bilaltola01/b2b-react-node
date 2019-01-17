@@ -59,7 +59,7 @@ export function getAnalytics (cb) {
     promise: () => {
       return new Promise((resolve, reject) => {
         AnalyticsService.getAnalytics().then((res) => {
-          console.log('request succeeded with JSON response', res);
+          // console.log('request succeeded with JSON response', res);
 
           if (res && typeof cb === 'function') {
             cb(res);
@@ -77,7 +77,7 @@ export function getMenu (data) {
     types: ['GET_MENU_REQUEST', 'GET_MENU_SUCCESS', 'GET_MENU_FAILURE'],
     promise: () => {
       return new Promise((resolve, reject) => {
-        console.log(data);
+        // console.log(data);
         resolve(data);
       });
     }
@@ -85,21 +85,21 @@ export function getMenu (data) {
 };
 
 export function saveMenu (data, cb) {
-  console.log(data);
+  // console.log(data);
   return {
     types: ['SAVE_MENU_REQUEST', 'SAVE_MENU_SUCCESSS', 'SAVE_MENU_FAILURE'],
     promise: () => {
       return new Promise((resolve, reject) => {
 
         MenuService.updateMenu(data).then((res) => {
-          console.log('request succeeded with JSON response', res);
+          // console.log('request succeeded with JSON response', res);
 
           if (res && typeof cb === 'function') {
             data.MenuID = data.MenuID ?  data.MenuID : res;
             cb(data);
           }
         }).catch(err => {
-          console.log(err);
+          // console.log(err);
         });
       });
     }
@@ -112,7 +112,7 @@ export function translateMenu (data, cb) {
     promise: () => {
       return new Promise((resolve, reject) => {
         MenuService.translateMenu(data, 'text').then((res) => {
-          console.log('request succeeded with JSON response', res);
+          // console.log('request succeeded with JSON response', res);
 
           if (res && typeof cb === 'function') {
             cb(data);
@@ -129,7 +129,7 @@ export function getMenus (cb) {
     promise: () => {
       return new Promise((resolve, reject) => {
         MenuService.getMenus().then((res) => {
-          console.log('request succeeded with JSON response', res);
+          // console.log('request succeeded with JSON response', res);
 
           if (res && typeof cb === 'function') {
             cb(res);
@@ -146,7 +146,7 @@ export function getMenuTranslations (cb) {
     promise: () => {
       return new Promise((resolve, reject) => {
         MenuService.getMenuTranslations().then((res) => {
-          console.log('request succeeded with JSON response', res);
+          // console.log('request succeeded with JSON response', res);
 
           if (res && typeof cb === 'function') {
             cb(res);
@@ -172,7 +172,7 @@ export function setMenu (menu, data) {
     finalMenu[dataKey] = data[dataKey];
   }
 
-  console.log(finalMenu, 'finalMenu');
+  // console.log(finalMenu, 'finalMenu');
 
   return {
     types: ['SET_MENU_REQUEST', 'SET_MENU_SUCCESS', 'SET_MENU_FAILURE'],
@@ -187,7 +187,7 @@ export function setMenu (menu, data) {
 };
 
 export function setBranches (branches, data, branchId) {
-  console.log(branches);
+  // console.log(branches);
   let returnResult = (res) => {
     return {
       types: ['SET_BRANCHES_REQUEST', 'SET_BRANCHES_SUCCESS', 'SET_BRANCHES_FAILURE'],
@@ -219,9 +219,9 @@ export function setBranches (branches, data, branchId) {
   let getFinalBranches = (branches, newData) => {
     let finalBranches = [Object.assign({}, ...branches)];
     let newBranch = addNewBranch(finalBranches, newData);
-    console.log(newBranch);
+    // console.log(newBranch);
     finalBranches.push(newBranch);
-    console.log(finalBranches);
+    // console.log(finalBranches);
     return finalBranches;
   };
 
@@ -247,24 +247,24 @@ export function setBranches (branches, data, branchId) {
   targetBranch[dataKey] = data[dataKey];
   Object.assign(targetBranch, newBranch);
 
-  console.log(branches);
+  // console.log(branches);
 
   return returnResult(branches);
 };
 
 export function saveBranches (branches, cb) {
-  console.log(branches);
+  // console.log(branches);
   return {
     types: ['SAVE_BRANCHES_REQUEST', 'SAVE_BRANCHES_SUCCESS', 'SAVE_BRANCHES_FAILURE'],
     promise: () => {
       return new Promise((resolve, reject) => {
         Promise.all(branches.map(branch => {
           return BranchService.updateBranch(branch).then((res) => {
-            console.log('request succeeded with JSON response', res);
+            // console.log('request succeeded with JSON response', res);
             return res;
           });
         })).then(res => {
-          console.log(res);
+          // console.log(res);
 
           if (res && typeof cb === 'function') {
             cb(res);
@@ -278,13 +278,13 @@ export function saveBranches (branches, cb) {
 };
 
 export function saveBranch (branch, cb) {
-  console.log(branch);
+  // console.log(branch);
   return {
     types: ['SAVE_BRANCH_REQUEST', 'SAVE_BRANCH_SUCCESS', 'SAVE_BRANCH_FAILURE'],
     promise: () => {
       return new Promise((resolve, reject) => {
         BranchService.updateBranch(branch).then((res) => {
-          console.log('request succeeded with JSON response', res);
+          // console.log('request succeeded with JSON response', res);
 
           if (res && typeof cb === 'function') {
             cb(res);
@@ -299,7 +299,7 @@ export function saveBranch (branch, cb) {
     promise: () => {
       return new Promise((resolve, reject) => {
         BranchService.updateBranches(branches).then((res) => {
-          console.log('request succeeded with JSON response', res);
+          // console.log('request succeeded with JSON response', res);
 
           if (res && typeof cb === 'function') {
             cb(res);
@@ -317,15 +317,15 @@ export function saveBranch (branch, cb) {
 };
 
 export function deleteBranch (branch, cb) {
-  console.log(branch);
+  // console.log(branch);
   return {
     types: ['DELETE_BRANCH_REQUEST', 'DELETE_BRANCH_SUCCESS', 'DELETE_BRANCH_FAILURE'],
     promise: () => {
       return new Promise((resolve, reject) => {
-        console.log('SHOULD DELETE BRANCH HERE');
+        // console.log('SHOULD DELETE BRANCH HERE');
 
         BranchService.deleteBranch(branch).then((res) => {
-          console.log('request succeeded with JSON response', res);
+          // console.log('request succeeded with JSON response', res);
 
           if (res && typeof cb === 'function') {
             cb(res);
@@ -340,15 +340,15 @@ export function deleteBranch (branch, cb) {
 
 
 export function deleteMenu (menu, cb) {
-  console.log(menu);
+  // console.log(menu);
   return {
     types: ['DELETE_MENU_REQUEST', 'DELETE_MENU_SUCCESS', 'DELETE_MENU_FAILURE'],
     promise: () => {
       return new Promise((resolve, reject) => {
-        console.log('WHY DOES IT DELETE DIRECTLY???');
+        // console.log('WHY DOES IT DELETE DIRECTLY???');
 
         MenuService.deleteMenu(menu).then((res) => {
-          console.log('request succeeded with JSON response', res);
+          // console.log('request succeeded with JSON response', res);
 
           if (res && typeof cb === 'function') {
             cb(res);
@@ -367,7 +367,7 @@ export function setPopup (data, cb) {
     types: ['SET_POPUP_REQUEST', 'SET_POPUP_SUCCESS', 'SET_POPUP_FAILURE'],
     promise: () => {
       return new Promise((resolve, reject) => {
-        console.log(data);
+        // console.log(data);
 
         if (typeof cb === 'function') {
           cb(data);
@@ -385,7 +385,7 @@ export function getCategories (type, cb) {
     promise: () => {
       return new Promise((resolve, reject) => {
         MenuCategoryService.getCategories(type).then((res) => {
-          console.log('request succeeded with JSON response', res);
+          // console.log('request succeeded with JSON response', res);
 
           if (res && typeof cb === 'function') {
             cb(res);
@@ -404,7 +404,7 @@ export function getLanguages (cb) {
     promise: () => {
       return new Promise((resolve, reject) => {
         LanguageService.getLanguages().then((res) => {
-          console.log('request succeeded with JSON response', res);
+          // console.log('request succeeded with JSON response', res);
 
           if (res && typeof cb === 'function') {
             cb(res);
@@ -424,7 +424,7 @@ export function getCurrentLanguage (nav, location, cb) {
     promise: () => {
       return new Promise((resolve, reject) => {
         LanguageService.getCurrentLanguage(nav, location).then((res) => {
-          console.log('Language successfully retrieved', res);
+          // console.log('Language successfully retrieved', res);
 
           if (res && typeof cb === 'function') {
             cb(res);
@@ -443,7 +443,7 @@ export function setCurrentLanguage (lang, cb) {
     types: ['SET_CURRENT_LANGUAGE_REQUEST', 'SET_CURRENT_LANGUAGE_SUCCESS', 'SET_CURRENT_LANGUAGE_FAILURE'],
     promise: () => {
       return new Promise((resolve, reject) => {
-        console.log(lang);
+        // console.log(lang);
 
         if (typeof cb === 'function') {
           cb(lang);
@@ -463,7 +463,7 @@ export function getCuisines (cb) {
     promise: () => {
       return new Promise((resolve, reject) => {
         CuisineService.getCuisines().then((res) => {
-          console.log('request succeeded with JSON response', res);
+          // console.log('request succeeded with JSON response', res);
 
           if (res && typeof cb === 'function') {
             cb(res);
@@ -482,7 +482,7 @@ export function getCurrencies (cb) {
     promise: () => {
       return new Promise((resolve, reject) => {
         CurrencyService.getCurrencies().then((res) => {
-          console.log('request succeeded with JSON response', res);
+          // console.log('request succeeded with JSON response', res);
 
           if (res && typeof cb === 'function') {
             cb(res);
@@ -501,7 +501,7 @@ export function getProfile (cb) {
     promise: () => {
       return new Promise((resolve, reject) => {
         ProfileService.getProfile().then((res) => {
-          console.log('request succeeded with JSON response', res);
+          // console.log('request succeeded with JSON response', res);
 
           if (res && typeof cb === 'function') {
             cb(res);
@@ -515,13 +515,13 @@ export function getProfile (cb) {
 };
 
 export function saveProfile (data, cb) {
-  console.log(data);
+  // console.log(data);
   return {
     types: ['SAVE_PROFILE_REQUEST', 'SAVE_PROFILE_SUCCESS', 'SAVE_PROFILE_FAILURE'],
     promise: () => {
       return new Promise((resolve, reject) => {
         ProfileService.updateProfile(data).then((res) => {
-          console.log('request succeeded with JSON response', res);
+          // console.log('request succeeded with JSON response', res);
 
           if (res && typeof cb === 'function') {
             cb(res.obj);
@@ -541,7 +541,7 @@ export function uploadImage (data, cb) {
     promise: () => {
       return new Promise((resolve, reject) => {
         ImageService.uploadImage(data).then((res) => {
-          console.log('request succeeded with JSON response', res);
+          // console.log('request succeeded with JSON response', res);
 
           if (res && typeof cb === 'function') {
             cb(res);
@@ -564,8 +564,8 @@ export function setProfile (profile, data) {
 
   finalProfile[dataKey] = data[dataKey];
 
-  console.log(profile);
-  console.log(finalProfile);
+  // console.log(profile);
+  // console.log(finalProfile);
 
   return {
     types: ['SET_PROFILE_REQUEST', 'SET_PROFILE_SUCCESS', 'SET_PROFILE_FAILURE'],
@@ -586,8 +586,8 @@ export function getAuth (data, cb) {
       return new Promise((resolve, reject) => {
         // If the token is already stored in localstorage, resolve
         let token = AuthService.isAuthenticated();
-        console.log(data);
-        console.log(token);
+        // console.log(data);
+        // console.log(token);
         if (token) {
           resolve(AuthService.getAuth());
           return;
@@ -609,7 +609,7 @@ export function getAuth (data, cb) {
             "cache-control": "no-cache"
           }
         }).then((res) => {
-          console.log('request succeeded with JSON response', res);
+          // console.log('request succeeded with JSON response', res);
 
           // If user is successfully logged in, Store the auth token in localStorage for further usage
           if (res.token && res.success) {
@@ -634,7 +634,7 @@ export function getAuth (data, cb) {
             });
           }
         }).catch((err) => {
-          console.log('request failed', err);
+          // console.log('request failed', err);
 
           let error = err.error;
 
@@ -674,7 +674,7 @@ export function signupUser (data, cb) {
             "cache-control": "no-cache"
           }
         }).then((res) => {
-          console.log('request succeeded with JSON response', res);
+          // console.log('request succeeded with JSON response', res);
           // If user is successfully logged in, Store the auth token in localStorage for further usage
           if (res.token && res.success) {
             StorageManagerInstance.save('token', res.token);
@@ -698,7 +698,7 @@ export function signupUser (data, cb) {
             });
           }
         }).catch((err) => {
-          console.log('request failed', err);
+          // console.log('request failed', err);
 
           let error = err.error;
           
@@ -733,7 +733,7 @@ export function forgotPassword (data, cb) {
             "cache-control": "no-cache"
           }
         }).then((res) => {
-          console.log(res);
+          // console.log(res);
           // If user is successfully logged in, Store the auth token in localStorage for further usage
           if (res.success) {
             if (typeof cb === 'function') {
@@ -754,7 +754,7 @@ export function forgotPassword (data, cb) {
             });
           }
         }).catch((err) => {
-          console.log('request failed', err);
+          // console.log('request failed', err);
           if (typeof cb === 'function') {
             cb({
               error: err.error,
@@ -785,7 +785,7 @@ export function checkResetCode(data, cb) {
             "cache-control": "no-cache"
           }
         }).then((res) => {
-          console.log(res);
+          // console.log(res);
           // If user is successfully logged in, Store the auth token in localStorage for further usage
           if (res.success) {
             if (typeof cb === 'function') {
@@ -806,7 +806,7 @@ export function checkResetCode(data, cb) {
             });
           }
         }).catch((err) => {
-          console.log('request failed', err);
+          // console.log('request failed', err);
           if (typeof cb === 'function') {
             cb({
               error: err.error,
@@ -837,7 +837,7 @@ export function updatePassword(data, cb) {
             "cache-control": "no-cache"
           }
         }).then((res) => {
-          console.log(res);
+          // console.log(res);
           // If user is successfully logged in, Store the auth token in localStorage for further usage
           if (res.success) {
             if (typeof cb === 'function') {
@@ -858,7 +858,7 @@ export function updatePassword(data, cb) {
             });
           }
         }).catch((err) => {
-          console.log('request failed', err);
+          // console.log('request failed', err);
           if (typeof cb === 'function') {
             cb({
               error: err.error,

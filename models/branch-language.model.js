@@ -16,7 +16,7 @@ BranchLanguage.create = (obj) => {
   let language = obj;
   language.Date = dateUtils.toMysqlDate(new Date());
 
-  console.log(language);
+  // console.log(language);
   return db('BranchLanguage').insert(language).returning('BranchLanguageID');
 };
 
@@ -70,7 +70,7 @@ BranchLanguage.updateAll = (languages) => {
       return Promise.all(branchLanguages.map(branchLanguage => {
         return BranchLanguage.remove(branchLanguage.BranchLanguageID);
       })).then(res => {
-        console.log(res);
+        // console.log(res);
 
         return BranchLanguage.create({
           BranchID: language.BranchID,
@@ -131,7 +131,7 @@ function createBranchLanguage (branchLanguage) {
     Promise.all([
       Language.getWithDetails({LanguageID: branchLanguage.LanguageID})
     ]).then(res => {
-      console.log(res);
+      // console.log(res);
       let obj = branchLanguage;
       obj.Language = res[0];
       resolve(obj);

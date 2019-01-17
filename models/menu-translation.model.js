@@ -30,7 +30,7 @@ MenuTranslation.create = (obj) => {
     menu.callback_uri = constants.STRAKER_CALLBACK_URL + '?type=menu';
   }
 
-  console.log(menu);
+  // console.log(menu);
 
   // Send a req to the Staker server to translate
   const options = {
@@ -46,7 +46,7 @@ MenuTranslation.create = (obj) => {
   };
 
   return rp(options).then((res) => {
-    console.log(res);
+    // console.log(res);
 
     if (!res || !res.success) {
       return Promise.reject(res);

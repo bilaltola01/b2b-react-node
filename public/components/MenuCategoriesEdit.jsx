@@ -9,10 +9,10 @@ let createHandlers = (ctx) => {
 	let lastSelectedCategory = 1;
 	let totalCategories = (ctx.props && ctx.props.availableCategories) ? ctx.props.availableCategories : [];
 	let onCategoryRemove = (obj) => {
-		console.log(obj);
+		// console.log(obj);
 		let categories;
 		ctx.setState((prevState) => {
-			console.log(prevState.allCategories, 'prevState.allCategories')
+			// console.log(prevState.allCategories, 'prevState.allCategories')
 			categories = prevState.allCategories.reduce((acc, current) => {
 				if (current.Category && (current.Category.CategoryStandardID || current.Category.id)) {
 					return ((current.Category.CategoryStandardID || current.Category.id) !== obj.id) ? acc.concat([current]) : acc;
@@ -36,10 +36,10 @@ let createHandlers = (ctx) => {
 	let onCategoryChange = (cat) => {
 		let categories;
 		ctx.setState((prevState) => {
-			console.log(prevState.allCategories);
+			// console.log(prevState.allCategories);
 
 			categories = prevState.allCategories.map((prevCategory, index) => {
-				console.log(prevCategory, cat);
+				// console.log(prevCategory, cat);
 
 				if ((prevCategory.CategoryID === cat.id) ||
 					(prevCategory.id === 1 || prevCategory.CategoryID === 1) /*&& prevState.allCategories.length === 1*/ ||
@@ -66,7 +66,7 @@ let createHandlers = (ctx) => {
 
 			lastSelectedCategory = cat.CategoryID || cat.id;
 
-			console.log(categories);
+			// console.log(categories);
 			ctx.props.onChange('categories', { data: categories });
 
 			return {
@@ -76,7 +76,7 @@ let createHandlers = (ctx) => {
 	};
 
 	let onCategoryAdd = (obj) => {
-		console.log(obj);
+		// console.log(obj);
 		let categories;
 		ctx.setState((prevState) => {
 			categories = prevState.allCategories;
@@ -103,10 +103,10 @@ let createHandlers = (ctx) => {
 				onChange: ctx.props.onChange
 			};
 
-			console.log(finalObj);
+			// console.log(finalObj);
 
 			categories.push(finalObj);
-			console.log(categories, 'teststt.categories');
+			// console.log(categories, 'teststt.categories');
 			ctx.props.onChange('categories', { data: categories });
 
 			return {
@@ -152,8 +152,8 @@ class MenuCategoriesEdit extends Component {
 		const totalCategories = (this.props && this.props.availableCategories) ? this.props.availableCategories : [];
 		const stateCategories = this.state.allCategories;
 
-		console.log(totalCategories);
-		console.log(stateCategories, 'stateCategories');
+		// console.log(totalCategories);
+		// console.log(stateCategories, 'stateCategories');
 
 		const categoriesAll = (stateCategories && stateCategories.length > 0) ? stateCategories.map((category, index) => {
 			const finalCategory = (category.Category) ? category.Category : category;
@@ -165,7 +165,7 @@ class MenuCategoriesEdit extends Component {
 			return <MenuCategoryEdit id={finalCategory.CategoryStandardID} categoriesAll={categoriesAll} totalCategories={totalCategories} isCustom={false} title={finalCategory.Title} description={finalCategory.Description} meals={category.meals || []} onChange={this.handlers.onCategoryChange} onCategoryRemove={this.handlers.onCategoryRemove} key={index} />;
 		}) : null;
 
-		console.log(categoriesComponent, 'categoriesComponent')
+		// console.log(categoriesComponent, 'categoriesComponent')
 		return (
 			<div>
 				<h3 className="asset--title">Categories</h3>
@@ -190,7 +190,7 @@ MenuCategoriesEdit.propTypes = {
 
 
 const mapStateToProps = (state) => {
-	console.log(state);
+	// console.log(state);
 	return {
 		availableCategories: state._categories.categories
 	};

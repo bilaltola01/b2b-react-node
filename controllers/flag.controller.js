@@ -11,7 +11,7 @@ FlagController.get = (req, res) => {
     res.setHeader('Content-Type', 'application/json');
 
     Flag.getAll().then(output => {
-        console.log(output);
+        // console.log(output);
         res.status(200).json({ success: true, message: 'Flag successfully fetched', obj: output });
     }).catch(err => {
         console.error(err);
@@ -23,7 +23,7 @@ FlagController.post = (req, res) => {
     res.setHeader('Content-Type', 'application/json');
 
     Flag.create(req.body.obj).then(output => {
-        console.log(output);
+        // console.log(output);
         res.status(201).json({ success: true, message: 'Flag successfully created', obj: output });
     }).catch(err => {
         console.error(err);

@@ -7,8 +7,8 @@ import * as actionCreators from '../action-creators';
 
 let createHandlers = (ctx) => {
 	let onMenuSaved = (obj) => {
-		console.log('menu saved!');
-		console.log(obj);
+		// console.log('menu saved!');
+		// console.log(obj);
 
 		ctx.props.dispatch(actionCreators.setMenu({}));
 
@@ -22,7 +22,7 @@ let createHandlers = (ctx) => {
 	};
 
 	let validateState = (menu, cb) => {
-		console.log(menu);
+		// console.log(menu);
 
 		let errors = [];
 
@@ -118,7 +118,7 @@ let createHandlers = (ctx) => {
 	let onSave = (props) => {
 		validateState(ctx.props.menu, () => {
 			if (ctx.state.isValid) {
-				console.log('should save the object here');
+				// console.log('should save the object here');
 
 				switch (props.type) {
 					case 'menu':
@@ -156,7 +156,7 @@ class Save extends Component {
 	render() {
 		const { type, component } = this.props;
 
-		console.log(this.props);
+		// console.log(this.props);
 
 		const saveComponent = (this.state.isSaved)
 			? (
@@ -188,7 +188,7 @@ Save.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-	console.log(state);
+	// console.log(state);
 	return {
 		menu: state._menu.menu
 	}

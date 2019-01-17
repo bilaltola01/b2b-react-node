@@ -107,8 +107,8 @@ class SectionArticleDeleteBranch extends Component {
 		const name = branchComponent ? branchComponent.Name : '';
 		const hasHeadquarters = branchComponent ? branchComponent.HasHeadquarters : false;
 
-		console.log(component);
-		console.log(branchComponent);
+		// console.log(component);
+		// console.log(branchComponent);
 
 		if (this.state.redirect) {
 			return <Redirect push to={"/branches"} />;
@@ -231,7 +231,7 @@ SectionArticleDeleteBranch.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-	console.log(state);
+	// console.log(state);
 	return {
 		popup: state._popup.popup
 	};

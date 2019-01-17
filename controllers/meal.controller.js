@@ -11,7 +11,7 @@ MealController.get = (req, res) => {
     res.setHeader('Content-Type', 'application/json');
 
     Meal.getAll().then(output => {
-        console.log(output);
+        // console.log(output);
         res.status(200).json({ success: true, message: 'Meal successfully fetched', obj: output });
     }).catch(err => {
         console.error(err);
@@ -23,7 +23,7 @@ MealController.post = (req, res) => {
     res.setHeader('Content-Type', 'application/json');
 
     Meal.create(req.body.obj).then(output => {
-        console.log(output);
+        // console.log(output);
         res.status(201).json({ success: true, message: 'Meal successfully created', obj: output });
     }).catch(err => {
         console.error(err);
@@ -35,7 +35,7 @@ MealController.put = (req, res) => {
     res.setHeader('Content-Type', 'application/json');
 
     Meal.update(req.body.id, req.body.updates).then(output => {
-        console.log(output);
+        // console.log(output);
         res.status(201).json({ success: true, message: 'Meal successfully updated', obj: output });
     }).catch(err => {
         console.error(err);
@@ -47,7 +47,7 @@ MealController.remove = (req, res) => {
     res.setHeader('Content-Type', 'application/json');
 
     Meal.remove(req.body.id).then(output => {
-        console.log(output);
+        // console.log(output);
         res.status(201).json({ success: true, message: 'Meal successfully removed', obj: output });
     }).catch(err => {
         console.error(err);
@@ -59,7 +59,7 @@ MealController.removeAll = (req, res) => {
     res.setHeader('Content-Type', 'application/json');
 
     Meal.removeSelected(req.body, req.body.meals).then(output => {
-        console.log(output);
+        // console.log(output);
         res.status(201).json({ success: true, message: 'Meal successfully removed', obj: output });
     }).catch(err => {
         console.error(err);

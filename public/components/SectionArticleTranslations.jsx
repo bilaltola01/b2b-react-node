@@ -7,7 +7,7 @@ class SectionArticleTranslations extends Component {
 	render() {
 		const { title, dateUpdate, component } = this.props;
 
-		console.log(component.props);
+		// console.log(component.props);
 
 		const translationsMenu = (component.props.translations && component.props.translations.menus && component.props.translations.menus.length > 0) ? component.props.translations.menus : [];
 		const translationsMenuCategories = (component.props.translations && component.props.translations.menuCategories && component.props.translations.menuCategories.length > 0) ? component.props.translations.menuCategories : [];

@@ -19,7 +19,7 @@ Category.create = (obj) => {
   let category = obj;
   category.Date = dateUtils.toMysqlDate(new Date());
 
-  console.log(category);
+  // console.log(category);
   return db('Category').insert(category).returning('CategoryID');
 };
 

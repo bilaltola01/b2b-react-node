@@ -2,7 +2,8 @@
 var initialCurrenciesState = {};
 
 export function _currencies(state = initialCurrenciesState, action) {
-  console.log('_currencies reducer called with state ', state , ' and action ', action);
+  // please use redux devtools from chrome/firefox ext
+  // console.log('_currencies reducer called with state ', state , ' and action ', action);
 
   switch (action.type) {
     case 'GET_CURRENCIES_REQUEST':

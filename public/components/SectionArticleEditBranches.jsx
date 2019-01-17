@@ -43,7 +43,7 @@ let createHandlers = (ctx) => {
 	};
 
 	let onBranchesSaved = (res) => {
-		console.log('branhes saved!');
+		// console.log('branhes saved!');
 
 		// Set profile in the global store here
 
@@ -53,7 +53,7 @@ let createHandlers = (ctx) => {
 	};
 
 	let onSaveChanges = (branches) => {
-		console.log('should save all changes to the db and redirect');
+		// console.log('should save all changes to the db and redirect');
 		ctx.props.dispatch(actionCreators.saveBranches(branches, onBranchesSaved));
 	};
 
@@ -88,10 +88,10 @@ class SectionArticleEditBranches extends Component {
 
 		const finalBranches = (this.props.profile && this.props.profile.branches && this.props.profile.branches.length > 0) ? this.props.profile.branches : component.props.branches || [];
 
-		console.log(finalBranches);
+		// console.log(finalBranches);
 
 		const branchComponents = (finalBranches && finalBranches.length > 0) ? finalBranches.map((branch, index) => {
-			console.log(branch, 'branch')
+			// console.log(branch, 'branch')
 			return <SectionArticleEditBranch 
 				id={branch.BranchID}
 				address={branch.Address}
@@ -143,7 +143,7 @@ SectionArticleEditBranches.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-    console.log(state);
+    // console.log(state);
   return {
     profile: state._profile.profile,
     availableLanguages: state._languages.languages,

@@ -11,8 +11,8 @@ class ArticleMenuDetailListItem extends Component {
   render() {
 		const { nbItems, category, currency, language } = this.props;
 
-    console.log(category);
-    console.log(language);
+    // console.log(category);
+    // console.log(language);
 
     const mealsComponent = (category && category.meals && category.meals.length > 0) ? category.meals.map((meal, index) => {
       return <ArticleMenuDetailListItemMeal meal={meal} currency={currency} currentLanguage={language} index={index} key={index} />

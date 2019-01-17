@@ -11,7 +11,7 @@ CompanyController.get = (req, res) => {
     res.setHeader('Content-Type', 'application/json');
 
     Company.getAll().then(output => {
-        console.log(output);
+        // console.log(output);
         res.status(200).json({ success: true, message: 'Company successfully fetched', obj: output });
     }).catch(err => {
         console.error(err);
@@ -23,7 +23,7 @@ CompanyController.post = (req, res) => {
     res.setHeader('Content-Type', 'application/json');
 
     Company.create(req.body.obj).then(output => {
-        console.log(output);
+        // console.log(output);
         res.status(201).json({ success: true, message: 'Company successfully created', obj: output });
     }).catch(err => {
         console.error(err);
@@ -35,7 +35,7 @@ CompanyController.put = (req, res) => {
     res.setHeader('Content-Type', 'application/json');
 
     Company.update(req.body.id, req.body.updates).then(output => {
-        console.log(output);
+        // console.log(output);
         res.status(201).json({ success: true, message: 'Company successfully updated', obj: output });
     }).catch(err => {
         console.error(err);

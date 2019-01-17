@@ -20,11 +20,11 @@ let createHandlers = (ctx) => {
 				let title = document.querySelector('#meal-id-' + ctx.props.catId + '-' + ctx.props.id + ' #meal-title').value;
 				let desc = document.querySelector('#meal-id-' + ctx.props.catId + '-' + ctx.props.id + ' #meal-description').value;
 				let price = document.querySelector('#meal-id-' + ctx.props.catId + '-' + ctx.props.id + ' #meal-price').value;
-				console.log(ctx.props)
-				console.log(title);
-				console.log(desc);
-				console.log(price);
-				console.log(obj)
+				// console.log(ctx.props)
+				// console.log(title);
+				// console.log(desc);
+				// console.log(price);
+				// console.log(obj)
 				let tmp = {
 					catId: ctx.props.catId,
 					id: ctx.props.id,
@@ -33,16 +33,16 @@ let createHandlers = (ctx) => {
 					price: parseFloat(price) || null
 				};
 
-				console.log(tmp);
+				// console.log(tmp);
 
 				tmp[obj.key] = obj.target.target.value;
-				console.log(tmp);
+				// console.log(tmp);
 				fn(tmp);
 			}
 		}
 	};
 	let onImageUpload = () => {
-		console.log('uploaded image!!');
+		// console.log('uploaded image!!');
 	};
 	return {
 		onRemove,

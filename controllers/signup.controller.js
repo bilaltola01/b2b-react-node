@@ -18,17 +18,17 @@ SignupController.post = (req, res) => {
         "Email": data.auth.Email,
         "country": data.auth.Country
     }
-    console.log(body);
+    // console.log(body);
 
     Company.emailExists(body.Email).then(emailExists => {
-        console.log(emailExists);
+        // console.log(emailExists);
         if (emailExists) {
             res.status(400).json({ success: false, message: 'Email already in use.' });
             throw new Error(400);
         }
         else{
             Company.create(body).then(company => {
-                console.log("company created");
+                // console.log("company created");
                 if (!company) {
                     res.status(400).json({ success: false, message: 'Error while signing up the user.' });
                     throw new Error(400);

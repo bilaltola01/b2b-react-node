@@ -8,9 +8,9 @@ class AuthRoot extends Component {
   render () {
     const { dispatch } = this.props;
 
-    console.log(this.props.isAuthenticated);
-    console.log("*********************************************")
-    console.log(window.location.href.substr(window.location.href.indexOf("code")+5, window.location.href.length))
+    // console.log(this.props.isAuthenticated);
+    // console.log("*********************************************")
+    // console.log(window.location.href.substr(window.location.href.indexOf("code")+5, window.location.href.length))
     return (this.props.isAuthenticated) ? (
       <Redirect to={{
         pathname: '/dashboard',

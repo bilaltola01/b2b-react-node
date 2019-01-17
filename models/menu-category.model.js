@@ -18,7 +18,7 @@ MenuCategory.create = (obj) => {
   let category = obj;
   category.Date = dateUtils.toMysqlDate(new Date());
 
-  console.log(category);
+  // console.log(category);
   return db('MenuCategory').insert(category).returning('MenuCategoryID');
 };
 
@@ -88,7 +88,7 @@ function createMenuCategoryContainer (menu) {
       MenuCategoryTranslation.get({MenuCategoryID: menu.MenuCategoryID}),
       CategoryStandard.getById(menu.CategoryID)
     ]).then(res => {
-      console.log(res);
+      // console.log(res);
       let obj = menu;
       obj.meals = res[0];
       obj.translations = res[1];

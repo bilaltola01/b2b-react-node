@@ -12,7 +12,7 @@ TranslationCallbackController.get = (req, res) => {
     res.setHeader('Content-Type', 'application/json');
 
     TranslationCallback.getAll().then(output => {
-        console.log(output);
+        // console.log(output);
         res.status(200).json({ success: true, message: 'MenuTranslation successfully fetched', obj: output });
     }).catch(err => {
         console.error(err);
@@ -24,11 +24,11 @@ TranslationCallbackController.get = (req, res) => {
 TranslationCallbackController.post = (req, res) => {
     res.setHeader('Content-Type', 'application/json');
 
-    console.log(req);
-    console.log(req.body);
+    // console.log(req);
+    // console.log(req.body);
 
     TranslationCallback.create(req.query, req.body).then(output => {
-        console.log(output);
+        // console.log(output);
         res.status(201).json({ success: true, message: 'TranslationCallback successfully created', obj: output });
     }).catch(err => {
         console.error(err);

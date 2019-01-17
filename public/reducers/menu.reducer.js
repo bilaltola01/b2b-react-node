@@ -2,7 +2,8 @@
 var initialMenuState = {};
 
 export function _menu(state = initialMenuState, action) {
-  console.log('_menu reducer called with state ', state , ' and action ', action);
+  // please use redux devtools from chrome/firefox ext
+  // console.log('_menu reducer called with state ', state , ' and action ', action);
 
   switch (action.type) {
     case 'GET_MENUS_REQUEST':

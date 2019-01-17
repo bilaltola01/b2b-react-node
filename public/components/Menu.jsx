@@ -7,7 +7,7 @@ class Menu extends Component {
 	render() {
 		const { id, title, ownProps } = this.props;
 
-		console.log(this.props);
+		// console.log(this.props);
 
 		const currency = (ownProps.currencies && ownProps.currencies.length > 0) ? ownProps.currencies : null;
 		const symbol = (currency && currency.Currency) ? currency.Currency : MAP_CONSTANTS.DEFAULT_LANGUAGE_SYMBOL;

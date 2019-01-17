@@ -92,7 +92,7 @@ class TranslatePage extends Component {
 };
 
 const mapStateToProps = (state) => {
-  console.log(state);
+  // console.log(state);
   return {
     profile: state._profile.profile
   }

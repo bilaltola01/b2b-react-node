@@ -9,8 +9,8 @@ import ImageUpload from './ImageUpload';
 
 let createHandlers = (ctx) => {
     let onImageUpload = (data) => {
-        console.log('uploaded image!!');
-        console.log(data);
+        // console.log('uploaded image!!');
+        // console.log(data);
 
         ctx.setState({
             image: data
@@ -18,13 +18,13 @@ let createHandlers = (ctx) => {
     };
 
     let onImageUploaded = (data) => {
-        console.log('image successfully uploaded on cloudinary!');
+        // console.log('image successfully uploaded on cloudinary!');
 
         // maybe set state with image or something
     };
 
     let onProfileSaved = (data) => {
-        console.log('profile saved!!!');
+        // console.log('profile saved!!!');
 
         ctx.setState({
             profile: data,
@@ -42,8 +42,8 @@ let createHandlers = (ctx) => {
             default:
                 dataToUpdate[type] = obj.data;
 
-                console.log(obj);
-                console.log(dataToUpdate);
+                // console.log(obj);
+                // console.log(dataToUpdate);
                 ctx.props.dispatch(actionCreators.setProfile(ctx.props.profile, dataToUpdate));
 
         }
@@ -59,7 +59,7 @@ let createHandlers = (ctx) => {
         let fields = document.querySelectorAll('input[name*=profile-]');
         let newImage = ctx.state.imagePath;
 
-        console.log(fields);
+        // console.log(fields);
 
         let obj = [...fields].reduce((acc, field) => {
             const parsedField = field.name.substring(field.name.indexOf('profile-') + 8, field.name.length);
@@ -69,7 +69,7 @@ let createHandlers = (ctx) => {
 
         obj.imgPath = newImage;
 
-        console.log(obj);
+        // console.log(obj);
 
         return obj;
     };
@@ -105,10 +105,10 @@ class SectionArticleEditCompany extends Component {
 	render() {
 		const { title, dateUpdate, component } = this.props;
 
-        console.log(component.props);
+        // console.log(component.props);
         // do we even need state.profile ???
-        console.log(this.props.profile); // THIS IS OK
-        console.log(this.state.profile); // THIS IS NOT OK
+        // console.log(this.props.profile); // THIS IS OK
+        // console.log(this.state.profile); // THIS IS NOT OK
 
         const logo = (this.props.profile) ? [{
             altDesc: this.props.profile.LogoAltDesc,
@@ -242,7 +242,7 @@ SectionArticleEditCompany.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-    console.log(state);
+    // console.log(state);
   return {
     profile: state._profile.profile
   };

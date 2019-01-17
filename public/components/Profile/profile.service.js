@@ -15,7 +15,7 @@ export function updateProfile (opts) {
                 "x-access-token": StorageManagerInstance.read('token')
             }
         }) : ImageService.uploadImage(opts.image).then((res) => {
-            console.log(res);
+            // console.log(res);
 
             if (!res || !res.success) {
                 return Promise.reject(res);
@@ -23,7 +23,7 @@ export function updateProfile (opts) {
 
 
             let imageRes = res.obj;
-            console.log(imageRes);
+            // console.log(imageRes);
 
             let finalOpts = opts;
             finalOpts.imgPath = imageRes.secure_url || imageRes.url;
@@ -63,7 +63,7 @@ export function getProfile () {
 }
 
 function convertOpts (opts, isUpdate) {
-    console.log(opts);
+    // console.log(opts);
 
     let email = opts.email;
     let obj = Object.keys(opts).reduce((acc, current) => {
@@ -80,7 +80,7 @@ function convertOpts (opts, isUpdate) {
         return acc;
     }, {});
 
-    console.log({email: email, updates: obj});
+    // console.log({email: email, updates: obj});
 
     return (isUpdate) ? {
         email: email,

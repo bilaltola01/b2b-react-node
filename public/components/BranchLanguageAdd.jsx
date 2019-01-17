@@ -33,7 +33,7 @@ class BranchLanguageAdd extends Component {
 		const { onRemove } = this.props;
 		const id = 9827376;
 
-		console.log(id, this.state.removed);
+		// console.log(id, this.state.removed);
 
 		const languageComponent = //(!this.state.removed) ? (
             <div id={"branch-language-add"} className="content--label">

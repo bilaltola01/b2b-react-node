@@ -17,7 +17,7 @@ class SectionArticle extends Component {
 	render() {
 		const { type, title, dateUpdate, component } = this.props;
 
-		console.log(type);
+		// console.log(type);
 		const sectionArticleComponent = () => {
 			switch(type) {
 				case 'main':

@@ -20,7 +20,7 @@ Subscription.create = (obj) => {
   let sub = obj;
   sub.Date = dateUtils.toMysqlDate(new Date());
 
-  console.log(sub);
+  // console.log(sub);
   return db('Subscription').insert(sub).returning('SubscriptionID');
 };
 

@@ -32,8 +32,8 @@ class AsidePreview extends Component {
 
 	componentDidMount() {
 		//access to this.props.menu;
-		console.log('in the preview aside ');
-		console.log(this.props.menu);
+		// console.log('in the preview aside ');
+		// console.log(this.props.menu);
 
 		window.addEventListener('scroll', this.handlers.onPageScroll);
 	}
@@ -43,7 +43,7 @@ class AsidePreview extends Component {
 	}
 
 	convertProps(props) {
-		console.log(props);
+		// console.log(props);
 		let newProps = {
 			...props,
 			Price: props.price || props.Price,
@@ -61,14 +61,14 @@ class AsidePreview extends Component {
 			delete newProps.price;
 		}
 
-		console.log(newProps);
+		// console.log(newProps);
 		return newProps;
 	}
 
 	render() {
 		const { component, save } = this.props;
 
-		console.log(this.props.menu);
+		// console.log(this.props.menu);
 
 		const menuComponent = (this.props.menu) ? (
 			<Menu ownProps={this.convertProps(this.props.menu)} />
@@ -93,7 +93,7 @@ class AsidePreview extends Component {
 };
 
 const mapStateToProps = (state) => {
-	console.log(state);
+	// console.log(state);
 	return {
 		menu: state._menu.menu
 	};

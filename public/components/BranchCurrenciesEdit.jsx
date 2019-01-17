@@ -38,9 +38,9 @@ let createHandlers = (ctx) => {
 				return (current.CurrencyID !== obj.id) ? acc.concat([current]) : acc;
 			}, []);
 
-			console.log(prevState.allCurrencies);
+			// console.log(prevState.allCurrencies);
 
-			console.log(currencies);
+			// console.log(currencies);
 
 			ctx.props.onChange('currencies', {data: currencies});
 
@@ -110,8 +110,8 @@ class BranchCurrenciesEdit extends Component {
 	render() {
 		const { currencies, availableCurrencies, onChange } = this.props;
 
-		console.log(currencies);
-		console.log(availableCurrencies);
+		// console.log(currencies);
+		// console.log(availableCurrencies);
 
 		// List of all currencies availables is to retrieved dynamically from db
 		const obj = {
@@ -119,7 +119,7 @@ class BranchCurrenciesEdit extends Component {
 			items: availableCurrencies
 		};
 
-		console.log(this.state);
+		// console.log(this.state);
 
 		const currencyComponents = (this.state.allCurrencies && this.state.allCurrencies.length > 0) ? this.state.allCurrencies.map((currency, index) => {
 			return (index < this.state.allCurrencies.length - 1)

@@ -14,7 +14,7 @@ import Popup from './Popup';
 
 let createHandlers = (ctx) => {
     let onSubmitClick = () => {
-        console.log('delete submit button clicked');
+        // console.log('delete submit button clicked');
         let component = ctx.props.popup.component;
         let submitAction = ctx.props.popup.actions.filter(action => {
             return action.type === 'submit';
@@ -26,7 +26,7 @@ let createHandlers = (ctx) => {
     };
 
     let onCancelClick = () => {
-        console.log('cancel button clicked');
+        // console.log('cancel button clicked');
         let component = ctx.props.popup.component;
         let cancelAction = ctx.props.popup.actions.filter(action => {
             return action.type === 'cancel';
@@ -38,8 +38,8 @@ let createHandlers = (ctx) => {
     };
 
     let onActionSubmitted = (res) => {
-        console.log('action submitted!!');
-        console.log(res);
+        // console.log('action submitted!!');
+        // console.log(res);
         onRedirect();
     };
 
@@ -110,7 +110,7 @@ PageContent.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-    console.log(state);
+    // console.log(state);
     return {
         popup: state._popup.popup
     };

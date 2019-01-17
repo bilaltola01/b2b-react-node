@@ -10,7 +10,7 @@ let createHandlers = (ctx) => {
 	let onSubmit = (e) => {
 		e.preventDefault();
 		ctx.props.dispatch(actionCreators.forgotPassword(ctx.getDataFromEvent(e), (res) => {
-            console.log(res)
+            // console.log(res)
 			if (res) {
 				ctx.setState({
 					message: res.message

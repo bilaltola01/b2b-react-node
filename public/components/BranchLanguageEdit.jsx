@@ -32,7 +32,7 @@ class BranchLanguageEdit extends Component {
 	render() {
 		const { id, code, codeFull, name, title, onRemove } = this.props;
 
-		console.log(id, this.state.removed);
+		// console.log(id, this.state.removed);
 
 		const finalCode = codeFull ? codeFull : code;
 

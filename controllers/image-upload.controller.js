@@ -11,7 +11,7 @@ ImageUploadController.post = (req, res) => {
     res.setHeader('Content-Type', 'application/json');
 
     ImageUpload.create(req.body.obj).then(output => {
-        console.log(output);
+        // console.log(output);
         res.status(201).json({ success: true, message: 'ImageUpload successfully created', obj: output });
     }).catch(err => {
         console.error(err);
@@ -23,7 +23,7 @@ ImageUploadController.put = (req, res) => {
     res.setHeader('Content-Type', 'application/json');
 
     ImageUpload.update(req.body.email, req.body.updates).then(output => {
-        console.log(output);
+        // console.log(output);
         res.status(201).json({ success: true, message: 'ImageUpload successfully updated', obj: output });
     }).catch(err => {
         console.error(err);

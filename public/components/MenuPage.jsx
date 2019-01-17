@@ -8,7 +8,7 @@ import PageContent from './PageContent';
 
 let createHandlers = (ctx) => {
   let onMenusFetched = (obj) => {
-    console.log('menus fetched!');
+    // console.log('menus fetched!');
 
     let menus = obj;
 
@@ -22,7 +22,7 @@ let createHandlers = (ctx) => {
   };
 
   let onProfileFetched = (obj) => {
-    console.log('profile fetched!');
+    // console.log('profile fetched!');
 
     let profile = obj;
 
@@ -61,7 +61,7 @@ class MenuPage extends Component {
   }
 
   getMenus(profile) {
-    console.log(profile)
+    // console.log(profile)
     return (profile.branches && profile.branches.length > 0) ? profile.branches.reduce((acc, branch) => {
       return acc.concat(branch.menus);
     }, []) : [];
@@ -88,7 +88,7 @@ class MenuPage extends Component {
   componentDidMount() {
     const profile = (this.props.profile) ? this.props.profile : {};
     //this.props.dispatch(actionCreators.getMenus(this.handlers.onMenusFetched));
-    console.log(this.getCurrentMenu(this.getFilteredMenusById(this.getMenus(profile), this.props.match.params.id)));
+    // console.log(this.getCurrentMenu(this.getFilteredMenusById(this.getMenus(profile), this.props.match.params.id)));
     if (this.props.match.params.action === 'add') {
       this.props.dispatch(actionCreators.setMenu({}));
     } else {
@@ -125,10 +125,10 @@ class MenuPage extends Component {
     const currentMenu = this.getCurrentMenu(filteredMenus);
     const menuTitle = (currentMenu && currentMenu.Title) ? currentMenu.Title : ("Menu " + id);
 
-    console.log(menus)
-    console.log("currentBranchMenuId " + currentBranchMenuId)
-    console.log(currentBranchMenu)
-    console.log(currentBranch)
+    // console.log(menus)
+    // console.log("currentBranchMenuId " + currentBranchMenuId)
+    // console.log(currentBranchMenu)
+    // console.log(currentBranch)
     const company = {
       name: profile.Name,
       description: profile.Description,
@@ -179,7 +179,7 @@ class MenuPage extends Component {
 };
 
 const mapStateToProps = (state) => {
-  console.log(state);
+  // console.log(state);
   return {
     menu: state._menu.menu,
     profile: state._profile.profile

@@ -2,7 +2,8 @@
 var initialImageState = {};
 
 export function _image(state = initialImageState, action) {
-  console.log('_image reducer called with state ', state , ' and action ', action);
+  // please use redux devtools from chrome/firefox ext
+  // console.log('_image reducer called with state ', state , ' and action ', action);
 
   switch (action.type) {
     case 'UPLOAD_IMAGE_REQUEST':

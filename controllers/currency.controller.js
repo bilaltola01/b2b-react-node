@@ -11,7 +11,7 @@ CurrencyController.get = (req, res) => {
     res.setHeader('Content-Type', 'application/json');
 
     Currency.getAll().then(output => {
-        console.log(output);
+        // console.log(output);
         res.status(200).json({ success: true, message: 'Currency successfully fetched', obj: output });
     }).catch(err => {
         console.error(err);
@@ -23,7 +23,7 @@ CurrencyController.post = (req, res) => {
     res.setHeader('Content-Type', 'application/json');
 
     Currency.create(req.body.obj).then(output => {
-        console.log(output);
+        // console.log(output);
         res.status(201).json({ success: true, message: 'Currency successfully created', obj: output });
     }).catch(err => {
         console.error(err);
@@ -35,7 +35,7 @@ CurrencyController.put = (req, res) => {
     res.setHeader('Content-Type', 'application/json');
 
     Currency.update(req.body.id, req.body.updates).then(output => {
-        console.log(output);
+        // console.log(output);
         res.status(201).json({ success: true, message: 'Currency successfully updated', obj: output });
     }).catch(err => {
         console.error(err);
@@ -47,7 +47,7 @@ CurrencyController.remove = (req, res) => {
     res.setHeader('Content-Type', 'application/json');
 
     Currency.remove(req.body.id).then(output => {
-        console.log(output);
+        // console.log(output);
         res.status(201).json({ success: true, message: 'Currency successfully removed', obj: output });
     }).catch(err => {
         console.error(err);

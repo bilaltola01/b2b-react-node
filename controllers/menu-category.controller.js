@@ -11,7 +11,7 @@ MenuCategoryController.get = (req, res) => {
     res.setHeader('Content-Type', 'application/json');
 
     MenuCategory.getAll().then(output => {
-        console.log(output);
+        // console.log(output);
         res.status(200).json({ success: true, message: 'MenuCategory successfully fetched', obj: output });
     }).catch(err => {
         console.error(err);
@@ -23,7 +23,7 @@ MenuCategoryController.post = (req, res) => {
     res.setHeader('Content-Type', 'application/json');
 
     MenuCategory.create(req.body.obj).then(output => {
-        console.log(output);
+        // console.log(output);
         res.status(201).json({ success: true, message: 'MenuCategory successfully created', obj: output });
     }).catch(err => {
         console.error(err);
@@ -35,7 +35,7 @@ MenuCategoryController.put = (req, res) => {
     res.setHeader('Content-Type', 'application/json');
 
     MenuCategory.update(req.body.id, req.body.updates).then(output => {
-        console.log(output);
+        // console.log(output);
         res.status(201).json({ success: true, message: 'MenuCategory successfully updated', obj: output });
     }).catch(err => {
         console.error(err);
@@ -47,7 +47,7 @@ MenuCategoryController.remove = (req, res) => {
     res.setHeader('Content-Type', 'application/json');
 
     MenuCategory.remove(req.body.id).then(output => {
-        console.log(output);
+        // console.log(output);
         res.status(201).json({ success: true, message: 'MenuCategory successfully removed', obj: output });
     }).catch(err => {
         console.error(err);
@@ -59,7 +59,7 @@ MenuCategoryController.removeAll = (req, res) => {
     res.setHeader('Content-Type', 'application/json');
 
     MenuCategory.removeSelected(req.body, req.body.categories).then(output => {
-        console.log(output);
+        // console.log(output);
         res.status(201).json({ success: true, message: 'MenuCategory successfully removed', obj: output });
     }).catch(err => {
         console.error(err);

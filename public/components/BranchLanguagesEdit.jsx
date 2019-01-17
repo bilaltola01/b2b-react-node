@@ -44,9 +44,9 @@ let createHandlers = (ctx) => {
 				return (current.LanguageID !== obj.id) ? acc.concat([current]) : acc;
 			}, []);
 
-			console.log(prevState.allLanguages);
+			// console.log(prevState.allLanguages);
 
-			console.log(languages);
+			// console.log(languages);
 
 			ctx.props.onChange('languages', {data: languages});
 
@@ -120,7 +120,7 @@ class BranchLanguagesEdit extends Component {
 			return acc.concat(current.languages.map(lang => lang.Language));
 		}, []) : availableLanguages || languages || [];
 
-		console.log(branchLanguages);
+		// console.log(branchLanguages);
 
 		// list of all languages available is retrieved from selected branches
 		const obj = {
@@ -128,7 +128,7 @@ class BranchLanguagesEdit extends Component {
 			items: branchLanguages
 		};
 
-		console.log(this.state);
+		// console.log(this.state);
 
 		const languageComponents = (this.state.allLanguages && this.state.allLanguages.length > 0) ? this.state.allLanguages.map((language, index) => {
 			const finalLanguage = language;
@@ -160,7 +160,7 @@ BranchLanguagesEdit.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-	console.log(state);
+	// console.log(state);
   return {
     menu: state._menu.menu
   };

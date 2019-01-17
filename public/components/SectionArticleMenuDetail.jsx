@@ -50,7 +50,7 @@ let createHandlers = (ctx) => {
 		}
 
     	const langTranslations = translations.filter(t => {
-    		console.log(t, finalLang);
+    		// console.log(t, finalLang);
       		return (t.BranchLanguageID === finalLang.BranchLanguageID) || (t.BranchLanguageName === finalLang.Title);
     	});
 
@@ -67,7 +67,7 @@ let createHandlers = (ctx) => {
 			const injectWithTranslatedProps = (arr, options) => {
 				return arr.map(item => {
 					const obj = getTranslatedItems(language, item.translations);
-					console.log(obj);
+					// console.log(obj);
 					if (!obj || obj.length <= 0) {
 						return item;
 					}
@@ -115,12 +115,12 @@ let createHandlers = (ctx) => {
 						};
 					}
 
-					console.log(mealsObj);
+					// console.log(mealsObj);
 
 					const newItem = ['title', 'description'].reduce((acc, propKey) => {
 						let obj = {};
 						const translation = translations.find(lang => lang.PropKey === propKey);
-						console.log(translation);
+						// console.log(translation);
 						if (translation && translation.length > 0 && item[key] === translation[key]) {
 							obj[capitalizeFirstLetter(propKey)] = translation[textKey];
 						}
@@ -133,7 +133,7 @@ let createHandlers = (ctx) => {
 
 			// Could use same funciton as newItem = ...
 			let obj = getTranslatedItems(language, props.translations);
-			console.log(obj);
+			// console.log(obj);
 			if (!obj || obj.length <= 0) {
 				return props;
 			}
@@ -154,7 +154,7 @@ let createHandlers = (ctx) => {
 				categories: injectWithTranslatedProps(props.categories, {parent: 'Category', key: 'meals'})
 			});
 
-			console.log(newMenu);
+			// console.log(newMenu);
 
 			return newMenu;
 		};
@@ -166,8 +166,8 @@ let createHandlers = (ctx) => {
 
 	let onLanguageClick = (e, lang, index) => {
 	    ctx.props.dispatch(actionCreators.setCurrentLanguage(lang, (res) => {
-	    	console.log('changed current language!');
-	    	console.log(res);
+	    	// console.log('changed current language!');
+	    	// console.log(res);
 
 	    	ctx.setState({
 	    		currentLanguage: lang,
@@ -180,7 +180,7 @@ let createHandlers = (ctx) => {
 	 };
 
 	let onTranslateClick = () => {
-	 	console.log('menu to be translated!');
+	 	// console.log('menu to be translated!');
 	 	ctx.props.dispatch(actionCreators.translateMenu({
 	 		...ctx.props.menu,
 	 		languages: ctx.props.languages,
@@ -188,8 +188,8 @@ let createHandlers = (ctx) => {
 	};
 
 	let onMenuTranslateRequestDone = (obj) => {
-		console.log('translation request done! ');
-		console.log(obj);
+		// console.log('translation request done! ');
+		// console.log(obj);
 
 		ctx.setState({
 			redirect: true,
@@ -248,7 +248,7 @@ class SectionArticleMenuDetail extends Component {
 			currencies
 		} = this.props;
 
-		console.log(this.props);
+		// console.log(this.props);
 
 		const currency = (currencies && currencies.length > 0) ? currencies[0] : {};
 		const currencySymbol = (currency && currency.Currency) ? currency.Currency.Symbol : MAP_CONSTANTS.DEFAULT_LANGUAGE_SYMBOL;
@@ -271,7 +271,7 @@ class SectionArticleMenuDetail extends Component {
 	        	].concat(languages)
 	      	) : [DEFAULT_LANGUAGE];
 
-      	console.log(finalLanguages);
+      	// console.log(finalLanguages);
 
 		const currentItem = this.state.currentSubNavItem || 0;
 
@@ -423,7 +423,7 @@ SectionArticleMenuDetail.propTypes = {
 
 
 const mapStateToProps = (state) => {
-    console.log(state);
+    // console.log(state);
     return {
         currentLanguage: state._currentLanguage.currentLanguage,
         menu: state._menu.menu

@@ -14,7 +14,8 @@ var initialTimeState = {}
 // from state. So it's just a personal preference here and you may not need this depending on
 // how your reducers are named and what properties they expose in Redux's store.
 export function _time(state = initialTimeState, action) {
-  console.log('_time reducer called with state ', state , ' and action ', action);
+  // please use redux devtools from chrome/firefox ext
+  // console.log('_time reducer called with state ', state , ' and action ', action);
 
   switch (action.type) {
     case 'GET_TIME_REQUEST':

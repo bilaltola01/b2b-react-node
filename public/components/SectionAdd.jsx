@@ -7,7 +7,7 @@ class SectionAdd extends Component {
 	render() {
 		const { dataText, actionText, data } = this.props;
 
-		console.log(data);
+		// console.log(data);
 
 		const { type = '', title = '', component = {}} = data || {};
 

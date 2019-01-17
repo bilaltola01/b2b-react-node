@@ -23,8 +23,8 @@ let createHandlers = (ctx) => {
 			default:
 				dataToUpdate[type] = obj.data;
 
-				console.log(obj);
-				console.log(dataToUpdate);
+				// console.log(obj);
+				// console.log(dataToUpdate);
 				ctx.props.dispatch(actionCreators.setMenu(ctx.props.menu, dataToUpdate));
 
 		}
@@ -52,7 +52,7 @@ class SectionArticleAddMenu extends Component {
 		let languages = [];
 		let branches = [];
 
-		console.log(this.props, 'this.props this.props');
+		// console.log(this.props, 'this.props this.props');
 
 		const profileBranches = (this.props.profile && this.props.profile.branches && this.props.profile.branches.length > 0) ? this.props.profile.branches : [];
 
@@ -131,7 +131,7 @@ SectionArticleAddMenu.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-	console.log(state);
+	// console.log(state);
   return {
   	profile: state._profile.profile,
     menu: state._menu.menu

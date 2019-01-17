@@ -79,7 +79,7 @@ export function updateMenuLanguage (lang) {
 
     // Get the branchlanguage ID then
     return getMenuLanguage(id).then((menuLanguage) => {
-        console.log(menuLanguage);
+        // console.log(menuLanguage);
         if (!menuLanguage) {
             return Promise.resolve([]);
         }
@@ -106,7 +106,7 @@ function getMenuLanguage (id) {
     }
 
     return new Promise(resolve => {
-        console.log(StorageManagerInstance.read('token'));
+        // console.log(StorageManagerInstance.read('token'));
         Ajax().get('/menu-language', {
             headers: {
                 "content-type": "application/json",
@@ -114,7 +114,7 @@ function getMenuLanguage (id) {
                 "x-access-token": StorageManagerInstance.read('token')
             }
         }).then((languages) => {
-            console.log(languages);
+            // console.log(languages);
             if (languages.obj && languages.obj.length > 0) {
                 resolve(languages.obj.find((lang) => {
                     const finalLang = (lang.Language) ? lang.Language : lang;
@@ -142,7 +142,7 @@ export function removeMenuLanguage () {
 
 
 function convertOpts (opts, isUpdate) {
-    console.log(opts);
+    // console.log(opts);
 
 /*
     if (!opts.id) {
@@ -167,7 +167,7 @@ function convertOpts (opts, isUpdate) {
     }, {});
     //
 
-    console.log({id: id, updates: obj});
+    // console.log({id: id, updates: obj});
 
     return (isUpdate) ? {
         id: id,

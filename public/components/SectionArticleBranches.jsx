@@ -7,7 +7,7 @@ class SectionArticleBranches extends Component {
 	render() {
 		const { title, dateUpdate, component } = this.props;
 
-		console.log(component.props);
+		// console.log(component.props);
 
 		const branchComponents = (component.props.branches && component.props.branches.length > 0) ? component.props.branches.map((branch, index) => {
 			return <SectionArticleBranch 

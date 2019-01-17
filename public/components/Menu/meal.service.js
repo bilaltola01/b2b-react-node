@@ -22,7 +22,7 @@ export function postMeals(meals, newCatId) {
 }
 
 export function postMeal(meal, newCatId) {
-    console.log(meal);
+    // console.log(meal);
 
     if (!meal.Price && !meal.price) {
         meal.Price = 0;
@@ -93,7 +93,7 @@ export function updateMeal(meal) {
         meal.Price = 0;
         meal.price = 0;
     }
-    console.log(meal, 'hhhhh meal')
+    // console.log(meal, 'hhhhh meal')
     return Ajax().put('/meal', {
         body: JSON.stringify(convertOpts(meal, true)),
         headers: {
@@ -162,7 +162,7 @@ export function getMealTranslations(ids) {
                 }));
             }, []);
 
-            console.log(meals);
+            // console.log(meals);
 
             let meals2 = meals.reduce((acc, current) => {
                 return acc.concat(mealTranslations.reduce((acc_translation, curr_translation) => {
@@ -174,7 +174,7 @@ export function getMealTranslations(ids) {
                 }, []));
             }, []);
 
-            console.log(meals2);
+            // console.log(meals2);
 
             return meals2;
         });
@@ -205,7 +205,7 @@ export function translateMeal(langs, meal) {
             return (m.Description === meal.description || m.Description === meal.Description) && (m.Title === meal.title || m.Title === meal.Title) && (m.MenuCategoryID === meal.menuCategoryId || m.MenuCategoryID === meal.MenuCategoryID);
         }).MealID;
     }).then((id) => {
-        console.log(id);
+        // console.log(id);
         if (!id) {
             console.error('Meal id is not specified!');
             return;
@@ -220,11 +220,11 @@ export function translateMeal(langs, meal) {
             };
         });
 
-        console.log('props to translate!!');
-        console.log(propsToTranslate);
+        // console.log('props to translate!!');
+        // console.log(propsToTranslate);
 
         return Promise.all(langs.map((lang) => {
-            console.log(lang);
+            // console.log(lang);
             const translateLangs = (language, props, id) => {
                 return props.map((prop) => {
                     return Ajax().post('/translate-meal', {
@@ -278,7 +278,7 @@ export function translateMeal(langs, meal) {
                         name: currentLanguage.Name,
                         title: currentLanguage.Title,
                     };
-                    console.log(finalLang);
+                    // console.log(finalLang);
                     return translateLangs(finalLang, propsToTranslate, id);
                 });
             } else {
@@ -291,19 +291,19 @@ export function translateMeal(langs, meal) {
 
 function convertForTranslation(lang, obj) {
     let id = obj.id || obj.MealID;
-    console.log(lang, obj);
+    // console.log(lang, obj);
     switch (obj.type) {
         case 'meal':
-            console.log({
-                obj: {
-                    mealId: id,
-                    key: obj.prop.key,
-                    title: 'Meal ' + id + ', translation: ' + obj.prop.key,
-                    sl: 'English',
-                    tl: lang.title || lang.name,
-                    payload: obj.prop.value
-                }
-            });
+            // console.log({
+            //     obj: {
+            //         mealId: id,
+            //         key: obj.prop.key,
+            //         title: 'Meal ' + id + ', translation: ' + obj.prop.key,
+            //         sl: 'English',
+            //         tl: lang.title || lang.name,
+            //         payload: obj.prop.value
+            //     }
+            // });
             return {
                 obj: {
                     mealId: id,
@@ -328,7 +328,7 @@ export function removeMeal() {
 
 
 function convertOpts(meal, isUpdate) {
-    console.log(meal);
+    // console.log(meal);
     /*
         if (!meal.id) {
             console.error('The menu id to update is not specified!');
@@ -344,9 +344,9 @@ function convertOpts(meal, isUpdate) {
             }
         }
 
-        console.log(Mapping.getTableMap('meal').keys());
-        console.log(matchingKeys);
-        console.log(current);
+        // console.log(Mapping.getTableMap('meal').keys());
+        // console.log(matchingKeys);
+        // console.log(current);
 
         if (matchingKeys.length > 0) {
             acc[Mapping.getDBString('meal', current)] = meal[current];
@@ -355,7 +355,7 @@ function convertOpts(meal, isUpdate) {
     }, {});
     //
 
-    console.log({ id: id, updates: obj });
+    // console.log({ id: id, updates: obj });
 
     return (isUpdate) ? {
         id: id,

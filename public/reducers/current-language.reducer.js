@@ -2,7 +2,8 @@
 var initialLanguageState = {};
 
 export function _currentLanguage(state = initialLanguageState, action) {
-  console.log('_currentLanguage reducer called with state ', state , ' and action ', action);
+  // please use redux devtools from chrome/firefox ext
+  // console.log('_currentLanguage reducer called with state ', state , ' and action ', action);
 
   switch (action.type) {
     case 'GET_CURRENT_LANGUAGE_REQUEST':

@@ -12,7 +12,7 @@ export function getCurrencies () {
             "x-access-token": StorageManagerInstance.read('token')
         }
     }).then(res => {
-    	console.log(res);
+    	// console.log(res);
         if (!res || !res.success) {
             return Promise.reject(res);
         }

@@ -19,14 +19,14 @@ let authToken = (req, res, next) => {
       } else {
         // if everything is good, save to request for use in other routes
         req.decoded = decoded;
-        console.log(req.decoded);
+        // console.log(req.decoded);
         next();
       }
     });
   } else {
     // if there is no token
     // return an error
-    console.log(req.path);
+    // console.log(req.path);
     if (req.path === '/profile') {
       next();
     } else {

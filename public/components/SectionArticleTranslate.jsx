@@ -7,7 +7,7 @@ class SectionArticleTranslate extends Component {
 	render() {
 		const { title, dateUpdate, component } = this.props;
 
-        console.log(component);
+        // console.log(component);
 
         const alertComponent = (
             <Alert type={"Alert"} component={component} />

@@ -8,7 +8,7 @@ import PageContent from './PageContent';
 
 let createHandlers = (ctx) => {
   let onMenuTranslationsFetched = (obj) => {
-    console.log('menu translations fetched!');
+    // console.log('menu translations fetched!');
 
     let translations = obj;
 
@@ -57,13 +57,13 @@ class TranslationsPage extends Component {
       return acc.concat(branch.menus);
     }, []) : [];
 
-    console.log(menus);
+    // console.log(menus);
 
     const menuTranslations = (menus && menus.length > 0) ? menus.reduce((acc, menu) => {
       return acc.concat(menu.translations);
     }, []) : [];
 
-    console.log(menuTranslations);
+    // console.log(menuTranslations);
 
     const menuCategoryTranslations = (menus && menus.length > 0) ? menus.reduce((acc, menu) => {
       return acc.concat(menu.categories.reduce((catAcc, cat) => {
@@ -73,7 +73,7 @@ class TranslationsPage extends Component {
       });
     }, []) : [];
 
-    console.log(menuCategoryTranslations);
+    // console.log(menuCategoryTranslations);
 
     const mealTranslations = (menus && menus.length > 0) ? menus.reduce((acc, menu) => {
       return acc.concat(menu.categories.reduce((catAcc, cat) => {
@@ -83,7 +83,7 @@ class TranslationsPage extends Component {
       }, []));
     }, []) : [];
 
-    console.log(mealTranslations);
+    // console.log(mealTranslations);
 
     const company = {
       name: profile.Name,
@@ -139,7 +139,7 @@ class TranslationsPage extends Component {
 };
 
 const mapStateToProps = (state) => {
-  console.log(state);
+  // console.log(state);
   return {
     menu: state._menu.menu,
     profile: state._profile.profile

@@ -14,7 +14,7 @@ BranchImage.create = (obj) => {
   let image = obj;
   image.Date = dateUtils.toMysqlDate(new Date());
 
-  console.log(image);
+  // console.log(image);
   return db('BranchImage').insert(image).returning('BranchImageID');
 };
 
@@ -25,7 +25,7 @@ BranchImage.createAll = (images) => {
   }
 
   return Promise.all(images.map(image => {
-    console.log(image);
+    // console.log(image);
     return BranchImage.create({
       BranchID: image.BranchID || image.branchId,
       Path: image.Path || image.imgPath,
@@ -50,9 +50,9 @@ BranchImage.update = (id, obj) => {
 BranchImage.removeSelected = (images, branch) => {
   images = images || [];
   return BranchImage.get({BranchID: branch.BranchID}).then(res => {
-    console.log('res', res, 'res')
+    // console.log('res', res, 'res')
     var deletedImages = res.filter(img=> !images.find(image=> (image.BranchImageID || image.id) == (img.BranchImageID || img.id)))
-    console.log('deletedImages', deletedImages)
+    // console.log('deletedImages', deletedImages)
     return Promise.all(deletedImages.map(image => {
       let id = image.BranchImageID || image.id;
       return BranchImage.remove(id);
@@ -68,8 +68,8 @@ BranchImage.updateAll = (images) => {
   return Promise.all(images.map(image => {
     let id = image.BranchImageID || image.id;
     return BranchImage.getById(id).then(res => {
-      console.log('branchimage get by id');
-      console.log(res);
+      // console.log('branchimage get by id');
+      // console.log(res);
       if (!res || res.length <= 0) {
         return BranchImage.create({
           BranchID: image.BranchID || image.branchId,

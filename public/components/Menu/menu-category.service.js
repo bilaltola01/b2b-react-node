@@ -20,7 +20,7 @@ export function postMenuCategories (nextId, cats) {
 
 
 export function postMenuCategory (nextId, cat) {
-    console.log(cat);
+    // console.log(cat);
 
     cat.menuId = nextId;
 
@@ -56,9 +56,9 @@ export function updateMenuCategories (menuId, cats) {
     return Promise.all(cats.map((cat) => {
         let catId = cat.MenuCategoryID || cat.menuCategoryId;
         if (catId) {
-            console.log(cat)
+            // console.log(cat)
             return updateMenuCategory(cat).then((newCatId) => {
-                console.log(newCatId, 'test')
+                // console.log(newCatId, 'test')
                 return Meal.removeMeals(cat.meals, catId).then((newCatId) => {
                     return Meal.updateMeals(cat.meals, catId);
                 });
@@ -76,7 +76,7 @@ export function updateMenuCategory (cat) {
         console.error('Category id is not specified!');
         return;
     }
-    console.log(JSON.stringify(convertOpts(cat, true)), 'jjjjjjj')
+    // console.log(JSON.stringify(convertOpts(cat, true)), 'jjjjjjj')
     return Ajax().put('/menu-category', {
         body: JSON.stringify(convertOpts(cat, true)),
         headers: {
@@ -162,14 +162,14 @@ export function getMenuCategory (id) {
         }
 
         let cats = res.obj;
-        console.log(res.obj);
+        // console.log(res.obj);
 
         return cats.filter((cat, index) => {
             return cat.MenuID === id;
         });
     }).then((res) => {
-        console.log(res);
-        console.log(id);
+        // console.log(res);
+        // console.log(id);
 
         categories = res;
 
@@ -193,7 +193,7 @@ export function getMenuCategory (id) {
             return Promise.reject(res);
         }
 
-        console.log(res.obj);
+        // console.log(res.obj);
 
         let cats = categories.reduce((acc, menucat) => {
             let tmp = res.obj.filter(cat => {
@@ -206,9 +206,9 @@ export function getMenuCategory (id) {
             return (tmp && tmp.length > 0) ? acc.concat(tmp) : acc;
         }, []);
 
-        console.log(categories); // menu categories
-        console.log(cats);
-        console.log(meals);
+        // console.log(categories); // menu categories
+        // console.log(cats);
+        // console.log(meals);
 
 
         let returns = (cats && cats.length > 0) ? cats.map((cat) => {
@@ -234,7 +234,7 @@ export function getMenuCategory (id) {
             return tmpcat;
         }) : null;
 
-        console.log(returns);
+        // console.log(returns);
         return Promise.resolve({
             id: id,
             categories: returns
@@ -283,7 +283,7 @@ export function getMenuCategoryTranslations (ids) {
                 }));
             }, []);
 
-            console.log(menuCategories);
+            // console.log(menuCategories);
 
             let menuCategories2 = menuCategories.reduce((acc, current) => {
                 return acc.concat(menuCategoryTranslations.reduce((acc_translation, curr_translation) => {
@@ -295,7 +295,7 @@ export function getMenuCategoryTranslations (ids) {
                 }, []));
             }, []);
 
-            console.log(menuCategories2);
+            // console.log(menuCategories2);
 
             
 
@@ -348,7 +348,7 @@ export function translateMenuCategory (menuId, langs, cat) {
         });
 
         return Promise.all(langs.map((lang) => {
-            console.log(lang);
+            // console.log(lang);
             const translateLangs = (language, props, id) => {
                 return props.map((prop) => {
                     return Ajax().post('/translate-menu-category', {
@@ -402,9 +402,9 @@ export function translateMenuCategory (menuId, langs, cat) {
                         name: currentLanguage.Name,
                         title: currentLanguage.Title,
                     };
-                    console.log(finalLang);
-                    console.log(propsToTranslate);
-                    console.log(id);
+                    // console.log(finalLang);
+                    // console.log(propsToTranslate);
+                    // console.log(id);
                     return translateLangs(finalLang, propsToTranslate, id);
                 });
             } else {
@@ -429,17 +429,17 @@ export function removeMenuCategory () {
 
 function convertForTranslation (lang, obj) {
     let id = obj.id || obj.MenuCategoryID;
-    console.log(lang);
+    // console.log(lang);
     switch (obj.type) {
         case 'category':
-        console.log({obj: {
-                    categoryId: id,
-                    key: obj.prop.key,
-                    title: 'Menu Category ' + id + ', translation: ' + obj.prop.key,
-                    sl: 'English',
-                    tl: lang.title || lang.name,
-                    payload: obj.prop.value
-                }});
+        // console.log({obj: {
+                //     categoryId: id,
+                //     key: obj.prop.key,
+                //     title: 'Menu Category ' + id + ', translation: ' + obj.prop.key,
+                //     sl: 'English',
+                //     tl: lang.title || lang.name,
+                //     payload: obj.prop.value
+                // }});
             return {
                 obj: {
                     categoryId: id,
@@ -454,12 +454,12 @@ function convertForTranslation (lang, obj) {
 }
 
 function convertFromDB (cat) {
-    console.log(cat);
-    console.log(Mapping.getTableMap('menucategory'));
+    // console.log(cat);
+    // console.log(Mapping.getTableMap('menucategory'));
     return Object.keys(cat).map((key) => {
         let obj = {};
         let newKey = Mapping.getKeyFromValue(Mapping.getTableMap('menucategory'), key);
-        console.log(newKey);
+        // console.log(newKey);
         obj[newKey] = cat[key];
         return obj;
     });
@@ -467,7 +467,7 @@ function convertFromDB (cat) {
 
 
 function convertOpts (cat, isUpdate) {
-    console.log(cat);
+    // console.log(cat);
 
     /*
     if (!cat.id) {
@@ -492,7 +492,7 @@ function convertOpts (cat, isUpdate) {
     }, {});
     //
 
-    console.log({id: id, updates: obj});
+    // console.log({id: id, updates: obj});
 
     return (isUpdate) ? {
         id: id,

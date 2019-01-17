@@ -164,13 +164,13 @@ window.PageAssetTracking = function() {
 
             if ($('#modal--target').hasClass('hidden')) {
                 // If the modal is hidden
-                console.log(e);
+                // console.log(e);
 
                 // Tooltip Width and height
                 var tooltipWidth = 600;
                 var tooltipHeight = $('.tooltip').outerHeight();
 
-                console.log(e.target.getBoundingClientRect().left);
+                // console.log(e.target.getBoundingClientRect().left);
 
                 // Smart tooltip: calculate positition of click
                 var clickBoundingBox = {
@@ -193,12 +193,12 @@ window.PageAssetTracking = function() {
                     bottom: 15
                 };
 
-                console.log(clickBoundingBox);
-                console.log(tableBoundingBox);
+                // console.log(clickBoundingBox);
+                // console.log(tableBoundingBox);
 
                 // If the tooltip overflows the table
                 var overflowObj = checkBoundingBoxesOverflow(clickBoundingBox, tableBoundingBox, padding);
-                console.log(overflowObj);
+                // console.log(overflowObj);
                 if (overflowObj.isOverflowing) {
                     if (overflowObj.overflow.bottom) {
                         $('.tooltip').css({
@@ -340,7 +340,7 @@ window.PageAssetTracking = function() {
                     chartData = dataset[i];
                     if (!!chartData) {
                         target = '#chart-' + chartData.type + '-' + (i + 1);
-                        console.log(target);
+                        // console.log(target);
                         if (chartData.type === 'donut') {
                             chart = new ChartDonut(target, chartData.label, chartData.data, 174, 174, 40);
 
@@ -793,7 +793,7 @@ window.PageDashboard = function() {
             $(target).on('click', '.switch-grid', function(e) {
                 // Get index of selected element
                 prevElementIndex = $(target).find('.switch-grid.selected').parent().index();
-                console.log(prevElementIndex);
+                // console.log(prevElementIndex);
 
                 elementIndex = $(this).parent().index();
                 if (!$(this).hasClass('selected')) {
@@ -803,10 +803,10 @@ window.PageDashboard = function() {
 
                     // Translate Slider by right amount
                     chartSliderOffset += (prevElementIndex - elementIndex) * offset;
-                    console.log(chartSliderOffset);
+                    // console.log(chartSliderOffset);
                     applyTranslate(chartSliderTarget, chartSliderOffset);
                 }
-                console.log(elementIndex);
+                // console.log(elementIndex);
 
 
             });
@@ -926,7 +926,7 @@ window.PageDashboard = function() {
                 }
 
                 startIndex = (endIndex + 1) % 7;
-                console.log('start index end loop: ' + startIndex);
+                // console.log('start index end loop: ' + startIndex);
                 //console.log(strDays); 
 
                 strMonths += strDays;
@@ -961,7 +961,7 @@ window.PageDashboard = function() {
                     // append listener on days
                     currentEl.on('click', '.day:not(.day--opaque) .day--link', function(e) {
                         day = $(this).text();
-                        console.log(day.toString);
+                        // console.log(day.toString);
                         extraDigitDay = (day.toString().length === 1) ? '0' : '';
                         month = currentIndex + 1;
                         year = 2016;
@@ -1172,9 +1172,9 @@ window.PageSchedules = function() {
             $('#arrow--prev').hide();
         }
 
-        console.log('total width container:' + totalWidth);
-        console.log('visible width container:' + visibleWidth);
-        console.log('max scroll: ' + maxScroll);
+        // console.log('total width container:' + totalWidth);
+        // console.log('visible width container:' + visibleWidth);
+        // console.log('max scroll: ' + maxScroll);
 
         initMenuAnimation();
         initAsideComments();
@@ -1191,13 +1191,13 @@ window.PageSchedules = function() {
 
             if ($('#modal--target').hasClass('hidden')) {
                 // If the modal is hidden
-                console.log(e);
+                // console.log(e);
 
                 // Tooltip Width and height
                 var tooltipWidth = 600;
                 var tooltipHeight = $('.tooltip').outerHeight();
 
-                console.log(e.target.getBoundingClientRect().left);
+                // console.log(e.target.getBoundingClientRect().left);
 
                 // Smart tooltip: calculate positition of click
                 var clickBoundingBox = {
@@ -1220,12 +1220,12 @@ window.PageSchedules = function() {
                     bottom: 15
                 };
 
-                console.log(clickBoundingBox);
-                console.log(tableBoundingBox);
+                // console.log(clickBoundingBox);
+                // console.log(tableBoundingBox);
 
                 // If the tooltip overflows the table
                 var overflowObj = checkBoundingBoxesOverflow(clickBoundingBox, tableBoundingBox, padding);
-                console.log(overflowObj);
+                // console.log(overflowObj);
                 if (overflowObj.isOverflowing) {
                     if (overflowObj.overflow.bottom) {
                         $('.tooltip').css({
@@ -1465,9 +1465,9 @@ window.PageSchedules = function() {
 
 
                 /*
-                console.log('Month: ' + monthObj.month);
-                console.log('start index begining: ' + startIndex);
-                console.log('end index' + endIndex);
+                // console.log('Month: ' + monthObj.month);
+                // console.log('start index begining: ' + startIndex);
+                // console.log('end index' + endIndex);
                 */
 
                 strMonths += '<li>';
@@ -1503,7 +1503,7 @@ window.PageSchedules = function() {
                 }
 
                 startIndex = (endIndex + 1) % 7;
-                console.log('start index end loop: ' + startIndex);
+                // console.log('start index end loop: ' + startIndex);
                 //console.log(strDays); 
 
                 strMonths += strDays;
@@ -1531,7 +1531,7 @@ window.PageSchedules = function() {
                     // manually greys unpickable days
                     currentMonth = currentEl.children().get(7);
 
-                    console.log(currentMonth);
+                    // console.log(currentMonth);
 
                     $(currentMonth).find('.day:not(:nth-child(n+7):nth-child(-n+15))').addClass('day--opaque');
 
@@ -1540,7 +1540,7 @@ window.PageSchedules = function() {
                     // append listener on days
                     currentEl.on('click', '.day:not(.day--opaque) .day--link', function(e) {
                         day = $(this).text();
-                        console.log(day.toString);
+                        // console.log(day.toString);
                         extraDigitDay = (day.toString().length === 1) ? '0' : '';
                         month = currentIndex + 1;
                         year = 2016;
@@ -1611,13 +1611,13 @@ window.PageCatalogue = function() {
 
             if ($('#modal--target').hasClass('hidden')) {
                 // If the modal is hidden
-                console.log(e);
+                // console.log(e);
 
                 // Tooltip Width and height
                 var tooltipWidth = 600;
                 var tooltipHeight = $('.tooltip').outerHeight();
 
-                console.log(e.target.getBoundingClientRect().left);
+                // console.log(e.target.getBoundingClientRect().left);
 
                 // Smart tooltip: calculate positition of click
                 var clickBoundingBox = {
@@ -1640,12 +1640,12 @@ window.PageCatalogue = function() {
                     bottom: 15
                 };
 
-                console.log(clickBoundingBox);
-                console.log(tableBoundingBox);
+                // console.log(clickBoundingBox);
+                // console.log(tableBoundingBox);
 
                 // If the tooltip overflows the table
                 var overflowObj = checkBoundingBoxesOverflow(clickBoundingBox, tableBoundingBox, padding);
-                console.log(overflowObj);
+                // console.log(overflowObj);
                 if (overflowObj.isOverflowing) {
                     if (overflowObj.overflow.bottom) {
                         $('.tooltip').css({
@@ -1744,7 +1744,7 @@ window.PageCatalogue = function() {
                     chartData = dataset[i];
                     if (!!chartData) {
                         target = '#chart-' + chartData.type + '-' + (i + 1);
-                        console.log(target);
+                        // console.log(target);
                         if (chartData.type === 'donut') {
                             chart = new ChartDonut(target, chartData.label, chartData.data, 174, 174, 40);
 
@@ -1776,16 +1776,16 @@ window.PageCatalogue = function() {
                 return $(this).hasClass('switch-grid');
             });
 
-            console.log(switches);
+            // console.log(switches);
 
             $(target).on('click', '.switch-grid', function(e) {
                 var that = this;
                 // Get index of selected element
                 prevElementIndex = switches.index($(target).find('.switch-grid.selected'));
-                console.log('prev element index: ' + prevElementIndex);
+                // console.log('prev element index: ' + prevElementIndex);
 
                 elementIndex = switches.index($(this));
-                console.log('clicked element index: ' + elementIndex);
+                // console.log('clicked element index: ' + elementIndex);
 
                 if (!$(this).hasClass('selected')) {
                     // Select clicked button
@@ -1794,10 +1794,10 @@ window.PageCatalogue = function() {
 
                     // Translate Slider by right amount
                     chartSliderOffset += (prevElementIndex - elementIndex) * offset;
-                    console.log(chartSliderOffset);
+                    // console.log(chartSliderOffset);
                     applyLeftTransform(chartSliderTarget, chartSliderOffset);
                 }
-                console.log(elementIndex);
+                // console.log(elementIndex);
 
 
             });
@@ -2034,7 +2034,7 @@ ChartGraph.prototype.initGraph = function() {
     // Sort data by date
     this.dataset = this.dataset.sort(sortByDateAscending);
 
-    console.log(this.dataset);
+    // console.log(this.dataset);
 
     // Scales
     this.domain.x.scale = d3.scaleTime()
@@ -2049,7 +2049,7 @@ ChartGraph.prototype.initGraph = function() {
             return d.value / 10;
         }));
 
-    console.log(this.domain.x.scale.domain());
+    // console.log(this.domain.x.scale.domain());
 
     // Line
     this.line = this.line.curve(d3.curveBasisOpen)
@@ -2226,9 +2226,9 @@ function parseJSONFiles(jsonFilesArray, callback) {
                 }
 
                 results[i] = channels;
-                console.log(i, counter);
+                // console.log(i, counter);
                 if (++counter === jsonFilesArray.length) {
-                    console.log(results);
+                    // console.log(results);
                     callback(results);
                     //reset(results);
                 }

@@ -8,7 +8,7 @@ import PageContent from './PageContent';
 
 let createHandlers = (ctx) => {
   let onProfileFetched = (obj) => {
-    console.log('profile fetched!');
+    // console.log('profile fetched!');
 
     let profile = obj;
 
@@ -52,7 +52,7 @@ class Branches extends Component {
       }) : null;
     }
 
-    console.log(branchRoot);
+    // console.log(branchRoot);
 
     const company = {
       name: profile.Name,
@@ -100,7 +100,7 @@ class Branches extends Component {
 };
 
 const mapStateToProps = (state) => {
-  console.log(state);
+  // console.log(state);
   return {
     profile: state._profile.profile
   }

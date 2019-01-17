@@ -2,7 +2,8 @@
 var initialPageState = {};
 
 export function _page(state = initialPageState, action) {
-  console.log('_page reducer called with state ', state , ' and action ', action);
+  // please use redux devtools from chrome/firefox ext
+  // console.log('_page reducer called with state ', state , ' and action ', action);
 
   switch (action.type) {
     case 'GET_PAGE_REQUEST':

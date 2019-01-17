@@ -16,7 +16,7 @@ BranchCuisine.create = (obj) => {
   let cuisine = obj;
   cuisine.Date = dateUtils.toMysqlDate(new Date());
 
-  console.log(cuisine);
+  // console.log(cuisine);
   return db('BranchCuisine').insert(cuisine).returning('BranchCuisineID');
 };
 
@@ -71,7 +71,7 @@ BranchCuisine.updateAll = (cuisines) => {
       return Promise.all(branchCuisines.map(branchCuisine => {
         return BranchCuisine.remove(branchCuisine.BranchCuisineID);
       })).then(res => {
-        console.log(res);
+        // console.log(res);
 
         return BranchCuisine.create({
           BranchID: cuisine.BranchID,
@@ -133,7 +133,7 @@ function createBranchCuisine (branchCuisine) {
     Promise.all([
       Cuisine.getById(branchCuisine.CuisineID)
     ]).then(res => {
-      console.log(res);
+      // console.log(res);
       let obj = branchCuisine;
       obj.Cuisine = res[0];
       resolve(obj);

@@ -21,7 +21,7 @@ Language.create = (obj) => {
   let language = obj;
   language.Date = dateUtils.toMysqlDate(new Date());
 
-  console.log(language);
+  // console.log(language);
   return db('Language').insert(language).returning('LanguageID');
 };
 
@@ -81,7 +81,7 @@ function createLanguageContainer (language) {
     Promise.all([
       Flag.getById(language.FlagID)
     ]).then(res => {
-      console.log(res);
+      // console.log(res);
       let obj = language;
       obj.Flag = res[0];
 

@@ -12,7 +12,7 @@ ProfileController.get = (req, res) => {
 
     if (req.decoded) {
         Profile.getByEmail(req.decoded).then(output => {
-            console.log(output);
+            // console.log(output);
             res.status(200).json({ success: true, message: 'Profile successfully fetched', obj: output });
         }).catch(err => {
             console.error(err);
@@ -20,7 +20,7 @@ ProfileController.get = (req, res) => {
         });
     } else {
         Profile.getAll().then(output => {
-            console.log(output);
+            // console.log(output);
             res.status(200).json({ success: true, message: 'Profile successfully fetched', obj: output });
         }).catch(err => {
             console.error(err);
@@ -34,7 +34,7 @@ ProfileController.put = (req, res) => {
 
     if (req.decoded) {
         Profile.update(req.decoded, req.body.updates).then(output => {
-            console.log(output);
+            // console.log(output);
             res.status(201).json({ success: true, message: 'Profile successfully updated', obj: output });
         }).catch(err => {
             console.error(err);
@@ -42,7 +42,7 @@ ProfileController.put = (req, res) => {
         });
     } else {
         Profile.update(req.body.email, req.body.updates).then(output => {
-            console.log(output);
+            // console.log(output);
             res.status(201).json({ success: true, message: 'Profile successfully updated', obj: output });
         }).catch(err => {
             console.error(err);

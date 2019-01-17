@@ -12,7 +12,7 @@ import MenuBranchEdit from './MenuBranchEdit';
 
 let createHandlers = (ctx) => {
 	let onImageUpload = () => {
-		console.log('uploaded image!!');
+		// console.log('uploaded image!!');
 	};
 
 	let onSaveChanges = () => {
@@ -21,11 +21,11 @@ let createHandlers = (ctx) => {
 
 	let onChanges = (type, obj) => {
 		let dataToUpdate = {};
-		console.log(ctx.props.menu);
+		// console.log(ctx.props.menu);
 		switch (type) {
 			case 'main':
 				dataToUpdate[obj.key] = obj.target.target.value;
-				console.log(dataToUpdate);
+				// console.log(dataToUpdate);
 
 				ctx.props.dispatch(actionCreators.setMenu({
 					...ctx.props.menu,
@@ -34,8 +34,8 @@ let createHandlers = (ctx) => {
 			default:
 				dataToUpdate[type] = obj.data;
 
-				console.log(obj);
-				console.log(dataToUpdate);
+				// console.log(obj);
+				// console.log(dataToUpdate);
 				ctx.props.dispatch(actionCreators.setMenu({
 					...ctx.props.menu,
 					languages: ctx.props.languages,
@@ -93,7 +93,7 @@ class SectionArticleEditMenu extends Component {
 			currency
 		} = this.props;
 
-		console.log(this.props);
+		// console.log(this.props);
 
 		let languagesList = (translations && translations.length > 0) ? translations.map((translation, index) => {
 			return (index < translations.length - 1)
@@ -190,7 +190,7 @@ SectionArticleEditMenu.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-	console.log(state);
+	// console.log(state);
   return {
     menu: state._menu.menu
   };

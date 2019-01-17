@@ -2,7 +2,8 @@
 var initialProfileState = {};
 
 export function _profile(state = initialProfileState, action) {
-  console.log('_profile reducer called with state ', state , ' and action ', action);
+  // please use redux devtools from chrome/firefox ext
+  // console.log('_profile reducer called with state ', state , ' and action ', action);
 
   switch (action.type) {
     case 'GET_PROFILE_REQUEST':

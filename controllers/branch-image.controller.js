@@ -11,7 +11,7 @@ BranchImageController.get = (req, res) => {
     res.setHeader('Content-Type', 'application/json');
 
     BranchImage.getAll().then(output => {
-        console.log(output);
+        // console.log(output);
         res.status(200).json({ success: true, message: 'BranchImage successfully fetched', obj: output });
     }).catch(err => {
         console.error(err);
@@ -23,7 +23,7 @@ BranchImageController.post = (req, res) => {
     res.setHeader('Content-Type', 'application/json');
 
     BranchImage.create(req.body.obj).then(output => {
-        console.log(output);
+        // console.log(output);
         res.status(201).json({ success: true, message: 'BranchImage successfully created', obj: output });
     }).catch(err => {
         console.error(err);
@@ -35,7 +35,7 @@ BranchImageController.put = (req, res) => {
     res.setHeader('Content-Type', 'application/json');
 
     BranchImage.update(req.body.id, req.body.updates).then(output => {
-        console.log(output);
+        // console.log(output);
         res.status(201).json({ success: true, message: 'BranchImage successfully updated', obj: output });
     }).catch(err => {
         console.error(err);
@@ -47,7 +47,7 @@ BranchImageController.remove = (req, res) => {
     res.setHeader('Content-Type', 'application/json');
 
     BranchImage.remove(req.body.id).then(output => {
-        console.log(output);
+        // console.log(output);
         res.status(201).json({ success: true, message: 'BranchImage successfully removed', obj: output });
     }).catch(err => {
         console.error(err);

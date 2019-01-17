@@ -34,9 +34,9 @@ class PageSection extends Component {
 		const action = type.substring(type.lastIndexOf('-') + 1, type.length);
 		const actionText = (action.length > 0 && action !== type && action !== 'get') ? action.charAt(0).toUpperCase() + action.slice(1) : '';
 
-		console.log(articles);
-		console.log(dataText, actionText);
-		console.log(action);
+		// console.log(articles);
+		// console.log(dataText, actionText);
+		// console.log(action);
 
 		let articleComponents = null;
 

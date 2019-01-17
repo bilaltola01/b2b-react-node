@@ -53,7 +53,7 @@ class SectionArticleMenu extends Component {
 			currencies
 		} = this.props;
 
-		console.log(this.props);
+		// console.log(this.props);
 
 		const ownProps = {
 			id,
@@ -124,15 +124,15 @@ class SectionArticleMenu extends Component {
 
 		const initialBranch = branches.filter(b => b.BranchID === branchId);
 
-		console.log(duplicates);
+		// console.log(duplicates);
 
 		const finalBranches = (duplicates && duplicates.length > 0) ? duplicates.reduce((acc, dup) => {
 			const branch = branches.filter(b => b.BranchID === dup.BranchID);
-			console.log(branch);
+			// console.log(branch);
 			return (branch && branch.length > 0) ? acc.concat(branch) : acc;
 		}, initialBranch) : initialBranch;
 
-		console.log(finalBranches);
+		// console.log(finalBranches);
 
 		const branchesList = (finalBranches && finalBranches.length > 0) ? finalBranches.map((branch, index) => {
 			return (index < finalBranches.length - 1)

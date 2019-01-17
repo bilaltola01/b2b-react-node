@@ -73,13 +73,13 @@ class Dashboard extends Component {
       return acc.concat(branch.menus);
     }, []) : [];
 
-    console.log(menus);
+    // console.log(menus);
 
     const filteredMenus = (menus && menus.length > 0) ? menus.reduce((prev, current) => {
       return (prev.MenuID > current.MenuID) ? prev : current;
     }) : null;
 
-    console.log(filteredMenus);
+    // console.log(filteredMenus);
 
     const currentBranch = (profile.branches && profile.branches.length > 0) ? profile.branches.find(branch => {
       const menu = filteredMenus[0] || filteredMenus;
@@ -88,11 +88,11 @@ class Dashboard extends Component {
 
     const currencies = (currentBranch && currentBranch.currencies && currentBranch.currencies.length > 0) ? currentBranch.currencies : [];
 
-    console.log(currentBranch);
+    // console.log(currentBranch);
 
     const lastMenu = filteredMenus;
 
-    console.log(analytics);
+    // console.log(analytics);
 
     const sections = [{
       type: "analytics",
@@ -157,7 +157,7 @@ class Dashboard extends Component {
 };
 
 const mapStateToProps = (state) => {
-  console.log(state);
+  // console.log(state);
   return {
     menu: state._menu.menu,
     profile: state._profile.profile,

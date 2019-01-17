@@ -11,7 +11,7 @@ BranchLanguageController.get = (req, res) => {
     res.setHeader('Content-Type', 'application/json');
 
     BranchLanguage.getAll().then(output => {
-        console.log(output);
+        // console.log(output);
         res.status(200).json({ success: true, message: 'BranchLanguage successfully fetched', obj: output });
     }).catch(err => {
         console.error(err);
@@ -23,7 +23,7 @@ BranchLanguageController.post = (req, res) => {
     res.setHeader('Content-Type', 'application/json');
 
     BranchLanguage.create(req.body.obj).then(output => {
-        console.log(output);
+        // console.log(output);
         res.status(201).json({ success: true, message: 'BranchLanguage successfully created', obj: output });
     }).catch(err => {
         console.error(err);
@@ -35,7 +35,7 @@ BranchLanguageController.put = (req, res) => {
     res.setHeader('Content-Type', 'application/json');
 
     BranchLanguage.update(req.body.id, req.body.updates).then(output => {
-        console.log(output);
+        // console.log(output);
         res.status(201).json({ success: true, message: 'BranchLanguage successfully updated', obj: output });
     }).catch(err => {
         console.error(err);
@@ -47,7 +47,7 @@ BranchLanguageController.remove = (req, res) => {
     res.setHeader('Content-Type', 'application/json');
 
     BranchLanguage.remove(req.body.id).then(output => {
-        console.log(output);
+        // console.log(output);
         res.status(201).json({ success: true, message: 'BranchLanguage successfully removed', obj: output });
     }).catch(err => {
         console.error(err);

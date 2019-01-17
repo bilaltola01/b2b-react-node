@@ -59,8 +59,8 @@ class SectionArticleAnalytics extends Component {
 	render() {
 		const { title, dateUpdate, component } = this.props;
 
-        console.log(component);
-        console.log(component.props.analytics);
+        // console.log(component);
+        // console.log(component.props.analytics);
 
         const analytics = component.props.analytics || [];
         const totalAnalytics = analytics.filter(a => a.analyticType === ANALYTICS_TOTAL);

@@ -6,7 +6,7 @@ class MenuCategory extends Component {
 	render() {
 		const { id, isCustom, title, description, symbol, meals } = this.props;
 
-		console.log(this.props);
+		// console.log(this.props);
 
 		const mealComponents = (meals && meals.length > 0) ? meals.map((meal, index) => {
 			return <Meal

@@ -2,7 +2,8 @@
 var initialPopupState = {};
 
 export function _popup(state = initialPopupState, action) {
-  console.log('_popup reducer called with state ', state , ' and action ', action);
+  // please use redux devtools from chrome/firefox ext
+  // console.log('_popup reducer called with state ', state , ' and action ', action);
 
   switch (action.type) {
     case 'SET_POPUP_REQUEST':

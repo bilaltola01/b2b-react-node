@@ -25,8 +25,8 @@ let createHandlers = (ctx) => {
   };
 
   let deleteMenu = (component, cb) => {
-  	console.log('component?');
-  	console.log(component);
+  	// console.log('component?');
+  	// console.log(component);
 
   	ctx.props.dispatch(actionCreators.deleteMenu(component, (res) => {
   		goToMenus();
@@ -94,7 +94,7 @@ class SectionArticleDeleteMenu extends Component {
     componentWillReceiveProps(nextProps) {
     	if (nextProps.component.props.menus && nextProps.component.props.menus.length > 0 && this.state.redirect === false) {
 			let menuComponent = nextProps.component.props.menus[0] || null;
-			console.log('menus changed so popup goes to true!!!!');
+			// console.log('menus changed so popup goes to true!!!!');
 			this.popupObj.isOpened = !this.popupObj.isOpened;
 			this.popupObj.actions = [
 	  			{
@@ -131,8 +131,8 @@ class SectionArticleDeleteMenu extends Component {
 
 		const translationsContainer = '';
 
-		console.log(component);
-		console.log(menuComponent);
+		// console.log(component);
+		// console.log(menuComponent);
 
 		if (this.state.redirect) {
 			return <Redirect push to={"/menus"} />;
@@ -186,7 +186,7 @@ SectionArticleDeleteMenu.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-	console.log(state);
+	// console.log(state);
 	return {
 		popup: state._popup.popup
 	};

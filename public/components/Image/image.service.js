@@ -5,7 +5,7 @@ import { StorageManagerInstance } from '../../shared/storage.utils';
 
 
 export function uploadImage(data) {
-    console.log(data);
+    // console.log(data);
     return Ajax().post('/image-upload', {
         body: JSON.stringify({ obj: data }), // data: {file: file, url: url}
         headers: {
@@ -17,10 +17,10 @@ export function uploadImage(data) {
 }
 
 export function updateBranchImages(images) {
-    console.log(images);
+    // console.log(images);
     return Promise.all(images.map(image => {
         return uploadImage(image).then(res => {
-            console.log(res);
+            // console.log(res);
             if (!res || !res.success) {
                 return Promise.reject(res);
             }
@@ -31,10 +31,10 @@ export function updateBranchImages(images) {
 }
 
 export function updateContactImages(images) {
-    console.log(images);
+    // console.log(images);
     return Promise.all(images.map(image => {
         return uploadImage(image).then(res => {
-            console.log(res);
+            // console.log(res);
             if (!res || !res.success) {
                 return Promise.reject(res);
             }
@@ -45,10 +45,10 @@ export function updateContactImages(images) {
 }
 
 export function updateMealImages(images) {
-    console.log(images);
+    // console.log(images);
     return Promise.all(images.map(image => {
         return uploadImage(image).then(res => {
-            console.log(res);
+            // console.log(res);
             if (!res || !res.success) {
                 return Promise.reject(res);
             }

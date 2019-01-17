@@ -7,7 +7,7 @@ class SectionDelete extends Component {
 	render() {
 		const { dataText, actionText, data } = this.props;
 
-		console.log(data);
+		// console.log(data);
 
 		return (
 			<SectionArticleDelete type={data.type} title={data.title} component={data.component} />

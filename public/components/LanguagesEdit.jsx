@@ -8,7 +8,7 @@ import LanguagePicker from './LanguagePicker';
 let createHandlers = (ctx) => {
 	let onAdd = (obj) => {
 		ctx.setState((prevState) => {
-			console.log(obj);
+			// console.log(obj);
 			let languages = prevState.allLanguages;
 
 			let newLang = ctx.props.availableLanguages.find(lang => {
@@ -36,9 +36,9 @@ let createHandlers = (ctx) => {
 				return (current.id !== obj.id) ? acc.concat([current]) : acc;
 			}, []);
 
-			console.log(prevState.allLanguages);
+			// console.log(prevState.allLanguages);
 
-			console.log(languages);
+			// console.log(languages);
 
 			ctx.props.onChange('languages', {data: languages});
 
@@ -99,15 +99,15 @@ class LanguagesEdit extends Component {
 	render() {
 		const { languages, availableLanguages, onChange } = this.props;
 
-		console.log(languages);
-		console.log(availableLanguages);
+		// console.log(languages);
+		// console.log(availableLanguages);
 
 		const obj = {
 			type: "languages",
 			items: availableLanguages
 		};
 
-		console.log(this.state);
+		// console.log(this.state);
 
 		const languagesComponent = (this.state.allLanguages && this.state.allLanguages.length > 0) ? this.state.allLanguages.map((lang, index) => {
 			return (index < this.state.allLanguages.length - 1)

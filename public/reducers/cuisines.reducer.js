@@ -2,7 +2,8 @@
 var initialCuisinesState = {};
 
 export function _cuisines(state = initialCuisinesState, action) {
-  console.log('_cuisines reducer called with state ', state , ' and action ', action);
+  // please use redux devtools from chrome/firefox ext
+  // console.log('_cuisines reducer called with state ', state , ' and action ', action);
 
   switch (action.type) {
     case 'GET_CUISINES_REQUEST':

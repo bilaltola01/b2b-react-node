@@ -25,7 +25,7 @@ MealTranslation.create = (obj) => {
     meal.callback_uri = constants.STRAKER_CALLBACK_URL + '?type=meal';
   }
 
-  console.log(meal);
+  // console.log(meal);
 
   // Send a req to the Staker server to translate
   const options = {
@@ -41,7 +41,7 @@ MealTranslation.create = (obj) => {
   };
 
   return rp(options).then((res) => {
-    console.log(res);
+    // console.log(res);
 
     if (!res || !res.success) {
       return Promise.reject(res);

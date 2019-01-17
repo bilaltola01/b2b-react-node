@@ -12,7 +12,7 @@ let createHandlers = (ctx) => {
         var data = ctx.getDataFromEvent(e);
         data.code = window.location.href.substr(window.location.href.indexOf("reset/")+6, window.location.href.length)
 		ctx.props.dispatch(actionCreators.updatePassword(data, (res) => {
-            console.log(res)
+            // console.log(res)
 			if (res) {
 				ctx.setState({
 					message: res.message
@@ -44,7 +44,7 @@ class ResetPasswordHeader extends Component {
             code: window.location.href.substr(window.location.href.indexOf("reset/")+6, window.location.href.length)
         }
         this.props.dispatch(actionCreators.checkResetCode(body, (res) => {
-            console.log(res)
+            // console.log(res)
 			if (res) {
 				this.setState({
 					message: res.message

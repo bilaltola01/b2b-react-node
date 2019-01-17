@@ -23,7 +23,7 @@ let createHandlers = (ctx) => {
     };
 
     let closePopup = () => {
-        console.log('popup is about to close!!!');
+        // console.log('popup is about to close!!!');
 
         let newPopup = {
             isOpened: false,
@@ -67,9 +67,9 @@ class Popup extends Component {
     render () {
         const { isOpened, type, component, text, actions } = this.props;
 
-        console.log(this.props);
-        console.log('state!!!');
-        console.log(this.state);
+        // console.log(this.props);
+        // console.log('state!!!');
+        // console.log(this.state);
 
         const typeText = type ? type.toUpperCase() : '';
         const confirmationText = text;
@@ -121,7 +121,7 @@ Popup.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-    console.log(state);
+    // console.log(state);
     return {
         popup: state._popup.popup
     };
