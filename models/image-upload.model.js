@@ -36,4 +36,23 @@ ImageUpload.update = (id, obj) => {
 */
 };
 
+/**
+ * @description remove image from cloud
+ * @param {string} id id from cloud  
+ * @note Forcing cache invalidation is done by setting the invalidate parameter to true 
+ *         either when deleting an image or uploading a new one. Note that it 
+ *         sually takes up to one hour for the CDN invalidation to take effect.
+ */
+ImageUpload.remove = (id) => {
+    return new Promise((resolve, reject) => {
+        ImageUploadUtils.remove(id, (res) => {
+            if (res) {
+                resolve(res);
+            } else {
+                reject('Error occurred while getting the response from Cloudinary');
+            }
+        });
+    });
+};
+
 module.exports = ImageUpload;

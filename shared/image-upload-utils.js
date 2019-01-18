@@ -16,13 +16,29 @@ let ImageUploadUtils = {
             chunk_size: 50000000,
             public_id: data.file.name
         }, function(err, res) {
-            console.log(err)
-            console.log(res)
+            // console.log(err)
+            // console.log(res)
             if (typeof cb === 'function') {
                 cb(res);
             }
         });
-    }
+    },
+    /**
+     * 
+     * @description remove image from cloud
+     * @param {string} id id from cloud  
+     * @param {Function} cb 
+     * @return {void}
+     */
+    remove: function(id, cb) {
+        cloudinary.v2.uploader.destroy(id, { invalidate: true }, function(err, res) {
+            // console.log(err)
+            // console.log(res)
+            if (typeof cb === 'function') {
+                cb(res);
+            }
+        });
+    },
 };
 
 module.exports = ImageUploadUtils;
