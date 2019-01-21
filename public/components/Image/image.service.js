@@ -19,7 +19,16 @@ export function uploadImage(data) {
 export function updateBranchImages(images) {
     // console.log(images);
     return Promise.all(images.map(image => {
-        return uploadImage(image).then(res => {
+        const { file, ...m } = image;
+        const f = {
+            file: {
+                name: file.name,
+                size: file.size,
+                type: file.type,
+                folder: 'branch',
+            }
+        }
+        return uploadImage({ ...f, ...m }).then(res => {
             // console.log(res);
             if (!res || !res.success) {
                 return Promise.reject(res);
@@ -33,7 +42,16 @@ export function updateBranchImages(images) {
 export function updateContactImages(images) {
     // console.log(images);
     return Promise.all(images.map(image => {
-        return uploadImage(image).then(res => {
+        const { file, ...m } = image;
+        const f = {
+            file: {
+                name: file.name,
+                size: file.size,
+                type: file.type,
+                folder: 'contact',
+            }
+        }
+        return uploadImage({ ...f, ...m }).then(res => {
             // console.log(res);
             if (!res || !res.success) {
                 return Promise.reject(res);
@@ -47,7 +65,16 @@ export function updateContactImages(images) {
 export function updateMealImages(images) {
     // console.log(images);
     return Promise.all(images.map(image => {
-        return uploadImage(image).then(res => {
+        const { file, ...m } = image;
+        const f = {
+            file: {
+                name: file.name,
+                size: file.size,
+                type: file.type,
+                folder: 'meal',
+            }
+        }
+        return uploadImage({ ...f, ...m }).then(res => {
             // console.log(res);
             if (!res || !res.success) {
                 return Promise.reject(res);

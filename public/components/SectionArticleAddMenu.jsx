@@ -14,6 +14,8 @@ let createHandlers = (ctx) => {
 	};
 
 	let onChanges = (type, obj) => {
+		console.log(type, obj)
+		console.log('changing', ctx.props.menu);
 		let dataToUpdate = {};
 		switch (type) {
 			case 'main':
@@ -73,15 +75,15 @@ class SectionArticleAddMenu extends Component {
                 <form id="form-menu-content" className="content--edit">
                     <div className="edit--block">
                         <label className="label--edit">Enter new Menu Name:</label>
-                        <input className="input--edit" type="text" name="menu--price" id="menu-title" defaultValue={"New Menu title..."} onChange={(e) => this.handlers.onChanges('main', {target: e, key: 'title'})} />
+                        <input className="input--edit" required type="text" name="menu--price" id="menu-title" placeholder={"New Menu title..."} onChange={(e) => this.handlers.onChanges('main', {target: e, key: 'title'})} />
                     </div>
                     <div className="edit--block">
                         <label className="label--edit">Enter new Menu Description:</label>
-                        <input className="input--edit" type="text" name="menu--description" id="menu-description" defaultValue={"New Menu description..."} onChange={(e) => this.handlers.onChanges('main', {target: e, key: 'description'})} />
+                        <input className="input--edit" required type="text" name="menu--description" id="menu-description" placeholder={"New Menu description..."} onChange={(e) => this.handlers.onChanges('main', {target: e, key: 'description'})} />
                     </div>
                     <div className="edit--block">
                         <label className="label--edit">Enter new Menu Price:</label>
-                        <input className="input--edit" type="text" name="menu--price" id="menu-price" defaultValue={"New Menu price..."} onChange={(e) => this.handlers.onChanges('main', {target: e, key: 'price'})} />
+                        <input className="input--edit" required type="number" step="0.01" name="menu--price" id="menu-price" placeholder={"New Menu price..."} onChange={(e) => this.handlers.onChanges('main', {target: e, key: 'price'})} />
                     </div>
                 </form>
 

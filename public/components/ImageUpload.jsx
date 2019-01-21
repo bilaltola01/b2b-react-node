@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router-dom';
+import imageCompression from 'browser-image-compression';
 
 import BranchImageEdit from './BranchImageEdit';
 
@@ -17,38 +18,95 @@ let createHandlers = (ctx) => {
 		}
 	};
 
-	let handleImageChange = (e, props) => {
+	let handleImageChange = async (e, props) => {
 		e.preventDefault();
-		let reader = new FileReader();
-		let file = e.target.files[0];
+		const file = e.target.files[0];
+		const maxSizeMB = 1;
+		const maxWidthOrHeight = 1024; // compressedFile will scale down by ratio to a point that width or height is smaller than maxWidthOrHeight
 
-		reader.onloadend = () => {
-			ctx.setState((prevState) => {
-				let nextID = 879237;
-				if (prevState.allImages.length > 0) {
-					nextID = parseInt(prevState.allImages[prevState.allImages.length - 1].id, 10) + 1;
-				}
+		try {
+			const compressedFile = await imageCompression(file, maxSizeMB, maxWidthOrHeight);  
+			console.log('compressedFile instanceof Blob', compressedFile instanceof Blob); // true
+			console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`); // smaller than maxSizeMB
+			let reader = new FileReader();
+			await new Promise((resolve) => {
+				reader.onloadend = () => {
+					ctx.setState((prevState) => {
+						let nextID = 879237;
+						if (prevState.allImages.length > 0) {
+							nextID = parseInt(prevState.allImages[prevState.allImages.length - 1].id, 10) + 1;
+						}
 
-				let images = prevState.allImages;
-				images.push({
-					id: nextID,
-					imgPath: reader.result,
-					newlyAdded: true,
-					file: file,
-					caption: ''
-				});
+						let images = prevState.allImages;
+						images.push({
+							id: nextID,
+							imgPath: reader.result,
+							newlyAdded: true,
+							file: file,
+							caption: ''
+						});
 
-				return {
-					file: file,
-					imagePreviewUrl: reader.result,
-					allImages: images
-				}
+						return {
+							file: file,
+							imagePreviewUrl: reader.result,
+							allImages: images
+						}
+					});
+
+					handleSubmit(e, props);
+					resolve();
+				};
+				reader.readAsDataURL(compressedFile);
 			});
-
+		
 			handleSubmit(e, props);
-		};
+		} catch (error) {
+			console.log(error);
+		}
+	
+		// new Compressor(e.target.files[0], {
+		// 	quality: 0.6,
+		// 	// height: 768,
+		// 	// width: 1024,
+		// 	success(result) {
+						
+		// 		let reader = new FileReader();
+		// 		console.log(result);
+		// 		let file = result;
 
-		reader.readAsDataURL(file);
+		// 		reader.onloadend = () => {
+		// 			ctx.setState((prevState) => {
+		// 				let nextID = 879237;
+		// 				if (prevState.allImages.length > 0) {
+		// 					nextID = parseInt(prevState.allImages[prevState.allImages.length - 1].id, 10) + 1;
+		// 				}
+
+		// 				let images = prevState.allImages;
+		// 				images.push({
+		// 					id: nextID,
+		// 					imgPath: reader.result,
+		// 					newlyAdded: true,
+		// 					file: file,
+		// 					caption: ''
+		// 				});
+
+		// 				return {
+		// 					file: file,
+		// 					imagePreviewUrl: reader.result,
+		// 					allImages: images
+		// 				}
+		// 			});
+
+		// 			handleSubmit(e, props);
+		// 		};
+
+		// 		reader.readAsDataURL(file);
+		// 	},
+		// 	error(err) {
+		// 		console.error(err);
+		// 	},
+		// });
+
 	};
 
 	let onImageRemove = (obj) => {

@@ -2,22 +2,30 @@
 
 const ImageUpload = require('../models/image-upload.model');
 const BranchImage = require('../models/branch-image.model');
+const Company = require('../models/company.model');
+const md5 = require('md5');
 
 class ImageUploadController {
 
 }
 
-ImageUploadController.post = (req, res) => {
+ImageUploadController.post = async (req, res) => {
     //console.log(req.body);
     res.setHeader('Content-Type', 'application/json');
-
-    ImageUpload.create(req.body.obj).then(output => {
-        // console.log(output);
+    try {
+        const obj = req.body.obj;
+        const result = await Company.getByEmail(req.decoded);
+        const name = obj.file.name;
+        obj.file = obj.file || {};
+        obj.file.folder = `company/${result.CompanyID}/${obj.file.folder || 'branch'}`;
+        obj.file.name = `${md5(obj.file.name)}`;
+        const output = await ImageUpload.create(obj);
+        output.name = name;
         res.status(201).json({ success: true, message: 'ImageUpload successfully created', obj: output });
-    }).catch(err => {
+    } catch (err) {
         console.error(err);
-        res.status(204).send({ success: false, message: 'ImageUpload get failed', obj: err });
-    });
+        res.status(203).send({ success: false, message: 'ImageUpload get failed', obj: err });
+    }
 };
 
 ImageUploadController.put = (req, res) => {

@@ -46,13 +46,13 @@ export function updateBranches (branches) {
 }
 
 export function updateBranch (branch) {
-    // console.log(branch);
+    console.log(branch);
 
     return new Promise((resolve, reject) => {
         const updateOrCreateBranch = (branch) => {
             return new Promise((resolve, reject) => {
                 (branch.BranchID) ? Ajax().put('/branch', {
-                    body: JSON.stringify({id: branch.BranchID, updates: branch}), // data: {file: file, url: url}
+                    body: JSON.stringify({id: branch.BranchID, updates}), // data: {file: file, url: url}
                     headers: {
                         "content-type": "application/json",
                         "cache-control": "no-cache",
@@ -86,7 +86,6 @@ export function updateBranch (branch) {
         };
 
         const findImage = (res, arr, isContactImage) => {
-            // console.log('response from update images:');
             // console.log(res);
             // console.log('arr:');
             // console.log(arr);
@@ -100,9 +99,8 @@ export function updateBranch (branch) {
                 if (!image.newlyAdded && !isContactImage) {
                     return image;
                 }
-
                 const match = res.reduce((acc, imageResponse) => {
-                    if (image.file && imageResponse.bytes === image.file.size) {
+                    if (image.file && imageResponse.name == image.file.name) {
                         return acc.concat(imageResponse);
                     }
 

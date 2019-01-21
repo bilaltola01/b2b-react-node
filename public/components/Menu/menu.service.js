@@ -34,15 +34,14 @@ export async function updateMenu(opts) {
             await MenuCategory.postMenuCategories(id, obj.categories);
             await MenuLanguage.postMenuLanguages(id, obj.languages);
 
-            const ids = await Promise.all(
+            await Promise.all(
                 obj.branches.map(async (branch) => await MenuBranch.postMenuBranch({
                     obj: {
                         MenuID: id,
                         BranchID: branch.BranchID,
                     }
-                })
-                )
-            );
+                })));
+
             return { MenuID: id };
         } catch (e) {
             console.error(e);

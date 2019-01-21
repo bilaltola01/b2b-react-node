@@ -3,6 +3,7 @@ import { Ajax } from '../../shared/ajax.utils';
 import { Mapping } from '../../shared/mapping.utils';
 import { StorageManagerInstance } from '../../shared/storage.utils';
 
+import * as ImageService from '../Image/image.service';
 const SANDBOX_TOKEN = 'ACE563CA-FF89-4C7D-8DDF-35B5F11CFA21';
 const TRANSLATION_ENV = 'sandbox';
 const TRANSLATION_URL = 'https://' + TRANSLATION_ENV + '.strakertranslations.com/v3/translate';
@@ -21,9 +22,9 @@ export function postMeals(meals, newCatId) {
     }));
 }
 
-export function postMeal(meal, newCatId) {
+export async function postMeal(meal, newCatId) {
     // console.log(meal);
-
+ 
     if (!meal.Price && !meal.price) {
         meal.Price = 0;
         meal.price = 0;
@@ -39,7 +40,7 @@ export function postMeal(meal, newCatId) {
 
     meal.menuCategoryId = newCatId;
 
-    return Ajax().post('/meal', {
+    const {obj:[MealID]} = await Ajax().post('/meal', {
         body: JSON.stringify(convertOpts(meal, false)),
         headers: {
             "content-type": "application/json",
@@ -47,6 +48,31 @@ export function postMeal(meal, newCatId) {
             "x-access-token": StorageManagerInstance.read('token')
         }
     });
+
+    
+    const resImages = await ImageService.updateMealImages(meal.images.map(image => {
+        image.file.folder = "meal";
+        return {
+            file: image.file,
+            url: image.imgPath
+        };
+    }));
+
+    await Promise.all(resImages.map(async (image) => {
+        return await Ajax().post('/meal-image', {
+            body: JSON.stringify({obj: {
+                MealID,
+                Caption: '',
+                AltDesc: '',
+                Path: image.secure_url || image.url
+            }}),
+            headers: {
+                "content-type": "application/json",
+                "cache-control": "no-cache",
+                "x-access-token": StorageManagerInstance.read('token')
+            }
+        });
+    }));
 }
 
 

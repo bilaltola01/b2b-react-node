@@ -14,22 +14,32 @@ let createHandlers = (ctx) => {
 	};
 
 	let onChange = (obj, fn) => {
+		if(obj.key === 'images'){
+			let tmp = {
+				catId: ctx.props.catId,
+				id: ctx.props.id,
+				title: ctx.props.title,
+				description: ctx.props.description,
+				images: obj,
+				price: ctx.props.price
+			};
+			if (typeof fn === 'function') {
+				fn(tmp);
+			}
+			return;
+		}
 		if (obj.target && obj.key) {
 			// actually remove that thing from the global store
 			if (typeof fn === 'function') {
 				let title = document.querySelector('#meal-id-' + ctx.props.catId + '-' + ctx.props.id + ' #meal-title').value;
 				let desc = document.querySelector('#meal-id-' + ctx.props.catId + '-' + ctx.props.id + ' #meal-description').value;
 				let price = document.querySelector('#meal-id-' + ctx.props.catId + '-' + ctx.props.id + ' #meal-price').value;
-				// console.log(ctx.props)
-				// console.log(title);
-				// console.log(desc);
-				// console.log(price);
-				// console.log(obj)
 				let tmp = {
 					catId: ctx.props.catId,
 					id: ctx.props.id,
 					title: title,
 					description: desc,
+					images: ctx.props.images,
 					price: parseFloat(price) || null
 				};
 
@@ -41,8 +51,7 @@ let createHandlers = (ctx) => {
 			}
 		}
 	};
-	let onImageUpload = () => {
-		// console.log('uploaded image!!');
+	let onImageUpload = (e, fn) => {
 	};
 	return {
 		onRemove,
@@ -65,7 +74,7 @@ class MealEdit extends Component {
 		let detailComponents = '';
 
 		const allImagesComponent = (
-			<ImageUpload onChanges={this.handlers.onChange} onUploadSubmit={this.handlers.onImageUpload} images={[]} />
+			<ImageUpload onChanges={(key, obj) => this.handlers.onChange({key, images: obj.data}, onChange)} onUploadSubmit={this.handlers.onImageUpload} images={images} />
 		);
 
 		if (detail &&Object.keys(detail) && Object.keys(detail).length > 0 && enableDetails) {
