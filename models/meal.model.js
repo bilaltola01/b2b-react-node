@@ -138,7 +138,9 @@ function createMealCategoryContainer(meal) {
             // console.log(res);
             let obj = meal;
             obj.translations = res[0];
-
+            try {
+                obj.Price = parseFloat(obj.price) || 0;
+            } catch (error) {}
             resolve(obj);
         }).catch(err => {
             reject(err);

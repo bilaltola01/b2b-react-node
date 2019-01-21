@@ -43,7 +43,10 @@ Contact.propTypes = {
 	altDesc: PropTypes.string,
 	firstname: PropTypes.string,
 	lastname: PropTypes.string,
-	isAdmin: PropTypes.number,
+	isAdmin: PropTypes.oneOfType([
+		PropTypes.number,
+		PropTypes.bool,
+	]),
 	email: PropTypes.string,
 	tel: PropTypes.string
 };

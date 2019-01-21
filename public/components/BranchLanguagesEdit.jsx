@@ -120,12 +120,16 @@ class BranchLanguagesEdit extends Component {
 			return acc.concat(current.languages.map(lang => lang.Language));
 		}, []) : availableLanguages || languages || [];
 
-		// console.log(branchLanguages);
-
+		let uniqueBranches = [];
+		branchLanguages.forEach(x => {
+			if (!uniqueBranches.find(y => y.LanguageID === x.LanguageID)) {
+				uniqueBranches.push(x);
+			}
+		});
 		// list of all languages available is retrieved from selected branches
 		const obj = {
 			type: "languages",
-			items: branchLanguages
+			items: uniqueBranches
 		};
 
 		// console.log(this.state);

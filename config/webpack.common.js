@@ -21,7 +21,7 @@ module.exports = {
                 exclude: ['/node_modules/', 'public/v1'],
                 loaders: [
                     'react-hot-loader',
-                    'babel-loader?presets[]=react,presets[]=es2015,presets[]=stage-2'
+                    'babel-loader?presets[]=react,presets[]=env'
                 ]
             },
             {
@@ -29,7 +29,7 @@ module.exports = {
                 //exclude: helpers.root('v1', 'node_modules'),
                 exclude: ['/node_modules/', 'public/v1'],
                 loaders: [
-                    'babel-loader?presets[]=react,presets[]=es2015,presets[]=stage-2'
+                    'babel-loader?presets[]=react,presets[]=env'
                 ]
             },
             /*

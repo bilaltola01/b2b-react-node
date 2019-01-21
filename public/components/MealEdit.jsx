@@ -82,11 +82,11 @@ class MealEdit extends Component {
 				<div className="content--edit">
 		            <div className="edit--block">
 	                    <label className="label--edit">Enter new Title:</label>
-	                    <input className="input--edit" type="text" name="meal--title" id="meal-title" value={title} onChange={(e) => this.handlers.onChange({target: e, key: 'title'}, onChange)} />
+	                    <input className="input--edit" type="text" name="meal--title" id="meal-title" value={title || ''} onChange={(e) => this.handlers.onChange({target: e, key: 'title'}, onChange)} />
 	                </div>
 	                <div className="edit--block">
 	                    <label className="label--edit">Enter new Description:</label>
-	                    <input className="input--edit" type="text" name="meal--description" id="meal-description" value={description} onChange={(e) => this.handlers.onChange({target: e, key: 'description'}, onChange)} />
+	                    <input className="input--edit" type="text" name="meal--description" id="meal-description" value={description || ''} onChange={(e) => this.handlers.onChange({target: e, key: 'description'}, onChange)} />
 	                </div>
 	                <div className="edit--block">
 	                    <label className="label--edit">Enter new Price:</label>

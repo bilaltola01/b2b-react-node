@@ -9,6 +9,7 @@ import Translation from './Translation';
 import BranchLanguagesEdit from './BranchLanguagesEdit';
 import MenuCategoriesEdit from './MenuCategoriesEdit';
 import MenuBranchEdit from './MenuBranchEdit';
+import { StorageManagerInstance } from '../shared/storage.utils';
 
 let createHandlers = (ctx) => {
 	let onImageUpload = () => {
@@ -63,6 +64,7 @@ class SectionArticleEditMenu extends Component {
 			expanded: true,
 		};
 		this.handlers = createHandlers(this);
+		this.componentDidMount = this.componentDidMount.bind(this);
 	}
 
 
@@ -72,10 +74,15 @@ class SectionArticleEditMenu extends Component {
 			languages: this.props.languages,
 		});
 		var body  = {
-			CompanyID:this.state._profile.profile.CompanyID
+			CompanyID:this.props.profile.CompanyID
+		}
+		var headers = {
+				"content-type": "application/json",
+				"cache-control": "no-cache",
+				"x-access-token": StorageManagerInstance.read('token')
 		}
 
-		axios.post("/menuBranch", body)
+		axios.post("/menuBranch", body, {headers})
 		  .then(res => {
 			const branches = res.data;
 		})
@@ -181,6 +188,8 @@ SectionArticleEditMenu.propTypes = {
 	id: PropTypes.number,
 	title: PropTypes.string,
 	description: PropTypes.string,
+	menu: PropTypes.object,
+	profile: PropTypes.object,
 	price: PropTypes.number,
 	categories: PropTypes.array,
 	languages: PropTypes.array,
@@ -190,9 +199,10 @@ SectionArticleEditMenu.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-	// console.log(state);
+	console.log(state._profile.profile);
   return {
-    menu: state._menu.menu
+    menu: state._menu.menu,
+    profile: state._profile.profile
   };
 };
 

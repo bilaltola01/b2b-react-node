@@ -9,7 +9,7 @@ import * as MenuLanguage from './menu-language.service';
 import * as Meal from './meal.service';
 
 
-export function updateMenu(opts) {
+export async function updateMenu(opts) {
     let menuId = opts.MenuID || opts.id;
     if (menuId) {
         return MenuCategory.removeSelectedMenuCategory(opts)
@@ -26,34 +26,28 @@ export function updateMenu(opts) {
     } else {
         let id;
         let obj = opts;
-        return Promise.all(obj.branches.map(branch => {
-            // obj.BranchID = branch.BranchID;
-            return postMenu(obj).then(res => {
-                if (!res || !res.success) {
-                    return Promise.reject(res);
-                }
+        try {
+            let res = await postMenu(obj);
+            if (!res || !res.success) return null;
+            id = res.obj[0];
 
-                // console.log(res.obj);
+            await MenuCategory.postMenuCategories(id, obj.categories);
+            await MenuLanguage.postMenuLanguages(id, obj.languages);
 
-                id = res.obj[0];
-                const menuBranch = {
-                    MenuID: id,
-                    BranchID: branch.BranchID,
-                }
-                return Promise.all([
-                    MenuBranch.postMenuBranch({obj:menuBranch}),
-                    MenuCategory.postMenuCategories(id, obj.categories),
-                    MenuLanguage.postMenuLanguages(id, obj.languages)
-                ]);
-            });
-        })).then(ids => {
-            // console.log('last modif');
-            // console.log(ids);
-            // console.log([].concat.apply([], ids));
-            return [].concat.apply([], ids);
-        }).then(() => {
-            return id;
-        });
+            const ids = await Promise.all(
+                obj.branches.map(async (branch) => await MenuBranch.postMenuBranch({
+                    obj: {
+                        MenuID: id,
+                        BranchID: branch.BranchID,
+                    }
+                })
+                )
+            );
+            return { MenuID: id };
+        } catch (e) {
+            console.error(e);
+            return null;
+        }
     }
 }
 
@@ -189,9 +183,9 @@ export function getMenuTranslation(id, translations) {
             acc[menuTranslation.PropKey] = menuTranslation.Text;
             return acc;
         }, {
-            // Generate random id here
-            id: 987248947
-        });
+                // Generate random id here
+                id: 987248947
+            });
 
         menu.categories = menuCategoryTranslations.map((cat) => {
             let finalCat = cat;
@@ -211,7 +205,7 @@ export function translateMenu(opts, mode) {
     // console.log(opts);
 
     let propsToTranslate = Object.keys(opts).filter((key) => {
-        return ((key === 'title' ||  key === 'Title') || (key === 'description' || key === 'Description')) && (opts[key] && opts[key].length > 0);
+        return ((key === 'title' || key === 'Title') || (key === 'description' || key === 'Description')) && (opts[key] && opts[key].length > 0);
     }).map((key) => {
         return {
             key: key,
@@ -416,6 +410,6 @@ function convertOpts(opts, isUpdate) {
         id: id,
         updates: obj
     } : {
-        obj: obj
-    };
+            obj: obj
+        };
 }
