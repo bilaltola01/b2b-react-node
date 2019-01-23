@@ -52,7 +52,7 @@ export function updateBranch (branch) {
         const updateOrCreateBranch = (branch) => {
             return new Promise((resolve, reject) => {
                 (branch.BranchID) ? Ajax().put('/branch', {
-                    body: JSON.stringify({id: branch.BranchID, updates}), // data: {file: file, url: url}
+                    body: JSON.stringify({id: branch.BranchID, updates: branch}), // data: {file: file, url: url}
                     headers: {
                         "content-type": "application/json",
                         "cache-control": "no-cache",

@@ -160,6 +160,7 @@ let Routes = class {
         router.post('/meal-image', mealImageController.post);
         router.put('/meal-image', mealImageController.put);
         router.delete('/meal-image', mealImageController.remove);
+        router.put('/meal-image-remove', mealImageController.removeAll);
 
         router.get('/translate-menu-category', menuCategoryTranslationController.get);
         router.post('/translate-menu-category', menuCategoryTranslationController.post);

@@ -4,6 +4,7 @@ const DBLayer = require('../DBLayer');
 const db = DBLayer.connection;
 const dateUtils = require('../shared/date-utils');
 
+const ImageUpload = require('./image-upload.model');
 // Create new image in the database
 // Returns a resolved Promise containing its id
 let MealImage = class {
@@ -98,6 +99,21 @@ MealImage.remove = (id) => {
         MealImageID: id
     }).first('*').del();
 };
+
+MealImage.removeNotOnList = async (id, images) => {
+    const mealImages = await MealImage.get({MealID: id});
+    for(let i = 0; i < mealImages.length; i+=1){
+        const mealImage = mealImages[i];
+        if(!images.find(x => x.MealImageID === mealImage.MealImageID)){
+            const matches = mealImage.Path.match(/(\/company.*?\.)/g);
+            const imageId = matches.length ? matches[0].split('.')[0] : false;
+            console.log('Removing...'+mealImage.MealImageID+' --- '+imageId);
+            await MealImage.remove(mealImage.MealImageID);
+            const res = imageId && await ImageUpload.remove(imageId);
+            console.log(res);
+        }
+    }
+}
 
 // Get an image by id
 // Returns a Promise

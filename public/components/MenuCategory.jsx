@@ -14,6 +14,8 @@ class MenuCategory extends Component {
 				title={meal.Title || meal.title}
 				description={meal.Description || meal.description}
 				price={meal.Price || meal.price}
+				images={meal.Images || meal.images}
+				foodTypes={meal.FoodTypes || meal.foodTypes}
 				symbol={symbol}
 				enableDetails={!!meal.EnableDetails || !!meal.enableDetails}
 				detail={meal.MealDetail || meal.mealDetail}

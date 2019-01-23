@@ -50,6 +50,7 @@ Meal.createWithDetails = (obj) => {
         Description: meal.Description,
         Price: meal.Price,
         EnableDetails: meal.EnableDetails,
+        FoodTypes: meal.FoodTypes,
         Date: dateUtils.toMysqlDate(new Date())
     }).then(res => {
         // console.log(res);
@@ -133,13 +134,16 @@ Meal.removeSelected = (category, meals) => {
 function createMealCategoryContainer(meal) {
     return new Promise((resolve, reject) => {
         Promise.all([
-            MealTranslation.get({ MealID: meal.MealID })
+            MealTranslation.get({ MealID: meal.MealID }),
+            MealImage.get({MealID: meal.MealID}),
         ]).then(res => {
             // console.log(res);
             let obj = meal;
             obj.translations = res[0];
+            obj.images = res[1];
+            obj.FoodTypes = obj.FoodTypes.split(',').map(x => ({Name: x}));
             try {
-                obj.Price = parseFloat(obj.price) || 0;
+                obj.Price = parseFloat(obj.Price) || 0;
             } catch (error) {}
             resolve(obj);
         }).catch(err => {

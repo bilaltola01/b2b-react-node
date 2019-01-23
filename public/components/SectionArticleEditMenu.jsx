@@ -21,6 +21,8 @@ let createHandlers = (ctx) => {
 	};
 
 	let onChanges = (type, obj) => {
+    console.log(type, obj)
+    console.log('changing', ctx.props.menu);
 		let dataToUpdate = {};
 		switch (type) {
 			case 'main':
@@ -81,10 +83,10 @@ class SectionArticleEditMenu extends Component {
 				"x-access-token": StorageManagerInstance.read('token')
 		}
 
-		axios.post("/menuBranch", body, {headers})
-		  .then(res => {
-			const branches = res.data;
-		})
+		// axios.post("/menuBranch", body, {headers})
+		//   .then(res => {
+		// 	const branches = res.data;
+		// })
 	}
 
 	render() {
@@ -198,7 +200,7 @@ SectionArticleEditMenu.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-	console.log(state._profile.profile);
+	// console.log(state._profile.profile);
   return {
     menu: state._menu.menu,
     profile: state._profile.profile

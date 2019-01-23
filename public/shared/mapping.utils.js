@@ -131,6 +131,8 @@ const MAP_TABLE = [
             ['description', 'Description'],
             ['Description', 'Description'],
             ['price', 'Price'],
+            ['foodTypes', 'FoodTypes'],
+            ['FoodTypes', 'FoodTypes'],
             ['Price', 'Price'],
             ['enableDetails', 'EnableDetails'],
             ['EnableDetails', 'EnableDetails']

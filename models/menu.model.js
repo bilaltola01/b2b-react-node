@@ -4,7 +4,7 @@ const DBLayer = require('../DBLayer');
 const db = DBLayer.connection;
 const dateUtils = require('../shared/date-utils');
 
-const MenuBranch = require('./menu-branch.model');
+const MealImages = require('./meal-image.model');
 const MenuCategory = require('./menu-category.model');
 const MenuLanguage = require('./menu-language.model');
 const MenuTranslation = require('./menu-translation.model');
@@ -82,7 +82,7 @@ function createMenuContainer (menu) {
     Promise.all([
       MenuCategory.getWithDetails({MenuID: menu.MenuID}),
       MenuLanguage.get({MenuID: menu.MenuID}),
-      MenuTranslation.get({MenuID: menu.MenuID})
+      MenuTranslation.get({MenuID: menu.MenuID}),
     ]).then(res => {
       // console.log(res);
       let obj = menu;

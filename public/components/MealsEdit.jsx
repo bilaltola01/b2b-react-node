@@ -23,6 +23,7 @@ let createHandlers = (ctx) => {
 				description: "",
 				price: null,
 				images:[],
+				foodTypes:[],
 				enableDetails: false,
 				detail: {},
 				onRemove: onRemove
@@ -47,7 +48,7 @@ let createHandlers = (ctx) => {
 	};
 
 	let onChange = (obj) => {
-		// console.log(obj);
+		console.log('meals' ,obj);
 		ctx.setState((prevState) => {
 			// console.log(prevState.allMeals);
 
@@ -60,6 +61,8 @@ let createHandlers = (ctx) => {
 					tmp.MealID = obj.id || obj.MealID;
 					tmp.catId = obj.catId;
 					tmp.Title = obj.title || obj.Title;
+					tmp.FoodTypes = obj.foodTypes || obj.FoodTypes;
+					tmp.images = obj.images;
 					tmp.Description = obj.description || obj.Description;
 					tmp.Price = parseFloat(obj.price) || null;
 					return tmp;
@@ -152,6 +155,7 @@ class MealsEdit extends Component {
 				description={meal.description || meal.Description} 
 				price={meal.price || meal.Price}
 				images={meal.images || meal.Images} 
+				foodTypes={meal.foodTypes || meal.FoodTypes} 
 				enableDetails={meal.enableDetails} 
 				detail={meal.detail} 
 				onChange={this.handlers.onChange} 
