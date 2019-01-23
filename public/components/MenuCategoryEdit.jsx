@@ -5,6 +5,7 @@ const classNames = require("classnames");
 
 import MealsEdit from "./MealsEdit";
 import LanguagePicker from "./LanguagePicker";
+import MenuCopyCategory from "./MenuCopyCategory";
 
 let createHandlers = ctx => {
   let headerOnClick = () => {
@@ -199,6 +200,17 @@ class MenuCategoryEdit extends Component {
               this.handlers.onCategoryRemove({ id: stateId }, onCategoryRemove)
             }
           />
+          {this.props.id && (
+            <MenuCopyCategory
+              category={{
+                id: this.props.id,
+                title: this.props.title,
+                meals: this.props.meals,
+                isCustom: this.props.isCustom,
+                description: this.props.description
+              }}
+            />
+          )}
         </h4>
         <div className="content--edit">
           <div id="menu-category-add" className="language--add">
@@ -242,6 +254,7 @@ MenuCategoryEdit.propTypes = {
   description: PropTypes.string,
   meals: PropTypes.array,
   totalCategories: PropTypes.array,
+  translations: PropTypes.array,
   onCategoryRemove: PropTypes.func,
   onChange: PropTypes.func
 };

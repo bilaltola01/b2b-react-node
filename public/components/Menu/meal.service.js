@@ -103,7 +103,7 @@ export function updateMeals(meals, catId) {
       if (!meal.MenuCategoryID) {
         return postMeal(meal, catId);
       }
-      return updateMeal(meal);
+      return updateMeal(meal, catId);
     })
   );
 }
@@ -126,7 +126,7 @@ export function removeMeals(meals, catId) {
     });
 }
 
-export async function updateMeal(meal) {
+export async function updateMeal(meal, catId) {
   const MealID = meal.id || meal.MealID;
   if (!meal.id && !meal.MealID) {
     console.error("meal id is not specified!");
@@ -165,6 +165,8 @@ export async function updateMeal(meal) {
       .map(image => {
         image.file.folder = "meal";
         return {
+          catId: catId,
+          id: MealID,
           file: image.file,
           url: image.imgPath
         };

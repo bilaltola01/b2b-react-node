@@ -5856,6 +5856,9 @@ MENU DETAIL
     font-weight: 600;
     padding: 20px 30px;
 }
+.ReactModal__Content p strong{
+    font-weight: 800;
+}
 .ReactModal__Content footer::after{
     content: '';
     display: block;
@@ -5865,4 +5868,150 @@ MENU DETAIL
 .ReactModal__Content footer button{
     margin-right: 20px!important;
     float: right;
+}
+.menu--copy {
+    float: right;
+    display: block;
+    margin-top: -4px;
+    position: relative;
+}
+
+.menu--copy > button > img{
+    border: none;
+}
+.menu--copy > button{
+    cursor: pointer;
+    border: 0;
+    padding: 0;
+    background: transparent;
+}
+/* .menu--copy::before {
+    content: '';
+    display: block;
+    position: fixed;
+    height: 100%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9998;
+    cursor: pointer;
+} */
+.menu--copy > div.menu--copy__menu{
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    width: 200px;
+    background: #FFF;
+    border: 2px solid #ECEFF2;
+    z-index: 9999;
+}
+.menu--copy header {
+    overflow-y: auto;
+    background: #ECEFF2;
+    margin: 0;
+    padding: 10px;
+    font-size: 1rem;
+}
+.menu--copy header button{
+    border: none;
+    background: transparent;
+    opacity: 0.7;
+    float: right;
+}
+.menu--copy header button:hover{
+    opacity: 1;
+}
+.menu--copy header button img{
+    width: 16px;
+    height: 16px;
+}
+.menu--copy ul {
+    min-height: 40px;
+    max-height: 200px;
+    overflow-y: auto;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.menu--copy h3,
+.menu--copy ul li{
+    height: 0.9rem;
+    margin: 0;
+    max-width: 196px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    padding: 8px 13px 8px 13px;
+    color: #979DB0;
+    font-size: 0.75em;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    -webkit-transition: color 0.3s ease 0s;
+    transition: color 0.3s ease 0s;
+    cursor: pointer;
+}
+.menu--copy h3 {
+    font-weight: bold;
+    color: #FFF;
+    background: #727b9c;
+}
+.menu--copy h3 button {
+    background: transparent;
+    border: none;
+}
+.menu--copy footer {
+    border-top: 2px solid #ECEFF2;
+    display: block;
+    padding: 10px;
+}
+.menu--copy footer button{
+    float: none;
+    background: #727b9c;
+    color: #FFF;
+}
+button.button--action:disabled{
+    background: #ECEFF2;
+    color: #FFF;
+    cursor: not-allowed;
+}
+.menu--copy__selected {
+    background: #ECEFF2;
+}
+.toast--container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #4f5168;
+    color: #FFF;
+    z-index: 99999;
+}
+.toast--container::after {
+    content: '';
+    display: block;
+    clear: both;
+}
+.toast--container > div:first-child {
+    padding: 20px;
+    box-sizing: border-box; 
+    margin-right: 40px;
+}
+.toast--container > div:last-child {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    margin: 0 20px;
+    margin-top: -12px;
+}
+.toast--container > div:last-child button{
+    border: none;
+    background: transparent;
+    padding: 7px;
+    margin: 0;
+    height: 30px;
+    width: 30px;
+}
+.toast--container > div:last-child button img{
+    height: 16px;
+    width: 16px;
 }

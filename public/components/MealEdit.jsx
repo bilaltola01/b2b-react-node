@@ -3,6 +3,7 @@ import React, { Component, PropTypes } from "react";
 import MealDetail from "./MealDetail";
 import ImageUpload from "./ImageUpload";
 import MealFoodTypes from "./MealFoodTypes";
+import MenuCopyMeal from "./MenuCopyMeal";
 let createHandlers = ctx => {
   let onRemove = (obj, fn) => {
     ctx.setState({
@@ -15,7 +16,7 @@ let createHandlers = ctx => {
   };
 
   let onChange = (obj, fn) => {
-    console.log('meaEdit', obj);
+    console.log("meaEdit", obj);
     if (obj.key === "foodTypes") {
       let tmp = {
         catId: ctx.props.catId,
@@ -119,7 +120,11 @@ class MealEdit extends Component {
           this.handlers.onChange({ key, images: obj.data }, onChange)
         }
         onUploadSubmit={this.handlers.onImageUpload}
-        images={images.map(x => ({...x, id: x.id || x.MealImageID, imgPath: x.imgPath || x.Path}))}
+        images={images.map(x => ({
+          ...x,
+          id: x.id || x.MealImageID,
+          imgPath: x.imgPath || x.Path
+        }))}
       />
     );
 
@@ -147,6 +152,20 @@ class MealEdit extends Component {
             className="status status--issue remove"
             onClick={e => this.handlers.onRemove({ id }, onRemove)}
           />
+          {this.props.id && (
+            <MenuCopyMeal
+              meal={{
+                id: this.props.id,
+                title: this.props.title,
+                description: this.props.description,
+                price: this.props.price,
+                detail: this.props.detail,
+                images: this.props.images,
+                foodTypes: this.props.foodTypes,
+                enableDetails: this.props.enableDetails
+              }}
+            />
+          )}
         </h4>
         <div className="content--edit">
           <div className="edit--block">

@@ -12,8 +12,8 @@ let createHandlers = ctx => {
   let onSaveMenu = () => {};
 
   let onChanges = (type, obj) => {
-    console.log(type, obj)
-    console.log('changing', ctx.props.menu);
+    // console.log(type, obj)
+    // console.log('changing', ctx.props.menu);
     let dataToUpdate = {};
     switch (type) {
       case "main":

@@ -13,11 +13,16 @@ ImageUploadController.post = async (req, res) => {
     //console.log(req.body);
     res.setHeader('Content-Type', 'application/json');
     try {
+        const {id, catid} = req.body.obj;
         const obj = req.body.obj;
         const result = await Company.getByEmail(req.decoded);
         const name = obj.file.name;
         obj.file = obj.file || {};
-        obj.file.folder = `company/${result.CompanyID}/${obj.file.folder || 'branch'}`;
+        if(obj.file.folder === 'meal'){
+            obj.file.folder = `company/${result.CompanyID}/meal/${id}/category/${catid}`;
+        }else{
+            obj.file.folder = `company/${result.CompanyID}/${obj.file.folder || 'branch'}/${id || 0}`;
+        }
         obj.file.name = `${md5(obj.file.name)}`;
         const output = await ImageUpload.create(obj);
         output.name = name;

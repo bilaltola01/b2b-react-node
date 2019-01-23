@@ -73,5 +73,4 @@ Category.getAll = () => {
   return db.select('*').from('Category');
 };
 
-
 module.exports = Category;

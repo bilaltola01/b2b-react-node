@@ -48,7 +48,7 @@ let createHandlers = (ctx) => {
 	};
 
 	let onChange = (obj) => {
-		console.log('meals' ,obj);
+		// console.log('meals' ,obj);
 		ctx.setState((prevState) => {
 			// console.log(prevState.allMeals);
 

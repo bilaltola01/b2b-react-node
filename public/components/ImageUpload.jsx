@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from "react";
 import { Link } from "react-router-dom";
 import imageCompression from "browser-image-compression";
-import Modal from "react-modal";
 
 import BranchImageEdit from "./BranchImageEdit";
 
@@ -136,26 +135,6 @@ class ImageUpload extends Component {
             );
           })
         : "";
-    const confirmEemoveImage = (
-      <Modal ariaHideApp={false} isOpen={this.state.showRemoveConfirm}>
-        <h2>Delete Image</h2>
-        <p>Are you sure you want to remove image permanently?</p>
-        <footer className="group-buttons">
-          <button
-            className="button--action"
-            onClick={() => this.setState({ showRemoveConfirm: false })}
-          >
-            Cancel
-          </button>
-          <button
-            onClick={this.handlers.confirmRemove}
-            className="button--action"
-          >
-            Yes
-          </button>
-        </footer>
-      </Modal>
-    );
 
     return (
       <div>

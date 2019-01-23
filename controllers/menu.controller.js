@@ -60,4 +60,28 @@ MenuController.remove = (req, res) => {
     });
 };
 
+MenuController.cloneCategory = async (req, res) => {
+    res.setHeader('Content-Type', 'application/json');
+    try {
+        const { menu, category } = req.body;
+        await Menu.cloneCategory(category, menu);
+        res.status(201).json({ success: true, message: 'Menu successfully removed'});
+    } catch (err) {
+        console.error(err);
+        res.status(204).send({ success: false, message: 'Category clone failed', obj: err });
+    }
+};
+
+MenuController.cloneMeal = async (req, res) => {
+    res.setHeader('Content-Type', 'application/json');
+    try {
+        const { menu, category, meal } = req.body;
+        await Menu.cloneMeal(meal, category, menu);
+        res.status(201).json({ success: true, message: 'Menu successfully removed'});
+    } catch (err) {
+        console.error(err);
+        res.status(204).send({ success: false, message: 'Category clone failed', obj: err });
+    }
+};
+
 module.exports = MenuController;
