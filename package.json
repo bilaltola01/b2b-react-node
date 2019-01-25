@@ -36,6 +36,7 @@
         "file-loader": "0.11.2",
         "flickity": "2.0.10",
         "formdata-polyfill": "2.0.4",
+        "heroku-ssl-redirect": "0.0.4",
         "jsonwebtoken": "7.4.1",
         "knex": "0.13.0",
         "morgan": "1.8.2",
