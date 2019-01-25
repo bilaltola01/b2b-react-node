@@ -6,7 +6,6 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
 const webpackMiddleware = require('./middlewares/webpack.middleware');
-const sslRedirect = require('heroku-ssl-redirect');
 
 let Server = class {
     constructor(middleware, wrapper, db_layer) {
@@ -37,12 +36,6 @@ let Server = class {
         this.app.use(logger('dev'));
         this.app.use(cookieParser());
         this.app.use(this.middleware.static(path.join(__dirname, 'public')));
-        // enable ssl redirect
-        console.log(process.env);
-        this.app.use(sslRedirect([
-            'development',
-            'production'
-        ]));
     }
 
     initHeaders() {
