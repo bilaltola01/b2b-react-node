@@ -143,7 +143,7 @@ class SectionArticleEditMenu extends Component {
 
 		const menuLanguages = <BranchLanguagesEdit languages={(languages && languages.length > 0) ? languages.map(language => language.Language) : []} onChange={this.handlers.onChanges} />
 		const menuCategories = <MenuCategoriesEdit categories={(categories && categories.length > 0) ? categories : []} onChange={this.handlers.onChanges} />
-		const menuBranches = <MenuBranchEdit/>;
+		const menuBranches = <MenuBranchEdit/>; // TODO add props or improve component
 		return (
 			<div>
 	            <div className="content--container global-padding-wrapper">
@@ -170,15 +170,15 @@ class SectionArticleEditMenu extends Component {
 
 	                <div className="menu--languages">
 		                {menuLanguages}
-		            </div>
+		            	</div>
 
-		            <div className="menu--categories">
-		                {menuCategories}
-		            </div>
+									<div className="menu--categories">
+											{menuCategories}
+									</div>
 
-					<div className="menu--languages">
-						{menuBranches}
-					</div>
+									{/*<div className="menu--languages">*/}
+											{/*{menuBranches}*/}
+									{/*</div>*/}
 	            </div>
 			</div>
 		)
