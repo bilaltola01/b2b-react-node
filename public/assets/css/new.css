@@ -2361,7 +2361,7 @@ ol.calendar--week {
 }
 
 .content--container--header.header--orange {
-    background-color: #FFA600;
+    background-color: #FF004C;
 }
 
 .content--module.no-spacing .content--container {
@@ -3902,6 +3902,17 @@ ul.analytics--analytics_most_viewed li header h5 {
     outline: 0 none;
     border: 0 none;
     border-radius: 3px;
+}
+
+.button--action.button--action-filled {
+    color: #fff;
+    background-color: #FF004C;
+    border: 1px solid #FF004C;
+}
+.button--action.button--action-outline {
+    color: #FF004C;
+    background-color: #fff;
+    border: 1px solid #FF004C;
 }
 
 a.button--action-filled {
