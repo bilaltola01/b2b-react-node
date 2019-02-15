@@ -62,7 +62,7 @@ class SectionArticleBranch extends Component {
 		}
 
 		const contactComponents = (contacts.length > 0) ? contacts.map((contact, index) => {
-			return <Contact id={contact.BranchContactID} imgPath={contact.ImagePath} altDesc={contact.ImageAltDesc} firstname={contact.Firstname} lastname={contact.Lastname} isAdmin={contact.IsAdmin} email={contact.Email} tel={contact.Tel} key={contact.BranchContactID} />;
+			return <Contact id={contact.BranchContactID} imgPath={contact.ImagePath} altDesc={contact.ImageAltDesc} firstname={contact.Firstname} lastname={contact.Lastname} isAdmin={contact.IsAdmin} email={contact.Email} tel={contact.Tel} key={index} />;
 		}) : '';
 
 		const cuisineComponents = (cuisines.length > 0) ? cuisines.map((cuisine, index) => {
@@ -70,31 +70,31 @@ class SectionArticleBranch extends Component {
 			return (index < cuisines.length - 1)
 				? (
 					<div key={cuisine.BranchCuisineID}>
-						<BranchCuisine id={cuisine.BranchCuisineID} description={finalCuisine.Description} title={finalCuisine.Title} key={cuisine.BranchCuisineID} />
+						<BranchCuisine id={cuisine.BranchCuisineID} description={finalCuisine.Description} title={finalCuisine.Title} key={index} />
 						,&nbsp;
 					</div>
 				) : (
 					<div key={cuisine.BranchCuisineID}>
-						<BranchCuisine id={cuisine.BranchCuisineID} description={finalCuisine.Description} title={finalCuisine.Title} key={cuisine.BranchCuisineID} />
+						<BranchCuisine id={cuisine.BranchCuisineID} description={finalCuisine.Description} title={finalCuisine.Title} key={index} />
 					</div>
 				)
 		}) : '';
 
 		const languageComponents = (languages.length > 0) ? languages.map((language, index) => {
 			const finalLanguage = (language.Language && Object.keys(language.Language).length > 0) ? language.Language : language;
-			return <BranchLanguage id={language.BranchLanguageID} code={finalLanguage.Code} codeFull={finalLanguage.CodeFull} name={finalLanguage.Name} title={finalLanguage.Title} key={language.BranchLanguageID} />;
+			return <BranchLanguage id={language.BranchLanguageID} code={finalLanguage.Code} codeFull={finalLanguage.CodeFull} name={finalLanguage.Name} title={finalLanguage.Title} key={index} />;
 		}) : '';
 
 		const currencyComponents = (currencies && currencies.length > 0) ? currencies.map((currency, index) => {
 			const finalCurrency = (currency.Currency && Object.keys(currency.Currency).length > 0) ? currency.Currency : currency;
 			return (index < currencies.length - 1)
 				? (
-					<div key={currency.BranchCurrencyID}>
+					<div key={index}>
 						<BranchCurrency id={currency.BranchCurrencyID} name={finalCurrency.Name} nameShort={finalCurrency.NameShort} symbol={finalCurrency.Symbol} description={finalCurrency.Description} />
 						,&nbsp;
 					</div>
 				) : (
-					<div key={currency.BranchCurrencyID}>
+					<div key={index}>
 						<BranchCurrency id={currency.BranchCurrencyID} name={finalCurrency.Name} nameShort={finalCurrency.NameShort} symbol={finalCurrency.Symbol} description={finalCurrency.Description} />
 					</div>
 				)
@@ -102,7 +102,7 @@ class SectionArticleBranch extends Component {
 
 		const imageComponents = (images.length > 0) ? images.map((image, index) => {
 			return (
-				<li key={image.BranchImageID}>
+				<li key={index}>
 					<BranchImage id={image.BranchImageID} imgPath={image.Path} altDesc={image.AltDesc} key={image.BranchImageID} />
 				</li>
 			)

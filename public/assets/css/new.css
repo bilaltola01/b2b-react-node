@@ -538,7 +538,7 @@ th {
 html,
 html a {
     -webkit-font-smoothing: antialiased !important;
-    -moz-osx-font-smoothing: greyscale;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 html,

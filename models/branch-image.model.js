@@ -3,6 +3,7 @@
 const DBLayer = require('../DBLayer');
 const db = DBLayer.connection;
 const dateUtils = require('../shared/date-utils');
+const ImageUpload = require('./image-upload.model');
 
 // Create new image in the database
 // Returns a resolved Promise containing its id
@@ -52,8 +53,13 @@ BranchImage.removeSelected = (images, branch) => {
   return BranchImage.get({BranchID: branch.BranchID}).then(res => {
     // console.log('res', res, 'res')
     var deletedImages = res.filter(img=> !images.find(image=> (image.BranchImageID || image.id) == (img.BranchImageID || img.id)))
-    // console.log('deletedImages', deletedImages)
+
     return Promise.all(deletedImages.map(image => {
+      // Remove image from Cloudinary
+      const idIndex = image.Path.indexOf('/company');
+      const publicId = idIndex > -1 ? image.Path.substr(idIndex + 1, image.Path.length - idIndex) : '';
+      ImageUpload.remove(publicId.split('.')[0]);
+
       let id = image.BranchImageID || image.id;
       return BranchImage.remove(id);
     }));

@@ -23,7 +23,7 @@ BranchController.get = (req, res) => {
 
 BranchController.post = (req, res) => {
     res.setHeader('Content-Type', 'application/json');
-
+    // console.log('BranchController.post');
     Branch.createWithDetails(req.body.obj).then(output => {
         // console.log(output);
         res.status(201).json({ success: true, message: 'Branch successfully created', obj: output });
@@ -35,7 +35,7 @@ BranchController.post = (req, res) => {
 
 BranchController.put = (req, res) => {
     res.setHeader('Content-Type', 'application/json');
-
+    // console.log('BranchController.put');
     Branch.updateWithDetails(req.body.id, req.body.updates).then(output => {
         // console.log(output);
         res.status(201).json({ success: true, message: 'Branch successfully updated', obj: output });
@@ -47,16 +47,19 @@ BranchController.put = (req, res) => {
 
 BranchController.remove = async (req, res) => {
     res.setHeader('Content-Type', 'application/json');
+    // console.log('BranchController.remove');
     try {
         // console.log(output);
         const images = await BranchImage.get({ BranchID: req.body.id });
         const output = await Branch.remove(req.body.id);
+
         images.map(result => {
-            const paths = result.Path.split('/');
-            const id = paths.length > 0 ? paths[paths.length - 1] : null;
             // Just remove in background, no need to wait since it also invalidate cache in an hour
-            ImageUpload.remove(id.split('.')[0]);
+            const idIndex = result.Path.indexOf('/company');
+            const publicId = idIndex > -1 ? result.Path.substr(idIndex + 1, result.Path.length - idIndex) : '';
+            ImageUpload.remove(publicId.split('.')[0]);
         });
+
         res.status(201).json({
             success: true,
             message: 'Branch successfully removed', obj: Object.assign(output, { images })

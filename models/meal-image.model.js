@@ -102,14 +102,21 @@ MealImage.remove = (id) => {
 
 MealImage.removeNotOnList = async (id, images) => {
     const mealImages = await MealImage.get({MealID: id});
+
     for(let i = 0; i < mealImages.length; i+=1){
         const mealImage = mealImages[i];
+
         if(!images.find(x => x.MealImageID === mealImage.MealImageID)){
             const matches = mealImage.Path.match(/(\/company.*?\.)/g);
             const imageId = matches.length ? matches[0].split('.')[0] : false;
             console.log('Removing...'+mealImage.MealImageID+' --- '+imageId);
             await MealImage.remove(mealImage.MealImageID);
-            const res = imageId && await ImageUpload.remove(imageId);
+
+            // Remove image from Cloudinary
+            const idIndex = imageId.indexOf('/company');
+            const publicId = idIndex > -1 ? imageId.substr(idIndex + 1, imageId.length - idIndex) : imageId;
+
+            const res = publicId && await ImageUpload.remove(publicId);
             console.log(res);
         }
     }

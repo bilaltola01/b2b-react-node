@@ -3,6 +3,7 @@
 const DBLayer = require('../DBLayer');
 const db = DBLayer.connection;
 const dateUtils = require('../shared/date-utils');
+const ImageUpload = require('./image-upload.model');
 
 const MealTranslation = require('./meal-translation.model');
 const MealImage = require('./meal-image.model')
@@ -125,6 +126,17 @@ Meal.removeSelected = (category, meals) => {
     return Meal.getWithDetails({ MenuCategoryID: category.MenuCategoryID }).then(res => {
         var deletedMeals = res.filter(ml => !meals.find(meal => (meal.MealID || meal.id) == (ml.MealID || ml.id)))
         return Promise.all(deletedMeals.map(catMeal => {
+
+            // Remove image from Cloudinary
+            MealImage.get({ MealID: catMeal.MealID }).then((images) => {
+                images && images.forEach(result => {
+                  // Just remove in background, no need to wait since it also invalidate cache in an hour
+                  const idIndex = result.Path.indexOf('/company');
+                  const publicId = idIndex > -1 ? result.Path.substr(idIndex + 1, result.Path.length - idIndex) : '';
+                  ImageUpload.remove(publicId.split('.')[0]);
+                });
+            });
+
             let id = catMeal.MealID || catMeal.id;
             return Meal.remove(id);
         }));

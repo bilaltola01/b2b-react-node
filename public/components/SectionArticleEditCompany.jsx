@@ -110,12 +110,17 @@ class SectionArticleEditCompany extends Component {
         // console.log(this.props.profile); // THIS IS OK
         // console.log(this.state.profile); // THIS IS NOT OK
 
-        const logo = (this.props.profile) ? [{
-            altDesc: this.props.profile.LogoAltDesc,
-            imgPath: this.props.profile.LogoPath
-        }] : [{altDesc: component.props.logo.altDesc || '', imgPath: component.props.logo.imgPath|| ''}];
+    const logo = (this.props.profile) ? [{
+        altDesc: this.props.profile.LogoAltDesc,
+        imgPath: this.props.profile.LogoPath
+    }] : [{altDesc: component.props.logo.altDesc || '', imgPath: component.props.logo.imgPath|| ''}];
 
-        const name = (this.props.profile) ? this.props.profile.Name : component.props.name || '';
+    const images = logo.altDesc && logo.imgPath ? [{
+      altDesc: logo.altDesc,
+      imgPath: logo.imgPath
+    }] : [];
+
+    const name = (this.props.profile) ? this.props.profile.Name : component.props.name || '';
         const email = (this.props.profile) ? this.props.profile.Email : component.props.email || '';
         const description = (this.props.profile) ? this.props.profile.Description : component.props.description || '';
         const website = (this.props.profile) ? this.props.profile.Website : component.props.website || '';
@@ -125,8 +130,15 @@ class SectionArticleEditCompany extends Component {
         const youtube = (this.props.profile) ? this.props.profile.Youtube : component.props.social.youtube || '';
         const instagram = (this.props.profile) ? this.props.profile.Instagram : component.props.social.instagram || '';
 
+        console.log('images', images);
         const allImagesComponent = (
-            <ImageUpload onUploadSubmit={this.handlers.onImageUpload} images={logo} />
+            <ImageUpload
+              onChanges={(key, obj) =>
+                this.handlers.onChanges({ key, images: obj.data }, onChange)
+              }
+              onUploadSubmit={this.handlers.onImageUpload}
+              images={images}
+            />
         );
 
         const renderComponent = (this.state.isProfileSaved)
