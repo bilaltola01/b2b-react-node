@@ -134,6 +134,8 @@ class MenuCategoryEdit extends Component {
       categoriesAll,
       totalCategories,
       onCategoryRemove,
+      onAddCategory,
+      menuCategories,
       onChange
     } = this.props;
 
@@ -181,12 +183,15 @@ class MenuCategoryEdit extends Component {
       this.state.expanded ? "opened" : ""
     );
 
+    // console.log('category meals', meals);
     const mealComponents =
       stateId && stateId > 0 && stateId !== 1 ? (
         <MealsEdit
           meals={meals}
+          menuCategories={menuCategories}
           category={{ id: stateId, title: stateTitle }}
           onChange={this.handlers.onMealsChange}
+          onCloneMeal={this.props.onCloneMeal}
         />
       ) : null;
 
@@ -202,6 +207,7 @@ class MenuCategoryEdit extends Component {
           />
           {this.props.id && (
             <MenuCopyCategory
+              onClone={onAddCategory}
               category={{
                 id: this.props.id,
                 title: this.props.title,

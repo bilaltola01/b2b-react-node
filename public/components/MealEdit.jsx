@@ -73,7 +73,7 @@ let createHandlers = ctx => {
           foodTypes: ctx.props.foodTypes
         };
 
-        // console.log(tmp);
+        console.log('tmp', tmp);
 
         tmp[obj.key] = obj.target.target.value;
         // console.log(tmp);
@@ -110,6 +110,8 @@ class MealEdit extends Component {
       enableDetails,
       detail,
       onRemove,
+      onCloneMeal,
+      menuCategories,
       onChange
     } = this.props;
     let detailComponents = "";
@@ -154,6 +156,8 @@ class MealEdit extends Component {
           />
           {this.props.id && (
             <MenuCopyMeal
+              onClone={onCloneMeal}
+              menuCategories={menuCategories}
               meal={{
                 id: this.props.id,
                 title: this.props.title,

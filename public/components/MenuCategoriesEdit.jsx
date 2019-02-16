@@ -94,8 +94,56 @@ let createHandlers = ctx => {
     });
   };
 
+  let onCloneMeal = data => {
+    let categories;
+    let newCategoryID = data && data.category && data.category.CategoryID
+    ctx.setState(prevState => {
+      // console.log('onCloneMeal cat', data)
+      // console.log('onCloneMeal allCategories', prevState.allCategories)
+      categories = prevState.allCategories.map((prevCategory, index) => {
+        // console.log('prevCategory', newCategoryID, prevCategory);
+
+        if (
+          prevCategory.CategoryID === newCategoryID
+        ) {
+          let obj = prevCategory;
+
+          let lastIndex = 0;
+          obj.meals && obj.meals.forEach(item => {
+            if (item.id > lastIndex) {
+              lastIndex = item.id
+            }
+          })
+          if (data && data.meal) {
+            let mealData = data.meal
+            mealData.Description = mealData.description
+            mealData.Title = mealData.title
+            mealData.Price = mealData.price
+            mealData.Images = mealData.images
+            delete mealData.MealID
+            delete mealData.description
+            delete mealData.title
+            delete mealData.price
+            delete mealData.images
+            mealData.id = lastIndex + 1
+            obj.meals.push(mealData);
+          }
+
+          // console.log('new obj', data.meal, obj)
+          return obj;
+        }
+
+        return prevCategory;
+      });
+      // console.log('new categories', categories)
+      return {
+        allCategories: categories
+      };
+    });
+  }
+
   let onCategoryAdd = obj => {
-    // console.log(obj);
+    // console.log('onCategoryAdd', obj);
     let categories;
     ctx.setState(prevState => {
       categories = prevState.allCategories;
@@ -107,7 +155,23 @@ let createHandlers = ctx => {
 			}
 			*/
 
-      let finalObj = {
+      let finalObj = obj && obj.menu && obj.menu.MenuID === -1
+        ? {
+          id: obj.category && obj.category.id,
+          CategoryID: obj.category && obj.category.id,
+          Category: {
+            Title: obj.category && obj.category.title,
+            CategoryStandardID: obj.category && obj.category.id,
+          },
+          isCustom: obj.category && obj.category.isCustom,
+          title: obj.category && obj.category.title,
+          description: obj.category && obj.category.description,
+          meals: [],
+          totalCategories: totalCategories,
+          onCategoryRemove: onCategoryRemove,
+          onChange: ctx.props.onChange
+        }
+        : {
         id: lastSelectedCategory,
         CategoryID: lastSelectedCategory,
         Category: {
@@ -122,7 +186,7 @@ let createHandlers = ctx => {
         onChange: ctx.props.onChange
       };
 
-      // console.log(finalObj);
+      console.log('finalObj', finalObj);
 
       categories.push(finalObj);
       // console.log(categories, 'teststt.categories');
@@ -139,6 +203,7 @@ let createHandlers = ctx => {
   };
 
   return {
+    onCloneMeal,
     onCategoryRemove,
     onCategoryAdd,
     onCategoryChange,
@@ -174,7 +239,7 @@ class MenuCategoriesEdit extends Component {
     const stateCategories = this.state.allCategories;
 
     // console.log(totalCategories);
-    // console.log(stateCategories, 'stateCategories');
+    // console.log('stateCategories', stateCategories);
 
     const categoriesAll =
       stateCategories && stateCategories.length > 0
@@ -196,6 +261,7 @@ class MenuCategoriesEdit extends Component {
               <MenuCategoryEdit
                 id={finalCategory.CategoryStandardID}
                 categoriesAll={categoriesAll}
+                menuCategories={categories}
                 totalCategories={totalCategories}
                 isCustom={false}
                 title={finalCategory.Title}
@@ -203,6 +269,8 @@ class MenuCategoriesEdit extends Component {
                 meals={category.meals || []}
                 onChange={this.handlers.onCategoryChange}
                 onCategoryRemove={this.handlers.onCategoryRemove}
+                onAddCategory={this.handlers.onCategoryAdd}
+                onCloneMeal={this.handlers.onCloneMeal}
 								key={index}
               />
             );

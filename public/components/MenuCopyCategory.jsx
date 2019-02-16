@@ -34,23 +34,33 @@ class MenuCopyCategory extends Component {
   }
   async handleConfirmCopy() {
     this.setState({ loading: true });
-    try {
-      await Ajax().post("/menu-clone-category", {
-        body: JSON.stringify({
-          category: this.props.category,
-          menu: {
-            MenuID: this.state.selectedMenu.MenuID || this.state.selectedMenu.id
-          }
-        }),
-        headers: {
-          "content-type": "application/json",
-          "cache-control": "no-cache",
-          "x-access-token": StorageManagerInstance.read("token")
+    if (this.state.selectedMenu.MenuID === -1) {
+      this.props.onClone({
+        category: this.props.category,
+        menu: {
+          MenuID: this.state.selectedMenu.MenuID || this.state.selectedMenu.id
         }
       });
-    } catch (e) {
-      console.error(e);
+    } else {
+      try {
+        await Ajax().post("/menu-clone-category", {
+          body: JSON.stringify({
+            category: this.props.category,
+            menu: {
+              MenuID: this.state.selectedMenu.MenuID || this.state.selectedMenu.id
+            }
+          }),
+          headers: {
+            "content-type": "application/json",
+            "cache-control": "no-cache",
+            "x-access-token": StorageManagerInstance.read("token")
+          }
+        });
+      } catch (e) {
+        console.error(e);
+      }
     }
+
     this.setState({
       loading: false,
       showRemoveConfirm: false,
@@ -121,6 +131,17 @@ class MenuCopyCategory extends Component {
               </button>
             </header>
             <ul>
+              <li
+                onClick={e => this.handleClick({MenuID: -1, Title: 'This menu'})}
+                className={
+                  selectedMenu && selectedMenu.MenuID === -1
+                    ? "menu--copy__selected"
+                    : null
+                }
+                key={-1}
+              >
+                This menu
+              </li>
               {menus.map(x => {
                 return (
                   <li

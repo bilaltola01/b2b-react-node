@@ -25,6 +25,7 @@ class MenuCopyMeal extends Component {
     this.renderToast = this.renderToast.bind(this);
   }
   handleClickMenu(x) {
+    // console.log('handleClickMenu', x);
     const { selectedMenu } = this.state;
     if (x && selectedMenu && selectedMenu.MenuID === x.MenuID) {
       this.setState({ selectedMenu: null });
@@ -45,52 +46,69 @@ class MenuCopyMeal extends Component {
     }
   }
   handleCopyClick() {
+    // console.log('handleCopyClick');
     this.setState({ isOpen: false, showRemoveConfirm: true });
   }
   async handleConfirmCopy() {
     this.setState({ loading: true });
-    try {
-      await Ajax().post("/menu-clone-meal", {
-        body: JSON.stringify({
-          meal: this.props.meal,
-          menu: {
-            MenuID: this.state.selectedMenu.MenuID || this.state.selectedMenu.id
-          },
-          category: {
-            CategoryID: this.state.selectedCategory.Category.CategoryID,
-            id: this.state.selectedCategory.MenuCategoryID || this.state.selectedCategory.id,
-          }
-        }),
-        headers: {
-          "content-type": "application/json",
-          "cache-control": "no-cache",
-          "x-access-token": StorageManagerInstance.read("token")
+    // console.log('handleConfirmCopy', this.state.selectedMenu.MenuID, this.state.selectedCategory);
+    if (this.state.selectedMenu.MenuID === -1) {
+      this.props.onClone({
+        meal: this.props.meal,
+        menu: {
+          MenuID: this.state.selectedMenu.MenuID || this.state.selectedMenu.id
+        },
+        category: {
+          CategoryID: this.state.selectedCategory.CategoryID,
+          id: this.state.selectedCategory.MenuCategoryID || this.state.selectedCategory.id,
         }
       });
-    } catch (e) {
-      console.error("Error");
+    } else {
+      try {
+        await Ajax().post("/menu-clone-meal", {
+          body: JSON.stringify({
+            meal: this.props.meal,
+            menu: {
+              MenuID: this.state.selectedMenu.MenuID || this.state.selectedMenu.id
+            },
+            category: {
+              CategoryID: this.state.selectedCategory.Category.CategoryID,
+              id: this.state.selectedCategory.MenuCategoryID || this.state.selectedCategory.id,
+            }
+          }),
+          headers: {
+            "content-type": "application/json",
+            "cache-control": "no-cache",
+            "x-access-token": StorageManagerInstance.read("token")
+          }
+        });
+      } catch (e) {
+        console.error("Error");
+      }
     }
     this.setState({
       loading: false,
       showRemoveConfirm: false,
-      isSuccess: true
+      isSuccess: true,
+      selectedMenu: null,
+      selectedCategory: null
     });
     this.props.dispatch(actionCreators.getProfile());
   }
   renderConfirm() {
-    const { loading } = this.state;
+    const { loading, selectedMenu, selectedCategory } = this.state;
     return (
-      this.state.selectedCategory && (
+      selectedCategory && (
         <Modal ariaHideApp={false} isOpen={this.state.showRemoveConfirm}>
           <h2>Confirm Copy</h2>
           <p>
             Are you sure you want to copy meal "
             <strong>{this.props.meal.title}</strong>"
             <br />
-            to menu "<strong>{this.state.selectedMenu.Title}</strong>"
+            to menu "<strong>{selectedMenu && selectedMenu.Title}</strong>"
             <br />
             and category "
-            <strong>{this.state.selectedCategory.Category.Title}</strong>" ?
+            <strong>{selectedCategory && selectedCategory.Category.Title}</strong>" ?
           </p>
           <footer className="group-buttons">
             <button
@@ -125,8 +143,9 @@ class MenuCopyMeal extends Component {
     );
   }
   render() {
-    const { menus, meal } = this.props;
+    const { menus, meal, menuCategories } = this.props;
     const { selectedMenu, selectedCategory, isOpen, isSuccess } = this.state;
+    // console.log('menus', menus);
     return (
       <div className="menu--copy">
         <button onClick={() => this.setState({ isOpen: !isOpen })}>
@@ -152,6 +171,20 @@ class MenuCopyMeal extends Component {
               </h3>
             )}
             <ul>
+              {!selectedMenu
+                ? (<li
+                    onClick={e => this.handleClickMenu({MenuID: -1, Title: 'This menu', categories: menuCategories})}
+                    className={
+                      selectedMenu && selectedMenu.MenuID === -1
+                        ? "menu--copy__selected"
+                        : null
+                    }
+                    key={-1}
+                  >
+                    This menu
+                  </li>)
+                : null
+              }
               {!selectedMenu &&
                 menus.map(x => {
                   return (

@@ -4,9 +4,11 @@ import MealEdit from './MealEdit';
 
 let createHandlers = (ctx) => {
 	let lastSelectedMeal = 1;
-	let onAdd = () => {
+	let onAdd = (data) => {
+    console.log('onAdd', data);
+    // return
 		ctx.setState((prevState) => {
-			// console.log(prevState.allMeals);
+			console.log('allMeals', prevState.allMeals);
 			let meals = prevState.allMeals;
 
 			/*
@@ -16,7 +18,20 @@ let createHandlers = (ctx) => {
 			*/
 
 
-			let obj = {
+			let obj = data && data.menu && data.menu.MenuID === -1 && data.meal
+        ? {
+          id: lastSelectedMeal,
+          catId: data.category.CategoryID,
+          Title: data.meal.title || "",
+          Description: data.meal.description || "",
+          Price: data.meal.price || null,
+          Images:[],
+          FoodTypes: data.meal.foodTypes || [],
+          enableDetails: data.meal.enableDetails || false,
+          detail: data.meal.details || {},
+          onRemove: onRemove
+        }
+        : {
 				id: lastSelectedMeal,
 				catId: ctx.props.category.id,
 				title: "",
@@ -31,7 +46,7 @@ let createHandlers = (ctx) => {
 
 			lastSelectedMeal++;
 
-			// console.log(obj);
+			console.log('obj', obj);
 
 			meals.push(obj);
 
@@ -48,13 +63,14 @@ let createHandlers = (ctx) => {
 	};
 
 	let onChange = (obj) => {
-		// console.log('meals' ,obj);
+		console.log('meals onChange' ,obj);
 		ctx.setState((prevState) => {
 			// console.log(prevState.allMeals);
 
 			//ctx.props.category.id === obj.catId
 
 			let meals = prevState.allMeals.map((meal) => {
+        console.log('meal map', meal)
 				if ((ctx.props.category.id === obj.catId && (meal.id === obj.id || meal.MealID === obj.id))
 					|| ((meal.id === 1 || meal.MealID === 1) && prevState.allMeals.length === 1)) {
 					let tmp = meal;
@@ -65,6 +81,7 @@ let createHandlers = (ctx) => {
 					tmp.images = obj.images;
 					tmp.Description = obj.description || obj.Description;
 					tmp.Price = parseFloat(obj.price) || null;
+					console.log('tmp map', tmp)
 					return tmp;
 				}
 				/*
@@ -82,7 +99,7 @@ let createHandlers = (ctx) => {
 
 			// console.log(prevState.allMeals);
 
-			// console.log(meals);
+			console.log('updated meals', meals);
 
 			// console.log(ctx.props.category.title);
 
@@ -144,22 +161,24 @@ class MealsEdit extends Component {
 	}
 
 	render() {
-		const { meals, onChange, category } = this.props;
-
-
+		const { meals, onChange, category, menuCategories } = this.props;
+    // console.log('meals', meals, this.state.allMeals)
 		const mealComponents = (this.state.allMeals && this.state.allMeals.length > 0) ? this.state.allMeals.map((meal, index) => {
-			return <MealEdit 
+			return <MealEdit
 				id={meal.id || meal.MealID} 
 				catId={category.id} 
 				title={meal.title || meal.Title} 
-				description={meal.description || meal.Description} 
+				description={meal.description || meal.Description}
 				price={meal.price || meal.Price}
 				images={meal.images || meal.Images} 
 				foodTypes={meal.foodTypes || meal.FoodTypes} 
 				enableDetails={meal.enableDetails} 
 				detail={meal.detail} 
 				onChange={this.handlers.onChange} 
-				onRemove={this.handlers.onRemove} 
+				onRemove={this.handlers.onRemove}
+				// onAddMeal={this.handlers.onAdd}
+				onCloneMeal={this.props.onCloneMeal}
+				menuCategories={menuCategories}
 				key={index} />;
 		}) : null;
 
