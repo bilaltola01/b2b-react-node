@@ -9,6 +9,7 @@ import Translation from './Translation';
 import BranchLanguagesEdit from './BranchLanguagesEdit';
 import MenuCategoriesEdit from './MenuCategoriesEdit';
 import MenuBranchEdit from './MenuBranchEdit';
+import MenuBranchesEdit from "./MenuBranchesEdit";
 import { StorageManagerInstance } from '../shared/storage.utils';
 
 let createHandlers = (ctx) => {
@@ -98,10 +99,11 @@ class SectionArticleEditMenu extends Component {
 			categories,
 			languages,
 			translations,
+      branchesIds,
 			currency
 		} = this.props;
 
-		// console.log(this.props);
+		// console.log('branchesIds', this.props.branchesIds);
 
 		let languagesList = (translations && translations.length > 0) ? translations.map((translation, index) => {
 			return (index < translations.length - 1)
@@ -143,7 +145,14 @@ class SectionArticleEditMenu extends Component {
 
 		const menuLanguages = <BranchLanguagesEdit languages={(languages && languages.length > 0) ? languages.map(language => language.Language) : []} onChange={this.handlers.onChanges} />
 		const menuCategories = <MenuCategoriesEdit categories={(categories && categories.length > 0) ? categories : []} onChange={this.handlers.onChanges} />
-		const menuBranches = <MenuBranchEdit/>; // TODO add props or improve component
+    const branches = branchesIds;
+		const menuBranches = (
+      <MenuBranchesEdit
+        branches={branches}
+        onChange={this.handlers.onChanges}
+      />
+    );
+
 		return (
 			<div>
 	            <div className="content--container global-padding-wrapper">
@@ -172,13 +181,13 @@ class SectionArticleEditMenu extends Component {
 		                {menuLanguages}
 		            	</div>
 
+									<div className="menu--languages">
+										{menuBranches}
+									</div>
+
 									<div className="menu--categories">
 											{menuCategories}
 									</div>
-
-									{/*<div className="menu--languages">*/}
-											{/*{menuBranches}*/}
-									{/*</div>*/}
 	            </div>
 			</div>
 		)

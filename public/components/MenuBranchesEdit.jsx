@@ -101,14 +101,30 @@ class MenuBranchesEdit extends Component {
 	}
 
 	componentDidMount() {
-        
-    }
+		const { branches, profile } = this.props;
+		let allBranches = []
+
+    if (branches && branches.length > 0) {
+      branches.forEach(branchID => {
+      	const tempBranch = (profile && profile.branches) ? profile.branches.find(branch => {
+          return branch.BranchID === branchID;
+        }) : null;
+
+        if (tempBranch) {
+          allBranches.push(tempBranch);
+				}
+			})
+		}
+
+			this.setState({allBranches})
+	}
 
 	render() {
 		const { branches, onChange } = this.props;
 
 		const availableBranches = (this.props.profile && this.props.profile.branches) ? this.props.profile.branches : [];
 
+		// console.log('allBranches', this.state.allBranches);
 		// console.log(branches);
 		// console.log(availableBranches);
 

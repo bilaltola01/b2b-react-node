@@ -68,9 +68,18 @@ class MenuPage extends Component {
   }
 
   getFilteredMenusById(menus, id) {
-    return (menus && menus.length > 0) ? menus.filter(menu => {
+    const items = (menus && menus.length > 0) ? menus.filter(menu => {
       return parseInt(menu.MenuID, 10) === parseInt(id, 10);
-    }) : null;
+    }) : [];
+    const branches = items.map(menu => menu.BranchID);
+    const res = items && items[0] || null;
+
+    if (res) {
+      res.branchesIds = branches;
+    }
+
+    return  res ? [res] : null;
+    // return  items;
   }
 
   getCurrentMenu(menus) {
@@ -125,7 +134,7 @@ class MenuPage extends Component {
     const currentMenu = this.getCurrentMenu(filteredMenus);
     const menuTitle = (currentMenu && currentMenu.Title) ? currentMenu.Title : ("Menu " + id);
 
-    // console.log(menus)
+    // console.log('menus', menus)
     // console.log("currentBranchMenuId " + currentBranchMenuId)
     // console.log(currentBranchMenu)
     // console.log(currentBranch)

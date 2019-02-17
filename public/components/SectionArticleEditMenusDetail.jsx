@@ -5,9 +5,11 @@ import SectionArticleEditMenu from './SectionArticleEditMenu';
 class SectionArticleEditMenusDetail extends Component {
 	render() {
 		const { title, dateUpdate, component } = this.props;
-		// console.log(component)
+		// console.log('component', component)
 		const currencies = (component.props.currencies && component.props.currencies.length > 0) ? component.props.currencies : [];
 		const languages = (component.props.languages && component.props.languages.length > 0) ? component.props.languages : [];
+		const branchesIds = (component.props.menus && component.props.menus[0] && component.props.menus[0].branchesIds
+			&& component.props.menus[0].branchesIds.length > 0) ? component.props.menus[0].branchesIds : [];
 
 
 		const menuComponents = (component.props.menus && component.props.menus.length > 0) ? component.props.menus.map((menu, index) => {
@@ -19,6 +21,7 @@ class SectionArticleEditMenusDetail extends Component {
 				categories={menu.categories}
 				currencies={currencies}
 				languages={languages}
+				branchesIds={branchesIds}
 				translations={menu.translations}
 				key={index} />;
 		}) : null;

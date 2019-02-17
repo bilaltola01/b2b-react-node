@@ -49,4 +49,16 @@ MenuBranchController.remove = (req, res) => {
     });
 };
 
+MenuBranchController.removeByMenuId = (req, res) => {
+    res.setHeader('Content-Type', 'application/json');
+
+    MenuBranch.removeByMenuId(req.body.id).then(output => {
+        // console.log(output);
+        res.status(201).json({ success: true, message: 'Menu Branches successfully remomved', obj: output });
+    }).catch(err => {
+        console.error(err);
+        res.status(204).send({ success: false, message: 'Menu Branches deletiong failed', obj: err });
+    });
+};
+
 module.exports = MenuBranchController;

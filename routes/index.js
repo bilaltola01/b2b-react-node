@@ -140,6 +140,7 @@ let Routes = class {
         router.get('/menu-branch', menuBranchController.get);
         router.post('/menu-branch', menuBranchController.post);
         router.delete('/menu-branch', menuBranchController.remove);
+        router.delete('/menu-branch-id', menuBranchController.removeByMenuId);
 
         router.get('/menu-category', menuCategoryController.get);
         router.post('/menu-category', menuCategoryController.post);

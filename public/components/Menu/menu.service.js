@@ -15,6 +15,7 @@ export async function updateMenu(opts) {
         return MenuCategory.removeSelectedMenuCategory(opts)
             .then(MenuCategory.updateMenuCategories(menuId, opts.categories))
             .then(MenuLanguage.updateMenuLanguages(menuId, opts.languages))
+            .then(MenuBranch.updateMenuBranches(menuId, opts.branches))
             .then(Ajax().put('/menu', {
                 body: JSON.stringify(convertOpts(opts, true)),
                 headers: {

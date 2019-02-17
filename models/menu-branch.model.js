@@ -39,6 +39,18 @@ MenuBranch.remove = (obj) => {
 };
 
 /**
+ * @description Remove Menu Branch
+ * @param {obj.MenuId} number Linked to Menu.MenuID
+ * @param {obj.BranchID} number Linked to Menu.MenuID
+ * @return {QueryBuilder|Promise<any>}
+ */
+MenuBranch.removeByMenuId = (id) => {
+  return db('MenuBranch').where({
+    MenuID: id,
+  }).del();
+};
+
+/**
  * @description Get All
  * @return {QueryBuilder|Promise<any>}
  */

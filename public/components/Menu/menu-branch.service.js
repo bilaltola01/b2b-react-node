@@ -30,6 +30,37 @@ export function postMenuBranch (menuBranch) {
     });
 }
 
+export function updateMenuBranches (menuID, branches) {
+  // console.log('updateMenuBranches', menuID, branches)
+    return Ajax().delete('/menu-branch-id', {
+      body: JSON.stringify({id: menuID}),
+      headers: {
+        "content-type": "application/json",
+        "cache-control": "no-cache",
+        "x-access-token": StorageManagerInstance.read('token')
+      }
+    }).then(res => {
+      if (!res || !res.success) {
+        return Promise.reject(res);
+      }
+
+      // console.log('updateMenuBranches res', res)
+      if (branches) {
+        branches.forEach(branch => {
+          const data = {
+            obj: {
+                MenuID: menuID,
+                BranchID: branch.BranchID,
+            },
+          }
+          postMenuBranch(data);
+        })
+      }
+
+      return Promise.resolve(true);
+    });
+}
+
 export function removeMenuBranch (menuBranch) {
     return Ajax().delete('/menu-branch', {
         body: JSON.stringify(menuBranch),
