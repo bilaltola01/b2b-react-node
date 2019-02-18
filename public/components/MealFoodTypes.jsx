@@ -134,9 +134,11 @@ class MealFoodTypes extends Component {
       items: groups
     };
 
+    // console.log('allFoodTypes', this.state.allFoodTypes)
     const foodTypesComponent =
       this.state.allFoodTypes && this.state.allFoodTypes.length > 0
         ? this.state.allFoodTypes.map((foodType, index) => {
+          if (foodType.Name !== '') {
             return index < this.state.allFoodTypes.length - 1 ? (
               <span key={foodType.Name}>
                 <MealFoodTypeEdit
@@ -157,6 +159,7 @@ class MealFoodTypes extends Component {
                 />
               </span>
             );
+          }
           })
         : null;
 
