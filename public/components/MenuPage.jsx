@@ -52,6 +52,7 @@ class MenuPage extends Component {
       branches: []
     };
     this.handlers = createHandlers(this);
+    this.getFilteredMenusById = this.getFilteredMenusById.bind(this);
   }
 
   getCurrentBranch(profile, currentBranchMenuId) {
@@ -68,6 +69,7 @@ class MenuPage extends Component {
   }
 
   getFilteredMenusById(menus, id) {
+
     const items = (menus && menus.length > 0) ? menus.filter(menu => {
       return parseInt(menu.MenuID, 10) === parseInt(id, 10);
     }) : [];
@@ -76,8 +78,27 @@ class MenuPage extends Component {
 
     if (res) {
       res.branchesIds = branches;
-    }
 
+      if (branches && this.props.profile && this.props.profile.branches) {
+        res.branches = branches.map(branchID => {
+          let branch = this.props.profile.branches.find(branch => branch.BranchID === branchID)
+          return branch ? {
+            Address: branch.Address,
+            BranchID: branch.BranchID,
+            City: branch.City,
+            CompanyID: branch.CompanyID,
+            Country: branch.Country,
+            Date: branch.Date,
+            Email: branch.Email,
+            Name: branch.Name,
+            Tel: branch.Tel
+          } : {}
+        })
+      } else {
+        res.branches = [];
+      }
+    }
+    console.log('menu branches', branches, this.props.profile.branches, res)
     return  res ? [res] : null;
     // return  items;
   }
