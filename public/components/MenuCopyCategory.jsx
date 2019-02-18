@@ -83,17 +83,17 @@ class MenuCopyCategory extends Component {
           <footer className="group-buttons">
             <button
               disabled={loading}
-              className="button--action"
-              onClick={() => this.setState({ showRemoveConfirm: false })}
+              onClick={this.handleConfirmCopy}
+              className="button--action button--action-filled"
             >
-              Cancel
+              {loading ? "Copying..." : "Yes"}
             </button>
             <button
               disabled={loading}
-              onClick={this.handleConfirmCopy}
-              className="button--action"
+              className="button--action button--action-outline"
+              onClick={() => this.setState({ showRemoveConfirm: false })}
             >
-              {loading ? "Copying..." : "Yes"}
+              Cancel
             </button>
           </footer>
         </Modal>

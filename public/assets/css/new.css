@@ -1370,7 +1370,8 @@ a.text-link:hover {
     letter-spacing: 0.046em;
 }
 
-.content--container--header.header--orange .content--container--title {
+.content--container--header.header--orange .content--container--title,
+.content--container--header.header--alert .content--container--title {
     color: #fff;
 }
 
@@ -2361,6 +2362,10 @@ ol.calendar--week {
 }
 
 .content--container--header.header--orange {
+    background-color: #FFCA0C;
+}
+
+.content--container--header.header--alert {
     background-color: #FF004C;
 }
 
@@ -3904,15 +3909,37 @@ ul.analytics--analytics_most_viewed li header h5 {
     border-radius: 3px;
 }
 
-.button--action.button--action-filled {
+.alert.button--action.button--action-filled {
     color: #fff;
     background-color: #FF004C;
     border: 1px solid #FF004C;
 }
-.button--action.button--action-outline {
+.alert.button--action.button--action-outline {
     color: #FF004C;
     background-color: #fff;
     border: 1px solid #FF004C;
+}
+
+.notification.button--action.button--action-filled {
+    color: #fff;
+    background-color: #727B9C;
+    border: 1px solid #727B9C;
+}
+.notification.button--action.button--action-outline {
+    color: #727B9C;
+    background-color: #fff;
+    border: 1px solid #727B9C;
+}
+
+.button--action.button--action-filled {
+    color: #fff;
+    background-color: #FFCA0C;
+    border: 1px solid #FFCA0C;
+}
+.button--action.button--action-outline {
+    color: #FFCA0C;
+    background-color: #fff;
+    border: 1px solid #FFCA0C;
 }
 
 a.button--action-filled {
@@ -5855,7 +5882,7 @@ MENU DETAIL
 .ReactModal__Content h2{
     padding: 16px 20px;
     border-bottom: 1px solid #E9F1FA;
-    background-color: #FFA600;
+    background-color: #FFCA0C;
     margin: 0;
     font-size: 14px;
     font-weight: 500;

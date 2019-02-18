@@ -83,7 +83,7 @@ class Popup extends Component {
         const buttonsComponent = (actions && actions.length > 0) ? (actions.map((action, index) => {
             return (
                 <button
-                  className={"button--action button--action-"
+                  className={"alert button--action button--action-"
                   + (action.type === 'cancel' ? 'outline' : 'filled')
                   + " button--action--" + action.type}
                   key={index}
@@ -99,7 +99,7 @@ class Popup extends Component {
                 <div className="popup--overlay"></div>
                 <div className="popup--container">
                     <article className="content--module module--alert">
-                        <header className="content--container--header header--orange">
+                        <header className="content--container--header header--alert">
                             <h2 className="content--container--title">{typeText}</h2>
                         </header>
                         <div className="alert--container content--container">

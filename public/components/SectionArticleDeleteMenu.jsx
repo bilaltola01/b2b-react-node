@@ -51,19 +51,19 @@ let createHandlers = (ctx) => {
   		text: 'Are you sure you want to delete this menu?',
   		actions: [
   			{
-  				type: 'submit',
-  				text: 'Delete',
-  				fn: (comp, cb) => {
-  					deleteMenu(component, cb);
-  				}
-  			},
-  			{
   				type: 'cancel',
   				text: 'Cancel',
   				fn: (comp, cb) => {
   					goToMenus();
   				}
-  			}
+  			},
+        {
+          type: 'submit',
+          text: 'Delete',
+          fn: (comp, cb) => {
+            deleteMenu(component, cb);
+          }
+        }
   		]
   	};
   };
@@ -98,19 +98,19 @@ class SectionArticleDeleteMenu extends Component {
 			this.popupObj.isOpened = !this.popupObj.isOpened;
 			this.popupObj.actions = [
 	  			{
-	  				type: 'submit',
-	  				text: 'Delete',
-	  				fn: (comp, cb) => {
-	  					this.handlers.deleteMenu(menuComponent, cb);
-	  				}
-	  			},
-	  			{
 	  				type: 'cancel',
 	  				text: 'Cancel',
 	  				fn: (comp, cb) => {
 	  					this.handlers.goToMenus();
 	  				}
-	  			}
+	  			},
+					{
+						type: 'submit',
+						text: 'Delete',
+						fn: (comp, cb) => {
+							this.handlers.deleteMenu(menuComponent, cb);
+						}
+					},
 	  		];
 	  		this.handlers.dispatchPopup(this.popupObj);
     	}
