@@ -16,7 +16,7 @@ let createHandlers = (ctx) => {
 
 			const selectedBranches = (ctx.props.menu && ctx.props.menu.branches && ctx.props.menu.branches.length > 0) ? ctx.props.menu.branches : [];
 			const branchLanguages = (selectedBranches && selectedBranches.length > 0) ? selectedBranches.reduce((acc, current) => {
-				return acc.concat(current.languages.map(lang => lang.Language));
+				return current.languages && current.languages.length > 0 ? acc.concat(current.languages.map(lang => lang.Language)) : acc;
 			}, []) : ctx.props.availableLanguages || [];
 
 			let newLang = branchLanguages.find(lang => {
@@ -117,7 +117,7 @@ class BranchLanguagesEdit extends Component {
 
 		const selectedBranches = (this.props.menu && this.props.menu.branches && this.props.menu.branches.length > 0) ? this.props.menu.branches : [];
 		const branchLanguages = (selectedBranches && selectedBranches.length > 0) ? selectedBranches.reduce((acc, current) => {
-			return acc.concat(current.languages.map(lang => lang.Language));
+			return current.languages && current.languages.length > 0 ? acc.concat(current.languages.map(lang => lang.Language)) : acc;
 		}, []) : availableLanguages || languages || [];
 
 		let uniqueBranches = [];

@@ -58,7 +58,7 @@ export function updateMenuBranches (menuID, branches) {
       }
 
       return Promise.resolve(true);
-    }) : null;
+    }) : Promise.resolve();
 }
 
 export function removeMenuBranch (menuBranch) {

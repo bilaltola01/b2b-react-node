@@ -81,8 +81,9 @@ class MenuPage extends Component {
 
       if (branches && this.props.profile && this.props.profile.branches) {
         res.branches = branches.map(branchID => {
-          let branch = this.props.profile.branches.find(branch => branch.BranchID === branchID)
-          return branch ? {
+          let branch = this.props.profile.branches.find(branch => branch.BranchID === branchID) || {}
+          return branch
+            ? {
             Address: branch.Address,
             BranchID: branch.BranchID,
             City: branch.City,
@@ -91,7 +92,12 @@ class MenuPage extends Component {
             Date: branch.Date,
             Email: branch.Email,
             Name: branch.Name,
-            Tel: branch.Tel
+            Tel: branch.Tel,
+            Tel: branch.Tel,
+            languages: branch.languages,
+            cuisines: branch.cuisines,
+            currencies: branch.currencies,
+            images: branch.images,
           } : {}
         })
       } else {
