@@ -32,7 +32,7 @@ export function postMenuBranch (menuBranch) {
 
 export function updateMenuBranches (menuID, branches) {
   // console.log('updateMenuBranches', menuID, branches)
-    return Ajax().delete('/menu-branch-id', {
+    return branches ? Ajax().delete('/menu-branch-id', {
       body: JSON.stringify({id: menuID}),
       headers: {
         "content-type": "application/json",
@@ -58,7 +58,7 @@ export function updateMenuBranches (menuID, branches) {
       }
 
       return Promise.resolve(true);
-    });
+    }) : null;
 }
 
 export function removeMenuBranch (menuBranch) {
