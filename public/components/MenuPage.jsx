@@ -104,7 +104,7 @@ class MenuPage extends Component {
         res.branches = [];
       }
     }
-    console.log('menu branches', branches, this.props.profile.branches, res)
+    // console.log('menu branches', branches, this.props.profile.branches, res)
     return  res ? [res] : null;
     // return  items;
   }

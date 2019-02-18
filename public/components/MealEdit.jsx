@@ -157,6 +157,7 @@ class MealEdit extends Component {
           {this.props.id && (
             <MenuCopyMeal
               onClone={onCloneMeal}
+              catId={catId}
               menuCategories={menuCategories}
               meal={{
                 id: this.props.id,

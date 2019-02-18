@@ -34,6 +34,7 @@ class MenuCopyMeal extends Component {
     }
   }
   handleClickCategory(x) {
+    // console.log('handleClickCategory', x);
     const { selectedCategory } = this.state;
     if (
       x &&
@@ -103,12 +104,12 @@ class MenuCopyMeal extends Component {
           <h2>Confirm Copy</h2>
           <p>
             Are you sure you want to copy meal "
-            <strong>{this.props.meal.title}</strong>"
+            <strong>{this.props.meal && this.props.meal.title}</strong>"
             <br />
             to menu "<strong>{selectedMenu && selectedMenu.Title}</strong>"
             <br />
             and category "
-            <strong>{selectedCategory && selectedCategory.Category.Title}</strong>" ?
+            <strong>{selectedCategory && selectedCategory.Category && selectedCategory.Category.Title}</strong>" ?
           </p>
           <footer className="group-buttons">
             <button
@@ -143,9 +144,10 @@ class MenuCopyMeal extends Component {
     );
   }
   render() {
-    const { menus, meal, menuCategories } = this.props;
+    const { menus, meal, menuCategories, catId } = this.props;
     const { selectedMenu, selectedCategory, isOpen, isSuccess } = this.state;
     // console.log('menus', menus);
+    // console.log('selectedCategory', selectedCategory);
     return (
       <div className="menu--copy">
         <button onClick={() => this.setState({ isOpen: !isOpen })}>
@@ -201,6 +203,26 @@ class MenuCopyMeal extends Component {
                     </li>
                   );
                 })}
+              {selectedMenu && selectedMenu.MenuID === -1
+                ? (
+                    <li
+                      onClick={e => this.handleClickCategory({MenuID: -1, CategoryID: catId,
+                        Category: {
+                          Title: 'This category',
+                          CategoryStandardID: catId
+                        }})}
+                      className={
+                        selectedCategory &&
+                        selectedCategory.CategoryID === catId
+                          ? "menu--copy__selected"
+                          : null
+                      }
+                      key={catId}
+                    >
+                      This category
+                    </li>
+                  )
+                : null}
               {selectedMenu &&
                 selectedMenu.categories.map(x => {
                   return (

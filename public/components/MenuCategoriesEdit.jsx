@@ -186,7 +186,7 @@ let createHandlers = ctx => {
         onChange: ctx.props.onChange
       };
 
-      console.log('finalObj', finalObj);
+      // console.log('finalObj', finalObj);
 
       categories.push(finalObj);
       // console.log(categories, 'teststt.categories');
