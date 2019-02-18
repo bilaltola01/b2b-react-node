@@ -34,7 +34,7 @@ class MenuCopyCategory extends Component {
   }
   async handleConfirmCopy() {
     this.setState({ loading: true });
-    if (this.state.selectedMenu.MenuID === -1) {
+    if (this.state.selectedMenu.MenuID === -1) { // TODO Clone to the current menu. Need to be refactored
       this.props.onClone({
         category: this.props.category,
         menu: {
@@ -131,17 +131,6 @@ class MenuCopyCategory extends Component {
               </button>
             </header>
             <ul>
-              <li
-                onClick={e => this.handleClick({MenuID: -1, Title: 'This menu'})}
-                className={
-                  selectedMenu && selectedMenu.MenuID === -1
-                    ? "menu--copy__selected"
-                    : null
-                }
-                key={-1}
-              >
-                This menu
-              </li>
               {menus.map(x => {
                 return (
                   <li
