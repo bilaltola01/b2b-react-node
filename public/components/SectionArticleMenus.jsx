@@ -61,6 +61,7 @@ class SectionArticleMenus extends Component {
 				duplicates={finalDuplicates}
 				languages={menu.languages}
 				translations={menu.translations}
+				translationStatus="translate" // TODO take value from DB, possible values translated, translate, translating
 				key={index} />;
 		}) : null;
 

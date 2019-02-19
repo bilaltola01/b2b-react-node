@@ -6053,3 +6053,36 @@ button.button--action:disabled{
     height: 16px;
     width: 16px;
 }
+
+.status--translate, .status--translated, .status--translating{
+    font-family: "Lato", "Helvetica Neue Light", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.status--translate{
+    color: #0FACF3;
+}
+.status--translated{
+    color: #63BB1E;
+}
+.status--translating{
+    color: #F7C40C;
+}
+.status--icon-translate, .status--icon-translated, .status--icon-translating{
+    width: 26px;
+    height: 26px;
+    display: block;
+    margin-left: 10px;
+}
+.status--icon-translate{
+    background-image: url('../images/icon-translate.png');
+}
+.status--icon-translated{
+    background-image: url('../images/icon-translated.png');
+}
+.status--icon-translating{
+    background-image: url('../images/icon-translating.png');
+}

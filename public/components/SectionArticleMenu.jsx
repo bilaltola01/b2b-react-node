@@ -35,6 +35,15 @@ class SectionArticleMenu extends Component {
 			expanded: false
 		};
 		this.handlers = createHandlers(this);
+		this.handleTranslate = this.handleTranslate.bind(this)
+	}
+
+	handleTranslate(e) {
+			console.log('handleTranslate');
+			e.preventDefault();
+			e.stopPropagation();
+
+			// TODO place here translations functionality
 	}
 
 	render() {
@@ -50,7 +59,8 @@ class SectionArticleMenu extends Component {
 			duplicates,
 			languages,
 			translations,
-			currencies
+			currencies,
+			translationStatus
 		} = this.props;
 
 		// console.log(this.props);
@@ -206,6 +216,15 @@ class SectionArticleMenu extends Component {
 						</div>
 						<div className="header--actions">
 							<ul>
+								<li>
+									{translationStatus === 'translating'
+										? <div className="status--translating">Translating <span className="status--icon-translating"></span></div>
+										: ( translationStatus === 'translated'
+											? <div className="status--translated">Translated <span className="status--icon-translated"></span></div>
+											: <div className="status--translate">Translate <span onClick={this.handleTranslate} className="status--icon-translate"></span></div>
+										)
+									}
+								</li>
 								<li><Link to={"/menu/edit/" + id} className="action--edit">Edit</Link></li>
 								<li><Link to={"/menu/delete/" + id} className="action--delete">Delete</Link></li>
 							</ul>
