@@ -23,6 +23,7 @@ class SectionArticleBranches extends Component {
 				images={branch.images}
 				languages={branch.languages}
 				cuisines={branch.cuisines}
+				isEnabled={branch.IsEnabled}
 				name={branch.Name}
 				key={index} />;
 		}) : null;

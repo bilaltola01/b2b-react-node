@@ -69,6 +69,7 @@ class SectionArticleEditBranch extends Component {
 			images,
 			languages,
 			availableLanguages,
+			isEnabled,
 			name,
 			onChange
 		} = this.props;
@@ -135,6 +136,15 @@ class SectionArticleEditBranch extends Component {
 							}
 						</div>
 
+						<div className="branch--hq">
+							<p className="menu--title">Branch Enabled</p>
+							<div className="content--edit">
+								<div className="edit--block">
+									<label className="label--edit">Is this Branch enabled?</label>
+									<input className="input--edit" type="checkbox" name="branch-IsEnabled" defaultChecked={!!isEnabled} onChange={(e) => this.handlers.onChanges('main', e)} />
+								</div>
+							</div>
+						</div>
 						<div className="branch--currencies">
 							<p className="menu--title">Currency</p>
 							{currencyComponents}
@@ -147,22 +157,22 @@ class SectionArticleEditBranch extends Component {
 							{branchLanguages}
 						</div>
 						<div className="branch--name">
-				            <p className="menu--title">Name</p>
-				            <div className="content--edit branch--address--edit">
-				            	<div className="edit--block">
-                            		<label className="label--edit">Enter new Branch Name:</label>
-                        			<input className="input--edit" type="text" name="branch-Name" defaultValue={name} onChange={(e) => this.handlers.onChanges('main', e)} />
-                        		</div>
-                        	</div>
-                       	</div>
-                       	<div className="branch--hq">
+							<p className="menu--title">Name</p>
+							<div className="content--edit branch--address--edit">
+								<div className="edit--block">
+										<label className="label--edit">Enter new Branch Name:</label>
+									<input className="input--edit" type="text" name="branch-Name" defaultValue={name} onChange={(e) => this.handlers.onChanges('main', e)} />
+								</div>
+							</div>
+						</div>
+						<div className="branch--hq">
 							<p className="menu--title">Branch Type</p>
 							<div className="content--edit">
 								<div className="edit--block">
-                            		<label className="label--edit">Is it your Main Branch?</label>
-                        			<input className="input--edit" type="checkbox" name="branch-HasHeadquarters" defaultChecked={!!hasHeadquarters} onChange={(e) => this.handlers.onChanges('main', e)} />
-                        		</div>
-                        	</div>
+									<label className="label--edit">Is it your Main Branch?</label>
+									<input className="input--edit" type="checkbox" name="branch-HasHeadquarters" defaultChecked={!!hasHeadquarters} onChange={(e) => this.handlers.onChanges('main', e)} />
+								</div>
+							</div>
 						</div>
 						<div className="branch--address">
 				            <p className="menu--title">Address</p>

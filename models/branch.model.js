@@ -85,7 +85,8 @@ Branch.createWithDetails = (obj) => {
     Email: branch.Email,
     Tel: branch.Tel,
     Name: branch.Name,
-    HasHeadquarters: branch.HasHeadquarters
+    HasHeadquarters: branch.HasHeadquarters,
+    IsEnabled: branch.IsEnabled
   }).then(res => {
     // console.log(res);
     let id = res[0];
@@ -182,6 +183,7 @@ Branch.updateWithDetails = (id, obj) => {
       Country: branch.Country,
       Email: branch.Email,
       HasHeadquarters: branch.HasHeadquarters,
+      IsEnabled: branch.IsEnabled,
       Name: branch.Name,
       Tel: branch.Tel
     }).then(res => {

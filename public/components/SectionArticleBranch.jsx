@@ -54,6 +54,7 @@ class SectionArticleBranch extends Component {
 			hasHeadquarters,
 			images,
 			languages,
+			isEnabled,
 			name
 		} = this.props;
 
@@ -148,6 +149,13 @@ class SectionArticleBranch extends Component {
 								</div>
 								*/
 							}
+							<div className="branch--hq">
+								<p className="menu--title">Enabled</p>
+								{isEnabled
+									? <span className="label--value">Yes</span>
+									: <span className="label--value">No</span>
+								}
+							</div>
 							<div className="branch--hq">
 								<p className="menu--title">Branch Type</p>
 								{isHqComponent}

@@ -101,11 +101,12 @@ class SectionArticleEditBranches extends Component {
 				currencies={branch.currencies}
 				availableCurrencies={this.props.availableCurrencies}
 				email={branch.Email}
-				hasHeadquarters={parseInt(branch.HasHeadquarters, 10)}
+				hasHeadquarters={branch.HasHeadquarters}
 				images={branch.images}
 				languages={branch.languages}
 				availableLanguages={this.props.availableLanguages}
 				cuisines={branch.cuisines}
+				isEnabled={branch.IsEnabled}
 				availableCuisines={this.props.availableCuisines}
 				name={branch.Name}
 				key={branch.BranchID}
