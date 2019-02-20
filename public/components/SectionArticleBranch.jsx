@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router-dom';
 import { Redirect } from 'react-router';
-
+import { connect } from 'react-redux';
+import Switch from "react-switch";
 const classNames = require('classnames');
 
 import Contact from './Contact';
@@ -9,6 +10,7 @@ import BranchCuisine from './BranchCuisine';
 import BranchLanguage from './BranchLanguage';
 import BranchImage from './BranchImage';
 import BranchCurrency from './BranchCurrency';
+import * as actionCreators from '../action-creators';
 
 let createHandlers = (ctx) => {
   let headerOnClick = () => {
@@ -35,9 +37,36 @@ class SectionArticleBranch extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			expanded: false
+			expanded: false,
+      checked: false
 		};
 		this.handlers = createHandlers(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleClickToggle = this.handleClickToggle.bind(this);
+	}
+
+  handleChange(checked, e) {
+    this.setState({ checked });
+    const payload = {
+    	BranchID: this.props.id,
+			IsEnabled: checked
+    };
+
+    this.props.dispatch(actionCreators.saveBranch(payload, (res) => {
+      if (res.success) {
+      	this.setState({isEnabled: res.data && res.data.IsEnabled})
+			}
+    }));
+    // this.props.dispatch(actionCreators.toggleBranch(this.props.id, checked));
+  }
+
+  handleClickToggle(e) {
+    e.preventDefault();
+    e.stopPropagation();
+	}
+
+	componentWillMount() {
+    this.setState({isEnabled: this.props.isEnabled})
 	}
 
 	render() {
@@ -132,6 +161,27 @@ class SectionArticleBranch extends Component {
 						</div>
 						<div className="header--actions">
 							<ul>
+								<li>
+									<div className="branch--enabled">{isEnabled ? 'Enabled' : 'Disabled'}
+										<span onClick={this.handleClickToggle}>
+											<Switch
+												checked={this.state.isEnabled}
+												onChange={this.handleChange}
+												onColor="#c1c7d6"
+												onHandleColor="#727b9c"
+												handleDiameter={25}
+												uncheckedIcon={false}
+												checkedIcon={false}
+												boxShadow="0px 1px 3px rgba(0, 0, 0, 0.6)"
+												// activeBoxShadow="0px 0px 1px 10px rgba(0, 0, 0, 0.2)"
+												height={18}
+												width={40}
+												className="react-switch"
+												id="material-switch"
+											/>
+										</span>
+									</div>
+								</li>
 								<li><Link to={"/branch/edit/" + id} className="action--edit">Edit</Link></li>
 								<li><Link to={"/branch/delete/" + id} className="action--delete">Delete</Link></li>
 							</ul>
@@ -203,4 +253,4 @@ SectionArticleBranch.propTypes = {
     component: PropTypes.object
 };
 
-export default SectionArticleBranch;
+export default connect()(SectionArticleBranch);

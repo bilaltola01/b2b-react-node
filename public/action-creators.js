@@ -287,10 +287,16 @@ export function saveBranch (branch, cb) {
           // console.log('request succeeded with JSON response', res);
 
           if (res && typeof cb === 'function') {
-            cb(res);
+            cb({success: true, data: res});
           }
 
           resolve(res);
+        }).catch((err) => {
+          // console.log('Update Branch error', err);
+          if (res && typeof cb === 'function') {
+            cb({success: false, error: err});
+          }
+          reject(err);
         });
       });
     }
@@ -313,6 +319,28 @@ export function saveBranch (branch, cb) {
       });
     }
     */
+  }
+};
+
+export function toggleBranch (branchID, value, cb) {
+  // console.log(branch);
+  return {
+    types: ['TOGGLE_BRANCH_REQUEST', 'TOGGLE_BRANCH_SUCCESS', 'TOGGLE_BRANCH_FAILURE'],
+    promise: () => {
+      return new Promise((resolve, reject) => {
+        // console.log('SHOULD TOGGLE BRANCH HERE');
+
+        BranchService.toggleBranch(branch).then((res) => {
+          // console.log('request succeeded with JSON response', res);
+
+          if (res && typeof cb === 'function') {
+            cb(res);
+          }
+
+          resolve(res);
+        });
+      });
+    }
   }
 };
 

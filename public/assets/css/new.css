@@ -6054,7 +6054,7 @@ button.button--action:disabled{
     width: 16px;
 }
 
-.status--translate, .status--translated, .status--translating{
+.status--translate, .status--translated, .status--translating, .branch--enabled{
     font-family: "Lato", "Helvetica Neue Light", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
     font-size: 14px;
     font-weight: 500;
@@ -6085,4 +6085,11 @@ button.button--action:disabled{
 }
 .status--icon-translating{
     background-image: url('../images/icon-translating.png');
+}
+.branch--enabled{
+    color: #727b9c;
+}
+.branch--enabled .react-switch{
+    margin-right: 8px;
+    margin-left: 16px;
 }

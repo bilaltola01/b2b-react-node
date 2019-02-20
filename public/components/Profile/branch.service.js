@@ -66,6 +66,8 @@ export function updateBranch (branch) {
                     }
 
                     resolve(res.obj);
+                }).catch((err) => {
+                  console.log('updateOrCreateBranch error', err);
                 }) : Ajax().post('/branch', {
                     body: JSON.stringify({obj: branch}), // data: {file: file, url: url}
                     headers: {
@@ -86,7 +88,7 @@ export function updateBranch (branch) {
         };
 
         const findImage = (res, arr, isContactImage) => {
-            // console.log(res);
+            // console.log('findImage res', res);
             // console.log('arr:');
             // console.log(arr);
             // console.log('propsHaveUppercase:');

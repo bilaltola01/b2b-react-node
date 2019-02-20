@@ -1,5 +1,5 @@
 "use strict";
-
+const _ = require('lodash');
 const DBLayer = require('../DBLayer');
 const db = DBLayer.connection;
 const dateUtils = require('../shared/date-utils');
@@ -158,35 +158,77 @@ Branch.updateWithDetails = (id, obj) => {
   let branch = obj;
   branch.DateUpdated = dateUtils.toMysqlDate(new Date());
 
-  return Promise.all([
-    BranchContact.updateAll(branch.contacts),
-    BranchCuisine.updateAll(insertNewId(id, branch.cuisines)),
-    BranchCurrency.updateAll(insertNewId(id, branch.currencies)),
-    BranchLanguage.updateAll(insertNewId(id, branch.languages)),
-    BranchImage.removeSelected(branch.images, branch),
-    BranchImage.updateAll(branch.images)
-  ]).then(res => {
-    // console.log(res);
+  const promises = [];
+
+  if (branch.contacts) {
+    promises.push(BranchContact.updateAll(branch.contacts));
+  }
+  if (branch.cuisines) {
+    promises.push(BranchCuisine.updateAll(insertNewId(id, branch.cuisines)));
+  }
+  if (branch.currencies) {
+    promises.push(BranchCurrency.updateAll(insertNewId(id, branch.currencies)));
+  }
+  if (branch.languages) {
+    promises.push(BranchLanguage.updateAll(insertNewId(id, branch.languages)));
+  }
+  if (branch.images) {
+    promises.push(BranchImage.removeSelected(branch.images, branch));
+    promises.push(BranchImage.updateAll(branch.images));
+  }
+  if (branch.languages) {
+    promises.push();
+  }
+
+  return Promise.all(promises).then(res => {
     let tmp = branch;
-    tmp.contacts = res[0][0];
-    tmp.cuisines = res[0][1];
-    tmp.currencies = res[0][2];
-    tmp.languages = res[0][3];
-    tmp.images = res[0][5];
+    if (branch.contacts && res.size > 0) {
+      tmp.contacts = res[0].shift();
+    }
+    if (branch.cuisines && res.size > 0) {
+      tmp.cuisines = res[0].shift();
+    }
+    if (branch.currencies && res.size > 0) {
+      tmp.currencies = res[0].shift();
+    }
+    if (branch.languages && res.size > 0) {
+      tmp.languages = res[0].shift();
+    }
+    if (branch.images && res.size > 1) {
+      tmp.images = res[0][1];
+    }
 
     // console.log('finalobj');
     // console.log(tmp);
 
-    return Branch.getById(id).update({
-      Address: branch.Address,
-      City: branch.City,
-      Country: branch.Country,
-      Email: branch.Email,
-      HasHeadquarters: branch.HasHeadquarters,
-      IsEnabled: branch.IsEnabled,
-      Name: branch.Name,
-      Tel: branch.Tel
-    }).then(res => {
+    const data = {}
+
+    if (_.has(branch, 'Address')) {
+      data.Address = branch.Address;
+    }
+    if (_.has(branch, 'City')) {
+      data.City = branch.City;
+    }
+    if (_.has(branch, 'Country')) {
+      data.Country = branch.Country;
+    }
+    if (_.has(branch, 'Email')) {
+      data.Email = branch.Email;
+    }
+    if (_.has(branch, 'HasHeadquarters')) {
+      data.HasHeadquarters = branch.HasHeadquarters;
+    }
+    if (_.has(branch, 'IsEnabled')) {
+      data.IsEnabled = branch.IsEnabled;
+    }
+    if (_.has(branch, 'Name')) {
+      data.Name = branch.Name;
+    }
+    if (_.has(branch, 'Tel')) {
+      data.Tel = branch.Tel;
+    }
+
+    return Branch.getById(id).update(data).then(res => {
       //return Branch.getById(id);
       return Promise.resolve(tmp);
     });
