@@ -51,6 +51,13 @@ Profile.update = (email, obj) => {
   });
 };
 
+Profile.delete = (email) => {
+  // TODO delete branches, menu, meals
+  return Company.getByEmail(email).del().then(res => {
+    return true;
+  });
+};
+
 function createProfile(companyObj, branchesPromise) {
   return new Promise((resolve, reject) => {
     let obj = companyObj;

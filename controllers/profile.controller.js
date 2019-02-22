@@ -1,6 +1,7 @@
 "use strict";
 
 const Profile = require('../models/profile.model');
+const Company = require('../models/company.model');
 
 class ProfileController {
 
@@ -49,6 +50,43 @@ ProfileController.put = (req, res) => {
             res.status(204).send({ success: false, message: 'Profile update failed', obj: err });
         });
     }
+};
+
+ProfileController.delete = (req, res) => {
+    res.setHeader('Content-Type', 'application/json');
+
+    // console.log('email, pass', req.body.email, req.body.password);
+    const email = req.body.email;
+    const password = req.body.password;
+    Company.emailExists(email).then(emailExists => {
+    // console.log(emailExists);
+        if (!emailExists) {
+          res.status(400).json({ success: false, message: 'Invalid Email/Password.' });
+          throw new Error(400);
+        }
+
+        return Company.auth(email, password);
+    }).then((isPwdValid) => {
+        if (!isPwdValid) {
+          res.status(400).json({ success: false, message: 'Invalid Email/Password.' });
+          throw new Error(400);
+        }
+
+        console.log('Deleting profile')
+        Profile.delete(email);
+
+        // Return the information including token as JSON
+        res.status(200).json({
+          success: true,
+          message: 'Profile successfully deleted',
+        });
+    }).catch(err => {
+        console.error(err);
+        // Check if headers are not already sent earlier in the flow
+        if (!res.headersSent) {
+          res.status(204).json({ success: false, message: 'Authentication failed.', obj: err });
+        }
+    });
 };
 
 module.exports = ProfileController;

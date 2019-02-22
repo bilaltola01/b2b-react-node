@@ -62,6 +62,23 @@ export function getProfile () {
     });
 }
 
+export function deleteProfile (opts) {
+    return Ajax().delete('/profile', {
+        body: JSON.stringify(opts, true),
+        headers: {
+            "content-type": "application/json",
+            "cache-control": "no-cache",
+            "x-access-token": StorageManagerInstance.read('token')
+        }
+    }).then((res) => {
+        if (!res || !res.success) {
+            return Promise.reject(res);
+        }
+
+        return true;
+    });
+}
+
 function convertOpts (opts, isUpdate) {
     // console.log(opts);
 

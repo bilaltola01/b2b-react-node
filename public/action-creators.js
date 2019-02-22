@@ -344,6 +344,31 @@ export function toggleBranch (branchID, value, cb) {
   }
 };
 
+export function deleteProfile (profile, password, cb) {
+  console.log('deleteProfile', profile, password);
+  return {
+    types: ['DELETE_PROFILE_REQUEST', 'DELETE_PROFILE_SUCCESS', 'DELETE_PROFILE_FAILURE'],
+    promise: () => {
+      return new Promise((resolve, reject) => {
+        // console.log('SHOULD DELETE PROFILE HERE');
+
+        ProfileService.deleteProfile({email: profile && profile.props && profile.props.email, password}).then((res) => {
+          console.log('request succeeded with JSON response', res);
+
+          if (res && typeof cb === 'function') {
+            cb({success: true, res});
+          }
+
+          resolve(res);
+        }).catch((err) => {
+          if (err && typeof cb === 'function') {
+            cb({success: false, err});
+          }
+        });
+      });
+    }
+  }
+}
 export function deleteBranch (branch, cb) {
   // console.log(branch);
   return {

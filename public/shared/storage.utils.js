@@ -75,6 +75,14 @@ export let StorageManager = class {
     	this.initStorageCache(this.storageKey);
     }
 
+    delete(cb) {
+      this.getWebStorage().clear()
+      this.storageKey = null
+
+      if (cb && typeof cb === 'function') {
+        cb(true);
+      }
+    }
     //
     /** Choose Persistency mode over Storage Providers */
     //

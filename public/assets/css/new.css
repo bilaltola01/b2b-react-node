@@ -5879,23 +5879,26 @@ MENU DETAIL
     margin-right: -50%!important;
     transform: translate(-50%, -50%)!important;
 }
-.ReactModal__Content h2{
-    padding: 16px 20px;
-    border-bottom: 1px solid #E9F1FA;
-    background-color: #FFCA0C;
-    margin: 0;
-    font-size: 14px;
-    font-weight: 500;
-    color: #FFF;
-    text-transform: uppercase;
-}
-.ReactModal__Content p{
-    font-size: 0.75em;
-    font-weight: 600;
-    padding: 20px 30px;
-}
-.ReactModal__Content p strong{
-    font-weight: 800;
+/*.ReactModal__Content h2{*/
+    /*padding: 16px 20px;*/
+    /*border-bottom: 1px solid #E9F1FA;*/
+    /*background-color: #FFCA0C;*/
+    /*margin: 0;*/
+    /*font-size: 14px;*/
+    /*font-weight: 500;*/
+    /*color: #FFF;*/
+    /*text-transform: uppercase;*/
+/*}*/
+/*.ReactModal__Content p{*/
+    /*font-size: 0.75em;*/
+    /*font-weight: 600;*/
+    /*padding: 20px 30px;*/
+/*}*/
+/*.ReactModal__Content p strong{*/
+    /*font-weight: 800;*/
+/*}*/
+.ReactModal__Content input{
+    margin-left: 2px;
 }
 .ReactModal__Content footer::after{
     content: '';
@@ -6092,4 +6095,11 @@ button.button--action:disabled{
 .branch--enabled .react-switch{
     margin-right: 8px;
     margin-left: 16px;
+}
+.profile--delete {
+    font-family: "Lato", "Helvetica Neue Light", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #FF004C;
+    cursor: pointer;
 }

@@ -62,6 +62,7 @@ let Routes = class {
 
         router.get('/profile', profileController.get);
         router.put('/profile', profileController.put);
+        router.delete('/profile', profileController.delete);
 
         router.get('/company', companyController.get);
         router.post('/company', companyController.post);

@@ -156,6 +156,11 @@ export function updatePassword(data, opts) {
     }
 
 }
+export function logout(data, opts) {
+  StorageManagerInstance.delete(() => {
+    window.location.reload();
+  });
+}
 export function isAuthenticated() {
     return StorageManagerInstance.read('token');
 }
