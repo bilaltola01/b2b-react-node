@@ -162,7 +162,7 @@ class SectionArticleBranch extends Component {
 						<div className="header--actions">
 							<ul>
 								<li>
-									<div className="branch--enabled">{isEnabled ? 'Enabled' : 'Disabled'}
+									<div className="branch--enabled">{this.state.isEnabled ? 'Enabled' : 'Disabled'}
 										<span onClick={this.handleClickToggle}>
 											<Switch
 												checked={this.state.isEnabled}
