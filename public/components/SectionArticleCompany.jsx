@@ -197,36 +197,40 @@ class SectionArticleCompany extends Component {
 										</div>
 								}
 						</div>
-						<div className="profile-social">
-								<ul>
-										{component.props.social.twitter &&
-												<li>
-													<a className="icon-twitter" href="#,">
-														<img src="assets/images/social_icon_twitter.png" alt="Twitter" />
-														<span>{component.props.social.twitter}</span>
-													</a>
-												</li>
-										}
-										{component.props.social.facebook &&
-												<li>
-													<a className="icon-facebook" href="#,">
-														<img src="assets/images/social_icon_facebook.png" alt="Facebook" />
-														<span>{component.props.social.facebook}</span>
-													</a>
-												</li>
-										}
-										{component.props.social.instagram &&
-												<li>
-													<a className="icon-instagram" href="#,">
-														<img src="assets/images/social_icon_instagram.png" alt="Instagram" />
-														<span>{component.props.social.instagram}</span>
-													</a>
-												</li>
-										}
-								</ul>
-						</div>
-					<div className="profile-social">
-						<span className="profile--delete" onClick={this.handleDeleteProfile}>Delete Profile</span>
+						{component.props.social.twitter || component.props.social.facebook || component.props.social.instagram
+							? (
+								<div className="profile-social" style={{marginTop: 40}}>
+									<ul>
+                    {component.props.social.twitter &&
+										<li>
+											<a className="icon-twitter" href="#,">
+												<img src="assets/images/social_icon_twitter.png" alt="Twitter" />
+												<span>{component.props.social.twitter}</span>
+											</a>
+										</li>
+                    }
+                    {component.props.social.facebook &&
+										<li>
+											<a className="icon-facebook" href="#,">
+												<img src="assets/images/social_icon_facebook.png" alt="Facebook" />
+												<span>{component.props.social.facebook}</span>
+											</a>
+										</li>
+                    }
+                    {component.props.social.instagram &&
+										<li>
+											<a className="icon-instagram" href="#,">
+												<img src="assets/images/social_icon_instagram.png" alt="Instagram" />
+												<span>{component.props.social.instagram}</span>
+											</a>
+										</li>
+                    }
+									</ul>
+								</div>
+							) : null
+						}
+					<div className="profile-social" style={{marginBottom: 10, marginTop: 30}}>
+						<span className="profile--delete" onClick={this.handleDeleteProfile}>Delete Account</span>
 						<span className="profile--delete" onClick={this.handleLogout} style={{marginLeft: 20}}>Logout</span>
 					</div>
 				</div>
