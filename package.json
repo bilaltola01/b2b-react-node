@@ -54,6 +54,7 @@
         "react-redux": "5.0.5",
         "react-router": "4.1.1",
         "react-router-dom": "4.1.1",
+        "react-simple-dropdown": "^3.2.3",
         "react-switch": "^4.1.0",
         "redux": "3.6.0",
         "redux-thunk": "2.2.0",

@@ -1,7 +1,19 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router-dom';
+import Dropdown, { DropdownTrigger, DropdownContent } from 'react-simple-dropdown';
+import * as AuthService from "./Auth/auth.service";
 
 class PageHeader extends Component {
+  constructor(props) {
+    super(props);
+
+    this.handleLogout = this.handleLogout.bind(this);
+  }
+
+  handleLogout() {
+    AuthService.logout()
+  }
+
 	render () {
 		const { company } = this.props;
 
@@ -11,7 +23,7 @@ class PageHeader extends Component {
 					{company.branchRoot.mainContact.Firstname} {company.branchRoot.mainContact.Lastname}
 					<span>Admin</span>
 				</h4>
-				<img src={company.branchRoot.mainContact.ImagePath} alt={company.branchRoot.mainContact.ImageAltDesc} />
+				<img src={company.branchRoot.mainContact.ImagePath || 'assets/images/icon-anonymous.svg'} alt={company.branchRoot.mainContact.ImageAltDesc} />
 			</div>
 		) : (
 			<div>
@@ -27,9 +39,14 @@ class PageHeader extends Component {
 			<section className="toolbar clearfix">
 	            <h3 className="content--container--title">{company.name} Management Portal</h3>
 	            <nav className="admin-nav">
-	                <Link to="/profile/get">
-	                    {adminComponent}
-	                </Link>
+								<Dropdown>
+									<DropdownTrigger>{adminComponent}</DropdownTrigger>
+									<DropdownContent>
+										<div className="dropdown--item" onClick={this.handleLogout}>Log out
+											<img src={'assets/images/logout.png'} width={24} height={24} />
+										</div>
+									</DropdownContent>
+								</Dropdown>
 	            </nav>
 	        </section>
 		)

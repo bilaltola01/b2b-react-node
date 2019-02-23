@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import Modal from 'react-modal';
 import * as actionCreators from '../action-creators';
 import { Toast } from "./Toast";
-import * as AuthService from "./Auth/auth.service";
 
 Modal.setAppElement('#app-wrapper');
 
@@ -38,16 +37,12 @@ class SectionArticleCompany extends Component {
     this.handleDelete = this.handleDelete.bind(this);
     this.validation = this.validation.bind(this);
     this.renderToast = this.renderToast.bind(this);
-    this.handleLogout = this.handleLogout.bind(this);
+
 	}
 
 	handleDeleteProfile() {
 		// console.log('handleDeleteProfile');
 		this.setState({modalIsOpen: true});
-	}
-
-  handleLogout() {
-    AuthService.logout()
 	}
 
   closeModal() {
@@ -231,7 +226,6 @@ class SectionArticleCompany extends Component {
 						}
 					<div className="profile-social" style={{marginBottom: 10, marginTop: 30}}>
 						<span className="profile--delete" onClick={this.handleDeleteProfile}>Delete Account</span>
-						<span className="profile--delete" onClick={this.handleLogout} style={{marginLeft: 20}}>Logout</span>
 					</div>
 				</div>
 		</article>
