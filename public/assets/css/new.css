@@ -5641,6 +5641,10 @@ MENU DETAIL
     margin-left: 10px;
 }
 
+.branch--menus .language--picker .custom-select {
+    z-index: 1022
+}
+
 .branch--currencies .language--picker .custom-select {
     z-index: 1020;
 }

@@ -10,6 +10,7 @@ const BranchCuisine = require('./branch-cuisine.model');
 const BranchCurrency = require('./branch-currency.model');
 const BranchLanguage = require('./branch-language.model');
 const BranchImage = require('./branch-image.model');
+const MenuBranch = require('./menu-branch.model');
 const Menu = require('./menu.model');
 
 // Create new branch in the database
@@ -96,6 +97,7 @@ Branch.createWithDetails = (obj) => {
       BranchCuisine.createAll(insertNewId(id, branch.cuisines)),
       BranchCurrency.createAll(insertNewId(id, branch.currencies)),
       BranchLanguage.createAll(insertNewId(id, branch.languages)),
+      MenuBranch.createAll(insertNewId(id, branch.menus)),
       BranchImage.createAll(insertNewId(id, branch.images))
     ]).then(res => {
       // console.log(res);
@@ -171,6 +173,9 @@ Branch.updateWithDetails = (id, obj) => {
   }
   if (branch.languages) {
     promises.push(BranchLanguage.updateAll(insertNewId(id, branch.languages)));
+  }
+  if (branch.menus) {
+    promises.push(MenuBranch.updateAll(insertNewId(id, branch.menus)));
   }
   if (branch.images) {
     promises.push(BranchImage.removeSelected(branch.images, branch));

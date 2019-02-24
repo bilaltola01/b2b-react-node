@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router-dom';
+import BranchMenusEdit from "./BranchMenusEdit";
 
 const classNames = require('classnames');
 
@@ -29,7 +30,7 @@ let createHandlers = (ctx) => {
 	};
 
 	let onChanges = (type, obj) => {
-
+		// console.log('onChanges', type, obj)
 		// update store
 		ctx.props.onChange(ctx.props.id, type, obj);
 	};
@@ -71,6 +72,7 @@ class SectionArticleEditBranch extends Component {
 			availableLanguages,
 			isEnabled,
 			name,
+      menus,
 			onChange
 		} = this.props;
 
@@ -84,6 +86,7 @@ class SectionArticleEditBranch extends Component {
 			(this.state.expanded) ? 'opened' : ''
 		);
 
+		// console.log('languages', languages)
 		const contactComponents = (
 			<BranchContactsEdit contacts={contacts} branchId={id} onChange={this.handlers.onChanges} />
 		);
@@ -100,6 +103,10 @@ class SectionArticleEditBranch extends Component {
 			<BranchCurrenciesEdit currencies={(currencies && currencies.length > 0) ? currencies.map(currency => currency.Currency) : []} availableCurrencies={availableCurrencies} onChange={this.handlers.onChanges} />
 		);
 
+    const branchMenus = (
+			<BranchMenusEdit menus={menus.map(menu => menu.MenuID)} onChange={this.handlers.onChanges}
+			/>
+    );
 		const allImages = images.map(img => {
 			return {
 				id: img.BranchImageID,
@@ -144,6 +151,9 @@ class SectionArticleEditBranch extends Component {
 									<input className="input--edit" type="checkbox" name="branch-IsEnabled" defaultChecked={!!isEnabled} onChange={(e) => this.handlers.onChanges('main', e)} />
 								</div>
 							</div>
+						</div>
+						<div className="branch--currencies">
+							{branchMenus}
 						</div>
 						<div className="branch--currencies">
 							<p className="menu--title">Currency</p>

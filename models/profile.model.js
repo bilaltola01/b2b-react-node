@@ -8,6 +8,7 @@ const dateUtils = require('../shared/date-utils');
 const Company = require('./company.model');
 const Branch = require('./branch.model');
 const foodTypes = require('./food-types.model');
+const Menu = require('./menu.model');
 
 // Create new company in the database
 // Returns a resolved Promise containing its id
@@ -31,14 +32,14 @@ Profile.get = (obj) => {
 Profile.getAll = () => {
   return Company.getAll().then(companies => {
     return Promise.all(companies.map(company => {
-      return createProfile(company, Branch.getWithEntities({ CompanyID: company.CompanyID }));
+      return createProfile(company, Branch.getWithEntities({ CompanyID: company.CompanyID }), Menu.get({ CompanyID: company.CompanyID }));
     }));
   });
 };
 
 Profile.getByEmail = (email) => {
   return Company.getByEmail(email).then(company => {
-    return createProfile(company, Branch.getWithEntities({ CompanyID: company.CompanyID }));
+    return createProfile(company, Branch.getWithEntities({ CompanyID: company.CompanyID }), Menu.get({ CompanyID: company.CompanyID }));
   });
 };
 
@@ -58,14 +59,17 @@ Profile.delete = (email) => {
   });
 };
 
-function createProfile(companyObj, branchesPromise) {
+function createProfile(companyObj, branchesPromise, menusPromise) {
   return new Promise((resolve, reject) => {
     let obj = companyObj;
     let userFoodTypes = []; // FROM DB
     branchesPromise.then(branches => {
       obj.branches = branches;
       obj.foodTypes = [...foodTypes.getAll(), ...userFoodTypes];
-      resolve(obj);
+      menusPromise.then(menus => {
+        obj.menus = menus;
+        resolve(obj);
+      })
     })
   });
 }

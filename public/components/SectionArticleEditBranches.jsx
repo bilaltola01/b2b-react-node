@@ -88,10 +88,10 @@ class SectionArticleEditBranches extends Component {
 
 		const finalBranches = (this.props.profile && this.props.profile.branches && this.props.profile.branches.length > 0) ? this.props.profile.branches : component.props.branches || [];
 
-		// console.log(finalBranches);
+		// console.log('finalBranches', finalBranches);
 
 		const branchComponents = (finalBranches && finalBranches.length > 0) ? finalBranches.map((branch, index) => {
-			// console.log(branch, 'branch')
+
 			return <SectionArticleEditBranch 
 				id={branch.BranchID}
 				address={branch.Address}
@@ -104,6 +104,7 @@ class SectionArticleEditBranches extends Component {
 				hasHeadquarters={branch.HasHeadquarters}
 				images={branch.images}
 				languages={branch.languages}
+				menus={branch.menus}
 				availableLanguages={this.props.availableLanguages}
 				cuisines={branch.cuisines}
 				isEnabled={branch.IsEnabled}

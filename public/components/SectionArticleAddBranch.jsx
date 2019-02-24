@@ -11,6 +11,7 @@ import BranchCuisinesEdit from './BranchCuisinesEdit';
 import BranchCurrenciesEdit from './BranchCurrenciesEdit';
 import LanguagesEdit from './LanguagesEdit';
 import ImageUpload from './ImageUpload';
+import BranchMenusEdit from "./BranchMenusEdit";
 
 let createHandlers = (ctx) => {
 	let getProfile = () => {
@@ -27,6 +28,10 @@ let createHandlers = (ctx) => {
 
     let getAvailableCurrencies = () => {
         ctx.props.dispatch(actionCreators.getCurrencies());
+    };
+
+    let getAvailableMenus = () => {
+        ctx.props.dispatch(actionCreators.getMenus());
     };
 
 	let onImageUpload = () => {
@@ -181,6 +186,7 @@ let createHandlers = (ctx) => {
 		getAvailableCuisines,
 		getAvailableLanguages,
 		getAvailableCurrencies,
+		getAvailableMenus,
 		onImageUpload,
 		onSaveBranch,
 		onChanges
@@ -203,6 +209,7 @@ class SectionArticleAddBranch extends Component {
 				contacts: [],
 				cuisines: [],
 				currencies: [],
+				menus: [],
 				images: [],
 				languages: []
 			},
@@ -218,6 +225,7 @@ class SectionArticleAddBranch extends Component {
         this.handlers.getAvailableLanguages();
         this.handlers.getAvailableCuisines();
         this.handlers.getAvailableCurrencies();
+        this.handlers.getAvailableMenus();
     }
 
 	render() {
@@ -231,6 +239,7 @@ class SectionArticleAddBranch extends Component {
 		const availableCuisines = (this.props.availableCuisines || []).filter(cuisine => cuisine.CuisineID === 1 || cuisine.CuisineID === 3);
 		const availableLanguages = this.props.availableLanguages || [];
 		const availableCurrencies = this.props.availableCurrencies || [];
+		const availableMenus = this.props.availableMenus || [];
 
 		const contactComponents = (
 			<BranchContactsEdit contacts={[]} onChange={this.handlers.onChanges} />
@@ -246,6 +255,10 @@ class SectionArticleAddBranch extends Component {
 
 		const currencyComponents = (
 			<BranchCurrenciesEdit currencies={[]} availableCurrencies={availableCurrencies} onChange={this.handlers.onChanges} />
+		);
+
+		const menusComponents = (
+			<BranchMenusEdit menus={[]} availableCurrencies={availableMenus} onChange={this.handlers.onChanges} />
 		);
 
 		const allImagesComponent = (
@@ -307,6 +320,15 @@ class SectionArticleAddBranch extends Component {
 			                        			<input className="input--edit" type="checkbox" name="branch-HasHeadquarters" onChange={(e) => this.handlers.onChanges('main', e)} />
 			                        		</div>
 			                        	</div>
+									</div>
+									<div className="branch--currencies">
+										{menusComponents}
+										{
+		                        			!!this.state.validationErrors.find(err => err.name === 'menus') &&
+		                        			<div className="error">
+		                        				{this.state.validationErrors.find(err => err.name === 'menus').message}
+		                        			</div>
+		                        		}
 									</div>
 									<div className="branch--currencies">
 										<p className="menu--title">Currency</p>
@@ -426,7 +448,8 @@ const mapStateToProps = (state) => {
     	profile: state._profile.profile,
     	availableLanguages: state._languages.languages,
     	availableCuisines: state._cuisines.cuisines,
-    	availableCurrencies: state._currencies.currencies
+    	availableCurrencies: state._currencies.currencies,
+    	availableMenus: state._menus && state._menus.menus || []
   	};
 };
 

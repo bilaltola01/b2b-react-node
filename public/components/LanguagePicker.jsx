@@ -14,6 +14,8 @@ class LanguagePicker extends Component {
           return "Choose a category...";
         case "branches":
           return "Choose a branch...";
+        case "menus":
+          return "Choose a menu...";
         case "cuisines":
           return "Choose a cuisine...";
         case "currencies":
@@ -64,6 +66,12 @@ class LanguagePicker extends Component {
                 return (
                   <option value={item.Name} key={item.BranchID}>
                     {item.Name}
+                  </option>
+                );
+              case "menus":
+                return (
+                  <option value={item.Title} key={item.MenuID}>
+                    {item.Title}
                   </option>
                 );
               case "categories":
@@ -161,6 +169,17 @@ class LanguagePicker extends Component {
                     key={item.BranchID}
                   >
                     {item.Name}
+                  </li>
+                );
+              case "menus":
+                return (
+                  <li
+                    data-id={item.MenuID}
+                    rel={item.Title}
+                    onClick={e => onPickerItemClick(e)}
+                    key={item.MenuID}
+                  >
+                    {item.Title}
                   </li>
                 );
               case "categories":

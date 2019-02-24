@@ -11,6 +11,10 @@ let MenuBranch = class {
 
 };
 
+MenuBranch.get = (conditions) => {
+  return db('MenuBranch').where(conditions).select('*');
+};
+
 /**
  * @description Insert/Create Menu Branch 
  * @param {obj.MenuId} number Linked to Menu.MenuID
@@ -25,6 +29,57 @@ MenuBranch.create = (obj) => {
   return db('MenuBranch').insert(menu).returning('MenuID');
 };
 
+MenuBranch.createAll = (menus) => {
+  if (!menus || menus.length <= 0) {
+    console.error('No menus specified');
+    return Promise.resolve([]);
+  }
+
+  return Promise.all(menus.map(menu => {
+    return MenuBranch.create({
+      BranchID: menu.BranchID,
+      MenuID: menu.MenuID
+    });
+  }));
+};
+
+MenuBranch.updateAll = (menus) => {
+  if (!menus || menus.length <= 0) {
+    console.error('No menus specified');
+    return Promise.resolve([]);
+  }
+
+  return Promise.all(menus.map(menu => {
+    //
+    // If the item is not already is in the db check if
+    // the same values are already somewhere
+    //
+    return MenuBranch.get({
+      MenuID: menu.MenuID,
+      BranchID: menu.BranchID
+    }).then(branchMenus => {
+      if (!branchMenus || branchMenus.length <= 0) {
+        return MenuBranch.create({
+          BranchID: menu.BranchID,
+          MenuID: menu.MenuID
+        });
+      }
+
+      return Promise.all(branchMenus.map(branchMenu => {
+        return MenuBranch.remove({
+          BranchID: branchMenu.BranchID,
+          // MenuID: branchMenu.MenuID
+        });
+      })).then(res => {
+        return MenuBranch.create({
+          BranchID: menu.BranchID,
+          MenuID: menu.MenuID
+        });
+      });
+    });
+  }));
+}
+
 /**
  * @description Remove Menu Branch 
  * @param {obj.MenuId} number Linked to Menu.MenuID
@@ -32,10 +87,16 @@ MenuBranch.create = (obj) => {
  * @return {QueryBuilder|Promise<any>}
  */
 MenuBranch.remove = (obj) => {
-  return db('MenuBranch').where({
-    MenuID: obj.MenuID,
-    BranchID: obj.BranchID,
-  }).first('*').del();
+  let data = {}
+
+  if (obj && obj.MenuID) {
+    data.MenuID = obj.MenuID
+  }
+  if (obj && obj.BranchID) {
+    data.BranchID = obj.BranchID
+  }
+
+  return db('MenuBranch').where(data).first('*').del();
 };
 
 /**
