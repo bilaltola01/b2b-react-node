@@ -4,6 +4,7 @@ import { Redirect } from 'react-router';
 import { connect } from 'react-redux';
 import Switch from "react-switch";
 const classNames = require('classnames');
+import Checkbox from 'react-simple-checkbox';
 
 import Contact from './Contact';
 import BranchCuisine from './BranchCuisine';
@@ -164,7 +165,14 @@ class SectionArticleBranch extends Component {
 					<header className={classes} onClick={this.handlers.headerOnClick}>
 						<div className="branch--header-wrap">
 							<div className="branch--selected" onClick={this.handleClickSelection}>
-								<input className="input--edit" type="checkbox" name="branch-selected" checked={selected[id]} onChange={(e) => onToggleSelection(e, id)} />
+								<Checkbox
+									id="all-branch-selected"
+									size={3}
+									tickSize={2}
+									color="#727B9C"
+									checked={selected[id]}
+									onChange={(e) => onToggleSelection(e, id)}
+								/>
 							</div>
 							<div className="header--title-container">
 								<h1 className="aside--title collapsable--title">

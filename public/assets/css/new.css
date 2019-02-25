@@ -6149,6 +6149,10 @@ button.button--action:disabled{
     flex-direction: row;
     align-items: center;
 }
+.branch--selected {
+    display: flex;
+    align-items: center;
+}
 .branch--selected, .branch--all-selected {
     margin: 0 0 0 10px;
     padding: 5px;
@@ -6164,6 +6168,22 @@ button.button--action:disabled{
     align-items: center;
 }
 .checkbox-label{
+    margin-left: 10px;
     font-size: 14px;
     font-family: "Lato", "Helvetica Neue Light", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
 }
+.Checkbox {
+    top: 0!important;
+    outline: none;
+}
+.Checkbox .tick {
+    transition: stroke-dashoffset 0s cubic-bezier(1,0,.55,.41) !important;
+}
+.Checkbox .square {
+    transition-duration: 0s !important;;
+    transition-delay: unset !important;
+}
+.Checkbox.checked .tick{
+    stroke: #fff;
+}
+

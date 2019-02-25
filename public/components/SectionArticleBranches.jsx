@@ -11,6 +11,7 @@ import MenuBranchesEdit from "./MenuBranchesEdit";
 import * as actionCreators from '../action-creators';
 import LanguagesEdit from "./LanguagesEdit";
 import BranchMenusEdit from "./BranchMenusEdit";
+import Checkbox from 'react-simple-checkbox';
 
 class SectionArticleBranches extends Component {
   constructor(props) {
@@ -188,9 +189,14 @@ class SectionArticleBranches extends Component {
 					<h2 className="asset--subtitle">{title}</h2>
 
 					<div className="branches--actions-wrap">
-						<div className="branch--all-selected">
-							<input id="all-branch-selected" className="input--edit" type="checkbox" name="all-branch-selected" checked={this.allSelected()} onChange={this.toggleAllSelection} />
-						</div>
+						<Checkbox
+							id="all-branch-selected"
+							size={3}
+							tickSize={2}
+							color="#727B9C"
+							checked={this.allSelected()}
+							onChange={this.toggleAllSelection}
+						/>
 						<label className="checkbox-label" htmlFor="all-branch-selected">Select All</label>
 						<div style={{margin: '0 20px'}}>
 							<LanguagePicker
