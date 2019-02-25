@@ -81,6 +81,32 @@ BranchLanguage.updateAll = (languages) => {
   }));
 }
 
+BranchLanguage.updateBulk = (branches, languages) => {
+  if (!languages || languages.length <= 0 || !branches || branches.length <= 0) {
+    console.error('No languages specified');
+    return Promise.resolve([]);
+  }
+
+  return Promise.all(branches.map(branchID => {
+    //
+    // If the item is not already is in the db check if
+    // the same values are already somewhere
+
+    return Promise.all(languages.map(LanguageID => {
+      return BranchLanguage.get({
+        LanguageID: LanguageID,
+        BranchID: branchID
+      }).then(branchlanguages => {
+        if (!branchlanguages || branchlanguages.length <= 0) {
+          return BranchLanguage.create({
+            BranchID: branchID,
+            LanguageID: LanguageID
+          });
+        }
+      });
+    }));
+  }));
+}
 
 // Remove language in the database
 // Returns a resolved Promise containing the number of rows affected

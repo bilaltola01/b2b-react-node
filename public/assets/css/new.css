@@ -6144,3 +6144,26 @@ button.button--action:disabled{
     background-color: #fff;
     border: 1px solid #ECEEF2;
 }
+.branch--header-wrap {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.branch--selected, .branch--all-selected {
+    margin: 0 0 0 10px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.branch--all-selected {
+    margin: 0 10px 0 0;
+}
+.branches--actions-wrap {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.checkbox-label{
+    font-size: 14px;
+    font-family: "Lato", "Helvetica Neue Light", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+}

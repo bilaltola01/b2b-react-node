@@ -75,6 +75,7 @@ let Routes = class {
         router.post('/branch-language', branchLanguageController.post);
         router.put('/branch-language', branchLanguageController.put);
         router.delete('/branch-language', branchLanguageController.remove);
+        router.post('/add-language-branch', branchLanguageController.addLanguagesToBranches);
 
         router.get('/branch-currency', branchCurrencyController.get);
         router.post('/branch-currency', branchCurrencyController.post);
@@ -142,6 +143,7 @@ let Routes = class {
         router.post('/menu-branch', menuBranchController.post);
         router.delete('/menu-branch', menuBranchController.remove);
         router.delete('/menu-branch-id', menuBranchController.removeByMenuId);
+        router.post('/add-menu-branch', menuBranchController.addMenuToBranches);
 
         router.get('/menu-category', menuCategoryController.get);
         router.post('/menu-category', menuCategoryController.post);

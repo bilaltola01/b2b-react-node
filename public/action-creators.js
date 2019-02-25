@@ -157,6 +157,40 @@ export function getMenuTranslations (cb) {
   }
 };
 
+export function addMenusToBranches (branches, menus, cb) {
+  return {
+    types: ['ADD_MENUS_TO_BRANCHES_REQUEST', 'ADD_MENUS_TO_BRANCHES_SUCCESS', 'ADD_MENUS_TO_BRANCHES_FAILURE'],
+    promise: () => {
+      return new Promise((resolve, reject) => {
+        BranchService.addMenusToBranches(branches, menus).then((res) => {
+          // console.log('request succeeded with JSON response', res);
+
+          if (res && typeof cb === 'function') {
+            cb(res);
+          }
+        });
+      });
+    }
+  }
+}
+
+export function addLanguagesToBranches (branches, languages, cb) {
+  return {
+    types: ['ADD_LANGUAGES_TO_BRANCHES_REQUEST', 'ADD_LANGUAGES_TO_BRANCHES_SUCCESS', 'ADD_LANGUAGES_TO_BRANCHES_FAILURE'],
+    promise: () => {
+      return new Promise((resolve, reject) => {
+        BranchService.addLanguagesToBranches(branches, languages).then((res) => {
+          // console.log('request succeeded with JSON response', res);
+
+          if (res && typeof cb === 'function') {
+            cb(res);
+          }
+        });
+      });
+    }
+  }
+}
+
 export function setMenu (menu, data) {
   let finalMenu;
 

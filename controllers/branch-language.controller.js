@@ -31,6 +31,18 @@ BranchLanguageController.post = (req, res) => {
     });
 };
 
+BranchLanguageController.addLanguagesToBranches = (req, res) => {
+    res.setHeader('Content-Type', 'application/json');
+
+    BranchLanguage.updateBulk(req.body.branches, req.body.languages).then(output => {
+        // console.log(output);
+        res.status(201).json({ success: true, message: 'BranchLanguage successfully created', obj: output });
+    }).catch(err => {
+        console.error(err);
+        res.status(204).send({ success: false, message: 'BranchLanguage creation failed', obj: err });
+    });
+};
+
 BranchLanguageController.put = (req, res) => {
     res.setHeader('Content-Type', 'application/json');
 

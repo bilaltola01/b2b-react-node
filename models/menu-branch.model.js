@@ -80,6 +80,33 @@ MenuBranch.updateAll = (menus) => {
   }));
 }
 
+MenuBranch.updateBulk = (branches, menus) => {
+  if (!menus || menus.length <= 0 || !branches || branches.length <= 0) {
+    console.error('No menus specified');
+    return Promise.resolve([]);
+  }
+
+  return Promise.all(branches.map(branchID => {
+    //
+    // If the item is not already is in the db check if
+    // the same values are already somewhere
+
+    return Promise.all(menus.map(menuID => {
+      return MenuBranch.get({
+        MenuID: menuID,
+        BranchID: branchID
+      }).then(branchMenus => {
+        if (!branchMenus || branchMenus.length <= 0) {
+          return MenuBranch.create({
+            BranchID: branchID,
+            MenuID: menuID
+          });
+        }
+      });
+    }));
+  }));
+}
+
 /**
  * @description Remove Menu Branch 
  * @param {obj.MenuId} number Linked to Menu.MenuID

@@ -43,6 +43,7 @@ class SectionArticleBranch extends Component {
 		this.handlers = createHandlers(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleClickToggle = this.handleClickToggle.bind(this);
+    this.handleClickSelection = this.handleClickSelection.bind(this);
 	}
 
   handleChange(checked, e) {
@@ -65,6 +66,11 @@ class SectionArticleBranch extends Component {
     e.stopPropagation();
 	}
 
+  handleClickSelection(e) {
+		// e.preventDefault();
+		e.stopPropagation();
+	}
+
 	componentWillMount() {
     this.setState({isEnabled: this.props.isEnabled})
 	}
@@ -84,6 +90,8 @@ class SectionArticleBranch extends Component {
 			images,
 			languages,
 			isEnabled,
+      selected,
+      onToggleSelection,
 			name
 		} = this.props;
 
@@ -154,10 +162,15 @@ class SectionArticleBranch extends Component {
 			<div className="article--branch">
 				<div className="branch--contact aside--section contacts--support">
 					<header className={classes} onClick={this.handlers.headerOnClick}>
-						<div className="header--title-container">
-							<h1 className="aside--title collapsable--title">
-								{name}
-							</h1>
+						<div className="branch--header-wrap">
+							<div className="branch--selected" onClick={this.handleClickSelection}>
+								<input className="input--edit" type="checkbox" name="branch-selected" checked={selected[id]} onChange={(e) => onToggleSelection(e, id)} />
+							</div>
+							<div className="header--title-container">
+								<h1 className="aside--title collapsable--title">
+									{name}
+								</h1>
+							</div>
 						</div>
 						<div className="header--actions">
 							<ul>

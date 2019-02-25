@@ -45,6 +45,64 @@ export function updateBranches (branches) {
     });
 }
 
+export function addMenusToBranches (branches, menus) {
+    if (!branches || branches.length <= 0 || !menus || menus.length <= 0) {
+        const err = 'No branches specified for branches update!';
+        console.error(err);
+        return Promise.reject(err);
+    }
+
+    return new Promise((resolve, reject) => {
+        Ajax().post('/add-menu-branch', {
+          body: JSON.stringify({branches, menus}), // data: {file: file, url: url}
+          headers: {
+            "content-type": "application/json",
+            "cache-control": "no-cache",
+            "x-access-token": StorageManagerInstance.read('token')
+          }
+        }).then(res => {
+          // console.log('UPDATE!!');
+          // console.log(res);
+          if (!res || !res.success) {
+            reject(res);
+          }
+
+          resolve(res.obj);
+        }).catch((err) => {
+          console.log('addMenusToBranches error', err);
+        })
+    });
+}
+
+export function addLanguagesToBranches (branches, languages) {
+    if (!branches || branches.length <= 0 || !languages || languages.length <= 0 ) {
+        const err = 'No branches specified for branches update!';
+        console.error(err);
+        return Promise.reject(err);
+    }
+
+    return new Promise((resolve, reject) => {
+        Ajax().post('/add-language-branch', {
+          body: JSON.stringify({branches, languages}), // data: {file: file, url: url}
+          headers: {
+            "content-type": "application/json",
+            "cache-control": "no-cache",
+            "x-access-token": StorageManagerInstance.read('token')
+          }
+        }).then(res => {
+          // console.log('UPDATE!!');
+          // console.log(res);
+          if (!res || !res.success) {
+            reject(res);
+          }
+
+          resolve(res.obj);
+        }).catch((err) => {
+          console.log('addLanguagesToBranches error', err);
+        })
+    });
+}
+
 export function updateBranch (branch) {
     console.log(branch);
 

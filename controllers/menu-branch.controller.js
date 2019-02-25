@@ -37,6 +37,18 @@ MenuBranchController.post = (req, res) => {
     });
 };
 
+MenuBranchController.addMenuToBranches = (req, res) => {
+  res.setHeader('Content-Type', 'application/json');
+
+  MenuBranch.updateBulk(req.body.branches, req.body.menus).then(output => {
+      // console.log(output);
+      res.status(201).json({ success: true, message: 'Menu added to Branches successfully created', obj: output });
+  }).catch(err => {
+      console.error(err);
+      res.status(204).send({ success: false, message: 'Menu adding to Branches failed', obj: err });
+  });
+};
+
 MenuBranchController.remove = (req, res) => {
     res.setHeader('Content-Type', 'application/json');
 
