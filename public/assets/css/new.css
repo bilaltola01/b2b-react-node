@@ -1736,9 +1736,10 @@ a.text-link:hover {
 .select--options li {
     height: 1.3em;
     margin: 0;
-    padding: 10px 13px 0 13px;
+    padding: 10px 13px 3px 13px;
     color: #979DB0;
     font-size: 0.75em;
+    line-height: 1em;
     font-weight: 500;
     letter-spacing: 0.05em;
     -webkit-transition: color 0.3s ease 0s;

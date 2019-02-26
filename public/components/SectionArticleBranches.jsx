@@ -18,15 +18,12 @@ class SectionArticleBranches extends Component {
   	super(props)
 		this.state = {
       selected: {},
-			action: null,
 			menus: [],
 			languages: []
     };
 		this.onToggleSelection = this.onToggleSelection.bind(this);
 		this.toggleAllSelection = this.toggleAllSelection.bind(this);
 		this.allSelected = this.allSelected.bind(this);
-		this.onPickerClick = this.onPickerClick.bind(this);
-		this.onPickerItemClick = this.onPickerItemClick.bind(this);
 		this.onApply = this.onApply.bind(this);
 		this.onChanges = this.onChanges.bind(this);
 	}
@@ -58,53 +55,6 @@ class SectionArticleBranches extends Component {
     return selectedCount === size(this.props.component.props.branches)
 	}
 
-  onAdd() {
-
-	}
-
-  onKeyPress(e) {
-		if (e.key == "Enter") {
-			// onAdd({
-			// 	id: null,
-			// 	rel: e.target.value,
-			// 	name: e.target.value
-			// });
-			e.target.value = "";
-		}
-	};
-
-  onPickerItemClick(e) {
-    // Change UI
-    let rel = e.target.getAttribute('rel');
-    let text = e.target.textContent;
-    let id = parseInt(e.target.getAttribute('data-id'), 10);
-    let target = e.target.parentNode.previousElementSibling;
-    target.setAttribute('data-rel', rel);
-    target.textContent = text;
-
-    DomUtils.toggleClass(target, 'active');
-
-    console.log('menu item', id)
-		this.setState({action: id})
-    // Then add the new language
-    // onAdd({
-    //   id,
-    //   rel,
-    //   name: text
-    // });
-  };
-
-  onPickerClick(e) {
-    DomUtils.toggleClass(e.target, "active");
-  }
-
-  onPickerBlur(e) {
-    let select = e.target.querySelector('.select--styled.active');
-    if (select) {
-      DomUtils.toggleClass(select, 'active');
-    }
-	}
-
   onChanges(type, obj) {
 		console.log(type, obj)
 		this.setState({[type]: obj && obj.data || []})
@@ -113,7 +63,7 @@ class SectionArticleBranches extends Component {
 	};
 
   onApply() {
-  	const {selected, action} = this.state;
+  	const {selected} = this.state;
 		const branches = map(selected, (item, index) => {
 			if (item) {
 				return parseInt(index);
@@ -122,17 +72,12 @@ class SectionArticleBranches extends Component {
 
 		const menus = map(this.state.menus, item => item.MenuID)
 		const languages = map(this.state.languages, item => item.LanguageID)
-		console.log('onApply', selected, action, branches, menus, languages)
-		if (action === 1 && size(branches) > 0 && size(menus) > 0) {
+		console.log('onApply', selected, branches, menus, languages)
+		if (size(branches) > 0 && size(menus) > 0) {
       this.props.dispatch(actionCreators.addMenusToBranches(branches, menus, (res) => {
-      	console.log('res', res);
-      	this.setState({action: null, menus: [], languages: []});
-			} ));
-		} else if (action === 2 && size(branches) > 0 && size(languages) > 0) {
-      this.props.dispatch(actionCreators.addLanguagesToBranches(branches, languages, (res) => {
         console.log('res', res);
-        this.setState({action: null, menus: [], languages: []});
-      } ));
+        this.setState({menus: [], languages: []});
+      }));
     }
 	}
 
@@ -160,6 +105,7 @@ class SectionArticleBranches extends Component {
 				hasHeadquarters={parseInt(branch.HasHeadquarters, 10)}
 				images={branch.images}
 				languages={branch.languages}
+				menus={branch.menus}
 				cuisines={branch.cuisines}
 				isEnabled={branch.IsEnabled}
 				name={branch.Name}
@@ -198,37 +144,14 @@ class SectionArticleBranches extends Component {
 							onChange={this.toggleAllSelection}
 						/>
 						<label className="checkbox-label" htmlFor="all-branch-selected">Select All</label>
-						<div style={{margin: '0 20px'}}>
-							<LanguagePicker
-								data={obj}
-								onKeyPress={this.onKeyPress}
-								onAdd={this.onAdd}
-								onPickerBlur={this.onPickerBlur}
-								onPickerClick={this.onPickerClick}
-								onPickerItemClick={this.onPickerItemClick}
-							/>
-						</div>
-						<div className="group-buttons">
+						<div className="group-buttons" style={{marginLeft: 20}}>
 							<button className="button--action" onClick={this.onApply}>Apply</button>
 						</div>
 					</div>
 
-					{this.state.action === 1
-						? (
-							<div className="branch--currencies">
-								<BranchMenusEdit menus={[]} availableCurrencies={availableMenus} onChange={this.onChanges} />
-							</div>
-						) : null
-					}
-
-					{this.state.action === 2
-						? (
-							<div className="branch--languages">
-								<p className="menu--title">Languages</p>
-								<LanguagesEdit languages={[]} availableLanguages={availableLanguages} onChange={this.onChanges} />
-							</div>
-						) : null
-					}
+					<div className="branch--currencies">
+						<BranchMenusEdit menus={[]} availableCurrencies={availableMenus} onChange={this.onChanges} />
+					</div>
 
 					<div className="branch--add">
 						{noItemsComponent}

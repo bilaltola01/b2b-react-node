@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Redirect } from 'react-router';
 import { connect } from 'react-redux';
 import Switch from "react-switch";
+import BranchMenu from "./BranchMenu";
 const classNames = require('classnames');
 import Checkbox from 'react-simple-checkbox';
 
@@ -90,6 +91,7 @@ class SectionArticleBranch extends Component {
 			hasHeadquarters,
 			images,
 			languages,
+			menus,
 			isEnabled,
       selected,
       onToggleSelection,
@@ -123,6 +125,24 @@ class SectionArticleBranch extends Component {
 			const finalLanguage = (language.Language && Object.keys(language.Language).length > 0) ? language.Language : language;
 			return <BranchLanguage id={language.BranchLanguageID} code={finalLanguage.Code} codeFull={finalLanguage.CodeFull} name={finalLanguage.Name} title={finalLanguage.Title} key={index} />;
 		}) : '';
+
+		// const menuComponents = (menus.length > 0) ? menus.map((menu, index) => {
+		// 	return <BranchMenu id={menu.MenuID} title={menu.Title} key={index} />;
+		// }) : '';
+
+    const menuComponents = (menus && menus.length > 0) ? menus.map((menu, index) => {
+      return (index < menus.length - 1)
+        ? (
+					<div key={index}>
+						<BranchMenu id={menu.MenuID} title={menu.Title} key={index} />
+						,&nbsp;
+					</div>
+        ) : (
+					<div key={index}>
+						<BranchMenu id={menu.MenuID} title={menu.Title} key={index} />
+					</div>
+        )
+    }) : '';
 
 		const currencyComponents = (currencies && currencies.length > 0) ? currencies.map((currency, index) => {
 			const finalCurrency = (currency.Currency && Object.keys(currency.Currency).length > 0) ? currency.Currency : currency;
@@ -242,6 +262,10 @@ class SectionArticleBranch extends Component {
 							<div className="branch--languages">
 								<p className="menu--title">Languages</p>
 								{languageComponents}
+							</div>
+							<div className="branch--cuisines">
+								<p className="menu--title">Menus</p>
+								{menuComponents}
 							</div>
 							<div className="branch--address">
 					            <p className="menu--title">Address</p>
