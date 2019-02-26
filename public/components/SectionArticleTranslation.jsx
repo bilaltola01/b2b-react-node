@@ -115,6 +115,31 @@ class SectionArticleTranslation extends Component {
 						<div className="article--menu--translations">
 							<header className="article--menu--translations--header">
 								<p className="menu--title">
+									Word Count:
+								</p>
+								<div>
+									<div className="content--label">
+										<h3 className="label--key">Total:</h3>
+										<span className="label--value">1,000 words</span>
+									</div>
+								</div>
+								<div>
+									<div className="content--label">
+										<h3 className="label--key">Used:</h3>
+										<span className="label--value">700 words</span>
+									</div>
+								</div>
+								<div>
+									<div className="content--label">
+										<h3 className="label--key">Available:</h3>
+										<span className="label--value">300 words</span>
+									</div>
+								</div>
+							</header>
+						</div>
+						<div className="article--menu--translations">
+							<header className="article--menu--translations--header">
+								<p className="menu--title">
 									Translation of your {type} {propKey} in {languageName} :
 								</p>
 								<div>
