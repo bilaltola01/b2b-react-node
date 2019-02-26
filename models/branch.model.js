@@ -175,7 +175,7 @@ Branch.updateWithDetails = (id, obj) => {
     promises.push(BranchLanguage.updateAll(insertNewId(id, branch.languages)));
   }
   if (branch.menus) {
-    promises.push(MenuBranch.updateAll(insertNewId(id, branch.menus)));
+    promises.push(MenuBranch.updateAll(insertNewId(id, branch.menus), branch));
   }
   if (branch.images) {
     promises.push(BranchImage.removeSelected(branch.images, branch));

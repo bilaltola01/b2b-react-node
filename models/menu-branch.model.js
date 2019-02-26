@@ -43,41 +43,23 @@ MenuBranch.createAll = (menus) => {
   }));
 };
 
-MenuBranch.updateAll = (menus) => {
-  if (!menus || menus.length <= 0) {
-    console.error('No menus specified');
+MenuBranch.updateAll = (menus, branch) => {
+  // console.log('MenuBranch.updateAll', menus)
+  if (!menus || menus.length <= 0 || !branch || !branch.BranchID) {
+    console.error('No menus or branch specified');
     return Promise.resolve([]);
   }
-
-  return Promise.all(menus.map(menu => {
-    //
-    // If the item is not already is in the db check if
-    // the same values are already somewhere
-    //
-    return MenuBranch.get({
-      MenuID: menu.MenuID,
-      BranchID: menu.BranchID
-    }).then(branchMenus => {
-      if (!branchMenus || branchMenus.length <= 0) {
-        return MenuBranch.create({
-          BranchID: menu.BranchID,
-          MenuID: menu.MenuID
-        });
-      }
-
-      return Promise.all(branchMenus.map(branchMenu => {
-        return MenuBranch.remove({
-          BranchID: branchMenu.BranchID,
-          // MenuID: branchMenu.MenuID
-        });
-      })).then(res => {
-        return MenuBranch.create({
-          BranchID: menu.BranchID,
-          MenuID: menu.MenuID
-        });
+  return MenuBranch.remove({
+    BranchID: branch.BranchID,
+    // MenuID: branchMenu.MenuID
+  }).then(() => {
+    return Promise.all(menus.map(menu => {
+      return MenuBranch.create({
+        BranchID: menu.BranchID,
+        MenuID: menu.MenuID
       });
-    });
-  }));
+    }));
+  });
 }
 
 MenuBranch.updateBulk = (branches, menus) => {
