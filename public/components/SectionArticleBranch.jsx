@@ -259,10 +259,10 @@ class SectionArticleBranch extends Component {
 								<p className="menu--title">Cuisine Types</p>
 								{cuisineComponents}
 							</div>
-							<div className="branch--languages">
-								<p className="menu--title">Languages</p>
-								{languageComponents}
-							</div>
+							{/*<div className="branch--languages">*/}
+								{/*<p className="menu--title">Languages</p>*/}
+								{/*{languageComponents}*/}
+							{/*</div>*/}
 							<div className="branch--cuisines">
 								<p className="menu--title">Menus</p>
 								{menuComponents}
