@@ -4,12 +4,12 @@ import { connect } from 'react-redux';
 import { has, filter, size, forEach, map } from 'lodash';
 
 import SectionArticleBranch from './SectionArticleBranch';
-import LanguagePicker from "./LanguagePicker";
-import * as DomUtils from "../shared/dom.utils";
-import BranchLanguagesEdit from "./BranchLanguagesEdit";
-import MenuBranchesEdit from "./MenuBranchesEdit";
+// import LanguagePicker from "./LanguagePicker";
+// import * as DomUtils from "../shared/dom.utils";
+// import BranchLanguagesEdit from "./BranchLanguagesEdit";
+// import MenuBranchesEdit from "./MenuBranchesEdit";
 import * as actionCreators from '../action-creators';
-import LanguagesEdit from "./LanguagesEdit";
+// import LanguagesEdit from "./LanguagesEdit";
 import BranchMenusEdit from "./BranchMenusEdit";
 import Checkbox from 'react-simple-checkbox';
 
@@ -19,7 +19,6 @@ class SectionArticleBranches extends Component {
 		this.state = {
       selected: {},
 			menus: [],
-			languages: []
     };
 		this.onToggleSelection = this.onToggleSelection.bind(this);
 		this.toggleAllSelection = this.toggleAllSelection.bind(this);
@@ -71,18 +70,19 @@ class SectionArticleBranches extends Component {
     });
 
 		const menus = map(this.state.menus, item => item.MenuID)
-		const languages = map(this.state.languages, item => item.LanguageID)
-		console.log('onApply', selected, branches, menus, languages)
+		// console.log('onApply', selected, branches, menus)
 		if (size(branches) > 0 && size(menus) > 0) {
       this.props.dispatch(actionCreators.addMenusToBranches(branches, menus, (res) => {
         console.log('res', res);
-        this.setState({menus: [], languages: []});
+        this.setState({menus: []}, () => {
+          this.props.dispatch(actionCreators.getProfile());
+				});
+
       }));
     }
 	}
 
   componentDidMount() {
-    this.props.dispatch(actionCreators.getLanguages());
     this.props.dispatch(actionCreators.getMenus());
   }
 
@@ -125,7 +125,6 @@ class SectionArticleBranches extends Component {
 				{id: 2, title: 'Assign Language', codeFull: 'language'},
 			]
     };
-    const availableLanguages = this.props.availableLanguages || [];
     const availableMenus = this.props.availableMenus || [];
 
 		return (
@@ -187,7 +186,6 @@ SectionArticleBranches.propTypes = {
 const mapStateToProps = (state) => {
   // console.log(state);
   return {
-    availableLanguages: state._languages.languages,
     availableMenus: state._menus && state._menus.menus || []
   };
 };
