@@ -198,6 +198,7 @@ class SectionArticleMenu extends Component {
 							<span className="label--value">{languagesList}</span>
 						</div>
 					</div>
+					<div>343 words translated (657 more words may be translated until March, 19)</div>
 				</header>
 				<Link to="/translations" >
 					<button className="button--action button--action-filled">See Translations</button>
