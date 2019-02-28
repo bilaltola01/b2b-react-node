@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router-dom';
 import { Redirect } from 'react-router';
 
+const constants = require('../../constants');
 const classNames = require('classnames');
 
 import Menu from './Menu';
@@ -217,9 +218,9 @@ class SectionArticleMenu extends Component {
 						<div className="header--actions">
 							<ul>
 								<li>
-									{translationStatus === 'translating'
+									{translationStatus === constants.STRAKER_STATUS_IN_PROGRESS || translationStatus === constants.STRAKER_STATUS_QUEUED
 										? <div className="status--translating">Translating <span className="status--icon-translating"></span></div>
-										: ( translationStatus === 'translated'
+										: ( translationStatus === constants.STRAKER_STATUS_COMPLETED
 											? <div className="status--translated">Translated <span className="status--icon-translated"></span></div>
 											: <div className="status--translate">Translate <span onClick={this.handleTranslate} className="status--icon-translate"></span></div>
 										)

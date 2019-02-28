@@ -76,6 +76,14 @@ Menu.get = (conditions) => {
   return db('Menu').where(conditions).select('*');
 };
 
+Menu.getExtended = (conditions) => {
+  return db('Menu').where(conditions).select('*').then(menus => {
+    return Promise.all(menus.map(menu => {
+      return createMenuContainer(menu, {category: true});
+    }));
+  });;
+};
+
 Menu.getWithDetails = (conditions) => {
   return db('Menu')
     .innerJoin('MenuBranch', 'Menu.MenuID', 'MenuBranch.MenuID')
@@ -87,7 +95,8 @@ Menu.getWithDetails = (conditions) => {
 };
 
 
-function createMenuContainer (menu) {
+function createMenuContainer (menu, hidden = {}) {
+
   return new Promise((resolve, reject) => {
     Promise.all([
       MenuCategory.getWithDetails({MenuID: menu.MenuID}),
@@ -95,10 +104,17 @@ function createMenuContainer (menu) {
       MenuTranslation.get({MenuID: menu.MenuID}),
     ]).then(res => {
       // console.log(res);
+      // console.log('MenuTranslation res', menu.MenuID, res[2])
       let obj = menu;
-      obj.categories = res[0];
-      obj.languages = res[1];
-      obj.translations = res[2];
+      if (!hidden.category) {
+        obj.categories = res[0];
+      }
+      if (!hidden.language) {
+        obj.languages = res[1];
+      }
+      if (!hidden.translation) {
+        obj.translations = res[2];
+      }
 
       resolve(obj);
     }).catch(err => {
