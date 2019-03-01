@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router-dom';
 import { Redirect } from 'react-router';
+import { forEach } from 'lodash';
 
 const constants = require('../../constants');
 const classNames = require('classnames');
@@ -61,7 +62,6 @@ class SectionArticleMenu extends Component {
 			languages,
 			translations,
 			currencies,
-			translationStatus
 		} = this.props;
 
 		// console.log(this.props);
@@ -105,6 +105,7 @@ class SectionArticleMenu extends Component {
 			return acc;
 		}, []) : [];
 
+		console.log('uniqueLanguages', uniqueLanguages, translations)
 		const languagesList = (uniqueLanguages && uniqueLanguages.length > 0) ? uniqueLanguages.map((translation, index) => {
 			return (index < uniqueLanguages.length - 1)
 				? (
@@ -119,6 +120,22 @@ class SectionArticleMenu extends Component {
 				);
 		}) : null;
 
+		let translationStatus = false;
+		forEach(translations, (translation) => {
+				switch (translation.Status) {
+					case constants.STRAKER_STATUS_IN_PROGRESS:
+					case constants.STRAKER_STATUS_QUEUED:
+            translationStatus = constants.STRAKER_STATUS_QUEUED;
+            break;
+					case constants.STRAKER_STATUS_COMPLETED:
+            translationStatus = !translationStatus ? constants.STRAKER_STATUS_COMPLETED : translationStatus;
+            break;
+					default:
+            translationStatus = 'TRANSLATE';
+        }
+		})
+
+		console.log('translationStatus', translationStatus);
 /*
 		let translationComponents = (translations.length > 0) ? translations.map((translation, index) => {
 			return (
