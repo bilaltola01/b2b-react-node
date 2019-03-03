@@ -20,6 +20,7 @@ class SectionArticleTranslations extends Component {
 				type="menu"
 				originalText={translation.OriginalText || translation.originaltext}
 				translatedText={translation.Text || translation.text}
+				wordCount={translation.WordCount || 0}
 				languageName={translation.BranchLanguageName || translation.name}
 				propKey={translation.PropKey || translation.propKey}
 				status={translation.Status || translation.status}

@@ -485,6 +485,25 @@ export function getCategories (type, cb) {
   }
 };
 
+export function getTranslation (id, cb) {
+  return {
+    types: ['GET_TRANSLATION_REQUEST', 'GET_TRANSLATION_SUCCESS', 'GET_TRANSLATION_FAILURE'],
+    promise: () => {
+      return new Promise((resolve, reject) => {
+        LanguageService.getTranslation(id).then((res) => {
+          // console.log('request succeeded with JSON response', res);
+
+          if (res && typeof cb === 'function') {
+            cb(res);
+          }
+
+          resolve(res);
+        });
+      });
+    }
+  }
+};
+
 export function getLanguages (cb) {
   return {
     types: ['GET_LANGUAGES_REQUEST', 'GET_LANGUAGES_SUCCESS', 'GET_LANGUAGES_FAILURE'],

@@ -11,7 +11,7 @@ import Modal from "react-modal";
 
 let createHandlers = (ctx) => {
 	let onTranslate = (props) => {
-		// console.log('menu to be translated!');
+		console.log('menu to be translated!', props);
 
 		if (props.hasOwnProperty('menu')) {
 			ctx.props.dispatch(actionCreators.translateMenu(props.component.props, onMenuTranslateRequestDone));
@@ -19,7 +19,7 @@ let createHandlers = (ctx) => {
 	};
 
 	let onMenuTranslateRequestDone = (obj) => {
-		// console.log('translation request done! ');
+		console.log('translation request done! ', obj);
 
 		ctx.setState({
 			isTranslateRequestDone: true,
@@ -46,11 +46,22 @@ class Alert extends Component {
       showRemoveConfirm: true,
 		};
 		this.handlers = createHandlers(this);
+		this.handlePurchase = this.handlePurchase.bind(this);
+	}
+
+  handlePurchase() {
+    this.handlers.onTranslate(this.props);
+
+    // this.props.dispatch(actionCreators.getTranslation(1, (res) => {
+    // 	console.log('getTranslation', res)
+    // }));
+    this.setState({ showRemoveConfirm: false });
 	}
 
   renderConfirm() {
 		const { history } = this.props;
     const { loading, showRemoveConfirm } = this.state;
+    const quote = 3000;
     const type = 1;
     // TODO check subscription and limits
     let message = null;
@@ -64,7 +75,7 @@ class Alert extends Component {
 				buttons = [<button
 						key="1"
 						disabled={loading}
-						onClick={() => {history.push('/subscriptions')}}
+						onClick={this.handlePurchase}
 						className="button--action button--action-filled"
 					>
             Purchase

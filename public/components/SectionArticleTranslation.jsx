@@ -60,6 +60,7 @@ class SectionArticleTranslation extends Component {
 			translatedText,
 			languageName,
 			propKey,
+      wordCount,
 			status
 		} = this.props;
 
@@ -101,6 +102,8 @@ class SectionArticleTranslation extends Component {
 			</span>
 		);
 
+    const limit = 3000 // TODO remove hard code limit
+
 		return (
 			<div className="article--menu">
 				<div className="branch--contact aside--section contacts--support">
@@ -120,19 +123,19 @@ class SectionArticleTranslation extends Component {
 								<div>
 									<div className="content--label">
 										<h3 className="label--key">Total:</h3>
-										<span className="label--value">1,000 words</span>
+										<span className="label--value">{limit} words</span>
 									</div>
 								</div>
 								<div>
 									<div className="content--label">
 										<h3 className="label--key">Used:</h3>
-										<span className="label--value">700 words</span>
+										<span className="label--value">{wordCount} words</span>
 									</div>
 								</div>
 								<div>
 									<div className="content--label">
 										<h3 className="label--key">Available:</h3>
-										<span className="label--value">300 words</span>
+										<span className="label--value">{limit - wordCount} words</span>
 									</div>
 								</div>
 							</header>

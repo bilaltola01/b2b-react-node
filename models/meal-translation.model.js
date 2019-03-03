@@ -41,28 +41,51 @@ MealTranslation.create = (obj) => {
   };
 
   return rp(options).then((res) => {
-    // console.log(res);
+    // console.log('translate result', res);
 
     if (!res || !res.success) {
       return Promise.reject(res);
     }
 
-    // If successful, update the db entry with the translation PENDING
-    let dbObj = {
-      MealID: obj.mealId,
-      PropKey: obj.key,
-      Title: meal.title,
-      JobNumber: res.job_key,
-      WordCount: parseInt(res.wordcount, 10),
-      BranchLanguageName: meal.tl,
-      Status: 'PENDING',
-      OriginalText: meal.payload,
-      Date: dateUtils.toMysqlDate(new Date())
+    // get translation
+    const options = {
+      method: 'GET',
+      uri: constants.STRAKER_TRANSLATION_URL + '?job_key=' + res.job_key,
+      json: true,
+      headers: {
+        "content-type": "application/json",
+        "cache-control": "no-cache",
+        "Authorization": "Bearer " + constants.STRAKER_TOKEN
+      }
     };
 
-    return db('MealTranslation').insert(dbObj).returning('MealTranslationID');
+    return rp(options).then((res) => {
+      const data = res && res.job && res.job[0]
+      if (data) {
+        // console.log('JOB INFO', data.job_key, data.status, data.wordcount);
+
+        // update DB
+        let dbObj = {
+          MealID: obj.mealId,
+          PropKey: obj.key,
+          Title: meal.title,
+          JobNumber: data.job_key,
+          WordCount: parseInt(data.wordcount, 10),
+          BranchLanguageName: meal.tl,
+          Status: data.status,
+          OriginalText: meal.payload,
+          Date: dateUtils.toMysqlDate(new Date())
+        };
+
+        return db('MealTranslation').insert(dbObj).returning('MealTranslationID');
+      }
+
+    });
+
+      // If successful, update the db entry with the translation PENDING
+
   }).catch((err) => {
-    console.error(err);
+    console.error('MealTranslation.create', options, err);
   });
 };
 
@@ -75,6 +98,19 @@ MealTranslation.update = (id, obj) => {
 
   return MealTranslation.getById(id).update(meal).then(res => {
     return MealTranslation.getById(id);
+  });
+};
+
+// Update new meal in the database by job_key
+// Returns a resolved Promise containing the new language
+MealTranslation.updateByJobKey = (id, obj) => {
+  let meal = obj;
+  meal.DateUpdated = dateUtils.toMysqlDate(new Date());
+
+  db('MealTranslation').where({
+    JobNumber: id
+  }).first('*').update(meal).then(res => {
+    console.log('meal updated', id);
   });
 };
 

@@ -120,8 +120,11 @@ class SectionArticleMenu extends Component {
 				);
 		}) : null;
 
+    const limit = 3000 // TODO remove hard code limit
 		let translationStatus = false;
+		let wordCount = 0;
 		forEach(translations, (translation) => {
+        wordCount += translation.WordCount;
 				switch (translation.Status) {
 					case constants.STRAKER_STATUS_IN_PROGRESS:
 					case constants.STRAKER_STATUS_QUEUED:
@@ -215,7 +218,7 @@ class SectionArticleMenu extends Component {
 							<span className="label--value">{languagesList}</span>
 						</div>
 					</div>
-					<div>343 words translated (657 more words may be translated until March, 19)</div>
+					<div>{wordCount} words translated ({limit - wordCount} more words may be translated until March, 19)</div>
 				</header>
 				<Link to="/translations" >
 					<button className="button--action button--action-filled">See Translations</button>
