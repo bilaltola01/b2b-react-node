@@ -96,7 +96,7 @@ class SectionArticleAddMenu extends Component {
               <label className="label--edit">Enter new Menu Name:</label>
               <input
                 className="input--edit"
-                required
+                // required
                 type="text"
                 name="menu--price"
                 id="menu-title"
@@ -127,7 +127,7 @@ class SectionArticleAddMenu extends Component {
               <label className="label--edit">Enter new Menu Price:</label>
               <input
                 className="input--edit"
-                required
+                // required
                 type="number"
                 step="0.01"
                 name="menu--price"
