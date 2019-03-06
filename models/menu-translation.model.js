@@ -52,21 +52,43 @@ MenuTranslation.create = (obj) => {
       return Promise.reject(res);
     }
 
-    // If successful, update the db entry with the translation PENDING
-    let dbObj = {
-      MenuID: obj.menuId,
-      PropKey: obj.key,
-      Title: menu.title,
-      JobNumber: res.job_key,
-      WordCount: parseInt(res.wordcount, 10),
-      BranchLanguageName: menu.tl,
-      BranchLanguageID: obj.branchLanguageId,
-      Status: 'PENDING',
-      OriginalText: menu.payload,
-      Date: dateUtils.toMysqlDate(new Date())
+    // get translation
+    const options = {
+      method: 'GET',
+      uri: constants.STRAKER_TRANSLATION_URL + '?job_key=' + res.job_key,
+      json: true,
+      headers: {
+        "content-type": "application/json",
+        "cache-control": "no-cache",
+        "Authorization": "Bearer " + constants.STRAKER_TOKEN
+      }
     };
 
-    return db('MenuTranslation').insert(dbObj).returning('MenuTranslationID');
+    return rp(options).then((res) => {
+      const data = res && res.job && res.job[0]
+      if (data) {
+        // console.log('JOB INFO', data.job_key, data.status, data.wordcount);
+
+        // update DB
+        // If successful, update the db entry with the translation PENDING
+        let dbObj = {
+          MenuID: obj.menuId,
+          PropKey: obj.key,
+          Title: menu.title,
+          JobNumber: data.job_key,
+          WordCount: parseInt(data.wordcount, 10),
+          BranchLanguageName: menu.tl,
+          BranchLanguageID: obj.branchLanguageId,
+          Status: data.status,
+          OriginalText: menu.payload,
+          Date: dateUtils.toMysqlDate(new Date())
+        };
+
+        return db('MenuTranslation').insert(dbObj).returning('MenuTranslationID');
+      }
+
+    });
+
   }).catch((err) => {
     console.error(err);
   });
