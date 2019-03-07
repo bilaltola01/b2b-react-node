@@ -5742,7 +5742,7 @@ MENU DETAIL
     color: #fff;
 }
 
-.branch--contact--header.status--pending {
+.branch--contact--header.status--pending, .branch--contact--header.status--queued {
     background-color: #ffa600;
 }
 
