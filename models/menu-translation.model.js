@@ -138,6 +138,17 @@ MenuTranslation.getAll = () => {
   return db.select('*').from('MenuTranslation');
 };
 
+// Update new meal in the database by job_key
+// Returns a resolved Promise containing the new language
+MenuTranslation.updateByJobKey = (id, obj) => {
+    let menu = obj;
+    menu.DateUpdated = dateUtils.toMysqlDate(new Date());
 
+    db('MenuTranslation').where({
+        JobNumber: id
+    }).first('*').update(menu).then(res => {
+        // console.log('menu updated', id);
+    });
+};
 
 module.exports = MenuTranslation;
