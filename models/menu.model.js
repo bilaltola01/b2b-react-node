@@ -42,7 +42,7 @@ Menu.update = (id, obj) => {
     MenuID: menu.MenuID,
     Title: menu.Title,
     Description: menu.Description,
-    Price: menu.Price,
+    Price: menu.Price || null,
     DateUpdated: menu.DateUpdated
   }
   return Menu.getById(id).update(data).then(res => {
