@@ -28,7 +28,7 @@ let createHandlers = (ctx) => {
 			}
 
 			if (ctx.props.onChange && typeof ctx.props.onChange === 'function') {
-				ctx.props.onChange('languages', {data: languages});
+				ctx.props.onChange(ctx.props.name, {data: languages});
 			}
 
 			return {
@@ -48,7 +48,7 @@ let createHandlers = (ctx) => {
 
 			// console.log(languages);
 
-			ctx.props.onChange('languages', {data: languages});
+			ctx.props.onChange(ctx.props.name, {data: languages});
 
 			return {
 				allLanguages: languages
@@ -113,7 +113,7 @@ class BranchLanguagesEdit extends Component {
 	}
 
 	render() {
-		const { languages, availableLanguages, onChange } = this.props;
+		const { languages, availableLanguages, onChange, label } = this.props;
 
 		const selectedBranches = (this.props.menu && this.props.menu.branches && this.props.menu.branches.length > 0) ? this.props.menu.branches : [];
 		const branchLanguages = (selectedBranches && selectedBranches.length > 0) ? selectedBranches.reduce((acc, current) => {
@@ -133,15 +133,19 @@ class BranchLanguagesEdit extends Component {
 		};
 
 		// console.log(this.state);
+		console.log('allLanguages', this.state.allLanguages);
 
 		const languageComponents = (this.state.allLanguages && this.state.allLanguages.length > 0) ? this.state.allLanguages.map((language, index) => {
+			console.log('language', language)
 			const finalLanguage = language;
-			return <BranchLanguageEdit id={finalLanguage.LanguageID} code={finalLanguage.Code} codeFull={finalLanguage.CodeFull} name={finalLanguage.Name} title={finalLanguage.Title} onRemove={(e) => this.handlers.onRemove({id: finalLanguage.LanguageID})} key={finalLanguage.LanguageID} />;
+			if (finalLanguage) {
+                return <BranchLanguageEdit id={finalLanguage.LanguageID} code={finalLanguage.Code} codeFull={finalLanguage.CodeFull} name={finalLanguage.Name} title={finalLanguage.Title} onRemove={(e) => this.handlers.onRemove({id: finalLanguage.LanguageID})} key={index} />;
+			}
 		}) : null;
 
 		return (branchLanguages && branchLanguages.length > 0) ? (
 			<div>
-				<p className="menu--title">Languages</p>
+				<p className="menu--title">{label ? label : 'Translate to'}</p>
 				<div>
 					{languageComponents}
 				</div>

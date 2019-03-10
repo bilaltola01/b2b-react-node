@@ -16,6 +16,7 @@ const menuController = require('../controllers/menu.controller');
 const menuBranchController = require('../controllers/menu-branch.controller');
 const menuCategoryController = require('../controllers/menu-category.controller');
 const menuLanguageController = require('../controllers/menu-language.controller');
+const menuOriginalLanguageController = require('../controllers/menu-original-language.controller');
 const branchLanguageController = require('../controllers/branch-language.controller');
 const branchCurrencyController = require('../controllers/branch-currency.controller');
 const branchCuisineController = require('../controllers/branch-cuisine.controller');
@@ -155,6 +156,11 @@ let Routes = class {
         router.post('/menu-language', menuLanguageController.post);
         router.put('/menu-language', menuLanguageController.put);
         router.delete('/menu-language', menuLanguageController.remove);
+
+        router.get('/menu-original-language', menuOriginalLanguageController.get);
+        router.post('/menu-original-language', menuOriginalLanguageController.post);
+        router.put('/menu-original-language', menuOriginalLanguageController.put);
+        router.delete('/menu-original-language', menuOriginalLanguageController.remove);
 
         router.get('/meal', mealController.get);
         router.post('/meal', mealController.post);

@@ -6,6 +6,7 @@ import { StorageManagerInstance } from '../../shared/storage.utils';
 import * as MenuBranch from './menu-branch.service';
 import * as MenuCategory from './menu-category.service';
 import * as MenuLanguage from './menu-language.service';
+import * as MenuOriginalLanguage from './menu-original-language.service';
 import * as Meal from './meal.service';
 
 
@@ -15,6 +16,7 @@ export async function updateMenu(opts) {
         return MenuCategory.removeSelectedMenuCategory(opts)
             .then(MenuCategory.updateMenuCategories(menuId, opts.categories))
             .then(MenuLanguage.updateMenuLanguages(menuId, opts.languages))
+            .then(MenuOriginalLanguage.updateMenuLanguages(menuId, opts.originalLanguages))
             .then(MenuBranch.updateMenuBranches(menuId, opts.branches))
             .then(Ajax().put('/menu', {
                 body: JSON.stringify(convertOpts(opts, true)),
@@ -34,6 +36,7 @@ export async function updateMenu(opts) {
 
             await MenuCategory.postMenuCategories(id, obj.categories);
             await MenuLanguage.postMenuLanguages(id, obj.languages);
+            await MenuOriginalLanguage.postMenuLanguages(id, obj.originalLanguages);
 
             await Promise.all(
                 obj.branches.map(async (branch) => await MenuBranch.postMenuBranch({

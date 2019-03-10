@@ -6,6 +6,7 @@ const db = DBLayer.connection;
 const dateUtils = require('../shared/date-utils');
 
 const MenuCategory = require('./menu-category.model');
+const MenuOriginalLanguage = require('./menu-original-language.model');
 const MenuLanguage = require('./menu-language.model');
 const MenuTranslation = require('./menu-translation.model');
 const Meal = require('./meal.model');
@@ -100,20 +101,25 @@ function createMenuContainer (menu, hidden = {}) {
   return new Promise((resolve, reject) => {
     Promise.all([
       MenuCategory.getWithDetails({MenuID: menu.MenuID}),
-      MenuLanguage.get({MenuID: menu.MenuID}),
+      MenuOriginalLanguage.getWithDetails({MenuID: menu.MenuID}),
+      MenuLanguage.getWithDetails({MenuID: menu.MenuID}),
       MenuTranslation.get({MenuID: menu.MenuID}),
     ]).then(res => {
       // console.log(res);
-      // console.log('MenuTranslation res', menu.MenuID, res[2])
+      // console.log('MenuOriginalLanguage res', res[1])
+      // console.log('MenuLanguage res', res[2])
       let obj = menu;
       if (!hidden.category) {
         obj.categories = res[0];
       }
       if (!hidden.language) {
-        obj.languages = res[1];
+        obj.originalLanguages = res[1];
+      }
+      if (!hidden.language) {
+        obj.languages = res[2];
       }
       if (!hidden.translation) {
-        obj.translations = res[2];
+        obj.translations = res[3];
       }
 
       resolve(obj);

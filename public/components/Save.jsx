@@ -61,6 +61,13 @@ let createHandlers = (ctx) => {
 			});
 		}
 
+		if (!menu.originalLanguages || menu.originalLanguages.length <= 0) {
+			errors.push({
+				name: 'originalLanguages',
+				message: 'Please choose at least one translation Language for your menu.'
+			});
+		}
+
 		if (!menu.categories || menu.categories.length <= 0) {
 			errors.push({
 				name: 'categories',
@@ -103,7 +110,7 @@ let createHandlers = (ctx) => {
 			}
 		}
 
-		// console.log('Save errors', errors)
+		console.log('Save errors', errors)
 		ctx.setState({
 			validationErrors: errors,
 			isValid: !errors.length
@@ -117,7 +124,7 @@ let createHandlers = (ctx) => {
 	let onSave = (props) => {
 		validateState(ctx.props.menu, () => {
 			if (ctx.state.isValid) {
-				// console.log('should save the object here');
+				console.log('should save the object here', props.component);
 
 				switch (props.type) {
 					case 'menu':
@@ -155,6 +162,7 @@ class Save extends Component {
 	render() {
 		const { type, component } = this.props;
 
+		console.log('menu', this.props.menu);
 		// console.log(this.props);
 
 		const saveComponent = (this.state.isSaved)

@@ -105,7 +105,7 @@ class SectionArticleMenu extends Component {
 			return acc;
 		}, []) : [];
 
-		console.log('uniqueLanguages', uniqueLanguages, translations)
+		// console.log('uniqueLanguages', uniqueLanguages, translations)
 		const languagesList = (uniqueLanguages && uniqueLanguages.length > 0) ? uniqueLanguages.map((translation, index) => {
 			return (index < uniqueLanguages.length - 1)
 				? (
@@ -138,7 +138,7 @@ class SectionArticleMenu extends Component {
         }
 		})
 
-		console.log('translationStatus', translationStatus);
+		// console.log('translationStatus', translationStatus);
 /*
 		let translationComponents = (translations.length > 0) ? translations.map((translation, index) => {
 			return (

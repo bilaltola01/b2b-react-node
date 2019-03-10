@@ -15,7 +15,7 @@ let MenuLanguage = class {
 MenuLanguage.create = (obj) => {
   let language = obj;
   language.Date = dateUtils.toMysqlDate(new Date());
-
+    console.log('MenuLanguage.post', language);
   // console.log(language);
   return db('MenuLanguage').insert(language).returning('MenuLanguageID');
 };
@@ -85,17 +85,22 @@ MenuLanguage.getAllByBranch = (id) => {
 };
 
 function createMenuLanguage (menuLanguage) {
+  console.log('createMenuLanguage', menuLanguage)
   return new Promise((resolve, reject) => {
-    Promise.all([
-      Language.getWithDetails({LanguageID: menuLanguage.LanguageID})
-    ]).then(res => {
-      // console.log(res);
-      let obj = menuLanguage;
-      obj.Language = res[0];
-      resolve(obj);
-    }).catch(err => {
-      reject(err);
-    });
+    if (menuLanguage.BranchLanguageID) {
+        Promise.all([
+            Language.getWithDetails({LanguageID: menuLanguage.BranchLanguageID})
+        ]).then(res => {
+            // console.log(res);
+            let obj = menuLanguage;
+            obj.Language = res[0];
+            resolve(obj);
+        }).catch(err => {
+            reject(err);
+        });
+    } else {
+        resolve();
+    }
   });
 }
 

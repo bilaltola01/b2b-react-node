@@ -49,6 +49,7 @@ class SectionArticleAddMenu extends Component {
     const { title, component } = this.props;
 
     let categories = [];
+    let originalLanguages = [];
     let languages = [];
     let branches = [];
 
@@ -68,12 +69,25 @@ class SectionArticleAddMenu extends Component {
       />
     );
 
+    const menuOriginalLanguages =
+      this.props.menu &&
+      this.props.menu.branches &&
+      this.props.menu.branches.length > 0 ? (
+        <BranchLanguagesEdit
+          languages={originalLanguages}
+          label="Original Language"
+          name="originalLanguages"
+          onChange={this.handlers.onChanges}
+        />
+      ) : null;
+
     const menuLanguages =
       this.props.menu &&
       this.props.menu.branches &&
       this.props.menu.branches.length > 0 ? (
         <BranchLanguagesEdit
           languages={languages}
+          name="languages"
           onChange={this.handlers.onChanges}
         />
       ) : null;
@@ -141,6 +155,8 @@ class SectionArticleAddMenu extends Component {
           </form>
 
           <div className="menu--languages">{menuBranches}</div>
+
+          <div className="menu--languages">{menuOriginalLanguages}</div>
 
           <div className="menu--languages">{menuLanguages}</div>
 

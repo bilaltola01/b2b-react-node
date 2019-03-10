@@ -20,6 +20,7 @@ class SectionArticleEditMenusDetail extends Component {
 				price={menu.price || menu.Price}
 				categories={menu.categories}
 				currencies={currencies}
+				originalLanguages={menu.originalLanguages}
 				languages={languages}
 				branchesIds={branchesIds}
 				translations={menu.translations}

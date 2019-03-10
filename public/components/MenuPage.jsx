@@ -93,7 +93,6 @@ class MenuPage extends Component {
             Email: branch.Email,
             Name: branch.Name,
             Tel: branch.Tel,
-            Tel: branch.Tel,
             languages: branch.languages,
             cuisines: branch.cuisines,
             currencies: branch.currencies,
@@ -156,11 +155,14 @@ class MenuPage extends Component {
     const currentBranchMenuId = (currentBranchMenu && currentBranchMenu.length > 0) ? currentBranchMenu[0].BranchID : 0;
     const currentBranch = this.getCurrentBranch(profile, currentBranchMenuId);
     const currencies = this.getCurrencies(currentBranch);
-    const languages = this.getLanguages(currentBranch);
+
     const filteredMenus = this.getFilteredMenusById(menus, id);
     const currentMenu = this.getCurrentMenu(filteredMenus);
     const menuTitle = (currentMenu && currentMenu.Title) ? currentMenu.Title : ("Menu " + id);
+    const originalLanguages = currentMenu && currentMenu.originalLanguages;
+    const languages = currentMenu && currentMenu.languages;
 
+    console.log('currentMenu', currentMenu)
     // console.log('menus', menus)
     // console.log("currentBranchMenuId " + currentBranchMenuId)
     // console.log(currentBranchMenu)
@@ -196,7 +198,8 @@ class MenuPage extends Component {
             props: {
               menus: filteredMenus,
               currencies: currencies,
-              languages: languages
+              languages: languages,
+              originalLanguages: originalLanguages
             }
           }
         }]
