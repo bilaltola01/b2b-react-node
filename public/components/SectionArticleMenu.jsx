@@ -1,7 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router-dom';
 import { Redirect } from 'react-router';
+import Modal from "react-modal";
 import { forEach } from 'lodash';
+import MenuCopy from "./MenuCopy";
 
 const constants = require('../../constants');
 const classNames = require('classnames');
@@ -62,6 +64,7 @@ class SectionArticleMenu extends Component {
 			languages,
 			translations,
 			currencies,
+            onCloneMenu
 		} = this.props;
 
 		// console.log(this.props);
@@ -246,6 +249,16 @@ class SectionArticleMenu extends Component {
 											: <div className="status--translate">Translate <span onClick={this.handleTranslate} className="status--icon-translate"></span></div>
 										)
 									}
+								</li>
+								<li>
+									<MenuCopy
+										onClone={onCloneMenu}
+										menu={{
+											id,
+											title,
+											description
+										}}
+									/>
 								</li>
 								<li><Link to={"/menu/edit/" + id} className="action--edit">Edit</Link></li>
 								<li><Link to={"/menu/delete/" + id} className="action--delete">Delete</Link></li>

@@ -137,6 +137,7 @@ let Routes = class {
         router.post('/menu', menuController.post);
         router.put('/menu', menuController.put);
         router.delete('/menu', menuController.remove);
+        router.post('/menu-clone', menuController.clone);
         router.post('/menu-clone-category', menuController.cloneCategory);
         router.post('/menu-clone-meal', menuController.cloneMeal);
 

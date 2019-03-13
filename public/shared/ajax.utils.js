@@ -45,7 +45,7 @@ export let Ajax = (url) => {
 
     function parseJSON (response) {
         // console.log(response, 'ttt' )
-        return  response.json();
+        return  response && response.json();
     };
 
     return {

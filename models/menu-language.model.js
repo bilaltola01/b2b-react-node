@@ -85,7 +85,7 @@ MenuLanguage.getAllByBranch = (id) => {
 };
 
 function createMenuLanguage (menuLanguage) {
-  console.log('createMenuLanguage', menuLanguage)
+  // console.log('createMenuLanguage', menuLanguage)
   return new Promise((resolve, reject) => {
     if (menuLanguage.BranchLanguageID) {
         Promise.all([

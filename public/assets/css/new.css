@@ -5921,7 +5921,14 @@ MENU DETAIL
     margin-top: -4px;
     position: relative;
 }
-
+.menu--clone {
+    float: none;
+    margin: 0;
+    display: block;
+}
+.menu--clone button {
+    display: flex;
+}
 .menu--copy > button > img{
     border: none;
 }

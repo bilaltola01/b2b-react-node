@@ -1,10 +1,11 @@
 "use strict";
-
+const forEach = require('lodash/forEach');
 const md5 = require('md5');
 const DBLayer = require('../DBLayer');
 const db = DBLayer.connection;
 const dateUtils = require('../shared/date-utils');
 
+const MenuBranch = require('./menu-branch.model');
 const MenuCategory = require('./menu-category.model');
 const MenuOriginalLanguage = require('./menu-original-language.model');
 const MenuLanguage = require('./menu-language.model');
@@ -148,10 +149,52 @@ Menu.getAll = () => {
  * @param {object} category
  * @param {object} toMenu
  */
+Menu.clone = async(menu) => {
+  // const menu = await Menu.getById(toMenu.MenuID || toMenu.id);
+  if(!menu) return false;
+  // console.log('menu: ', menu);
+  const cc = { MenuID: menu.MenuID };
+  let menuData = await Menu.get({MenuID: menu.MenuID});
+  const categories = await MenuCategory.getWithDetails(cc);
+  // console.log('categories', categories);
+  // const menuData = await Menu.getWithDetails({MenuID: menu.MenuID, BranchID: menu.BranchID});
+  menuData = menuData && menuData[0];
+  if (!menuData) return false;
+  const { MenuID, ...data } = menuData;
+  // console.log('data', data);
+  let newMenuId = await Menu.create({ ...data, Title: `Copy of ${data.Title}` });
+  newMenuId = newMenuId && newMenuId[0];
+  // console.log('newMenuId', newMenuId);
+  const branches = await MenuBranch.get({MenuID: menu.MenuID});
+  forEach(branches, async (branch) => {
+    await MenuBranch.create({MenuID: newMenuId, BranchID: branch.BranchID});
+  });
+  // console.log('branches', branches);
+  const originalLanguages = await MenuOriginalLanguage.get({MenuID: menu.MenuID});
+  const languages = await MenuLanguage.get({MenuID: menu.MenuID});
+  forEach(originalLanguages, async (language) => {
+    await MenuOriginalLanguage.create({MenuID: newMenuId, BranchLanguageID: language.BranchLanguageID});
+  });
+  forEach(languages, async (language) => {
+    await MenuLanguage.create({MenuID: newMenuId, BranchLanguageID: language.BranchLanguageID});
+  });
+  // console.log('originalLanguages', originalLanguages, languages);
+  forEach(categories, async (category) => {
+    await Menu.cloneCategory(category, {MenuID: newMenuId});
+  });
+  // console.log(' done: ');
+  return true;
+}
+
+/**
+ * @description clone a category to an existing menu
+ * @param {object} category
+ * @param {object} toMenu
+ */
 Menu.cloneCategory = async(fromCategory, toMenu) => {
   const menu = await Menu.getById(toMenu.MenuID || toMenu.id);
   if(!menu) return;
-  console.log('menu: ', menu.MenuID);
+  // console.log('menu: ', menu.MenuID);
   const cc = {MenuID: menu.MenuID, CategoryID: fromCategory.CategoryID || fromCategory.id };
   let [category] = await MenuCategory.get(cc);
   if(!category) {
@@ -160,11 +203,14 @@ Menu.cloneCategory = async(fromCategory, toMenu) => {
   }
   const meals = fromCategory.meals;
   const MenuCategoryID = category.MenuCategoryID;
-  console.log('category: ', category.MenuCategoryID);
-  for(let i =0; i < meals.length; i+=1){
-    const meal = meals[i];
-    await Menu.cloneMeal(meal, category, menu);
+  // console.log('category: ', category.MenuCategoryID);
+  if (meals && meals.length > 0) {
+    for(let i =0; i < meals.length; i+=1){
+      const meal = meals[i];
+      await Menu.cloneMeal(meal, category, menu);
+    }
   }
+
   console.log(' done: ');
   return true;
 }
