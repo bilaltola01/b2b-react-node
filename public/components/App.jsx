@@ -27,6 +27,7 @@ import ResetPassword from './ResetPassword'
 import Terms from './Terms'
 import Page from './Page';
 import PrivateRoute from './PrivateRoute';
+import LoadingSpinner from "./LoadingSpinner";
 
 let createHandlers = (dispatcher) => {
   let checkAuth = () => {
@@ -49,7 +50,7 @@ class App extends Component {
   }
 
   render () {
-    const { dispatch } = this.props;
+    const { dispatch, loading } = this.props;
 
     const AuthRootRenderer = () => {
       return (
@@ -80,7 +81,8 @@ class App extends Component {
 
     return (this.props.isAuthenticated !== undefined) ? (
       <Router>
-        <div>
+        <div style={{position: 'relative'}}>
+          <LoadingSpinner loading={loading} />
           <Route path="/" render={AuthRootRenderer} />
           <Route path="/home" render={HomeRenderer} />
           <Route path="/signup" render={SignupRenderer} />
@@ -111,6 +113,7 @@ App.propTypes = {
 const mapStateToProps = (state) => {
   return {
     isAuthenticated: state._auth.authenticated,
+    loading: state._profile.loading,
     token: state._auth.token
   };
 };

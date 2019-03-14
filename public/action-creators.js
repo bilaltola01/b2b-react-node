@@ -640,6 +640,19 @@ export function saveProfile (data, cb) {
   }
 };
 
+export function setLoading (value) {
+  return {
+    types: ['SET_LOADING', 'SET_LOADING'],
+    promise: () => {
+      return new Promise((resolve, reject) => {
+        resolve(
+          value
+        );
+      });
+    }
+  }
+};
+
 // TO SAVE
 export function uploadImage (data, cb) {
   return {

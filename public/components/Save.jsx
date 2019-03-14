@@ -124,11 +124,15 @@ let createHandlers = (ctx) => {
 	let onSave = (props) => {
 		validateState(ctx.props.menu, () => {
 			if (ctx.state.isValid) {
+        this.props.dispatch(actionCreators.setLoading(true));
 				console.log('should save the object here', props.component);
 
 				switch (props.type) {
 					case 'menu':
-						ctx.props.dispatch(actionCreators.saveMenu(props.component, onMenuSaved));
+						ctx.props.dispatch(actionCreators.saveMenu(props.component, onMenuSaved), () => {
+              this.props.dispatch(actionCreators.setLoading(false));
+							console.log('menu saved')
+						});
 					default:
 
 				}

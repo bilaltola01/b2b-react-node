@@ -1,11 +1,18 @@
 
-var initialProfileState = {};
+var initialProfileState = {
+  loading: false
+};
 
 export function _profile(state = initialProfileState, action) {
   // please use redux devtools from chrome/firefox ext
   // console.log('_profile reducer called with state ', state , ' and action ', action);
 
   switch (action.type) {
+    case 'SET_LOADING':
+      return {
+        ...state,
+        loading: action.result
+      }
     case 'GET_PROFILE_REQUEST':
       return {
         ...state,
