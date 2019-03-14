@@ -129,7 +129,7 @@ class BranchLanguagesEdit extends Component {
 		// list of all languages available is retrieved from selected branches
 		const obj = {
 			type: "languages",
-			items: uniqueBranches
+			items: availableLanguages
 		};
 
 		// console.log(this.state);
@@ -143,7 +143,7 @@ class BranchLanguagesEdit extends Component {
 			}
 		}) : null;
 
-		return (branchLanguages && branchLanguages.length > 0) ? (
+		return (
 			<div>
 				<p className="menu--title">{label ? label : 'Translate to'}</p>
 				<div>
@@ -157,7 +157,7 @@ class BranchLanguagesEdit extends Component {
                     </div>
 				</div>
 			</div>
-		) : null;
+		);
 	}
 };
 
@@ -170,7 +170,8 @@ BranchLanguagesEdit.propTypes = {
 const mapStateToProps = (state) => {
 	// console.log(state);
   return {
-    menu: state._menu.menu
+    menu: state._menu.menu,
+    availableLanguages: state._languages.languages,
   };
 };
 

@@ -47,12 +47,12 @@ let createHandlers = (ctx) => {
 		// 	});
 		// }
 
-		if (!menu.branches || menu.branches.length <= 0) {
-			errors.push({
-				name: 'branches',
-				message: 'Please choose at least one Branch for your menu.'
-			});
-		}
+		// if (!menu.branches || menu.branches.length <= 0) {
+		// 	errors.push({
+		// 		name: 'branches',
+		// 		message: 'Please choose at least one Branch for your menu.'
+		// 	});
+		// }
 
 		if (!menu.languages || menu.languages.length <= 0) {
 			errors.push({

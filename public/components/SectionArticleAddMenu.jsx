@@ -70,9 +70,7 @@ class SectionArticleAddMenu extends Component {
     );
 
     const menuOriginalLanguages =
-      this.props.menu &&
-      this.props.menu.branches &&
-      this.props.menu.branches.length > 0 ? (
+      this.props.menu ? (
         <BranchLanguagesEdit
           languages={originalLanguages}
           label="Original Language"
@@ -82,9 +80,7 @@ class SectionArticleAddMenu extends Component {
       ) : null;
 
     const menuLanguages =
-      this.props.menu &&
-      this.props.menu.branches &&
-      this.props.menu.branches.length > 0 ? (
+      this.props.menu ? (
         <BranchLanguagesEdit
           languages={languages}
           name="languages"
@@ -103,7 +99,7 @@ class SectionArticleAddMenu extends Component {
       ) : null;
 
     const addMenuComponent =
-      profileBranches && profileBranches.length > 0 ? (
+      profileBranches && profileBranches.length > 0 || true ? (
         <div className="content--container global-padding-wrapper no-border-top">
           <form id="form-menu-content" className="content--edit">
             <div className="edit--block">
