@@ -45,6 +45,10 @@ class SectionArticleAddMenu extends Component {
     this.handlers = createHandlers(this);
   }
 
+  componentDidMount() {
+    this.props.dispatch(actionCreators.getLanguages());
+  }
+
   render() {
     const { title, component } = this.props;
 

@@ -71,6 +71,7 @@ class SectionArticleEditMenu extends Component {
 
 
 	componentDidMount() {
+		this.props.dispatch(actionCreators.getLanguages());
 		this.handlers.getMenu({
 			...this.props,
 			languages: this.props.languages,

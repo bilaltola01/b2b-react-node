@@ -115,6 +115,7 @@ class BranchLanguagesEdit extends Component {
 	render() {
 		const { languages, availableLanguages, onChange, label } = this.props;
 
+		// console.log('availableLanguages', availableLanguages)
 		const selectedBranches = (this.props.menu && this.props.menu.branches && this.props.menu.branches.length > 0) ? this.props.menu.branches : [];
 		const branchLanguages = (selectedBranches && selectedBranches.length > 0) ? selectedBranches.reduce((acc, current) => {
 			return current.languages && current.languages.length > 0 ? acc.concat(current.languages.map(lang => lang.Language)) : acc;
@@ -129,14 +130,14 @@ class BranchLanguagesEdit extends Component {
 		// list of all languages available is retrieved from selected branches
 		const obj = {
 			type: "languages",
-			items: availableLanguages
+			items: uniqueBranches
 		};
 
 		// console.log(this.state);
-		console.log('allLanguages', this.state.allLanguages);
+		// console.log('allLanguages', this.state.allLanguages);
 
 		const languageComponents = (this.state.allLanguages && this.state.allLanguages.length > 0) ? this.state.allLanguages.map((language, index) => {
-			console.log('language', language)
+			// console.log('language', language)
 			const finalLanguage = language;
 			if (finalLanguage) {
                 return <BranchLanguageEdit id={finalLanguage.LanguageID} code={finalLanguage.Code} codeFull={finalLanguage.CodeFull} name={finalLanguage.Name} title={finalLanguage.Title} onRemove={(e) => this.handlers.onRemove({id: finalLanguage.LanguageID})} key={index} />;
