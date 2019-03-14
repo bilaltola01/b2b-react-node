@@ -162,7 +162,7 @@ class MenuPage extends Component {
     const originalLanguages = currentMenu && currentMenu.originalLanguages;
     const languages = currentMenu && currentMenu.languages;
 
-    console.log('currentMenu', currentMenu)
+    // console.log('currentMenu', currentMenu)
     // console.log('menus', menus)
     // console.log("currentBranchMenuId " + currentBranchMenuId)
     // console.log(currentBranchMenu)

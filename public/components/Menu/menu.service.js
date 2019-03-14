@@ -1,4 +1,5 @@
 import { Ajax } from '../../shared/ajax.utils';
+import { map } from 'lodash';
 
 import { Mapping } from '../../shared/mapping.utils';
 import { StorageManagerInstance } from '../../shared/storage.utils';
@@ -39,7 +40,7 @@ export async function updateMenu(opts) {
             await MenuOriginalLanguage.postMenuLanguages(id, obj.originalLanguages);
 
             await Promise.all(
-                obj.branches.map(async (branch) => await MenuBranch.postMenuBranch({
+                map(obj.branches, async (branch) => await MenuBranch.postMenuBranch({
                     obj: {
                         MenuID: id,
                         BranchID: branch.BranchID,
@@ -90,14 +91,14 @@ export function getMenus() {
 
         menus = res.obj;
 
-        let ids = res.obj.map(menu => menu.MenuID).filter((id, i, self) => {
+        let ids = map(res.obj, menu => menu.MenuID).filter((id, i, self) => {
             return self.indexOf(id) === i;
         });
 
         // console.log(menus);
         // console.log(ids);
 
-        return Promise.all(ids.map((id) => {
+        return Promise.all(map(ids, (id) => {
             return MenuCategory.getMenuCategory(id);
         }));
     }).then((res) => {
@@ -107,7 +108,7 @@ export function getMenus() {
             return (current.categories && current.categories.length > 0) ? acc.concat([current]) : acc;
         }, []) : null;
 
-        let finalMenus = categories.map(cat => {
+        let finalMenus = map(categories, cat => {
             let matchingMenu = (menus && menus.length > 0) ? menus.find(menu => {
                 return parseInt(cat.id, 10) === parseInt(menu.MenuID, 10);
             }) : null;
@@ -147,13 +148,13 @@ export function getMenuTranslations() {
             return Promise.reject(res);
         }
 
-        let ids = res.obj.map(menu => menu.MenuID).filter((id, i, self) => {
+        let ids = map(res.obj, menu => menu.MenuID).filter((id, i, self) => {
             return self.indexOf(id) === i;
         });
 
         // console.log(ids);
 
-        return Promise.all(ids.map((id) => {
+        return Promise.all(map(ids, (id) => {
             return getMenuTranslation(id, res.obj);
         }));
     });
@@ -171,7 +172,7 @@ export function getMenuTranslation(id, translations) {
 
         menuCategoryTranslations = res;
 
-        return Promise.all(res.map((cat) => {
+        return Promise.all(map(res, (cat) => {
             return Meal.getMealTranslations([cat.MenuCategoryID]);
         }));
     }).then((res) => {
@@ -190,7 +191,7 @@ export function getMenuTranslation(id, translations) {
                 id: 987248947
             });
 
-        menu.categories = menuCategoryTranslations.map((cat) => {
+        menu.categories = map(menuCategoryTranslations, (cat) => {
             let finalCat = cat;
             finalCat.meals = Array.prototype.concat(...mealTranslations).filter((meal, index) => {
                 return meal.MenuCategoryID === cat.MenuCategoryID;
@@ -207,9 +208,9 @@ export function getMenuTranslation(id, translations) {
 export function translateMenu(opts, mode) {
     // console.log(opts);
 
-    let propsToTranslate = Object.keys(opts).filter((key) => {
+    let propsToTranslate = map(Object.keys(opts).filter((key) => {
         return ((key === 'title' || key === 'Title') || (key === 'description' || key === 'Description')) && (opts[key] && opts[key].length > 0);
-    }).map((key) => {
+    }), (key) => {
         return {
             key: key,
             value: opts[key]
@@ -236,7 +237,7 @@ export function translateMenu(opts, mode) {
         }).MenuID;
 
         // Convert to correct syntax
-        const finalLanguages = opts.languages.map(lang => {
+        const finalLanguages = map(opts.languages, lang => {
             const finalLang = (lang.Language) ? lang.Language : lang;
             return {
                 branchLanguageId: finalLang.BranchLanguageID,
@@ -258,10 +259,10 @@ export function translateMenu(opts, mode) {
                 // console.log('translation request finished');
                 // console.log(res);
 
-                return Promise.all(finalLanguages.map((lang) => {
+                return Promise.all(map(finalLanguages, (lang) => {
                     // console.log(lang);
                     const translateLangs = (language, props, id) => {
-                        return props.map((prop) => {
+                        return map(props, (prop) => {
                             return Ajax().post('/translate-menu', {
                                 body: JSON.stringify(convertForTranslation(language, { type: 'menu', id: menuId, prop: prop })),
                                 headers: {

@@ -10,6 +10,7 @@ let createHandlers = (ctx) => {
 		// console.log('menu saved!');
 		// console.log(obj);
 
+    ctx.props.dispatch(actionCreators.setLoading());
 		ctx.props.dispatch(actionCreators.setMenu({}));
 
 		ctx.setState({
@@ -130,9 +131,7 @@ let createHandlers = (ctx) => {
 				switch (props.type) {
 					case 'menu':
             ctx.props.dispatch(actionCreators.setLoading(true));
-						ctx.props.dispatch(actionCreators.saveMenu(props.component, onMenuSaved), () => {
-							console.log('menu saved')
-						});
+						ctx.props.dispatch(actionCreators.saveMenu(props.component, onMenuSaved));
 					default:
 
 				}
@@ -166,7 +165,7 @@ class Save extends Component {
 	render() {
 		const { type, component } = this.props;
 
-		console.log('menu', this.props.menu);
+		// console.log('menu', this.props.menu);
 		// console.log(this.props);
 
 		const saveComponent = (this.state.isSaved)

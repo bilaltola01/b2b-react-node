@@ -92,14 +92,14 @@ export function saveMenu (data, cb) {
       return new Promise((resolve, reject) => {
 
         MenuService.updateMenu(data).then((res) => {
-          // console.log('request succeeded with JSON response', res);
+          console.log('request succeeded with JSON response', res);
 
           if (res && typeof cb === 'function') {
             data.MenuID = data.MenuID ?  data.MenuID : res;
             cb(data);
           }
         }).catch(err => {
-          // console.log(err);
+          console.log(err);
         });
       });
     }
@@ -640,7 +640,7 @@ export function saveProfile (data, cb) {
   }
 };
 
-export function setLoading (value) {
+export function setLoading (value = false) {
   return {
     types: ['SET_LOADING', 'SET_LOADING'],
     promise: () => {

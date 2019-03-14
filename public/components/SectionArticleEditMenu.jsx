@@ -106,8 +106,8 @@ class SectionArticleEditMenu extends Component {
 		} = this.props;
 
 		// console.log('branchesIds', this.props.branchesIds);
-		console.log('languages', languages);
-		console.log('originalLanguages', originalLanguages);
+		// console.log('languages', languages);
+		// console.log('originalLanguages', originalLanguages);
 
 		let languagesList = (translations && translations.length > 0) ? translations.map((translation, index) => {
 			return (index < translations.length - 1)
@@ -147,7 +147,7 @@ class SectionArticleEditMenu extends Component {
 		: null;
 
 
-		console.log('menuOriginalLanguages', originalLanguages, languages)
+		// console.log('menuOriginalLanguages', originalLanguages, languages)
 		const menuOriginalLanguages = <BranchLanguagesEdit languages={(originalLanguages && originalLanguages.length > 0) ? originalLanguages.map(language => {if (language.Language) return language.Language}) : []} label="Original Language" name="originalLanguages" onChange={this.handlers.onChanges} />
 		const menuLanguages = <BranchLanguagesEdit languages={(languages && languages.length > 0) ? languages.map(language => {if (language.Language) return language.Language}) : []} name="languages" onChange={this.handlers.onChanges} />
 
