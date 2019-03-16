@@ -19,7 +19,7 @@ let createHandlers = (ctx) => {
 				return current.languages && current.languages.length > 0 ? acc.concat(current.languages.map(lang => lang.Language)) : acc;
 			}, []) : ctx.props.availableLanguages || [];
 
-			let newLang = branchLanguages.find(lang => {
+			let newLang = ctx.props.availableLanguages.find(lang => {
 				return lang.LanguageID === obj.id;
 			});
 
@@ -130,9 +130,8 @@ class BranchLanguagesEdit extends Component {
 		// list of all languages available is retrieved from selected branches
 		const obj = {
 			type: "languages",
-			items: uniqueBranches
+			items: availableLanguages || uniqueBranches || []
 		};
-
 		// console.log(this.state);
 		// console.log('allLanguages', this.state.allLanguages);
 

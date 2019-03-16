@@ -156,11 +156,13 @@ let Routes = class {
         router.get('/menu-language', menuLanguageController.get);
         router.post('/menu-language', menuLanguageController.post);
         router.put('/menu-language', menuLanguageController.put);
+        router.put('/menu-languages', menuLanguageController.putIds);
         router.delete('/menu-language', menuLanguageController.remove);
 
         router.get('/menu-original-language', menuOriginalLanguageController.get);
         router.post('/menu-original-language', menuOriginalLanguageController.post);
         router.put('/menu-original-language', menuOriginalLanguageController.put);
+        router.put('/menu-original-languages', menuOriginalLanguageController.putIds);
         router.delete('/menu-original-language', menuOriginalLanguageController.remove);
 
         router.get('/meal', mealController.get);

@@ -33,7 +33,9 @@ let createHandlers = (ctx) => {
 				ctx.props.dispatch(actionCreators.setMenu({
 					...ctx.props.menu,
 					languages: ctx.props.languages,
+					originalLanguages: ctx.props.originalLanguages,
 				}, dataToUpdate));
+				break
 			default:
 				dataToUpdate[type] = obj.data;
 
@@ -41,7 +43,6 @@ let createHandlers = (ctx) => {
 				// console.log(dataToUpdate);
 				ctx.props.dispatch(actionCreators.setMenu({
 					...ctx.props.menu,
-					languages: ctx.props.languages,
 				}, dataToUpdate));
 
 		}

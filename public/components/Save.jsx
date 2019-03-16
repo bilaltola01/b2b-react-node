@@ -111,7 +111,7 @@ let createHandlers = (ctx) => {
 			}
 		}
 
-		console.log('Save errors', errors)
+		// console.log('Save errors', errors, ctx.props.component)
 		ctx.setState({
 			validationErrors: errors,
 			isValid: !errors.length
@@ -126,12 +126,13 @@ let createHandlers = (ctx) => {
 		validateState(ctx.props.menu, () => {
 			if (ctx.state.isValid) {
 
-				console.log('should save the object here', props.component);
+				// console.log('should save the object here', props.component);
 
 				switch (props.type) {
 					case 'menu':
-            ctx.props.dispatch(actionCreators.setLoading(true));
+						ctx.props.dispatch(actionCreators.setLoading(true));
 						ctx.props.dispatch(actionCreators.saveMenu(props.component, onMenuSaved));
+						break;
 					default:
 
 				}

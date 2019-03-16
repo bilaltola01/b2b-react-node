@@ -53,21 +53,29 @@ export function postMenuLanguage (nextId, lang) {
 // UPDATE
 //
 export function updateMenuLanguages (menuId, langs) {
-    /*
-    if (!langs || langs.length <= 0) {
-        return Promise.resolve();
-    }
-    */
-
-    // Compare menu categories in the object to the categories in the DB
-    //let ids = langs.map(c => c.id)
-    //let languages = getMenuOriginalLanguage(ids);
+  if (!langs || langs.length <= 0) {
     return Promise.resolve();
-    /*
-    return Promise.all(langs.map((lang) => {
-        return updateMenuLanguage(lang);
-    }));
-*/
+  }
+
+  // Compare menu categories in the object to the categories in the DB
+  let ids = langs.map(c => {
+    let id = (c.Language) ? c.Language.LanguageID : (c.id || c.LanguageID);
+    if (id) return id
+  })
+
+  return Ajax().put('/menu-original-languages', {
+    body: JSON.stringify({
+      id: menuId,
+      languagesIds: ids,
+    }),
+    headers: {
+      "content-type": "application/json",
+      "cache-control": "no-cache",
+      "x-access-token": StorageManagerInstance.read('token')
+    }
+  });
+
+  return Promise.resolve();
 }
 
 export function updateMenuLanguage (lang) {

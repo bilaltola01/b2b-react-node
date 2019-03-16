@@ -32,12 +32,36 @@ MenuOriginalLanguage.update = (id, obj) => {
   });
 };
 
+// Update all languages for menu
+// Returns a resolved Promise containing the new language
+MenuOriginalLanguage.updateIds = (id, ids) => {
+  return new Promise((resolve, reject) => {
+    MenuOriginalLanguage.removeAll(id).then(() => {
+      Promise.all(ids.map(langID => {
+        MenuOriginalLanguage.create({MenuID: id, BranchLanguageID: langID}).then((res) => {
+          resolve(res);
+        }).catch(err => {
+          reject(err);
+        });
+      }));
+    })
+  });
+};
+
 // Remove language in the database
 // Returns a resolved Promise containing the number of rows affected
 MenuOriginalLanguage.remove = (id) => {
   return db('MenuOriginalLanguage').where({
     MenuLanguageID: id
   }).first('*').del();
+};
+
+// Remove all languages for menu
+// Returns a resolved Promise containing the number of rows affected
+MenuOriginalLanguage.removeAll = (id) => {
+  return db('MenuOriginalLanguage').where({
+    MenuID: id
+  }).del();
 };
 
 // Get a language by id

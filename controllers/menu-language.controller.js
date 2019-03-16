@@ -43,6 +43,18 @@ MenuLanguageController.put = (req, res) => {
     });
 };
 
+MenuLanguageController.putIds = (req, res) => {
+    res.setHeader('Content-Type', 'application/json');
+
+    MenuLanguage.updateIds(req.body.id, req.body.languagesIds).then(output => {
+        // console.log(output);
+        res.status(201).json({ success: true, message: 'MenuLanguage successfully updated', obj: output });
+    }).catch(err => {
+        console.error(err);
+        res.status(204).send({ success: false, message: 'MenuLanguage update failed', obj: err });
+    });
+};
+
 MenuLanguageController.remove = (req, res) => {
     res.setHeader('Content-Type', 'application/json');
 

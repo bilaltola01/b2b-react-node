@@ -31,6 +31,18 @@ MenuOriginalLanguageController.post = (req, res) => {
     });
 };
 
+MenuOriginalLanguageController.putIds = (req, res) => {
+  res.setHeader('Content-Type', 'application/json');
+
+  MenuOriginalLanguage.updateIds(req.body.id, req.body.languagesIds).then(output => {
+    // console.log(output);
+    res.status(201).json({ success: true, message: 'MenuOriginalLanguage successfully updated', obj: output });
+  }).catch(err => {
+    console.error(err);
+    res.status(204).send({ success: false, message: 'MenuOriginalLanguage update failed', obj: err });
+  });
+};
+
 MenuOriginalLanguageController.put = (req, res) => {
     res.setHeader('Content-Type', 'application/json');
 
