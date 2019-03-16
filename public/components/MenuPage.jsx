@@ -150,7 +150,8 @@ class MenuPage extends Component {
 
     const actionType = (typeof this.props.match.params.action !== 'undefined') ? 'menu-' + action : 'menu';
 
-    const menus = this.getMenus(profile);
+    // const menus = this.getMenus(profile);
+    const menus = profile && profile.menus;
     const currentBranchMenu = this.getFilteredMenusById(menus, id);
     const currentBranchMenuId = (currentBranchMenu && currentBranchMenu.length > 0) ? currentBranchMenu[0].BranchID : 0;
     const currentBranch = this.getCurrentBranch(profile, currentBranchMenuId);

@@ -74,11 +74,10 @@ class MenusPage extends Component {
     }
     */
 
-    const menus = (profile.branches && profile.branches.length > 0) ? profile.branches.reduce((acc, branch) => {
-      return acc.concat(branch.menus);
-    }, []) : [];
-
-    // console.log(menus);
+    // const menus = (profile.branches && profile.branches.length > 0) ? profile.branches.reduce((acc, branch) => {
+    //   return acc.concat(branch.menus);
+    // }, []) : [];
+    const menus = profile.menus || [];
 
     const company = {
       name: profile.Name,

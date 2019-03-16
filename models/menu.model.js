@@ -81,7 +81,7 @@ Menu.get = (conditions) => {
 Menu.getExtended = (conditions) => {
   return db('Menu').where(conditions).select('*').then(menus => {
     return Promise.all(menus.map(menu => {
-      return createMenuContainer(menu, {category: true});
+      return createMenuContainer(menu, {});
     }));
   });;
 };

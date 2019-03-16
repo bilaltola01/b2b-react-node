@@ -32,14 +32,14 @@ Profile.get = (obj) => {
 Profile.getAll = () => {
   return Company.getAll().then(companies => {
     return Promise.all(companies.map(company => {
-      return createProfile(company, Branch.getWithEntities({ CompanyID: company.CompanyID }), Menu.get({ CompanyID: company.CompanyID }));
+      return createProfile(company, Branch.getWithEntities({ CompanyID: company.CompanyID }), Menu.getExtended({ CompanyID: company.CompanyID }));
     }));
   });
 };
 
 Profile.getByEmail = (email) => {
   return Company.getByEmail(email).then(company => {
-    return createProfile(company, Branch.getWithEntities({ CompanyID: company.CompanyID }), Menu.get({ CompanyID: company.CompanyID }));
+    return createProfile(company, Branch.getWithEntities({ CompanyID: company.CompanyID }), Menu.getExtended({ CompanyID: company.CompanyID }));
   });
 };
 
