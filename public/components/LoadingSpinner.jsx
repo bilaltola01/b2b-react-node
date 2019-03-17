@@ -9,7 +9,7 @@ class LoadingSpinner extends Component {
     return this.props.loading ? (
       <div style={{position: 'fixed', width: '100%', height: '100%', background: 'rgba(0,0,0,0.7)', zIndex: 2000}}>
         <div style={{width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-          <img src="assets/images/loading.png" alt=""/></div>
+          <img src="assets/images/loading.png" alt="" className="loadingSpinner"/></div>
       </div>
     ) : null;
   }
