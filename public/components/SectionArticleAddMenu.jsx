@@ -76,6 +76,7 @@ class SectionArticleAddMenu extends Component {
     const menuOriginalLanguages =
       this.props.menu ? (
         <BranchLanguagesEdit
+          className="style-7"
           languages={originalLanguages}
           label="Original Language"
           name="originalLanguages"
@@ -86,6 +87,7 @@ class SectionArticleAddMenu extends Component {
     const menuLanguages =
       this.props.menu ? (
         <BranchLanguagesEdit
+          className="style-7"
           languages={languages}
           name="languages"
           onChange={this.handlers.onChanges}
@@ -93,9 +95,7 @@ class SectionArticleAddMenu extends Component {
       ) : null;
 
     const menuCategories =
-      this.props.menu &&
-      this.props.menu.languages &&
-      this.props.menu.languages.length > 0 ? (
+      this.props.menu ? (
         <MenuCategoriesEdit
           categories={categories}
           onChange={this.handlers.onChanges}
@@ -158,7 +158,7 @@ class SectionArticleAddMenu extends Component {
 
           <div className="menu--languages">{menuOriginalLanguages}</div>
 
-          <div className="menu--languages">{menuLanguages}</div>
+          <div className="menu--languages" style={{paddingBottom: 40}}>{menuLanguages}</div>
 
           <div className="menu--categories">{menuCategories}</div>
         </div>
