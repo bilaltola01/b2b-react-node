@@ -242,7 +242,7 @@ class LanguagePicker extends Component {
             {firstItemTitle}
           </div>
         )}
-        <ul className="select--options">{selectOptions}</ul>
+        <ul className={`select--options ${this.props.className || ''}`}>{selectOptions}</ul>
       </div>
     );
   }

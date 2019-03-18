@@ -153,7 +153,7 @@ class BranchLanguagesEdit extends Component {
 				<div id="language-add" className="language--add">
 					<label>Add a Language:</label>
 					<div id="language-picker" className="language--picker">
-						<LanguagePicker data={obj} onAdd={this.handlers.onAdd} onPickerClick={this.handlers.onPickerClick} onPickerBlur={this.handlers.onPickerBlur} onPickerItemClick={this.handlers.onPickerItemClick} />
+						<LanguagePicker className={this.props.className || null} data={obj} onAdd={this.handlers.onAdd} onPickerClick={this.handlers.onPickerClick} onPickerBlur={this.handlers.onPickerBlur} onPickerItemClick={this.handlers.onPickerItemClick} />
                     </div>
 				</div>
 			</div>

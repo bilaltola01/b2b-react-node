@@ -1704,6 +1704,7 @@ a.text-link:hover {
     position: relative;
     font-size: 1.0em;
     color: #4d5368;
+    outline: none;
 }
 
 .custom-select:last-child {
@@ -1726,6 +1727,10 @@ a.text-link:hover {
     border-left: 2px solid #ECEFF2;
     border-right: 2px solid #ECEFF2;
     border-bottom: 2px solid #ECEFF2;
+}
+
+.style-7.select--options {
+    height: 13em;
 }
 
 .select--styled.active+.select--options {
