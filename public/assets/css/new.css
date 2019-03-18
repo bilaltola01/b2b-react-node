@@ -1704,7 +1704,6 @@ a.text-link:hover {
     position: relative;
     font-size: 1.0em;
     color: #4d5368;
-    z-index: 999;
 }
 
 .custom-select:last-child {
@@ -6128,6 +6127,7 @@ button.button--action:disabled{
     position: absolute;
     top: 75px;
     right: 0;
+    z-index: 1999;
 }
 
 .dropdown__content .dropdown--item {
