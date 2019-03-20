@@ -184,7 +184,7 @@ Branch.updateWithDetails = async (id, obj) => {
     promises.push(BranchCurrency.updateAll(insertNewId(id, branch.currencies)));
   }
   if (branch.languages) {
-    promises.push(BranchLanguage.updateAll(insertNewId(id, languages)));
+    promises.push(BranchLanguage.updateAll(id, insertNewId(id, languages)));
   }
   if (branch.menus) {
     promises.push(MenuBranch.updateAll(insertNewId(id, branch.menus), branch));

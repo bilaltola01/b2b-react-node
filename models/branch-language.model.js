@@ -46,39 +46,27 @@ BranchLanguage.update = (id, obj) => {
   });
 };
 
-BranchLanguage.updateAll = (languages) => {
-  if (!languages || languages.length <= 0) {
+BranchLanguage.updateAll = (branchID, languages) => {
+  if (!branchID || !languages || languages.length <= 0) {
     console.error('No languages specified');
     return Promise.resolve([]);
   }
-
-  return Promise.all(languages.map(language => {
-    //
-    // If the item is not already is in the db check if
-    // the same values are already somewhere
-    //
-    return BranchLanguage.get({
-      BranchID: language.BranchID
-    }).then(branchLanguages => {
-      if (!branchLanguages || branchLanguages.length <= 0) {
-        return BranchLanguage.create({
-          BranchID: language.BranchID,
-          LanguageID: language.LanguageID
-        });
-      }
-
-      return Promise.all(branchLanguages.map(branchLanguage => {
-        return BranchLanguage.remove(branchLanguage.BranchLanguageID);
-      })).then(res => {
-        // console.log(res);
-
-        return BranchLanguage.create({
-          BranchID: language.BranchID,
-          LanguageID: language.LanguageID
-        });
+  return BranchLanguage.removeAll({BranchID: branchID}).then(res => {
+    // console.log(res);
+    return Promise.all(languages.map(language => {
+      return BranchLanguage.get({
+        BranchID: language.BranchID,
+        LanguageID: language.LanguageID
+      }).then(branchLanguages => {
+        if (!branchLanguages || branchLanguages.length <= 0) {
+          return BranchLanguage.create({
+            BranchID: language.BranchID,
+            LanguageID: language.LanguageID
+          });
+        }
       });
-    });
-  }));
+    }));
+  });
 }
 
 BranchLanguage.updateBulk = (branches, languages) => {
@@ -114,6 +102,10 @@ BranchLanguage.remove = (id) => {
   return db('BranchLanguage').where({
     BranchLanguageID: id
   }).first('*').del();
+};
+
+BranchLanguage.removeAll = (conditions) => {
+  return db('BranchLanguage').where(conditions).select('*').del();
 };
 
 // Get a language by id
