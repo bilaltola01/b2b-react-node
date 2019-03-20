@@ -1,4 +1,5 @@
 "use strict";
+const size = require('lodash/size');
 const forEach = require('lodash/forEach');
 const md5 = require('md5');
 const DBLayer = require('../DBLayer');
@@ -94,6 +95,36 @@ Menu.getWithDetails = (conditions) => {
         return createMenuContainer(menu);
       }));
     });
+};
+
+Menu.getLanguages = (menus) => {
+  // console.log('Menu.getLanguages menus', menus);
+  //   return Promise.all(menus.map(menu => {
+  //     return MenuLanguage.getWithDetails({MenuID: menu.MenuID});
+  //   })).then((res) => {
+  //     resolve
+  //     // console.log('languages res', res)
+  //   });
+
+  return new Promise((resolve, reject) => {
+    Promise.all(menus.map(menu => {
+      return MenuLanguage.getWithDetails({MenuID: menu.MenuID});
+    })).then(res => {
+      let data = [];
+      forEach(res, item => {
+        if (item && size(item) > 0) {
+          data = [...data, ...item];
+        }
+      })
+      // console.log(res);
+      // console.log('MenuOriginalLanguage res', res[1])
+      // console.log('MenuLanguage res', res[2])
+
+      resolve(data);
+    }).catch(err => {
+      reject(err);
+    });
+  });
 };
 
 

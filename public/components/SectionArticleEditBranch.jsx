@@ -95,9 +95,9 @@ class SectionArticleEditBranch extends Component {
 			<BranchCuisinesEdit cuisines={cuisines.map(cuisine => cuisine.Cuisine)} availableCuisines={availableCuisines} onChange={this.handlers.onChanges} />
 		);
 
-		const branchLanguages = (
-			<BranchLanguagesEdit languages={languages.map(lang => lang.Language)} availableLanguages={availableLanguages} onChange={this.handlers.onChanges} />
-		);
+		// const branchLanguages = (
+		// 	<BranchLanguagesEdit languages={languages.map(lang => lang.Language)} availableLanguages={availableLanguages} onChange={this.handlers.onChanges} />
+		// );
 
 		const currencyComponents = (
 			<BranchCurrenciesEdit currencies={(currencies && currencies.length > 0) ? currencies.map(currency => currency.Currency) : []} availableCurrencies={availableCurrencies} onChange={this.handlers.onChanges} />
@@ -163,9 +163,9 @@ class SectionArticleEditBranch extends Component {
 							<p className="menu--title">Cuisine Types</p>
 							{cuisineComponents}
 						</div>
-						<div className="branch--languages">
-							{branchLanguages}
-						</div>
+						{/*<div className="branch--languages">*/}
+							{/*{branchLanguages}*/}
+						{/*</div>*/}
 						<div className="branch--name">
 							<p className="menu--title">Name</p>
 							<div className="content--edit branch--address--edit">

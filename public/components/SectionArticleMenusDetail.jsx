@@ -35,17 +35,17 @@ class SectionArticleMenusDetail extends Component {
 		return (
 			<article className="content--module module--item-details no-metadata content--menus">
 				<div className="content--container branches-container">
-                   	{noItemsComponent}
+					{noItemsComponent}
 
-                    <div className="menus menu-detail">
-                    	{menuComponents}
-                    </div>
-                    <div className="branch--see-all global-padding-wrapper">
-                    	<Link to="/menus" >
+					<div className="menus menu-detail">
+						{menuComponents}
+					</div>
+					<div className="branch--see-all global-padding-wrapper">
+						<Link to="/menus" >
 							<button className="button--action button--action-filled">See all menus</button>
 						</Link>
-                    </div>
-                </div>
+					</div>
+				</div>
 			</article>
 		)
 	}

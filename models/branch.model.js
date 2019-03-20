@@ -54,7 +54,7 @@ Branch.create = (obj) => {
   return db('Branch').insert(branch).returning('BranchID');
 };
 
-Branch.createWithDetails = (obj) => {
+Branch.createWithDetails = async (obj) => {
   let insertNewId = (id, arr) => {
     if (!id) {
       return arr;
@@ -88,15 +88,21 @@ Branch.createWithDetails = (obj) => {
     Name: branch.Name,
     HasHeadquarters: branch.HasHeadquarters,
     IsEnabled: branch.IsEnabled
-  }).then(res => {
+  }).then(async (res) => {
     // console.log(res);
     let id = res[0];
+
+    // const languages = Menu.getLanguages(branch.menus)
+    const menuLanguages  = await Menu.getLanguages(branch.menus) || []
+    const languages = _.map(menuLanguages, item => {
+      return {...item, BranchID: id, LanguageID: item && item.Language && item.Language.LanguageID}
+    })
 
     return Promise.all([
       BranchContact.createAll(insertNewId(id, branch.contacts)),
       BranchCuisine.createAll(insertNewId(id, branch.cuisines)),
       BranchCurrency.createAll(insertNewId(id, branch.currencies)),
-      BranchLanguage.createAll(insertNewId(id, branch.languages)),
+      BranchLanguage.createAll(insertNewId(id, languages)),
       MenuBranch.createAll(insertNewId(id, branch.menus)),
       BranchImage.createAll(insertNewId(id, branch.images))
     ]).then(res => {
@@ -133,7 +139,7 @@ Branch.update = (id, obj) => {
 };
 
 // Returns a resolved Promise containing the new branch
-Branch.updateWithDetails = (id, obj) => {
+Branch.updateWithDetails = async (id, obj) => {
   let insertNewId = (id, arr) => {
     if (!id) {
       return arr;
@@ -157,11 +163,17 @@ Branch.updateWithDetails = (id, obj) => {
 
   // console.log('BRANCH UPDATE WITH DETAILS');
   // console.log(id, obj);
+
   let branch = obj;
   branch.DateUpdated = dateUtils.toMysqlDate(new Date());
 
   const promises = [];
-
+  // console.log('branch.menu', branch.menus);
+  const menuLanguages  = await Menu.getLanguages(branch.menus) || []
+  const languages = _.map(menuLanguages, item => {
+      return {...item, BranchID: branch && branch.BranchID, LanguageID: item && item.Language && item.Language.LanguageID}
+    })
+  // console.log('branch languages', languages);
   if (branch.contacts) {
     promises.push(BranchContact.updateAll(branch.contacts));
   }
@@ -172,7 +184,7 @@ Branch.updateWithDetails = (id, obj) => {
     promises.push(BranchCurrency.updateAll(insertNewId(id, branch.currencies)));
   }
   if (branch.languages) {
-    promises.push(BranchLanguage.updateAll(insertNewId(id, branch.languages)));
+    promises.push(BranchLanguage.updateAll(insertNewId(id, languages)));
   }
   if (branch.menus) {
     promises.push(MenuBranch.updateAll(insertNewId(id, branch.menus), branch));
@@ -181,7 +193,7 @@ Branch.updateWithDetails = (id, obj) => {
     promises.push(BranchImage.removeSelected(branch.images, branch));
     promises.push(BranchImage.updateAll(branch.images));
   }
-  if (branch.languages) {
+  if (languages) {
     promises.push();
   }
 
@@ -196,9 +208,9 @@ Branch.updateWithDetails = (id, obj) => {
     if (branch.currencies && res.size > 0) {
       tmp.currencies = res[0].shift();
     }
-    if (branch.languages && res.size > 0) {
-      tmp.languages = res[0].shift();
-    }
+    // if (branch.languages && res.size > 0) {
+    //   tmp.languages = res[0].shift();
+    // }
     if (branch.images && res.size > 1) {
       tmp.images = res[0][1];
     }

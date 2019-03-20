@@ -77,7 +77,7 @@ Language.getAllWithDetails = () => {
 
 
 function createLanguageContainer (language) {
-  return new Promise((resolve, reject) => {
+  return language ? new Promise((resolve, reject) => {
     Promise.all([
       Flag.getById(language.FlagID)
     ]).then(res => {
@@ -89,7 +89,7 @@ function createLanguageContainer (language) {
     }).catch(err => {
       reject(err);
     });
-  });
+  }) : null;
 }
 
 function createLanguage (languageObj, flagsPromise) {

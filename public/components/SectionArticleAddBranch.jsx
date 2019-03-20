@@ -93,12 +93,12 @@ let createHandlers = (ctx) => {
 			});
 		}
 
-		if (!branch.languages || branch.languages.length <= 0) {
-			errors.push({
-				name: 'languages',
-				message: 'Please choose at least one translation language for your branch.'
-			});
-		}
+		// if (!branch.languages || branch.languages.length <= 0) {
+		// 	errors.push({
+		// 		name: 'languages',
+		// 		message: 'Please choose at least one translation language for your branch.'
+		// 	});
+		// }
 
 		if (!branch.images || branch.images.length <= 0) {
 			errors.push({
@@ -249,9 +249,9 @@ class SectionArticleAddBranch extends Component {
 			<BranchCuisinesEdit cuisines={[]} availableCuisines={availableCuisines} onChange={this.handlers.onChanges} />
 		);
 
-		const branchLanguages = (
-			<LanguagesEdit languages={[]} availableLanguages={availableLanguages} onChange={this.handlers.onChanges} />
-		);
+		// const branchLanguages = (
+		// 	<LanguagesEdit languages={[]} availableLanguages={availableLanguages} onChange={this.handlers.onChanges} />
+		// );
 
 		const currencyComponents = (
 			<BranchCurrenciesEdit currencies={[]} availableCurrencies={availableCurrencies} onChange={this.handlers.onChanges} />
@@ -350,16 +350,16 @@ class SectionArticleAddBranch extends Component {
 		                        			</div>
 		                        		}
 									</div>
-									<div className="branch--languages">
-										<p className="menu--title">Languages</p>
-										{branchLanguages}
-										{
-		                        			!!this.state.validationErrors.find(err => err.name === 'languages') &&
-		                        			<div className="error">
-		                        				{this.state.validationErrors.find(err => err.name === 'languages').message}
-		                        			</div>
-		                        		}
-									</div>
+									{/*<div className="branch--languages">*/}
+										{/*<p className="menu--title">Languages</p>*/}
+										{/*{branchLanguages}*/}
+										{/*{*/}
+		                        			{/*!!this.state.validationErrors.find(err => err.name === 'languages') &&*/}
+		                        			{/*<div className="error">*/}
+		                        				{/*{this.state.validationErrors.find(err => err.name === 'languages').message}*/}
+		                        			{/*</div>*/}
+		                        		{/*}*/}
+									{/*</div>*/}
 									<div className="branch--address">
 							            <p className="menu--title">Address</p>
 							            <div className="content--edit branch--address--edit">
