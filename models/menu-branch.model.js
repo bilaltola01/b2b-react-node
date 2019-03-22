@@ -45,8 +45,8 @@ MenuBranch.createAll = (menus) => {
 
 MenuBranch.updateAll = (menus, branch) => {
   // console.log('MenuBranch.updateAll', menus, branch)
-  if (!menus || menus.length <= 0 || !branch || !branch.BranchID) {
-    console.error('No menus or branch specified');
+  if (!branch || !branch.BranchID) {
+    console.error('No branch specified');
     return Promise.resolve([]);
   }
   return MenuBranch.remove({

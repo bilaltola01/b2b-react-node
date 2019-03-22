@@ -73,7 +73,7 @@ class MenuPage extends Component {
     const items = (menus && menus.length > 0) ? menus.filter(menu => {
       return parseInt(menu.MenuID, 10) === parseInt(id, 10);
     }) : [];
-    const branches = items.map(menu => menu.BranchID);
+    const branches = items.map(menu => menu.BranchID) || [];
     const res = items && items[0] || null;
 
     if (res) {
@@ -127,7 +127,7 @@ class MenuPage extends Component {
     if (this.props.match.params.action === 'add') {
       this.props.dispatch(actionCreators.setMenu({}));
     } else {
-      this.props.dispatch(actionCreators.setMenu(this.getCurrentMenu(this.getFilteredMenusById(this.getMenus(profile), this.props.match.params.id))));
+      // this.props.dispatch(actionCreators.setMenu(this.getCurrentMenu(this.getFilteredMenusById(this.getMenus(profile), this.props.match.params.id))));
     }
 
     this.props.dispatch(actionCreators.getProfile(this.handlers.onProfileFetched));
