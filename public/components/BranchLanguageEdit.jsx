@@ -25,14 +25,15 @@ class BranchLanguageEdit extends Component {
 		this.handlers = createHandlers(this);
 	}
 
-	shouldComponentUpdate(nextProps, nextState) {
-		return this.state.removed !== nextState.removed;
-	}
+	// shouldComponentUpdate(nextProps, nextState) {
+	// 	return this.state.removed !== nextState.removed;
+	// }
 
 	render() {
 		const { id, code, codeFull, name, title, onRemove } = this.props;
 
 		// console.log(id, this.state.removed);
+		// console.log('branch-language', title);
 
 		const finalCode = codeFull ? codeFull : code;
 

@@ -24,7 +24,11 @@ let createHandlers = (ctx) => {
 			});
 
 			if (newLang) {
-				languages.push(newLang);
+				if (ctx.props.single) {
+					languages = [{...newLang}];
+				} else {
+						languages.push(newLang);
+				}
 			}
 
 			if (ctx.props.onChange && typeof ctx.props.onChange === 'function') {
@@ -133,13 +137,12 @@ class BranchLanguagesEdit extends Component {
 			items: availableLanguages || uniqueBranches || []
 		};
 		// console.log(this.state);
-		// console.log('allLanguages', this.state.allLanguages);
 
 		const languageComponents = (this.state.allLanguages && this.state.allLanguages.length > 0) ? this.state.allLanguages.map((language, index) => {
-			// console.log('language', language)
+
 			const finalLanguage = language;
 			if (finalLanguage) {
-                return <BranchLanguageEdit id={finalLanguage.LanguageID} code={finalLanguage.Code} codeFull={finalLanguage.CodeFull} name={finalLanguage.Name} title={finalLanguage.Title} onRemove={(e) => this.handlers.onRemove({id: finalLanguage.LanguageID})} key={index} />;
+					return <BranchLanguageEdit id={finalLanguage.LanguageID} code={finalLanguage.Code} codeFull={finalLanguage.CodeFull} name={finalLanguage.Name} title={finalLanguage.Title} onRemove={(e) => this.handlers.onRemove({id: finalLanguage.LanguageID})} key={index} />;
 			}
 		}) : null;
 
