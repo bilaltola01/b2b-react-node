@@ -23,6 +23,7 @@ class SectionArticleEditMenusDetail extends Component {
 				originalLanguages={menu.originalLanguages}
 				languages={languages}
 				branchesIds={branchesIds}
+				branches={menu.branches}
 				translations={menu.translations}
 				key={index} />;
 		}) : null;
@@ -31,12 +32,12 @@ class SectionArticleEditMenusDetail extends Component {
 			<article className="content--module module--item-details no-metadata content--menus">
 				<div className="content--container global-padding-wrapper branches-container">
 					<h2 className="asset--subtitle">
-                        Edit Menus
-                    </h2>
-                    <div className="branches">
-                    	{menuComponents}
-                    </div>
-                </div>
+						Edit Menus
+					</h2>
+					<div className="branches">
+						{menuComponents}
+					</div>
+				</div>
 			</article>
 		)
 	}

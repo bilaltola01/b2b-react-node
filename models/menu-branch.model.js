@@ -44,7 +44,7 @@ MenuBranch.createAll = (menus) => {
 };
 
 MenuBranch.updateAll = (menus, branch) => {
-  // console.log('MenuBranch.updateAll', menus)
+  // console.log('MenuBranch.updateAll', menus, branch)
   if (!menus || menus.length <= 0 || !branch || !branch.BranchID) {
     console.error('No menus or branch specified');
     return Promise.resolve([]);
@@ -62,6 +62,21 @@ MenuBranch.updateAll = (menus, branch) => {
   });
 }
 
+// Update all branches for menu
+MenuBranch.updateIds = (id, ids) => {
+  // console.log('updateIds', id, ids)
+  return new Promise((resolve, reject) => {
+    MenuBranch.removeByMenuId(id).then(() => {
+      Promise.all(ids.map(branchID => {
+        MenuBranch.create({MenuID: id, BranchID: branchID}).then((res) => {
+          resolve(res);
+        }).catch(err => {
+          reject(err);
+        });
+      }));
+    })
+  });
+};
 MenuBranch.updateBulk = (branches, menus) => {
   if (!menus || menus.length <= 0 || !branches || branches.length <= 0) {
     console.error('No menus specified');

@@ -58,6 +58,7 @@ class SectionArticleMenus extends Component {
 				categories={menu.categories}
 				currencies={currencies}
 				branches={branches}
+				menuBranches={menu.branches}
 				duplicates={finalDuplicates}
 				languages={menu.languages}
 				translations={menu.translations}

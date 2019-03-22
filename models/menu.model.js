@@ -136,6 +136,7 @@ function createMenuContainer (menu, hidden = {}) {
       MenuOriginalLanguage.getWithDetails({MenuID: menu.MenuID}),
       MenuLanguage.getWithDetails({MenuID: menu.MenuID}),
       MenuTranslation.get({MenuID: menu.MenuID}),
+      MenuBranch.get({MenuID: menu.MenuID}),
     ]).then(res => {
       // console.log(res);
       // console.log('MenuOriginalLanguage res', res[1])
@@ -152,6 +153,9 @@ function createMenuContainer (menu, hidden = {}) {
       }
       if (!hidden.translation) {
         obj.translations = res[3];
+      }
+      if (!hidden.branch) {
+        obj.branches = res[4];
       }
 
       resolve(obj);

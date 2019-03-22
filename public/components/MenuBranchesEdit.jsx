@@ -98,25 +98,37 @@ class MenuBranchesEdit extends Component {
 			allBranches: []
 		};
 		this.handlers = createHandlers(this);
+		this.updateBranches = this.updateBranches.bind(this);
 	}
 
-	componentDidMount() {
-		const { branches, profile } = this.props;
-		let allBranches = []
+	updateBranches(props = this.props) {
+    const { branches, profile } = props;
+    let allBranches = []
 
     if (branches && branches.length > 0) {
       branches.forEach(branchID => {
-      	const tempBranch = (profile && profile.branches) ? profile.branches.find(branch => {
+        const tempBranch = (profile && profile.branches) ? profile.branches.find(branch => {
           return branch.BranchID === branchID;
         }) : null;
 
         if (tempBranch) {
           allBranches.push(tempBranch);
-				}
-			})
-		}
+        }
+      })
+    }
 
-			this.setState({allBranches})
+    this.setState({allBranches})
+	}
+
+	componentDidMount() {
+    this.updateBranches();
+	}
+
+	componentWillReceiveProps(nextProps) {
+		const { profile } = this.props
+		if (profile !== nextProps.profile) {
+      this.updateBranches(nextProps);
+		}
 	}
 
 	render() {
@@ -125,7 +137,7 @@ class MenuBranchesEdit extends Component {
 		const availableBranches = (this.props.profile && this.props.profile.branches) ? this.props.profile.branches : [];
 
 		// console.log('allBranches', this.state.allBranches);
-		// console.log(branches);
+		// console.log('branches', branches);
 		// console.log(availableBranches);
 
 		// List of all branches availables is to retrieved dynamically from db

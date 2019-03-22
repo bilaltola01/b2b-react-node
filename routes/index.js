@@ -146,6 +146,7 @@ let Routes = class {
         router.delete('/menu-branch', menuBranchController.remove);
         router.delete('/menu-branch-id', menuBranchController.removeByMenuId);
         router.post('/add-menu-branch', menuBranchController.addMenuToBranches);
+        router.put('/menu-branches', menuBranchController.putIds);
 
         router.get('/menu-category', menuCategoryController.get);
         router.post('/menu-category', menuCategoryController.post);

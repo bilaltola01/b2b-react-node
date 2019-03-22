@@ -61,6 +61,7 @@ class SectionArticleMenu extends Component {
 			categories,
 			branches,
 			duplicates,
+			menuBranches,
 			languages,
 			translations,
 			currencies,
@@ -159,8 +160,9 @@ class SectionArticleMenu extends Component {
 		const initialBranch = branches.filter(b => b.BranchID === branchId);
 
 		// console.log(duplicates);
+		// console.log('menuBranches', menuBranches);
 
-		const finalBranches = (duplicates && duplicates.length > 0) ? duplicates.reduce((acc, dup) => {
+		const finalBranches = (menuBranches && menuBranches.length > 0) ? menuBranches.reduce((acc, dup) => {
 			const branch = branches.filter(b => b.BranchID === dup.BranchID);
 			// console.log(branch);
 			return (branch && branch.length > 0) ? acc.concat(branch) : acc;
@@ -191,7 +193,7 @@ class SectionArticleMenu extends Component {
 					<div>
 						<div className="content--label">
 							<h3 className="label--key">Total:</h3>
-							<span className="label--value">{finalBranches.length}</span>
+							<span className="label--value">{menuBranches.length}</span>
 						</div>
 						<div className="content--label">
 							<h3 className="label--key">Branches:</h3>
