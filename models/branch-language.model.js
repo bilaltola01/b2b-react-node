@@ -1,9 +1,9 @@
 "use strict";
 
+const uniqWith = require('lodash/uniqWith');
 const DBLayer = require('../DBLayer');
 const db = DBLayer.connection;
 const dateUtils = require('../shared/date-utils');
-
 const Language = require('./language.model');
 
 // Create new branch language in the database
@@ -51,9 +51,12 @@ BranchLanguage.updateAll = (branchID, languages) => {
     console.error('No languages specified');
     return Promise.resolve([]);
   }
+
+  const uniqLanguages = uniqWith(languages, (a, b) => a.BranchID === b.BranchID && a.LanguageID === b.LanguageID);
+  
   return BranchLanguage.removeAll({BranchID: branchID}).then(res => {
     // console.log(res);
-    return Promise.all(languages.map(language => {
+    return Promise.all(uniqLanguages.map(language => {
       return BranchLanguage.get({
         BranchID: language.BranchID,
         LanguageID: language.LanguageID
