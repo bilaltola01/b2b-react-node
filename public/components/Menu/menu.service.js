@@ -228,14 +228,17 @@ export function translateMenu(opts, mode) {
             return Promise.reject(res);
         }
 
+        // console.log('translateMenu', opts)
         // console.log(res);
-        let id = opts.MenuID || opts.id;
+        let id = opts.id || opts.MenuID;
 
-        let menuId = res.obj.find((menu) => {
+        let menuTemp = res.obj.find((menu) => {
             return id === menu.MenuID;
             //return opts.description === menu.Description && opts.title === menu.Title && parseFloat(opts.price, 10) === parseFloat(menu.Price, 10);
-        }).MenuID;
+        });
+        let menuId = menuTemp && menuTemp.MenuID || null
 
+        if (!menuId) return false;
         // Convert to correct syntax
         const finalLanguages = map(opts.languages, lang => {
             const finalLang = (lang.Language) ? lang.Language : lang;
