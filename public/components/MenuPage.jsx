@@ -76,32 +76,32 @@ class MenuPage extends Component {
     const branches = items.map(menu => menu.BranchID) || [];
     const res = items && items[0] || null;
 
-    if (res) {
-      res.branchesIds = branches;
-
-      if (branches && this.props.profile && this.props.profile.branches) {
-        res.branches = branches.map(branchID => {
-          let branch = this.props.profile.branches.find(branch => branch.BranchID === branchID) || {}
-          return branch
-            ? {
-            Address: branch.Address,
-            BranchID: branch.BranchID,
-            City: branch.City,
-            CompanyID: branch.CompanyID,
-            Country: branch.Country,
-            Date: branch.Date,
-            Email: branch.Email,
-            Name: branch.Name,
-            Tel: branch.Tel,
-            languages: branch.languages,
-            cuisines: branch.cuisines,
-            currencies: branch.currencies,
-            images: branch.images,
-          } : {}
-        })
-      } else {
-        res.branches = [];
-      }
+    if (res) { // TODO remove this code
+      // res.branchesIds = branches;
+      //
+      // if (branches && this.props.profile && this.props.profile.branches) {
+      //   res.branches = branches.map(branchID => {
+      //     let branch = this.props.profile.branches.find(branch => branch.BranchID === branchID) || {}
+      //     return branch
+      //       ? {
+      //       Address: branch.Address,
+      //       BranchID: branch.BranchID,
+      //       City: branch.City,
+      //       CompanyID: branch.CompanyID,
+      //       Country: branch.Country,
+      //       Date: branch.Date,
+      //       Email: branch.Email,
+      //       Name: branch.Name,
+      //       Tel: branch.Tel,
+      //       languages: branch.languages,
+      //       cuisines: branch.cuisines,
+      //       currencies: branch.currencies,
+      //       images: branch.images,
+      //     } : {}
+      //   })
+      // } else {
+      //   res.branches = [];
+      // }
     }
     // console.log('menu branches', branches, this.props.profile.branches, res)
     return  res ? [res] : null;
@@ -136,7 +136,7 @@ class MenuPage extends Component {
   render () {
     const { action, id } = this.props.match.params;
 
-    const profile = (this.props.profile) ? this.props.profile : {};
+    const profile = (this.props.profile) ? {...this.props.profile} : {};
 
     const branchRoot = (profile.branches && profile.branches.length > 0) ? profile.branches.find(branch => {
       return branch.HasHeadquarters == 1;

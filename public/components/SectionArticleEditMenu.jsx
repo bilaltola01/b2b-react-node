@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router-dom';
+import { map } from 'lodash';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import * as actionCreators from '../action-creators';
@@ -102,18 +103,15 @@ class SectionArticleEditMenu extends Component {
 			originalLanguages,
 			languages,
 			translations,
-			branchesIds,
 			currency,
 			profile,
 			menu
 		} = this.props;
 
-		// console.log('branchesIds', this.props.branchesIds);
 		// console.log('languages', languages);
 		// console.log('originalLanguages', originalLanguages);
-		// console.log('profile', branches, menu);
+		// console.log('profile', profile, menu);
 
-		const branches = menu && menu.branches;
 		let languagesList = (translations && translations.length > 0) ? translations.map((translation, index) => {
 			return (index < translations.length - 1)
 				? (
@@ -158,11 +156,11 @@ class SectionArticleEditMenu extends Component {
 
 		const menuCategories = <MenuCategoriesEdit categories={(categories && categories.length > 0) ? categories : []} onChange={this.handlers.onChanges} />
 
-    // const branchesIds2 = branches.map(item => item.BranchID);
-    // console.log('branchesIds2', branchesIds2,branches)
+    const branches = menu && menu.branches;
+    const branchesIds = map(branches, item => item.BranchID) || [];
 		const menuBranches = (
       <MenuBranchesEdit
-        branches={menu && menu.branchesIds || []}
+        branches={branchesIds}
         onChange={this.handlers.onChanges}
       />
     );

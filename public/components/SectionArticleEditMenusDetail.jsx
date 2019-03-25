@@ -8,8 +8,6 @@ class SectionArticleEditMenusDetail extends Component {
 		// console.log('component', component)
 		const currencies = (component.props.currencies && component.props.currencies.length > 0) ? component.props.currencies : [];
 		const languages = (component.props.languages && component.props.languages.length > 0) ? component.props.languages : [];
-		const branchesIds = (component.props.menus && component.props.menus[0] && component.props.menus[0].branchesIds
-			&& component.props.menus[0].branchesIds.length > 0) ? component.props.menus[0].branchesIds : [];
 
 
 		const menuComponents = (component.props.menus && component.props.menus.length > 0) ? component.props.menus.map((menu, index) => {
@@ -22,7 +20,6 @@ class SectionArticleEditMenusDetail extends Component {
 				currencies={currencies}
 				originalLanguages={menu.originalLanguages}
 				languages={languages}
-				branchesIds={branchesIds}
 				branches={menu.branches}
 				translations={menu.translations}
 				key={index} />;
