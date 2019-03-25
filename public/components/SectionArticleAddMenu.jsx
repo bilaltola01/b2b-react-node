@@ -76,6 +76,7 @@ class SectionArticleAddMenu extends Component {
     const menuOriginalLanguages =
       this.props.menu ? (
         <BranchLanguagesEdit
+          single
           className="style-7"
           languages={originalLanguages}
           label="Original Language"
