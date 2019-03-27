@@ -131,7 +131,7 @@ class MenuCopyCategory extends Component {
               </button>
             </header>
             <ul>
-              {menus.map(x => {
+              {menus.map((x, index) => {
                 return (
                   <li
                     onClick={e => this.handleClick(x)}
@@ -140,7 +140,7 @@ class MenuCopyCategory extends Component {
                         ? "menu--copy__selected"
                         : null
                     }
-                    key={x.MenuID}
+                    key={index}
                   >
                     {x.Title}
                   </li>
