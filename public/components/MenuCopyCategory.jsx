@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from "react";
 import { connect } from "react-redux";
 import Modal from "react-modal";
+import { uniqBy, map } from 'lodash';
 import * as actionCreators from '../action-creators';
 import { Ajax } from "../shared/ajax.utils";
 import { Toast } from "./Toast";
@@ -115,6 +116,7 @@ class MenuCopyCategory extends Component {
   render() {
     const { menus, category } = this.props;
     const { selectedMenu, isOpen, isSuccess } = this.state;
+    // console.log('menus', menus, uniqBy(menus, i => i.MenuID))
     return (
       <div className="menu--copy">
         <button onClick={() => this.setState({ isOpen: !isOpen })}>
@@ -131,7 +133,7 @@ class MenuCopyCategory extends Component {
               </button>
             </header>
             <ul>
-              {menus.map((x, index) => {
+              {map(uniqBy(menus, i => i.MenuID), (x, index) => {
                 return (
                   <li
                     onClick={e => this.handleClick(x)}
@@ -140,7 +142,7 @@ class MenuCopyCategory extends Component {
                         ? "menu--copy__selected"
                         : null
                     }
-                    key={index}
+                    key={x.MenuID}
                   >
                     {x.Title}
                   </li>
