@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from "react";
+import { uniqBy } from 'lodash';
 
 class LanguagePicker extends Component {
   render() {
@@ -32,57 +33,57 @@ class LanguagePicker extends Component {
             switch (data.type) {
               case "foodTypes":
                 return item.Items ? (
-                  <optgroup key={item.Group} label={item.Group}>
-                    {item.Items.map(group => (
-                      <option value={group.Name} key={group.Name}>
+                  <optgroup key={index} label={item.Group}>
+                    {item.Items.map((group, index2) => (
+                      <option value={group.Name} key={index2}>
                         {group.Name}
                       </option>
                     ))}
                   </optgroup>
                 ) : (
-                  <option value={item.Name} key={item.Name}>
+                  <option value={item.Name} key={index}>
                     {item.Name}
                   </option>
                 );
               case "languages":
                 return (
-                  <option value={finalCode} key={item.LanguageID}>
+                  <option value={finalCode} key={index}>
                     {item.Name}
                   </option>
                 );
               case "cuisines":
                 return (
-                  <option value={item.Title} key={item.CuisineID}>
+                  <option value={item.Title} key={index}>
                     {item.Title}
                   </option>
                 );
               case "currencies":
                 return (
-                  <option value={item.Name} key={item.CurrencyID}>
+                  <option value={item.Name} key={index}>
                     {item.Name}
                   </option>
                 );
               case "branches":
                 return (
-                  <option value={item.Name} key={item.BranchID}>
+                  <option value={item.Name} key={index}>
                     {item.Name}
                   </option>
                 );
               case "menus":
                 return (
-                  <option value={item.Title} key={item.MenuID}>
+                  <option value={item.Title} key={index}>
                     {item.Title}
                   </option>
                 );
               case "categories":
                 return (
-                  <option value={item.Title} key={item.CategoryStandardID}>
+                  <option value={item.Title} key={index}>
                     {item.Title}
                   </option>
                 );
               default:
                 return (
-                  <option value={item.codeFull} key={item.id}>
+                  <option value={item.codeFull} key={index}>
                     {item.title}
                   </option>
                 );
@@ -98,19 +99,19 @@ class LanguagePicker extends Component {
               case "foodTypes":
                 return item.Items ? (
                   <li
-                    key={item.Group}
+                    key={index}
                     data-id={item.Group}
                     rel={item.Group}
                     className="select--options__group"
                   >
                     {item.Group}
                     <ol>
-                      {item.Items.map(group => (
+                      {item.Items.map((group, index2) => (
                         <li
                           data-id={group.Name}
                           rel={group.Name}
                           onClick={e => onPickerItemClick(e)}
-                          key={group.Name}
+                          key={index2}
                         >
                           {group.Name}
                         </li>
@@ -122,7 +123,7 @@ class LanguagePicker extends Component {
                     data-id={item.Name}
                     rel={item.Name}
                     onClick={e => onPickerItemClick(e)}
-                    key={item.Name}
+                    key={index}
                   >
                     {item.Name}
                   </li>
@@ -133,7 +134,7 @@ class LanguagePicker extends Component {
                     data-id={item.LanguageID}
                     rel={finalCode}
                     onClick={e => onPickerItemClick(e)}
-                    key={item.LanguageID}
+                    key={index}
                   >
                     {item.Name}
                   </li>
@@ -144,7 +145,7 @@ class LanguagePicker extends Component {
                     data-id={item.CuisineID}
                     rel={item.Title}
                     onClick={e => onPickerItemClick(e)}
-                    key={item.CuisineID}
+                    key={index}
                   >
                     {item.Title}
                   </li>
@@ -155,7 +156,7 @@ class LanguagePicker extends Component {
                     data-id={item.CurrencyID}
                     rel={item.Name}
                     onClick={e => onPickerItemClick(e)}
-                    key={item.CurrencyID}
+                    key={index}
                   >
                     {item.Name + " (" + item.Symbol + ")"}
                   </li>
@@ -166,7 +167,7 @@ class LanguagePicker extends Component {
                     data-id={item.BranchID}
                     rel={item.Name}
                     onClick={e => onPickerItemClick(e)}
-                    key={item.BranchID}
+                    key={index}
                   >
                     {item.Name}
                   </li>
@@ -177,7 +178,7 @@ class LanguagePicker extends Component {
                     data-id={item.MenuID}
                     rel={item.Title}
                     onClick={e => onPickerItemClick(e)}
-                    key={item.MenuID}
+                    key={index}
                   >
                     {item.Title}
                   </li>
@@ -191,7 +192,7 @@ class LanguagePicker extends Component {
                     onClick={e =>
                       !item.disabled ? onPickerItemClick(e) : null
                     }
-                    key={item.CategoryStandardID}
+                    key={index}
                   >
                     {item.Title}
                   </li>
@@ -202,7 +203,7 @@ class LanguagePicker extends Component {
                     data-id={item.id}
                     rel={item.codeFull}
                     onClick={e => onPickerItemClick(e)}
-                    key={item.id}
+                    key={index}
                   >
                     {item.title}
                   </li>

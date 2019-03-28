@@ -263,7 +263,7 @@ class SectionArticleMenu extends Component {
 									/>
 								</li>
 								<li><Link to={"/menu/edit/" + id} className="action--edit">Edit</Link></li>
-								<li><Link to={"/menu/delete/" + id} className="action--delete">Delete</Link></li>
+								<li><Link to={"/menu/delete/" + id} className="action--delete" onClick={(e) => {e.stopPropagation()}}>Delete</Link></li>
 							</ul>
 						</div>
 					</header>

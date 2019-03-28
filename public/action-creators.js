@@ -85,7 +85,7 @@ export function getMenu (data) {
 };
 
 export function saveMenu (data, cb) {
-  // console.log(data);
+  console.log('saveMenu', data);
   return {
     types: ['SAVE_MENU_REQUEST', 'SAVE_MENU_SUCCESSS', 'SAVE_MENU_FAILURE'],
     promise: () => {
@@ -95,7 +95,7 @@ export function saveMenu (data, cb) {
           console.log('request succeeded with JSON response', res);
 
           if (res && typeof cb === 'function') {
-            data.MenuID = data.MenuID ?  data.MenuID : res;
+            // data.MenuID = data.MenuID ?  data.MenuID : res;
             cb(data);
           }
         }).catch(err => {
