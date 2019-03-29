@@ -18,7 +18,7 @@ MenuCategory.create = (obj) => {
   let category = obj;
   category.Date = dateUtils.toMysqlDate(new Date());
 
-  // console.log(category);
+  console.log('MenuCategory.create', category);
   return db('MenuCategory').insert(category).returning('MenuCategoryID');
 };
 
