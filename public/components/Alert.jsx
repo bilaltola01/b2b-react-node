@@ -28,6 +28,8 @@ let createHandlers = (ctx) => {
 				obj: ctx.props.component
 			}
 		});
+
+    ctx.props.dispatch(actionCreators.getProfile());
 	};
 
 	return {
