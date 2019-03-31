@@ -14,8 +14,9 @@ import * as Meal from './meal.service';
 export async function updateMenu(opts) {
     let menuId = opts.MenuID || opts.id;
     if (menuId) {
-        return MenuCategory.removeSelectedMenuCategory(opts)
-            .then(MenuCategory.updateMenuCategories(menuId, opts.categories))
+        // return MenuCategory.removeSelectedMenuCategory(opts)
+        //     .then(MenuCategory.updateMenuCategories(menuId, opts.categories))
+         return MenuCategory.updateMenuCategories(menuId, opts.categories)
             .then(MenuLanguage.updateMenuLanguages(menuId, opts.languages))
             .then(MenuOriginalLanguage.updateMenuLanguages(menuId, opts.originalLanguages))
             .then(MenuBranch.updateMenuBranches(menuId, opts.branches))
@@ -206,7 +207,7 @@ export function getMenuTranslation(id, translations) {
 }
 
 export function translateMenu(opts, mode) {
-    // console.log(opts);
+    // console.log('translateMenu', opts);
 
     let propsToTranslate = map(Object.keys(opts).filter((key) => {
         return ((key === 'title' || key === 'Title') || (key === 'description' || key === 'Description')) && (opts[key] && opts[key].length > 0);
