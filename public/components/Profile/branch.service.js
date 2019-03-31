@@ -221,7 +221,9 @@ export function updateBranch (branch) {
 
                         return acc.concat([{
                             file: contact.file,
-                            url: contact.ImagePath
+                            url: contact.ImagePath,
+                            id: branch.BranchID,
+                            Caption: branch.Name,
                         }]);
                     }, [])).then(resContacts => {
                         // console.log('RES CONTACT');
@@ -246,7 +248,9 @@ export function updateBranch (branch) {
             ImageService.updateBranchImages(newImages.map(image => {
                 return {
                     file: image.file,
-                    url: image.imgPath
+                    url: image.imgPath,
+                    id: branch.BranchID,
+                    Caption: branch.Name,
                 };
             })).then(resImages => {
                 let newImages = findImage(resImages, branch.images, false);
@@ -270,7 +274,9 @@ export function updateBranch (branch) {
 
                         return acc.concat([{
                             file: contact.file,
-                            url: contact.ImagePath
+                            url: contact.ImagePath,
+                            id: branch.BranchID,
+                            Caption: branch.Name,
                         }]);
                     }, [])).then(resContacts => {
                         // console.log('RES CONTACT');

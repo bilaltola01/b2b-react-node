@@ -11,11 +11,15 @@ cloudinary.config({
 
 let ImageUploadUtils = {
     upload: function(data, cb) {
+        const {url, ...other} = data
+      console.log('cloudinary upload', other);
         cloudinary.v2.uploader.upload(data.url, {
             resource_type: "image",
             chunk_size: 50000000,
             folder: data.file.folder,
             public_id: data.file.name,
+            tags: `${data.id}`,
+            context: `caption=${data.Caption}`
             // eager: { quality: "jpegmini", crop: "scale", width: 1024, height: 768 }
         }, function(err, res) {
             // console.error(err)
@@ -33,9 +37,10 @@ let ImageUploadUtils = {
      * @return {void}
      */
     remove: function(id, cb) {
+        console.log('cloudinary destroy', id);
         cloudinary.v2.uploader.destroy(id, { invalidate: true }, function(err, res) {
-            // console.log(err)
-            // console.log(res)
+            console.log('remove error = ', err)
+            console.log('remove res = ', id, res)
             if (typeof cb === 'function') {
                 cb(res);
             }

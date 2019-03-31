@@ -14,7 +14,6 @@ import * as Meal from './meal.service';
 export async function updateMenu(opts) {
     let menuId = opts.MenuID || opts.id;
     if (menuId) {
-        // return MenuCategory.removeSelectedMenuCategory(opts)
       await MenuCategory.removeSelectedMenuCategory(opts)
       await MenuCategory.updateMenuCategories(menuId, opts.categories)
       await MenuLanguage.updateMenuLanguages(menuId, opts.languages)

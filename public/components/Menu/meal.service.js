@@ -63,7 +63,9 @@ export async function postMeal(meal, newCatId) {
       image.file.folder = "meal";
       return {
         file: image.file,
-        url: image.imgPath
+        url: image.imgPath,
+        Caption: meal.Title,
+        id: MealID
       };
     })
   );
@@ -74,7 +76,7 @@ export async function postMeal(meal, newCatId) {
         body: JSON.stringify({
           obj: {
             MealID,
-            Caption: "",
+            Caption: meal.Title,
             AltDesc: "",
             Path: image.secure_url || image.url
           }
@@ -127,6 +129,7 @@ export function removeMeals(meals, catId) {
 }
 
 export async function updateMeal(meal, catId) {
+  // console.log('updateMeal', meal)
   const MealID = meal.id || meal.MealID;
   if (!meal.id && !meal.MealID) {
     console.error("meal id is not specified!");
@@ -167,6 +170,7 @@ export async function updateMeal(meal, catId) {
         return {
           catId: catId,
           id: MealID,
+          Caption: meal.Title,
           file: image.file,
           url: image.imgPath
         };

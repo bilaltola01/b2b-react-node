@@ -10,7 +10,6 @@ class ImageUploadController {
 }
 
 ImageUploadController.post = async (req, res) => {
-    //console.log(req.body);
     res.setHeader('Content-Type', 'application/json');
     try {
         const {id, catid} = req.body.obj;
@@ -19,11 +18,11 @@ ImageUploadController.post = async (req, res) => {
         const name = obj.file.name;
         obj.file = obj.file || {};
         if(obj.file.folder === 'meal'){
-            obj.file.folder = `company/${result.CompanyID}/meal/${id}/category/${catid}`;
+            obj.file.folder = `company/${result.CompanyID}/meal`;
         }else{
-            obj.file.folder = `company/${result.CompanyID}/${obj.file.folder || 'branch'}/${id || 0}`;
+            obj.file.folder = `company/${result.CompanyID}/${obj.file.folder || 'branch'}`;
         }
-        obj.file.name = `${md5(obj.file.name)}`;
+        obj.file.name = `${md5(obj.file.name)}${Date.now()}`;
         const output = await ImageUpload.create(obj);
         output.name = name;
         res.status(201).json({ success: true, message: 'ImageUpload successfully created', obj: output });
