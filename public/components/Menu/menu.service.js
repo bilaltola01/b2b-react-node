@@ -15,19 +15,20 @@ export async function updateMenu(opts) {
     let menuId = opts.MenuID || opts.id;
     if (menuId) {
         // return MenuCategory.removeSelectedMenuCategory(opts)
-        //     .then(MenuCategory.updateMenuCategories(menuId, opts.categories))
-         return MenuCategory.updateMenuCategories(menuId, opts.categories)
-            .then(MenuLanguage.updateMenuLanguages(menuId, opts.languages))
-            .then(MenuOriginalLanguage.updateMenuLanguages(menuId, opts.originalLanguages))
-            .then(MenuBranch.updateMenuBranches(menuId, opts.branches))
-            .then(Ajax().put('/menu', {
+      await MenuCategory.removeSelectedMenuCategory(opts)
+      await MenuCategory.updateMenuCategories(menuId, opts.categories)
+      await MenuLanguage.updateMenuLanguages(menuId, opts.languages)
+      await MenuOriginalLanguage.updateMenuLanguages(menuId, opts.originalLanguages)
+      await MenuBranch.updateMenuBranches(menuId, opts.branches)
+
+      return Ajax().put('/menu', {
                 body: JSON.stringify(convertOpts(opts, true)),
                 headers: {
                     "content-type": "application/json",
                     "cache-control": "no-cache",
                     "x-access-token": StorageManagerInstance.read('token')
                 }
-            }));
+            });
     } else {
         let id;
         let obj = opts;
