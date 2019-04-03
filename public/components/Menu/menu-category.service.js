@@ -1,3 +1,4 @@
+import { map } from 'lodash';
 import { Ajax } from '../../shared/ajax.utils';
 
 import { Mapping } from  '../../shared/mapping.utils';
@@ -420,6 +421,19 @@ export function translateMenuCategory (menuId, langs, cat) {
 //
 export function removeMenuCategories () {
 
+}
+
+export function removeCategories (cats) {
+  return Promise.all(cats.map((cat) => {
+    let catId = cat.MenuCategoryID || cat.menuCategoryId;
+    if (catId) {
+      // console.log('remove meals cat', catId, cat.meals)
+        return Meal.removeMeals([], catId).then((newCatId) => {
+            // console.log('meals deleted')
+        });
+    }
+
+  }));
 }
 
 export function removeMenuCategory () {

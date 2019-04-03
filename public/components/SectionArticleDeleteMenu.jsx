@@ -19,6 +19,7 @@ let createHandlers = (ctx) => {
   };
 
   let goToMenus = () => {
+    ctx.props.dispatch(actionCreators.getProfile());
   	ctx.setState({
         redirect: true
     });

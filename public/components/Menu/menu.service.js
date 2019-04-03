@@ -362,26 +362,30 @@ function convertForTranslation(lang, obj) {
 
 export function deleteMenu(menu) {
     // console.log('deletion!!!');
-    // console.log(menu);
+    // console.log('deleteMenu', menu);
     const id = menu.MenuID || menu.id;
 
     return new Promise((resolve, reject) => {
+      MenuCategory.removeCategories(menu.categories).then((res) => {
+        // console.log('deleteMenu res', res)
         Ajax().delete('/menu', {
-            body: JSON.stringify({ id: id }),
-            headers: {
-                "content-type": "application/json",
-                "cache-control": "no-cache",
-                "x-access-token": StorageManagerInstance.read('token')
-            }
+          body: JSON.stringify({ id: id }),
+          headers: {
+            "content-type": "application/json",
+            "cache-control": "no-cache",
+            "x-access-token": StorageManagerInstance.read('token')
+          }
         }).then(res => {
-            if (!res || !res.success) {
-                reject(res);
-            }
 
-            resolve(res.obj);
+          if (!res || !res.success) {
+            reject(res);
+          }
+
+          resolve(res);
         }).catch(err => {
-            reject(err);
+          reject(err);
         });
+      })
     });
 }
 
