@@ -32,6 +32,18 @@ ImageUploadController.post = async (req, res) => {
     }
 };
 
+ImageUploadController.tag = async (req, res) => {
+    res.setHeader('Content-Type', 'application/json');
+    try {
+        const obj = req.body.obj;
+        const output = await ImageUpload.tag(obj);
+        res.status(201).json({ success: true, message: 'ImageUpload successfully tagged', obj: output });
+    } catch (err) {
+        console.error(err);
+        res.status(203).send({ success: false, message: 'ImageUpload tag failed', obj: err });
+    }
+};
+
 ImageUploadController.put = (req, res) => {
     res.setHeader('Content-Type', 'application/json');
 

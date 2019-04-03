@@ -22,6 +22,18 @@ ImageUpload.create = (obj) => {
     });
 };
 
+ImageUpload.tag = (obj) => {
+    return new Promise((resolve, reject) => {
+        ImageUploadUtils.tag(obj, (res) => {
+            if (res) {
+                resolve(res);
+            } else {
+                reject('Error occurred while getting the response from Cloudinary');
+            }
+        });
+    });
+};
+
 
 // Update new menu in the database
 // Returns a resolved Promise containing the new language

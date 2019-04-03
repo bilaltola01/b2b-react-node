@@ -58,6 +58,7 @@ let Routes = class {
         ////////////
 
         router.post('/image-upload', imageUploadController.post);
+        router.post('/image-tag', imageUploadController.tag);
         router.put('/image-upload', imageUploadController.put);
         router.delete('/image-upload', imageUploadController.remove);
 

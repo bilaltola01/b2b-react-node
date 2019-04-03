@@ -18,10 +18,21 @@ let ImageUploadUtils = {
             chunk_size: 50000000,
             folder: data.file.folder,
             public_id: data.file.name,
-            tags: `${data.id}`,
+            tags: data.id ? `${data.id}` : '',
             context: `caption=${data.Caption}`
             // eager: { quality: "jpegmini", crop: "scale", width: 1024, height: 768 }
         }, function(err, res) {
+            // console.error(err)
+            // console.error(res)
+            if (typeof cb === 'function') {
+                cb(res);
+            }
+        });
+    },
+
+    tag: function(data, cb) {
+      console.log('cloudinary tag', data);
+        cloudinary.v2.uploader.add_tag(data.tag, data.ids, {}, function(err, res) {
             // console.error(err)
             // console.error(res)
             if (typeof cb === 'function') {

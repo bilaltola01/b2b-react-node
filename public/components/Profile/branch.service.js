@@ -1,3 +1,4 @@
+import { map } from 'lodash';
 import { Ajax } from '../../shared/ajax.utils';
 
 import { Mapping } from  '../../shared/mapping.utils';
@@ -104,7 +105,7 @@ export function addLanguagesToBranches (branches, languages) {
 }
 
 export function updateBranch (branch) {
-    console.log(branch);
+    // console.log('branch 1', branch);
 
     return new Promise((resolve, reject) => {
         const updateOrCreateBranch = (branch) => {
@@ -196,6 +197,7 @@ export function updateBranch (branch) {
         }) : null;
 
         // console.log(newImages);
+        // console.log('branch 2', branch);
 
 
         // No new branch images
@@ -253,6 +255,7 @@ export function updateBranch (branch) {
                     Caption: branch.Name,
                 };
             })).then(resImages => {
+                // console.log('resImages', resImages)
                 let newImages = findImage(resImages, branch.images, false);
                 let newBranch = branch;
                 newBranch.images = newImages;
@@ -260,6 +263,9 @@ export function updateBranch (branch) {
                 if (!hasContactImages(branch.contacts)) {
                     // console.log('DOESNT HAVE CONTACT IMAGES!!');
                     updateOrCreateBranch(newBranch).then(res => {
+                        // console.log('updateOrCreateBranch res', res)
+                        const ids = map(resImages, (item) => item.public_id)
+                        ImageService.tagImage({ids, tag: res && res.BranchID || 123}).then(tagImages => {console.log('tagImages', tagImages)})
                         resolve(res);
                     }).catch(err => {
                         reject(err);
