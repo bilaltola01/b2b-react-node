@@ -16,7 +16,9 @@ class PageHeader extends Component {
 
 	render () {
 		const { company } = this.props;
+		const logo = company && company.logo || {}
 
+		console.log('company', company)
 		const adminComponent = (company.branchRoot && company.branchRoot.mainContact) ? (
 			<div>
 				<h4 className="login">
@@ -26,12 +28,15 @@ class PageHeader extends Component {
 				<img src={company.branchRoot.mainContact.ImagePath || 'assets/images/icon-anonymous.svg'} alt={company.branchRoot.mainContact.ImageAltDesc} />
 			</div>
 		) : (
-			<div>
+			<div style={{display: 'flex', alignItems: 'center'}}>
 				<h4 className="login">
-					Admin
-					<span>Profile</span>
+          {company.name}
+          <span>Profile</span>
 				</h4>
-				<img src="assets/images/icon-anonymous.svg" alt="" />
+				{logo.imgPath
+					? <img  src={logo.imgPath} alt={logo.altDesc} />
+					: <img src="assets/images/icon-anonymous.svg" alt="" />
+				}
 			</div>
 		);
 

@@ -33,6 +33,7 @@ let createHandlers = (ctx) => {
     };
 
     let onChanges = (type, obj) => {
+        // console.log('onChanges company', type, obj)
         let dataToUpdate = {};
         switch (type) {
             case 'main':
@@ -51,7 +52,20 @@ let createHandlers = (ctx) => {
 
     let onSaveChanges = () => {
         let dataToUpdate = fetchFormData();
-        dataToUpdate.image = ctx.state.image;
+        const image = ctx.state.image;
+        if (!(image && image.file)) {
+            return false;
+        }
+
+        var file  = {
+            'lastModified'     : image.file.lastModified,
+            'lastModifiedDate' : image.file.lastModifiedDate,
+            'name'             : image.file.name,
+            'size'             : image.file.size,
+            'type'             : image.file.type,
+            'folder'           : 'profile'
+        };
+      dataToUpdate.image = { url: image.url, file };
         ctx.props.dispatch(actionCreators.saveProfile(dataToUpdate, onProfileSaved));
     };
 
@@ -103,22 +117,18 @@ class SectionArticleEditCompany extends Component {
     }
 
 	render() {
-		const { title, dateUpdate, component } = this.props;
+		const { title, dateUpdate, component, profile } = this.props;
 
         // console.log(component.props);
         // do we even need state.profile ???
         // console.log(this.props.profile); // THIS IS OK
         // console.log(this.state.profile); // THIS IS NOT OK
 
-    const logo = (this.props.profile) ? [{
-        altDesc: this.props.profile.LogoAltDesc,
-        imgPath: this.props.profile.LogoPath
+    const logo = profile ? [{
+        altDesc: profile.LogoAltDesc,
+        imgPath: profile.LogoPath
     }] : [{altDesc: component.props.logo.altDesc || '', imgPath: component.props.logo.imgPath|| ''}];
 
-    const images = logo.altDesc && logo.imgPath ? [{
-      altDesc: logo.altDesc,
-      imgPath: logo.imgPath
-    }] : [];
 
     const name = (this.props.profile) ? this.props.profile.Name : component.props.name || '';
         const email = (this.props.profile) ? this.props.profile.Email : component.props.email || '';
@@ -130,14 +140,14 @@ class SectionArticleEditCompany extends Component {
         const youtube = (this.props.profile) ? this.props.profile.Youtube : component.props.social.youtube || '';
         const instagram = (this.props.profile) ? this.props.profile.Instagram : component.props.social.instagram || '';
 
-        console.log('images', images);
+        // console.log('images', images, profile);
         const allImagesComponent = (
             <ImageUpload
               onChanges={(key, obj) =>
-                this.handlers.onChanges({ key, images: obj.data }, onChange)
+                this.handlers.onChanges( key, { ...obj })
               }
               onUploadSubmit={this.handlers.onImageUpload}
-              images={images}
+              images={logo}
             />
         );
 

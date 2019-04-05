@@ -8,7 +8,7 @@ class Navbar extends Component {
     return (
       <header className="navigation">
         <h1 className="logo--main--dashboard">
-            <a href="index.html"><img style={{width: 100 + '%'}} src={logo.imgPath} alt={logo.altDesc} /></a>
+            <a href="index.html"><img src="assets/images/logo-one-menu-white.svg" alt="ONE-MENU Logo" /></a>
         </h1>
 
         <nav className="navigation--main">
