@@ -18,7 +18,7 @@ class PageHeader extends Component {
 		const { company } = this.props;
 		const logo = company && company.logo || {}
 
-		console.log('company', company)
+		// console.log('company', company)
 		const adminComponent = (company.branchRoot && company.branchRoot.mainContact) ? (
 			<div>
 				<h4 className="login">

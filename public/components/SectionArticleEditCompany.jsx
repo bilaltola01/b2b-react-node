@@ -1,12 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 
 import { Redirect, Route } from 'react-router';
-import Cropper from 'react-easy-crop';
 import { connect } from 'react-redux';
 import Modal from 'react-modal';
 import * as actionCreators from '../action-creators';
-import getCroppedImg from './Image/cropImage'
-import ImageUpload from './ImageUpload';
+import ImageUploadCrop from "./ImageUploadCrop";
 
 const customStyles = {
     content : {
@@ -25,7 +23,7 @@ let createHandlers = (ctx) => {
         // console.log(data);
         ctx.setState({
             image: data,
-            modalIsOpen: true
+            // modalIsOpen: true
         });
     };
 
@@ -125,80 +123,10 @@ class SectionArticleEditCompany extends Component {
             zoom: 1,
         };
         this.handlers = createHandlers(this);
-        this.closeModal = this.closeModal.bind(this);
-        this.renderPopup = this.renderPopup.bind(this);
-        this.onCropChange = this.onCropChange.bind(this);
-        this.onCropComplete = this.onCropComplete.bind(this);
-        this.onZoomChange = this.onZoomChange.bind(this);
-        this.handleCrop = this.handleCrop.bind(this);
     }
 
     componentDidMount() {
         this.handlers.getProfile(this.props.component.props);
-    }
-
-    closeModal() {
-        this.setState({modalIsOpen: false});
-    }
-
-    onCropChange(crop) {
-        this.setState({ crop })
-    }
-
-    onCropComplete(croppedArea, croppedAreaPixels) {
-        console.log(croppedArea, croppedAreaPixels)
-        this.setState({ croppedAreaPixels})
-    }
-
-    onZoomChange(zoom) {
-        this.setState({ zoom })
-    }
-
-    async handleCrop() {
-        const croppedImage = await getCroppedImg(this.state.image && this.state.image.url, this.state.croppedAreaPixels)
-        console.log('croppedImage', croppedImage)
-        const image = {
-            file: {
-                name: "logo.jpg",
-                type: "image/jpeg",
-            },
-            url: croppedImage
-        }
-        this.setState({ image, modalIsOpen: false, crop: { x: 0, y: 0 }, zoom: 1})
-        this.closeModal();
-    }
-
-    renderPopup() {
-        const { crop, zoom, image } = this.state;
-        console.log('this.state.image', this.state.image)
-        return (
-          <Modal
-            isOpen={this.state.modalIsOpen}
-            // onAfterOpen={this.afterOpenModal}
-            onRequestClose={this.closeModal}
-            style={customStyles}
-            contentLabel="Example Modal"
-          >
-              <div style={{position: 'relative'}}>
-                  <div className="crop-container" style={{width: 400, height: 400, display: 'block'}}>
-                      <Cropper
-                          // image="https://img.huffingtonpost.com/asset/5ab4d4ac2000007d06eb2c56.jpeg?cache=sih0jwle4e&ops=1910_1000"
-                          image={image && image.url}
-                          crop={crop}
-                          zoom={zoom}
-                          aspect={1}
-                          onCropChange={this.onCropChange}
-                          onCropComplete={this.onCropComplete}
-                          onZoomChange={this.onZoomChange}
-                      />
-                  </div>
-              </div>
-              <footer className="group-buttons" style={{paddingTop: 24}}>
-                  <button onClick={this.handleCrop} className="alert button--action button--action-filled">Crop</button>
-                  {/*<button onClick={this.closeModal} className="alert button--action button--action-outline button--action--cancel">Cancel</button>*/}
-              </footer>
-          </Modal>
-        )
     }
 
 	render() {
@@ -225,9 +153,9 @@ class SectionArticleEditCompany extends Component {
         const youtube = (this.props.profile) ? this.props.profile.Youtube : component.props.social.youtube || '';
         const instagram = (this.props.profile) ? this.props.profile.Instagram : component.props.social.instagram || '';
 
-        console.log('logo', logo);
+        // console.log('logo', logo);
         const allImagesComponent = (
-            <ImageUpload
+            <ImageUploadCrop
               onChanges={(key, obj) =>
                 this.handlers.onChanges( key, { ...obj })
               }
@@ -336,7 +264,6 @@ class SectionArticleEditCompany extends Component {
                     <div className="profile-save">
                         <button id="profile-save" onClick={this.handlers.onSaveChanges}>Save Changes</button>
                     </div>
-                    {this.renderPopup()}
                 </article>
             );
 
