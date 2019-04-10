@@ -58,19 +58,38 @@ ImageUploadController.put = (req, res) => {
 };
 
 ImageUploadController.remove = async (req, res) => {
+    // console.log('ImageUploadController.remove', req.body)
     res.setHeader('Content-Type', 'application/json');
     try {
-        const result = await BranchImage.getById(req.query.id);
+        let result = null
+        let path = ''
+
+        if (req.body.type === 'company') {
+            result = await Company.getByEmail(req.body.email);
+            path = result.LogoPath
+            // console.log('LogoPath', path)
+        } else {
+            result = await BranchImage.getById(req.query.id);
+            path = result && result.Path
+        }
+        // console.log('LogoPath', path)
         // console.log(result);
-        if (result && result.Path) {
-            var paths = result.Path.split('/');
+        if (path) {
+            const idIndex = path.indexOf('/company');
+            const publicId = idIndex > -1 ? path.substr(idIndex + 1, path.length - idIndex) : '';
+            var paths = path.split('/');
             var id = paths.length > 0 ? paths[paths.length - 1] : null;
-            const output = await ImageUpload.remove(id.split('.')[0])
+            const output = await ImageUpload.remove(publicId.split('.')[0])
             // console.log(output);
             if (output.result == "not found") {
-                res.status(204).send({ success: false, message: 'Image delete failed', obj: err });
+                res.status(204).send({ success: false, message: 'Image delete failed', obj: output });
             } else {
-                await BranchImage.remove(req.query.id);
+                if (req.body.type === 'company') {
+                    // TODO
+                } else {
+                    await BranchImage.remove(req.query.id);
+                }
+
                 res.status(201).json({
                     success: true, message: 'Image successfully deleted',
                     obj: Object.assign(result, output)

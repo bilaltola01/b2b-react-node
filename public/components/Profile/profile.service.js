@@ -16,7 +16,17 @@ export function updateProfile (opts) {
             }
         }) : ImageService.uploadImage(opts.image).then((res) => {
             // console.log(res);
-
+            Ajax().delete('/image-upload', {
+                body: JSON.stringify({
+                    email: opts.email,
+                    type: 'company',
+                }),
+                headers: {
+                    "content-type": "application/json",
+                    "cache-control": "no-cache",
+                    "x-access-token": StorageManagerInstance.read('token')
+                }
+            });
             if (!res || !res.success) {
                 return Promise.reject(res);
             }

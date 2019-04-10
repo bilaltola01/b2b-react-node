@@ -5,7 +5,7 @@ import { StorageManagerInstance } from '../../shared/storage.utils';
 
 
 export function uploadImage(data) {
-    // console.log(data);
+    // console.log('uploadImage', data);
     return Ajax().post('/image-upload', {
         body: JSON.stringify({ obj: data }), // data: {file: file, url: url}
         headers: {

@@ -169,7 +169,7 @@ class ImageUpload extends Component {
   }
 
   onCropComplete(croppedArea, croppedAreaPixels) {
-      console.log(croppedArea, croppedAreaPixels)
+      // console.log(croppedArea, croppedAreaPixels)
       this.setState({ croppedAreaPixels})
   }
 
@@ -179,9 +179,7 @@ class ImageUpload extends Component {
 
   async handleCrop() {
     const { allImages } = this.state
-    console.log('allImages', allImages, allImages && allImages[0] && allImages[0].imgPath)
     const croppedImage = await getCroppedImg(allImages && allImages[0] && allImages[0].imgPath, this.state.croppedAreaPixels)
-    console.log('croppedImage', croppedImage)
     let nextID = Math.floor(
         new Date().getTime() * 1000 + Math.random() * 10000
     );
