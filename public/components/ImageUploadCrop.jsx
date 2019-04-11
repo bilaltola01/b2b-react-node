@@ -103,11 +103,15 @@ let createHandlers = ctx => {
     });
   };
 
-  let onImageRemove = obj => {
+  let onImageRemove = (obj) => {
     ctx.setState(prevState => {
-      let images = prevState.allImages.reduce((acc, current) => {
-        return current.id !== obj.id ? acc.concat([current]) : acc;
-      }, []);
+      let images = []
+
+      if (obj) {
+           prevState.allImages.reduce((acc, current) => {
+              return current.id !== obj.id ? acc.concat([current]) : acc;
+          }, []);
+      }
 
       // console.log(prevState.allImages);
 
@@ -149,20 +153,27 @@ class ImageUpload extends Component {
     this.onZoomChange = this.onZoomChange.bind(this);
     this.handleCrop = this.handleCrop.bind(this);
     this.closeModal = this.closeModal.bind(this);
+    this.cancelCrop = this.cancelCrop.bind(this);
   }
 
   shouldComponentUpdate(nextProps, nextState) {
     return (
+      this.state.allImages !== nextState.allImages ||
       this.state.allImages.length !== nextState.allImages.length ||
       this.state.imagePreviewUrl !== nextState.imagePreviewUrl ||
       this.state.showRemoveConfirm !== nextState.showRemoveConfirm ||
+      this.state.modalIsOpen !== nextState.modalIsOpen ||
       this.state.zoom !== nextState.zoom ||
       this.state.crop !== nextState.crop
     );
   }
 
   closeModal() {
-      this.setState({modalIsOpen: false});
+    this.setState({modalIsOpen: false});
+  }
+  cancelCrop() {
+    this.handlers.onImageRemove()
+    this.closeModal()
   }
   onCropChange(crop) {
       this.setState({ crop })
@@ -217,14 +228,17 @@ class ImageUpload extends Component {
         <Modal
             isOpen={this.state.modalIsOpen}
             // onAfterOpen={this.afterOpenModal}
-            onRequestClose={this.closeModal}
+            onRequestClose={this.cancelCrop}
             style={customStyles}
             contentLabel="Example Modal"
         >
+          <header className="content--container--header" style={{textAlign: 'center'}}>
+            <div className="content--container--title">Delete Account</div>
+            <div onClick={this.cancelCrop} style={{position: 'absolute', top: 10, right: 20, padding: 5, cursor: 'pointer', zIndex: 1000}}>x</div>
+          </header>
           <div style={{position: 'relative'}}>
             <div className="crop-container" style={{width: 400, height: 400, display: 'block'}}>
               <Cropper
-                  // image="https://img.huffingtonpost.com/asset/5ab4d4ac2000007d06eb2c56.jpeg?cache=sih0jwle4e&ops=1910_1000"
                   image={allImages && allImages[0] && allImages[0].imgPath}
                   crop={crop}
                   zoom={zoom}
@@ -235,9 +249,8 @@ class ImageUpload extends Component {
               />
             </div>
           </div>
-          <footer className="group-buttons" style={{paddingTop: 24}}>
-            <button onClick={this.handleCrop} className="alert button--action button--action-filled">Crop</button>
-              {/*<button onClick={this.closeModal} className="alert button--action button--action-outline button--action--cancel">Cancel</button>*/}
+          <footer className="group-buttons" style={{paddingTop: 24, textAlign: 'center'}}>
+            <button onClick={this.handleCrop} className="button--action" style={{float: 'none', marginRight: 0}}>Crop & Save</button>
           </footer>
         </Modal>
     )
