@@ -61,6 +61,7 @@ let createHandlers = (ctx) => {
     };
 
     let onSaveChanges = () => {
+        const { profile = {} } = ctx.props
         let dataToUpdate = fetchFormData();
         const image = ctx.state.image;
         if (!(image && image.file)) {
@@ -75,7 +76,9 @@ let createHandlers = (ctx) => {
             'type'             : image.file.type,
             'folder'           : 'profile'
         };
-      dataToUpdate.image = { url: image.url, file };
+
+      dataToUpdate.image = { url: image.url, file, id: profile.CompanyID, Caption: profile.Name, };
+      // console.log('dataToUpdate', dataToUpdate, profile)
         ctx.props.dispatch(actionCreators.saveProfile(dataToUpdate, onProfileSaved));
     };
 
