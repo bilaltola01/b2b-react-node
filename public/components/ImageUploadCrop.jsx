@@ -250,7 +250,7 @@ class ImageUpload extends Component {
             </div>
           </div>
           <footer className="group-buttons" style={{paddingTop: 24, textAlign: 'center'}}>
-            <button onClick={this.handleCrop} className="button--action" style={{float: 'none', marginRight: 0}}>Crop & Save</button>
+            <button onClick={this.handleCrop} className="button--action" style={{float: 'none', marginLeft: 20}}>Crop & Save</button>
           </footer>
         </Modal>
     )
