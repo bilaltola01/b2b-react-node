@@ -7,15 +7,19 @@ import LanguagePicker from './LanguagePicker';
 
 let createHandlers = (ctx) => {
 	let onAdd = (obj) => {
+        let cuisines;
 		ctx.setState((prevState) => {
-			let cuisines = prevState.allCuisines;
+            cuisines = prevState.allCuisines;
 
 			let newCuisine = ctx.props.availableCuisines.find(cuisine => {
 				return cuisine.CuisineID === obj.id;
 			});
 
+			// console.log('newCuisine', obj, newCuisine)
 			if (newCuisine) {
 				cuisines.push(newCuisine);
+			} else {
+                cuisines.push({Title: obj.name});
 			}
 
 			ctx.props.onChange('cuisines', {data: cuisines});
@@ -46,7 +50,7 @@ let createHandlers = (ctx) => {
 	};
 
 	let onPickerClick = (e) => {
-		DomUtils.toggleClass(e.target, 'active');
+		DomUtils.toggleClass(e.target.parentNode, 'active');
 	};
 
 	let onPickerBlur = (e) => {
@@ -61,8 +65,8 @@ let createHandlers = (ctx) => {
 		let rel = e.target.getAttribute('rel');
 		let text = e.target.textContent;
 		let id = parseInt(e.target.getAttribute('data-id'), 10);
-		let target = e.target.parentNode.previousElementSibling;
-		target.setAttribute('data-rel', rel);
+		// let target = e.target.parentNode.previousElementSibling;
+		// target.setAttribute('data-rel', rel);
 
 		let isItemAlreadyAdded = !!ctx.state.allCuisines.find(cuisine => {
 			return cuisine.CuisineID === id;
@@ -70,8 +74,8 @@ let createHandlers = (ctx) => {
 
 		// If item has not been added yet, add it
 		if (!isItemAlreadyAdded) {
-			target.textContent = text;
-			DomUtils.toggleClass(target, 'active');
+			// target.textContent = text;
+			// DomUtils.toggleClass(target, 'active');
 
 			// Then add the new cuisine
 			onAdd({
@@ -82,10 +86,22 @@ let createHandlers = (ctx) => {
 		}
 	};
 
+    let onKeyPress = e => {
+        if (e.key == "Enter") {
+            onAdd({
+                id: null,
+                rel: e.target.value,
+                name: e.target.value
+            });
+            e.target.value = "";
+        }
+    };
+
 	return {
 		onAdd,
 		onPickerBlur,
 		onRemove,
+        onKeyPress,
 		onPickerClick,
 		onPickerItemClick
 	};
@@ -117,12 +133,12 @@ class BranchCuisinesEdit extends Component {
 		const cuisineComponents = (this.state.allCuisines && this.state.allCuisines.length > 0) ? this.state.allCuisines.map((cuisine, index) => {
 			return (index < this.state.allCuisines.length - 1)
 				? (
-					<span key={cuisine.CuisineID}>
+					<span key={index}>
 						<BranchCuisineEdit id={cuisine.CuisineID} description={cuisine.Description} title={cuisine.Title} onRemove={(e) => this.handlers.onRemove({id: cuisine.CuisineID})} />
 						,&nbsp;
 					</span>
 				) : (
-					<span key={cuisine.CuisineID}>
+					<span key={index}>
 						<BranchCuisineEdit id={cuisine.CuisineID} description={cuisine.Description} title={cuisine.Title} onRemove={(e) => this.handlers.onRemove({id: cuisine.CuisineID})} />
 					</span>
 				)
@@ -135,7 +151,15 @@ class BranchCuisinesEdit extends Component {
 				<div id="language-add" className="language--add">
 					<label>Add a Cuisine:</label>
 					<div id="cuisine-picker" className="language--picker">
-						<LanguagePicker data={obj} onAdd={this.handlers.onAdd} onPickerBlur={this.handlers.onPickerBlur} onPickerClick={this.handlers.onPickerClick} onPickerItemClick={this.handlers.onPickerItemClick} />
+						<LanguagePicker
+							data={obj}
+							allowEdit
+							onAdd={this.handlers.onAdd}
+							onKeyPress={this.handlers.onKeyPress}
+							onPickerBlur={this.handlers.onPickerBlur}
+							onPickerClick={this.handlers.onPickerClick}
+							onPickerItemClick={this.handlers.onPickerItemClick}
+						/>
                     </div>
 				</div>
 			</div>

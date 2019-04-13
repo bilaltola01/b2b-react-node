@@ -27,10 +27,28 @@ BranchCuisine.createAll = (cuisines) => {
   }
 
   return Promise.all(cuisines.map(cuisine => {
-    return BranchCuisine.create({
-      BranchID: cuisine.BranchID,
-      CuisineID: cuisine.CuisineID
-    });
+      if (cuisine.CuisineID) {
+          return BranchCuisine.create({
+              BranchID: cuisine.BranchID,
+              CuisineID: cuisine.CuisineID
+          });
+      } else {
+          return Promise.all([
+              Cuisine.create({
+                  Title: cuisine.Title,
+                  Description: ""
+              })
+          ]).then(res => {
+              // console.log('Cuisine id', res)
+              if (res && res[0] && res[0][0]) {
+                  return BranchCuisine.create({
+                      BranchID: cuisine.BranchID,
+                      CuisineID: res[0][0]
+                  });
+              }
+
+          })
+      }
   }));
 };
 
@@ -73,10 +91,29 @@ BranchCuisine.updateAll = (cuisines) => {
       })).then(res => {
         // console.log(res);
 
-        return BranchCuisine.create({
-          BranchID: cuisine.BranchID,
-          CuisineID: cuisine.CuisineID
-        });
+        if (cuisine.CuisineID) {
+            return BranchCuisine.create({
+                BranchID: cuisine.BranchID,
+                CuisineID: cuisine.CuisineID
+            });
+        } else {
+            return Promise.all([
+                Cuisine.create({
+                    Title: cuisine.Title,
+                    Description: ""
+                })
+            ]).then(res => {
+                // console.log('Cuisine id', res)
+                if (res && res[0] && res[0][0]) {
+                    return BranchCuisine.create({
+                        BranchID: cuisine.BranchID,
+                        CuisineID: res[0][0]
+                    });
+                }
+
+            })
+        }
+
       });
     });
   }));
