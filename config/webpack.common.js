@@ -39,17 +39,26 @@ module.exports = {
             },*/
             {
                 test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
-                loader: 'file?name=/public/fonts/[name].[hash].[ext]'
+                exclude: ['/node_modules/', 'public/v1'],
+                loaders: [
+                    'babel-loader?presets[]=react,presets[]=env'
+                ]
             },
             {
                 test: /\.css$/,
                 exclude: helpers.root('public', 'app'),
-                loader: ExtractTextPlugin.extract({ fallback: 'style', use: 'css?sourceMap' })
+                exclude: ['/node_modules/', 'public/v1'],
+                loaders: [
+                    'babel-loader?presets[]=react,presets[]=env'
+                ]
             },
             {
                 test: /\.css$/,
                 include: helpers.root('public', 'app'),
-                loader: 'raw'
+                exclude: ['/node_modules/', 'public/v1'],
+                loaders: [
+                    'babel-loader?presets[]=react,presets[]=env'
+                ]
             },
             {
                 test: /\.scss$/,

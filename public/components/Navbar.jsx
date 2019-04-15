@@ -28,6 +28,12 @@ class Navbar extends Component {
                         <li><Link to="/branches">Branches</Link></li>
                     </ul>
                 </li>
+                <li>
+                    <Link className="has-subnav subnav-opened" to="/subscriptions/plans">Subscriptions</Link>
+                    <ul className="navigation--sub-level">
+                        <li><Link to="/subscriptions/plans">Plans</Link></li>
+                    </ul>
+                </li>
                 {/*
                 <li>
                     <a href="#,">Statistics</a>

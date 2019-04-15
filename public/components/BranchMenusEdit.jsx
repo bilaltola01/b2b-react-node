@@ -120,7 +120,7 @@ class BranchMenusEdit extends Component {
 	}
 
 	render() {
-		const { menus, onChange } = this.props;
+		const { menus, onChange, simple } = this.props;
 
 		const availableMenus = (this.props.profile && this.props.profile.menus) ? this.props.profile.menus : [];
 
@@ -150,11 +150,11 @@ class BranchMenusEdit extends Component {
 
 		return (
 			<div>
-				<p className="menu--title">Menus</p>
+				{!simple ? <p className="menu--title">Menus</p> : null}
 				{menusComponent}
 
 				<div id="menu-branch-add" className="language--add">
-					<label>Add a menu for this branch:</label>
+                    {!simple ? <label>Add a menu for this branch:</label> : null}
 					<div id="branch-picker" className="language--picker">
 						<LanguagePicker data={obj} onAdd={this.handlers.onAdd} onPickerBlur={this.handlers.onPickerBlur} onPickerClick={this.handlers.onPickerClick} onPickerItemClick={this.handlers.onPickerItemClick} />
                     </div>

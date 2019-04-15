@@ -2582,7 +2582,7 @@ ol.calendar--week {
 }
 
 .has-subnav.subnav-opened+.navigation--sub-level {
-    height: 5.75em;
+    height: 2.95em;
     visibility: visible;
     opacity: 1;
 }
@@ -3919,6 +3919,17 @@ ul.analytics--analytics_most_viewed li header h5 {
     background-color: #FF004C;
     border: 1px solid #FF004C;
 }
+.button--action.button--action-shadow {
+    color: #fff;
+    text-transform: uppercase;
+    background-color: #139FDE;
+    border: 1px solid #139FDE;
+    padding-left: 30px;
+    padding-right: 30px;
+    line-height: 30px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+}
+
 .alert.button--action.button--action-outline {
     color: #FF004C;
     background-color: #fff;
@@ -6211,4 +6222,183 @@ button.button--action:disabled{
     to {
         -webkit-transform: rotate(359deg);
     }
+}
+.plan-wrapper{
+    display: flex;
+    color: #4D5368;
+    justify-content: space-around;
+    padding: 30px 0;
+}
+.plan-wrapper .plan-text {
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.plan-wrapper .plan-text .title {
+    font-size: 60px;
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+.plan-wrapper .plan-text .body {
+    font-size: 27px;
+    line-height: 40px;
+    margin-bottom: 30px;
+}
+.plan-wrapper .plan-banner {
+    width: 45%;
+}
+
+.plan-card {
+    color: #4D5368;
+    background: #fff;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 320px;
+    min-height: 460px;
+    border: 1px solid #E4ECF5;
+    margin: 0 10px;
+    cursor: pointer;
+    position: relative;
+}
+.plan-card.active {
+    background: #55576F;
+    color: #fff;
+    cursor: default;
+}
+.plan-card.current {
+    cursor: default;
+}
+.plan-card.active.shadow {
+    box-shadow: 0px 4px 12px rgba(85, 87, 111, 0.24);
+}
+.plan-card .title {
+    font-size: 20px;
+    font-weight: 700;
+}
+.plan-card .version {
+    font-size: 35px;
+    font-weight: 700;
+}
+.plan-card .fee {
+    font-size: 16px;
+    font-weight: 300;
+}
+.plan-card.active .fee {
+    opacity: .5;
+}
+.plan-card .price {
+    font-size: 45px;
+    font-weight: 400;
+    display: flex;
+    align-items: flex-start;
+}
+.plan-card .line {
+    width: 100px;
+    height: 1px;
+    background: #E4ECF5;
+    display: block;
+}
+.plan-card.active .line {
+    background: #fff;
+    opacity: 0.5;
+}
+.plan-card .period {
+    font-size: 24px;
+    font-weight: 400;
+}
+.plan-card .devices {
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+}
+.plan-card .per-year, .notes {
+    font-size: 14px;
+    font-weight: 500;
+}
+.plan-card .description {
+    font-size: 16px;
+    font-weight: 700;
+}
+.plan-card .plan-button {
+    cursor: pointer;
+    border: 1px solid #55576F;
+    background: #55576F;
+    color: #fff;
+    box-sizing: border-box;
+    border-radius: 31px;
+    font-weight: 600;
+    font-size: 13px;
+    line-height: normal;
+    line-height: 36px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+.plan-card.active .plan-button {
+    border: 1px solid #FFFFFF;
+    color: #FFFFFF;
+    background: transparent;
+}
+.plan-card.current .plan-button, .plan-card.current.active .plan-button {
+    opacity: 0.5;
+}
+.plan-card .current-sticker {
+    display: none;
+}
+.plan-card.current .current-sticker {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: block;
+}
+.custom-plan-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0px 0 10px;
+    color: #4D5368;
+}
+.custom-plan-text {
+    display: block;
+    margin-right: 50px;
+    flex: 1;
+}
+.custom-plan-text .body {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 25px;
+    margin-bottom: 30px;
+}
+.custom-plan-text .words {
+    margin-bottom: 30px;
+}
+.custom-plan-text .title, .custom-plan-banner .title {
+    font-size: 27px;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+.custom-plan-banner .custom-plan-card {
+    width: 205px;
+    height: 370px;
+    background: #F1F5F9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    padding: 50px 40px 100px;
+}
+.custom-plan-banner .custom-plan-card .desc{
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 25px;
+    color: #898E9F;
+    text-align: center;
+}
+.notes {
+    color: #898E9F;
+    font-size: 14px;
+    padding: 0 10px 20px;
 }

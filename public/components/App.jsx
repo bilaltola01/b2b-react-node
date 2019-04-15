@@ -26,6 +26,7 @@ import ForgotPassword from './ForgotPassword'
 import ResetPassword from './ResetPassword'
 import Terms from './Terms'
 import Page from './Page';
+import Plans from './Plans/Plans';
 import PrivateRoute from './PrivateRoute';
 import LoadingSpinner from "./LoadingSpinner";
 
@@ -94,6 +95,7 @@ class App extends Component {
             <PrivateRoute path="/profile/:action" component={Profile} />
             <PrivateRoute path="/branch/:action/:id" component={Branch} />
             <PrivateRoute path="/branches" component={Branches} />
+            <PrivateRoute path="/subscriptions/plans" component={Plans} />
             <PrivateRoute path="/translations" component={TranslationsPage} />
             <PrivateRoute path="/translation/:id" component={TranslationPage} />
             <PrivateRoute path="/translate/:component" component={TranslatePage} />
