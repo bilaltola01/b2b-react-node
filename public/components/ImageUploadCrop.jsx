@@ -233,7 +233,7 @@ class ImageUpload extends Component {
             contentLabel="Example Modal"
         >
           <header className="content--container--header" style={{textAlign: 'center'}}>
-            <div className="content--container--title">Delete Account</div>
+            <div className="content--container--title">Crop your image</div>
             <div onClick={this.cancelCrop} style={{position: 'absolute', top: 10, right: 20, padding: 5, cursor: 'pointer', zIndex: 1000}}>x</div>
           </header>
           <div style={{position: 'relative'}}>
