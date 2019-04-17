@@ -15,11 +15,17 @@ let createHandlers = (ctx) => {
 				return cuisine.CuisineID === obj.id;
 			});
 
-			// console.log('newCuisine', obj, newCuisine)
+			// console.log('newCuisine', obj, newCuisine, ctx.props.availableCuisines)
 			if (newCuisine) {
 				cuisines.push(newCuisine);
 			} else {
-                cuisines.push({Title: obj.name});
+                newCuisine = ctx.props.availableCuisines.find(cuisine => {
+                    return cuisine.Title === obj.name;
+                });
+                // console.log('newCuisine2', newCuisine)
+                if (!newCuisine) {
+                	cuisines.push({Title: obj.name});
+                }
 			}
 
 			ctx.props.onChange('cuisines', {data: cuisines});
