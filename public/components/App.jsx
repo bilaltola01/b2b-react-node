@@ -29,6 +29,8 @@ import Page from './Page';
 import Plans from './Plans/Plans';
 import PrivateRoute from './PrivateRoute';
 import LoadingSpinner from "./LoadingSpinner";
+import PlansStepOne from "./Plans/PlansStepOne";
+import PlansStepTwo from "./Plans/PlansStepTwo";
 
 let createHandlers = (dispatcher) => {
   let checkAuth = () => {
@@ -96,6 +98,8 @@ class App extends Component {
             <PrivateRoute path="/branch/:action/:id" component={Branch} />
             <PrivateRoute path="/branches" component={Branches} />
             <PrivateRoute path="/subscriptions/plans" component={Plans} />
+            <PrivateRoute path="/subscriptions/step-1" component={PlansStepOne} />
+            <PrivateRoute path="/subscriptions/step-2" component={PlansStepTwo} />
             <PrivateRoute path="/translations" component={TranslationsPage} />
             <PrivateRoute path="/translation/:id" component={TranslationPage} />
             <PrivateRoute path="/translate/:component" component={TranslatePage} />

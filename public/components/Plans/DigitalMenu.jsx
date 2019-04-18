@@ -20,7 +20,7 @@ class DigitalMenu extends Component {
                         <div className="line"></div>
                         <div className="devices">Mobile & Tablet</div>
                         <div className="description">No limitations on branches and menus</div>
-                        <div className="plan-button" style={{marginTop: 30}}>Get started</div>
+                        <div className="plan-button" style={{marginTop: 30}} onClick={onClick}>Get started</div>
                     </div>
                 </div>
             </div>

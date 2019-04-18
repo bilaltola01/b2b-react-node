@@ -10,6 +10,7 @@ import * as Categories from './categories.reducer';
 import * as Branches from './branches.reducer';
 import * as Popup from './popup.reducer';
 import * as Analytics from './analytics.reducer';
+import * as Subscriptions from './subscriptions.reducer';
 
 const _auth = Auth._auth;
 const _menu = Menu._menu;
@@ -23,6 +24,7 @@ const _categories = Categories._categories;
 const _branches = Branches._branches;
 const _popup = Popup._popup;
 const _analytics = Analytics._analytics;
+const _subscriptions = Subscriptions._subscriptions;
 
 export {
     _auth,
@@ -36,5 +38,6 @@ export {
     _categories,
     _branches,
     _popup,
-    _analytics
+    _analytics,
+    _subscriptions
 }

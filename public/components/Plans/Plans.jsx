@@ -9,34 +9,9 @@ import PageHeader from "../PageHeader";
 import PlanCard from "./PlanCard";
 import DigitalMenu from "./DigitalMenu";
 import CustomOrder from "./CustomOrder";
+import {withRouter} from "react-router-dom";
 const classNames = require('classnames');
 
-const cards = [
-    {
-        id: 1,
-        title: 'Degustation',
-        icon: '',
-        price: 90,
-        words: 1000,
-        languages: 2,
-    },
-    {
-        id: 2,
-        title: 'Menu du jour',
-        icon: '',
-        price: 119,
-        words: 1500,
-        languages: 2,
-    },
-    {
-        id: 3,
-        title: 'A la carte',
-        icon: '',
-        price: 144,
-        words: 2000,
-        languages: 2,
-    },
-]
 class Plans extends Component {
     constructor(props) {
         super(props);
@@ -49,21 +24,25 @@ class Plans extends Component {
     }
 
     componentDidMount() {
-        this.props.dispatch(actionCreators.getProfile(this.handlers.onProfileFetched));
+        // this.props.dispatch(actionCreators.getProfile(this.handlers.onProfileFetched));
     }
 
     handleStart() {
+        const { history } = this.props;
+        history.push('/subscriptions/step-1')
 
     }
 
     handleClick(id) {
-        this.setState({selected: id})
+        this.setState({selected: id});
+        this.handleStart();
     }
 
     handleCustomOrder() {
     }
 
     render () {
+        const { subscriptions } = this.props;
         const { selected, current } = this.state;
         const action = this.props.match.params.action;
         const profileType = (typeof this.props.match.params.action !== 'undefined') ? 'profile-' + action : 'profile';
@@ -133,7 +112,7 @@ class Plans extends Component {
                                         </TabPanel>
                                         <TabPanel>
                                             <div className="plan-wrapper">
-                                                {cards.map((item, index) => {
+                                                {subscriptions.map((item, index) => {
                                                     return <PlanCard
                                                         key={item.id}
                                                         active={item.id === selected}
@@ -158,12 +137,10 @@ class Plans extends Component {
     }
 };
 
-
 const mapStateToProps = (state) => {
-    // console.log(state);
     return {
-        profile: state._profile.profile
+        profile: state._profile.profile,
+        subscriptions: state._subscriptions.list
     }
 };
-
-export default connect(mapStateToProps)(Plans);
+export default connect(mapStateToProps)(withRouter(Plans));

@@ -21,6 +21,8 @@ class LanguagePicker extends Component {
           return "Choose a cuisine...";
         case "currencies":
           return "Choose a currency...";
+        case "subscriptions":
+          return "Choose a subscription...";
         default:
           return "Choose an item...";
       }
@@ -79,6 +81,12 @@ class LanguagePicker extends Component {
                 return (
                   <option value={item.Title} key={index}>
                     {item.Title}
+                  </option>
+                );
+              case "subscriptions":
+                return (
+                  <option value={item.title} key={index}>
+                    {item.title}
                   </option>
                 );
               default:

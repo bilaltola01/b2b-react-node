@@ -6354,6 +6354,66 @@ button.button--action:disabled{
     right: 0;
     display: block;
 }
+.plan-order {
+    color: #4D5368;
+    background: #fff;
+    padding: 0px 24px 35px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /*align-items: center;*/
+    width: 240px;
+    border: 1px solid #E4ECF5;
+    margin: 36px 0 0 20px;
+    cursor: pointer;
+    position: relative;
+}
+.plan-order .header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 60px;
+    border-bottom: 1px dashed #E4ECF5;
+    width: 100%;
+}
+.plan-order .header .title {
+    font-size: 17px;
+    font-weight: 700;
+    margin-left: 16px;
+    text-transform: uppercase;
+}
+.plan-order .footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+    border-top: 1px dashed #E4ECF5;
+    width: 100%;
+    margin-top: 16px;
+}
+.plan-order .footer .title {
+    font-size: 27px;
+    font-weight: 700;
+}
+.plan-order .menu, .plan-order .primary, .plan-order .secondary {
+    display: flex;
+    justify-content: space-between;
+}
+.plan-order .menu {
+    font-size: 14px;
+    font-weight: 700;
+    margin-top: 24px;
+}
+.plan-order .primary {
+    font-size: 14px;
+    font-weight: 500;
+    margin-top: 18px;
+}
+.plan-order .secondary {
+    font-size: 12px;
+    font-weight: 300;
+}
 .custom-plan-wrapper {
     display: flex;
     flex-direction: row;
@@ -6401,4 +6461,9 @@ button.button--action:disabled{
     color: #898E9F;
     font-size: 14px;
     padding: 0 10px 20px;
+}
+.flex-row {
+    display: flex;
+    flex-direction: row;
+
 }

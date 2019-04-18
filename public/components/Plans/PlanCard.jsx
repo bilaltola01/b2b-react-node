@@ -17,7 +17,7 @@ class PlanCard extends Component {
                 </div>
                 <div className="plus"><img src={`assets/images/plus${active ? '_white' : ''}.png`} /></div>
                 <div className="description">{data.languages} languages</div>
-                <div className="plan-button">Get started</div>
+                <div className="plan-button" onClick={onClick}>Get started</div>
                 <img className="current-sticker" src="assets/images/current_plan.png" />
             </div>
         )
