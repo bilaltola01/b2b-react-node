@@ -6480,16 +6480,19 @@ button.button--action:disabled{
     color: #4D5368;
     font-size: 20px;
     font-weight: 700;
+    line-height: 30px;
 }
 .menu-header-wrapper .menu-plan{
     color: #4D5368;
     font-size: 14px;
     font-weight: 500;
+    line-height: 26px;
 }
 .menu-header-wrapper .active{
     color: #63BB1E;
     font-size: 12px;
     font-weight: 600;
+    line-height: 22px;
 }
 .global-padding-wrapper .menu-row{
     display: flex;
