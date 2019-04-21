@@ -6236,12 +6236,12 @@ button.button--action:disabled{
     justify-content: center;
 }
 .plan-wrapper .plan-text .title {
-    font-size: 60px;
+    font-size: 45px;
     font-weight: 400;
     margin-bottom: 20px;
 }
 .plan-wrapper .plan-text .body {
-    font-size: 27px;
+    font-size: 22px;
     line-height: 40px;
     margin-bottom: 30px;
 }
@@ -6257,7 +6257,7 @@ button.button--action:disabled{
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    width: 320px;
+    width: 280px;
     min-height: 460px;
     border: 1px solid #E4ECF5;
     margin: 0 10px;
@@ -6280,7 +6280,7 @@ button.button--action:disabled{
     font-weight: 700;
 }
 .plan-card .version {
-    font-size: 35px;
+    font-size: 30px;
     font-weight: 700;
 }
 .plan-card .fee {
@@ -6291,7 +6291,7 @@ button.button--action:disabled{
     opacity: .5;
 }
 .plan-card .price {
-    font-size: 45px;
+    font-size: 40px;
     font-weight: 400;
     display: flex;
     align-items: flex-start;
@@ -6436,7 +6436,7 @@ button.button--action:disabled{
     margin-bottom: 30px;
 }
 .custom-plan-text .title, .custom-plan-banner .title {
-    font-size: 27px;
+    font-size: 22px;
     font-weight: 500;
     margin-bottom: 20px;
 }
