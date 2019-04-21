@@ -27,6 +27,7 @@ import ResetPassword from './ResetPassword'
 import Terms from './Terms'
 import Page from './Page';
 import Plans from './Plans/Plans';
+import MySubscriptions from './Subscriptions/MySubscriptions';
 import PrivateRoute from './PrivateRoute';
 import LoadingSpinner from "./LoadingSpinner";
 import PlansStepOne from "./Plans/PlansStepOne";
@@ -98,6 +99,7 @@ class App extends Component {
             <PrivateRoute path="/branch/:action/:id" component={Branch} />
             <PrivateRoute path="/branches" component={Branches} />
             <PrivateRoute path="/subscriptions/plans" component={Plans} />
+            <PrivateRoute path="/subscriptions/my-subscriptions" component={MySubscriptions} />
             <PrivateRoute path="/subscriptions/step-1" component={PlansStepOne} />
             <PrivateRoute path="/subscriptions/step-2" component={PlansStepTwo} />
             <PrivateRoute path="/translations" component={TranslationsPage} />

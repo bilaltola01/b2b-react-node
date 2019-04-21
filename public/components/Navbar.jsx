@@ -32,6 +32,7 @@ class Navbar extends Component {
                     <Link className="has-subnav subnav-opened" to="/subscriptions/plans">Subscriptions</Link>
                     <ul className="navigation--sub-level">
                         <li><Link to="/subscriptions/plans">Plans</Link></li>
+                        <li><Link to="/subscriptions/my-subscriptions">My Subscriptions</Link></li>
                     </ul>
                 </li>
                 {/*

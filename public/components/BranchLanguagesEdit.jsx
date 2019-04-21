@@ -117,7 +117,7 @@ class BranchLanguagesEdit extends Component {
 	}
 
 	render() {
-		const { languages, availableLanguages, onChange, label } = this.props;
+		const { languages, availableLanguages, onChange, label, simple } = this.props;
 
 		// console.log('availableLanguages', availableLanguages)
 		const selectedBranches = (this.props.menu && this.props.menu.branches && this.props.menu.branches.length > 0) ? this.props.menu.branches : [];
@@ -148,7 +148,7 @@ class BranchLanguagesEdit extends Component {
 
 		return (
 			<div>
-				<p className="menu--title">{label ? label : 'Translate to'}</p>
+				{simple ? null : <p className="menu--title">{label ? label : 'Translate to'}</p>}
 				<div>
 					{languageComponents}
 				</div>
