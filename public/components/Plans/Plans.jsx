@@ -27,7 +27,7 @@ class Plans extends Component {
         // this.props.dispatch(actionCreators.getProfile(this.handlers.onProfileFetched));
     }
 
-    handleStart() {
+    handleStart(id) {
         const { history } = this.props;
         history.push('/subscriptions/step-1')
 
@@ -35,7 +35,6 @@ class Plans extends Component {
 
     handleClick(id) {
         this.setState({selected: id});
-        this.handleStart();
     }
 
     handleCustomOrder() {
@@ -118,6 +117,7 @@ class Plans extends Component {
                                                         active={item.id === selected}
                                                         current={item.id === current}
                                                         data={item}
+                                                        onStart={() => this.handleStart(item.id)}
                                                         onClick={() => this.handleClick(item.id)}
                                                     />
                                                 })}

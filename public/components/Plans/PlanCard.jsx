@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 
 class PlanCard extends Component {
     render() {
-        const { data = {}, active, current, onClick } = this.props;
+        const { data = {}, active, current, onClick, onStart } = this.props;
 
         return (
             <div className={`plan-card shadow ${active ? 'active' : ''} ${current ? 'current' : ''}`} onClick={onClick}>
@@ -17,7 +17,7 @@ class PlanCard extends Component {
                 </div>
                 <div className="plus"><img src={`assets/images/plus${active ? '_white' : ''}.png`} /></div>
                 <div className="description">{data.languages} languages</div>
-                <div className="plan-button" onClick={onClick}>Get started</div>
+                <div className="plan-button" onClick={onStart}>Get started</div>
                 <img className="current-sticker" src="assets/images/current_plan.png" />
             </div>
         )
