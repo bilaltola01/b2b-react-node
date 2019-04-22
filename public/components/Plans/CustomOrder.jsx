@@ -2,8 +2,40 @@ import React, { Component, PropTypes } from 'react';
 import BranchMenusEdit from "../BranchMenusEdit";
 
 class CustomOrder extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            words: undefined,
+            comments: '',
+            menus: []
+        };
+        this.handleStart = this.handleStart.bind(this);
+        this.onChange = this.onChange.bind(this);
+        this.onChangeMenu = this.onChangeMenu.bind(this);
+    }
+
+    handleStart() {
+        const { words, comments, menus } = this.state;
+        const payload = {
+            words: words || 0,
+            comments,
+            menus
+        }
+
+        this.props.onClick(payload);
+    }
+
+    onChange(title, event) {
+        this.setState({[title]: event.target.value});
+    }
+
+    onChangeMenu(type, data) {
+        this.setState({menus: data && data.data || []});
+    }
+
     render() {
-        const { onClick, onChanges, availableMenus } = this.props;
+        const { availableMenus } = this.props;
+        const { words, comments, menus } = this.state;
 
         return (
             <div className="custom-plan-wrapper">
@@ -14,22 +46,22 @@ class CustomOrder extends Component {
                         <div className="content--edit">
                             <div className="edit--block">
                                 <label className="label--edit">Number of words:</label>
-                                <input className="input--edit" type="text" name="words" placeholder="2600..." onChange={(e) => onChanges('main', e)} />
+                                <input className="input--edit" type="text" name="words" placeholder="2600..." value={words} onChange={(e) => this.onChange('words', e)} />
                             </div>
                         </div>
                     </div>
-                    <div style={{marginLeft: '-10px', marginBottom: 30}}>
-                        <BranchMenusEdit simple menus={[]} availableCurrencies={availableMenus} onChange={onChanges} />
+                    <div style={{marginBottom: 30}}>
+                        <BranchMenusEdit simple menus={menus} availableCurrencies={availableMenus} onChange={this.onChangeMenu} />
                     </div>
                     <div className="words">
                         <div className="content--edit">
                             <div className="edit--block">
                                 <label className="label--edit">Comments:</label>
-                                <textarea style={{height: 100}} className="input--edit" type="text" name="comments" placeholder="Any questions or comments?" onChange={(e) => onChanges('main', e)} ></textarea>
+                                <textarea value={comments} style={{height: 100}} className="input--edit" type="text" name="comments" placeholder="Any questions or comments?" onChange={(e) => this.onChange('comments', e)} ></textarea>
                             </div>
                         </div>
                     </div>
-                    <button style={{marginRight: 'auto'}} className="notification button--action button--action-filled" onClick={onClick}>Get your 3 months free trial</button>
+                    <button style={{marginRight: 'auto'}} className="notification button--action button--action-filled" onClick={this.handleStart}>Get your 3 months free trial</button>
                 </div>
                 <div className="custom-plan-banner">
                     <div className="title">You custom offer:</div>

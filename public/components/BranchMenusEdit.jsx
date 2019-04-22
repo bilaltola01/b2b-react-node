@@ -137,12 +137,12 @@ class BranchMenusEdit extends Component {
 		const menusComponent = (this.state.allMenus && this.state.allMenus.length > 0) ? this.state.allMenus.map((menu, index) => {
 			return (index < this.state.allMenus.length - 1)
 				? (
-					<span key={menu.MenuID}>
+					<span key={index}>
 						<BranchMenuEdit id={menu.MenuID} name={menu.Title} onRemove={this.handlers.onRemove} key={menu.MenuID} />
 						,&nbsp;
 					</span>
 				) : (
-					<span key={menu.MenuID}>
+					<span key={index}>
 						<BranchMenuEdit id={menu.MenuID} name={menu.Title} onRemove={this.handlers.onRemove} key={menu.MenuID} />
 					</span>
 				)
@@ -155,7 +155,7 @@ class BranchMenusEdit extends Component {
 
 				<div id="menu-branch-add" className="language--add">
                     {!simple ? <label>Add a menu for this branch:</label> : null}
-					<div id="branch-picker" className="language--picker">
+					<div id="branch-picker" className="language--picker" style={simple ? {marginLeft: 0} : {}}>
 						<LanguagePicker data={obj} onAdd={this.handlers.onAdd} onPickerBlur={this.handlers.onPickerBlur} onPickerClick={this.handlers.onPickerClick} onPickerItemClick={this.handlers.onPickerItemClick} />
                     </div>
 				</div>

@@ -1,5 +1,6 @@
+import { SELECT_PLAN, SET_CURRENT_PLAN } from '../actions/subscriptions';
 
-var initialSubscriptionsState = {
+const initialSubscriptionsState = {
   list: [
       {
           id: 1,
@@ -25,12 +26,24 @@ var initialSubscriptionsState = {
           words: 2000,
           languages: 2,
       },
-  ]
+  ],
+  selected: null,
+  current: 2
 };
 
 export function _subscriptions(state = initialSubscriptionsState, action) {
-  switch (action.type) {
-    default:
-      return state
-  }
+    switch (action.type) {
+        case SELECT_PLAN:
+            return {
+                ...state,
+                selected: action.payload
+            }
+        case SET_CURRENT_PLAN:
+            return {
+                ...state,
+                current: action.payload
+            }
+        default:
+        return state
+    }
 }

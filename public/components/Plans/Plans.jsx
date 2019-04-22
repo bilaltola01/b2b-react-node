@@ -10,14 +10,14 @@ import PlanCard from "./PlanCard";
 import DigitalMenu from "./DigitalMenu";
 import CustomOrder from "./CustomOrder";
 import {withRouter} from "react-router-dom";
+import * as SubscriptionActions from '../../actions/subscriptions';
+import {bindActionCreators} from "redux";
 const classNames = require('classnames');
 
 class Plans extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            selected: null,
-            current: 2
         };
         this.handleStart = this.handleStart.bind(this);
         this.handleClick = this.handleClick.bind(this);
@@ -29,20 +29,22 @@ class Plans extends Component {
 
     handleStart(id) {
         const { history } = this.props;
-        history.push('/subscriptions/step-1')
 
+        this.handleClick(id);
+        history.push('/subscriptions/step-1')
     }
 
     handleClick(id) {
-        this.setState({selected: id});
+        this.props.selectPlan(id);
     }
 
-    handleCustomOrder() {
+    handleCustomOrder(payload) {
+        console.log(payload)
+        // TODO send email with payload
     }
 
     render () {
-        const { subscriptions } = this.props;
-        const { selected, current } = this.state;
+        const { subscriptions, selected, current } = this.props;
         const action = this.props.match.params.action;
         const profileType = (typeof this.props.match.params.action !== 'undefined') ? 'profile-' + action : 'profile';
 
@@ -140,7 +142,17 @@ class Plans extends Component {
 const mapStateToProps = (state) => {
     return {
         profile: state._profile.profile,
-        subscriptions: state._subscriptions.list
+        subscriptions: state._subscriptions.list,
+        selected: state._subscriptions.selected,
+        current: state._subscriptions.current
     }
 };
-export default connect(mapStateToProps)(withRouter(Plans));
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        dispatch,
+        ...bindActionCreators(Object.assign({}, SubscriptionActions), dispatch)
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Plans));
