@@ -20,12 +20,14 @@ let createHandlers = (ctx) => {
 				cuisines.push(newCuisine);
 			} else {
                 newCuisine = ctx.props.availableCuisines.find(cuisine => {
-                    return cuisine.Title === obj.name;
+                    return cuisine.Title && obj.name && cuisine.Title.toLowerCase() === obj.name.toLowerCase();
                 });
                 // console.log('newCuisine2', newCuisine)
                 if (!newCuisine) {
                 	cuisines.push({Title: obj.name});
-                }
+                } else {
+                    cuisines.push(newCuisine);
+				}
 			}
 
 			ctx.props.onChange('cuisines', {data: cuisines});
