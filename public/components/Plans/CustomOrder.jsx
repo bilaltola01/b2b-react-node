@@ -61,7 +61,7 @@ class CustomOrder extends Component {
                             </div>
                         </div>
                     </div>
-                    <button style={{marginRight: 'auto'}} className="notification button--action button--action-filled" onClick={this.handleStart}>Get your 3 months free trial</button>
+                    <button style={{marginRight: 'auto'}} className="notification button--action button--action-filled" onClick={this.handleStart}>Get my custom offer</button>
                 </div>
                 <div className="custom-plan-banner">
                     <div className="title">You custom offer:</div>

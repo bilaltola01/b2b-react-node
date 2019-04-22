@@ -9,7 +9,7 @@ class PlanCard extends Component {
                 <div className="title">{data.title}</div>
                 <div className="version"><img src={`assets/images/plan_${data.id}${active ? '_white' : ''}.png`} /></div>
                 <div className="fee">Starting from</div>
-                <div className="price"><span>{data.price}</span><span className="period">/yr</span></div>
+                <div className="price"><span>{data.price}</span><span className="period">/mo</span></div>
                 <div className="line"></div>
                 <div className="devices">
                     <div>{data.words} words</div>
