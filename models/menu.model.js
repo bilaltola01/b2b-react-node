@@ -1,6 +1,7 @@
 "use strict";
 const size = require('lodash/size');
 const forEach = require('lodash/forEach');
+const map = require('lodash/map');
 const md5 = require('md5');
 const DBLayer = require('../DBLayer');
 const db = DBLayer.connection;
@@ -107,7 +108,7 @@ Menu.getLanguages = (menus) => {
   //   });
 
   return new Promise((resolve, reject) => {
-    Promise.all(menus.map(menu => {
+    Promise.all(map(menus, menu => {
       return MenuLanguage.getWithDetails({MenuID: menu.MenuID});
     })).then(res => {
       let data = [];
