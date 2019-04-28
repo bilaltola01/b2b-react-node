@@ -31,3 +31,4 @@ exports.SMTP_HOST = process.env.SMTP_HOST;
 exports.SMTP_USER = process.env.SMTP_USER;
 exports.SMTP_PASSWORD = process.env.SMTP_PASSWORD;
 exports.CUSTOM_ORDER_EMAIL = process.env.CUSTOM_ORDER_EMAIL;
+exports.STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY;
