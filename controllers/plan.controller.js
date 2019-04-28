@@ -28,12 +28,7 @@ PlanController.postCustomOrder = (req, res) => {
            `Comments: ${data.comments} \n` +
            `Menus: ${menus && menus.join(', ')} \n`
     };
-    console.log('mailOptions', mailOptions)
-    res.status(200).json({
-        success: true,
-        message: 'Reset link has been sent to your registered email.'
-    });
-    return
+    
     transporter.sendMail(mailOptions, function(error, info) {
         if (error) {
             // console.log(error);
