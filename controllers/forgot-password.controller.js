@@ -14,10 +14,10 @@ ForgotPasswordController.post = (req, res) => {
     // console.log(data);
     res.setHeader('Content-Type', 'application/json');
     var transporter = nodemailer.createTransport({
-        host: 'smtp.123-reg.co.uk',
+        host: constants.SMTP_HOST,
         auth: {
-            user: 'no-reply@one-menu.com',
-            pass: 'jtcv+uHr*yd#Q9x6'
+            user: constants.SMTP_USER,
+            pass: constants.SMTP_PASSWORD
         }
     });
     Company.getByEmail(data.auth.Email).then(company => {

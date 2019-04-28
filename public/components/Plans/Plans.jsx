@@ -12,15 +12,21 @@ import CustomOrder from "./CustomOrder";
 import {withRouter} from "react-router-dom";
 import * as SubscriptionActions from '../../actions/subscriptions';
 import {bindActionCreators} from "redux";
+import {sendCustomOrder} from "./plan.service";
+import {Toast} from "../Toast";
 const classNames = require('classnames');
 
 class Plans extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            isSuccess: false,
+            message: ''
         };
         this.handleStart = this.handleStart.bind(this);
         this.handleClick = this.handleClick.bind(this);
+        this.handleCustomOrder = this.handleCustomOrder.bind(this);
+        this.renderToast = this.renderToast.bind(this);
     }
 
     componentDidMount() {
@@ -38,13 +44,33 @@ class Plans extends Component {
         this.props.selectPlan(id);
     }
 
-    handleCustomOrder(payload) {
-        console.log(payload)
-        // TODO send email with payload
+    handleCustomOrder(payload, cb) {
+        console.log(payload);
+        sendCustomOrder(payload, (res) => {
+            console.log('sent ', res)
+            if(res) {
+                this.setState({isSuccess: true, message: 'Email sent.'})
+                cb(true)
+            } else {
+                this.setState({isSuccess: true, message: 'Email not sent. Please try one more time.'})
+                cb(false)
+            }
+        });
+    }
+
+    renderToast() {
+        return (
+            <Toast onDismiss={e => this.setState({ isSuccess: false })}>
+                <p>
+                    {this.state.message}
+                </p>
+            </Toast>
+        );
     }
 
     render () {
         const { subscriptions, selected, current } = this.props;
+        const { isSuccess } = this.state;
         const action = this.props.match.params.action;
         const profileType = (typeof this.props.match.params.action !== 'undefined') ? 'profile-' + action : 'profile';
 
@@ -134,6 +160,7 @@ class Plans extends Component {
                         </main>
                     </div>
                 </div>
+                {isSuccess && this.renderToast()}
             </div>
         )
     }

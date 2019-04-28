@@ -1,14 +1,15 @@
 import React, { Component, PropTypes } from 'react';
 import BranchMenusEdit from "../BranchMenusEdit";
 
+const initialState = {
+    words: undefined,
+    comments: '',
+    menus: [],
+}
 class CustomOrder extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            words: undefined,
-            comments: '',
-            menus: []
-        };
+        this.state = initialState;
         this.handleStart = this.handleStart.bind(this);
         this.onChange = this.onChange.bind(this);
         this.onChangeMenu = this.onChangeMenu.bind(this);
@@ -22,7 +23,11 @@ class CustomOrder extends Component {
             menus
         }
 
-        this.props.onClick(payload);
+        this.props.onClick(payload, (res) => {
+            if (res) {
+                this.setState({...initialState, words: 0})
+            }
+        });
     }
 
     onChange(title, event) {

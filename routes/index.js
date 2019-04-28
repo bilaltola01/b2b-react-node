@@ -24,6 +24,7 @@ const branchImageController = require('../controllers/branch-image.controller');
 const branchContactController = require('../controllers/branch-contact.controller');
 const flagController = require('../controllers/flag.controller');
 const imageUploadController = require('../controllers/image-upload.controller');
+const planController = require('../controllers/plan.controller');
 
 const mealTranslationController = require('../controllers/meal-translation.controller');
 const menuTranslationController = require('../controllers/menu-translation.controller');
@@ -195,6 +196,8 @@ let Routes = class {
         router.delete('/translate-menu', menuTranslationController.remove);
 
         router.get('/analytics', analyticsController.get);
+
+        router.post('/plans/custom-order', planController.postCustomOrder);
 
         this.router = router;
     }
