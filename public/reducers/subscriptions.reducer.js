@@ -28,7 +28,9 @@ const initialSubscriptionsState = {
       },
   ],
   selected: null,
-  current: 2
+  current: 2,
+  digitalMenuPlan: null,
+  digitalMenuPlanCompleted: false,
 };
 
 export function _subscriptions(state = initialSubscriptionsState, action) {
@@ -42,6 +44,23 @@ export function _subscriptions(state = initialSubscriptionsState, action) {
             return {
                 ...state,
                 current: action.payload
+            }
+        case 'GET_DIGITAL_MENU_PLAN_REQUEST':
+            return {
+                ...state,
+                digitalMenuPlanCompleted: false,
+                digitalMenuPlan: null
+            }
+        case 'GET_DIGITAL_MENU_PLAN_FAILURE':
+            return {
+                digitalMenuPlanCompleted: true,
+                digitalMenuPlan: null
+            }
+        case 'GET_DIGITAL_MENU_PLAN_SUCCESS':
+            return {
+                ...state,
+                digitalMenuPlanCompleted: true,
+                digitalMenuPlan: action.result
             }
         default:
         return state

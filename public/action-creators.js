@@ -32,6 +32,7 @@ import * as CuisineService from './components/Cuisine/cuisine.service';
 import * as CurrencyService from './components/Currency/currency.service';
 import * as BranchService from './components/Profile/branch.service';
 import * as MenuCategoryService from './components/Menu/menu-category.service';
+import * as SubscriptionsService from './components/Subscriptions/subscription.service.js';
 
 import { StorageManagerInstance } from './shared/storage.utils';
 
@@ -990,6 +991,24 @@ export function updatePassword(data, cb) {
             authenticated: false,
             completed: true
           })
+        });
+      });
+    }
+  }
+};
+
+export function getDigitalMenuPlan (cb) {
+  return {
+    types: ['GET_DIGITAL_MENU_PLAN_REQUEST', 'GET_DIGITAL_MENU_PLAN_SUCCESS', 'GET_DIGITAL_MENU_PLAN_FAILURE'],
+    promise: () => {
+      return new Promise((resolve, reject) => {
+        SubscriptionsService.getDigitalMenuPlans().then((res) => {
+          if (res && typeof cb === 'function') {
+            cb(res);
+          }
+          resolve(res);
+        }).catch(err => {
+          console.log(err);
         });
       });
     }
