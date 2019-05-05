@@ -37,6 +37,7 @@ const authController = require('../controllers/auth.controller');
 const signupController = require('../controllers/signup.controller')
 const forgotPasswordController = require('../controllers/forgot-password.controller')
 const checkResetCodeController = require('../controllers/check-reset-code.controller')
+const stripeController = require('../controllers/stripe.controller')
 const authMiddleware = require('../middlewares/auth.middleware');
 
 let Routes = class {
@@ -199,6 +200,8 @@ let Routes = class {
 
         router.post('/plans/custom-order', planController.postCustomOrder);
 
+        router.get('/plans/digital-menu', stripeController.getDigitalMenuPlan);
+        router.post('/charge/digital-menu', stripeController.chargeDigitalMenuPlan);
         this.router = router;
     }
 };
