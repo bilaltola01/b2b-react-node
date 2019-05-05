@@ -69,7 +69,8 @@ Company.getById = (id) => {
     'Youtube',
     'Instagram',
     'resetcode',
-    'resetcodevalidity'
+    'resetcodevalidity',
+    'CustomerID'
   );
 };
 
@@ -93,7 +94,8 @@ Company.getByEmail = (email) => {
     'Youtube',
     'Instagram',
     'resetcode',
-    'resetcodevalidity'
+    'resetcodevalidity',
+    'CustomerID'
   );
 };
 
@@ -131,7 +133,8 @@ Company.get = (conditions) => {
     'Youtube',
     'Instagram',
     'resetcode',
-    'resetcodevalidity'
+    'resetcodevalidity',
+    'CustomerID'
   );
 };
 
@@ -154,7 +157,8 @@ Company.getAll = () => {
     'Youtube',
     'Instagram',
     'resetcode',
-    'resetcodevalidity'
+    'resetcodevalidity',
+    'CustomerID'
   ).from('Company');
 };
 
@@ -163,6 +167,12 @@ Company.getAll = () => {
 Company.auth = (email, pwd) => {
   return Company.getByEmailPwd(email).then(company => {
     return cryptUtils.checkPwd(pwd, company.Pwd);
+  });
+};
+
+Company.customerIDExists = (email) => {
+  return Company.getByEmail(email).then(company => {
+    return company.CustomerID !== null
   });
 };
 
