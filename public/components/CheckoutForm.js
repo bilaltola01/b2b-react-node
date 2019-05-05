@@ -12,7 +12,7 @@ class CheckoutForm extends Component {
     }
 
     async submit(ev) {
-        const {profile, trial} = this.props.profile;
+        const {profile, trial} = this.props;
         let {token} = await this.props.stripe.createToken({name: "Name"});
         const data = { stripeToken: token.id, email: profile.Email, trial: trial }
         let response = await Ajax().post("/charge/digital-menu", {

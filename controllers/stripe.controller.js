@@ -14,6 +14,9 @@ StripeController.chargeDigitalMenuPlan = async (req, res) => {
 
     const email = data.email;
     const token = data.stripeToken;
+
+    const trial_period_days = data.trial ? 90 : null;
+
     Company.customerIDExists(email).then(customerIDExists => {
         if (!customerIDExists) {
             stripe.customers.create({
@@ -38,7 +41,8 @@ StripeController.chargeDigitalMenuPlan = async (req, res) => {
                     {
                         plan: 'digital-menu',
                     },
-                ]
+                ],
+                trial_period_days
                 }, function(err, subscription) {
                     if (err) {
                         res.status(204).send({ success: false, message: 'digital menu plan failed', obj: err });
