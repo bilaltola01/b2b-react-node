@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
 import {CardElement, injectStripe} from 'react-stripe-elements';
+import { StorageManagerInstance } from  '../shared/storage.utils';
+import { connect } from 'react-redux';
+import { Ajax } from '../shared/ajax.utils';
 
 class CheckoutForm extends Component {
     constructor(props) {
@@ -9,14 +12,18 @@ class CheckoutForm extends Component {
     }
 
     async submit(ev) {
+        const {profile, trial} = this.props.profile;
         let {token} = await this.props.stripe.createToken({name: "Name"});
-        let response = await fetch("/charge", {
-            method: "POST",
-            headers: {"Content-Type": "text/plain"},
-            body: token.id
+        const data = { stripeToken: token.id, email: profile.Email, trial: trial }
+        let response = await Ajax().post("/charge/digital-menu", {
+            headers: {
+                "content-type": "application/json",
+                "cache-control": "no-cache",
+                "x-access-token": StorageManagerInstance.read('token')
+            },
+            body: JSON.stringify(data)
         });
-
-        if (response.ok) this.setState({complete: true});
+        if (response.success) this.setState({complete: true});
     }
 
     render() {
@@ -34,4 +41,10 @@ class CheckoutForm extends Component {
     }
 }
 
-export default injectStripe(CheckoutForm);
+const mapStateToProps = (state) => {
+  return {
+    profile: state._profile.profile
+  }
+};
+
+export default connect(mapStateToProps)(injectStripe(CheckoutForm));
