@@ -30,15 +30,15 @@ class SubsriptionEdit extends Component {
 
 		return (
 			<span id={"menu-branch-" + id}>
-            	<span className="label--value">{name}</span>
-            	<span className="status status--issue remove" onClick={(e) => this.handlers.onRemove({id, name}, onRemove)}></span>
-            </span>
+				<span className="label--value">{name}</span>
+				<span className="status status--issue remove" onClick={(e) => this.handlers.onRemove({id, name}, onRemove)}></span>
+			</span>
 		)
 	}
 };
 
 SubsriptionEdit.propTypes = {
-	id: PropTypes.number,
+	id: PropTypes.string,
 	name: PropTypes.string,
 	onRemove: PropTypes.func
 };

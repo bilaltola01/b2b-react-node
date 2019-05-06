@@ -85,8 +85,8 @@ class LanguagePicker extends Component {
                 );
               case "subscriptions":
                 return (
-                  <option value={item.title} key={index}>
-                    {item.title}
+                  <option value={item.id} key={index}>
+                    {item.metadata.title}
                   </option>
                 );
               default:
@@ -203,6 +203,20 @@ class LanguagePicker extends Component {
                     key={index}
                   >
                     {item.Title}
+                  </li>
+                );
+              case "subscriptions":
+                return (
+                  <li
+                    data-id={item.id}
+                    className={item.disabled ? "disable" : ""}
+                    rel={item.id}
+                    onClick={e =>
+                      !item.disabled ? onPickerItemClick(e) : null
+                    }
+                    key={index}
+                  >
+                    {item.metadata.title}
                   </li>
                 );
               default:
