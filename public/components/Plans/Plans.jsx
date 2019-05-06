@@ -69,7 +69,7 @@ class Plans extends Component {
     }
 
     render () {
-        const { subscriptions, selected, current } = this.props;
+        const { subscriptions, selected, current, currencies } = this.props;
         const { isSuccess } = this.state;
         const action = this.props.match.params.action;
         const profileType = (typeof this.props.match.params.action !== 'undefined') ? 'profile-' + action : 'profile';
@@ -141,10 +141,11 @@ class Plans extends Component {
                                             <div className="plan-wrapper">
                                                 {subscriptions.map((item, index) => {
                                                     return <PlanCard
-                                                        key={item.id}
+                                                        key={item.metadata.id}
                                                         active={item.id === selected}
                                                         current={item.id === current}
                                                         data={item}
+                                                        currencies={currencies}
                                                         onStart={() => this.handleStart(item.id)}
                                                         onClick={() => this.handleClick(item.id)}
                                                     />
@@ -169,9 +170,10 @@ class Plans extends Component {
 const mapStateToProps = (state) => {
     return {
         profile: state._profile.profile,
-        subscriptions: state._subscriptions.list,
+        subscriptions: state._subscriptions.multilingualMenuPlans,
         selected: state._subscriptions.selected,
-        current: state._subscriptions.current
+        current: state._subscriptions.current,
+        currencies: state._currencies.currencies
     }
 };
 

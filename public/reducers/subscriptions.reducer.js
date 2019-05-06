@@ -28,7 +28,7 @@ const initialSubscriptionsState = {
       },
   ],
   selected: null,
-  current: 2,
+  current: 'multilingual-second',
   digitalMenuPlan: null,
   digitalMenuPlanCompleted: false,
   multilingualMenuPlans: null,
