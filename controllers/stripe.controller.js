@@ -65,4 +65,29 @@ StripeController.getDigitalMenuPlan = async (req, res) => {
     });
 }
 
+StripeController.getMultilingualMenuPlans = async (req, res) => {
+    res.setHeader('Content-Type', 'application/json');
+
+    const multilingualIDs = ['multilingual-first', 'multilingual-second', 'multilingual-third'];
+
+    let plans = [];
+
+    for (let index=0; index<3; index++) {
+        await stripe.plans.retrieve(multilingualIDs[index], function(err, plan) {
+            if (plan) {
+                plans.push(plan);
+            }
+            if (index === 2) {
+                if (plans.length === 3) {
+                    res.status(200).json({ success: true, message: 'digital menu plan successfully fetched', obj: plans });
+                } else {
+                    res.status(204).send({ success: false, message: 'digital menu plan get failed', obj: "error" });
+                }
+            }
+            
+        });
+    }
+}
+
+
 module.exports = StripeController;

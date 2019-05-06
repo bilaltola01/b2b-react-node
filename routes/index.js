@@ -201,6 +201,8 @@ let Routes = class {
         router.post('/plans/custom-order', planController.postCustomOrder);
 
         router.get('/plans/digital-menu', stripeController.getDigitalMenuPlan);
+        router.get('/plans/multilingual-menus', stripeController.getMultilingualMenuPlans);
+
         router.post('/charge/digital-menu', stripeController.chargeDigitalMenuPlan);
         this.router = router;
     }
