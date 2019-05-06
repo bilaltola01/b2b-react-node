@@ -48,6 +48,7 @@ class Dashboard extends Component {
     this.props.dispatch(actionCreators.getAnalytics(this.handlers.onAnalyticsFetched));
     this.props.dispatch(actionCreators.getProfile(this.handlers.onProfileFetched));
     this.props.dispatch(actionCreators.getDigitalMenuPlan());
+    this.props.dispatch(actionCreators.getMultilingualMenuPlans());
     this.props.dispatch(actionCreators.getCurrencies());
   }
 

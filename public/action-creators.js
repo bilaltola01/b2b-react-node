@@ -1014,3 +1014,21 @@ export function getDigitalMenuPlan (cb) {
     }
   }
 };
+
+export function getMultilingualMenuPlans (cb) {
+  return {
+    types: ['GET_MULTILINGUAL_MENU_PLAN_REQUEST', 'GET_MULTILINGUAL_MENU_PLAN_SUCCESS', 'GET_MULTILINGUAL_MENU_PLAN_FAILURE'],
+    promise: () => {
+      return new Promise((resolve, reject) => {
+        SubscriptionsService.getMultilingualMenuPlans().then((res) => {
+          if (res && typeof cb === 'function') {
+            cb(res);
+          }
+          resolve(res);
+        }).catch(err => {
+          console.log(err);
+        });
+      });
+    }
+  }
+};

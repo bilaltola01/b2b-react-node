@@ -18,3 +18,21 @@ export function getDigitalMenuPlans () {
     return plan;
   });
 }
+
+export function getMultilingualMenuPlans () {
+  return Ajax().get('/plans/multilingual-menus', {
+    headers: {
+      "content-type": "application/json",
+      "cache-control": "no-cache",
+      "x-access-token": StorageManagerInstance.read('token')
+    }
+  }).then((res) => {
+    if (!res || !res.success) {
+      return Promise.reject(res);
+    }
+
+    let plan = res.obj;
+
+    return plan;
+  });
+}

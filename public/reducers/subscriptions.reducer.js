@@ -31,6 +31,8 @@ const initialSubscriptionsState = {
   current: 2,
   digitalMenuPlan: null,
   digitalMenuPlanCompleted: false,
+  multilingualMenuPlans: null,
+  multilingualMenuPlansCompleted: false
 };
 
 export function _subscriptions(state = initialSubscriptionsState, action) {
@@ -61,6 +63,23 @@ export function _subscriptions(state = initialSubscriptionsState, action) {
                 ...state,
                 digitalMenuPlanCompleted: true,
                 digitalMenuPlan: action.result
+            }
+        case 'GET_MULTILINGUAL_MENU_PLAN_REQUEST':
+            return {
+                ...state,
+                multilingualMenuPlansCompleted: false,
+                multilingualMenuPlans: null
+            }
+        case 'GET_MULTILINGUAL_MENU_PLAN_FAILURE':
+            return {
+                multilingualMenuPlansCompleted: true,
+                multilingualMenuPlans: null
+            }
+        case 'GET_MULTILINGUAL_MENU_PLAN_SUCCESS':
+            return {
+                ...state,
+                multilingualMenuPlansCompleted: true,
+                multilingualMenuPlans: action.result
             }
         default:
         return state
