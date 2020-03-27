@@ -29,29 +29,44 @@ StripeController.chargeDigitalMenuPlan = async (req, res) => {
                     }
                     Company.getByEmail(email).then(company => {
                         company.CustomerID = customer.id;
-                        Company.update(company.CompanyID, company);
+                        stripe.subscriptions.create({
+                            customer: company.CustomerID,
+                            items: [
+                                {
+                                    plan: 'digital-menu',
+                                },
+                            ],
+                            trial_period_days
+                            }, function(err, subscription) {
+                                if (err) {
+                                    res.status(204).send({ success: false, message: 'digital menu plan failed', obj: err });
+                                }
+                                Company.update(company.CompanyID, company);
+                                res.status(200).json({ success: true, message: 'digital menu plan successfully activated', obj: subscription });
+                            }
+                        ); 
                     })
                 }
             );
-        }
-        Company.getByEmail(email).then(company => {
-            stripe.subscriptions.create({
-                customer: company.CustomerID,
-                items: [
-                    {
-                        plan: 'digital-menu',
-                    },
-                ],
-                trial_period_days
-                }, function(err, subscription) {
-                    if (err) {
-                        res.status(204).send({ success: false, message: 'digital menu plan failed', obj: err });
+        } else {
+            Company.getByEmail(email).then(company => {
+                stripe.subscriptions.create({
+                    customer: company.CustomerID,
+                    items: [
+                        {
+                            plan: 'digital-menu',
+                        },
+                    ],
+                    trial_period_days
+                    }, function(err, subscription) {
+                        if (err) {
+                            res.status(204).send({ success: false, message: 'digital menu plan failed', obj: err });
+                        }
+                        res.status(200).json({ success: true, message: 'digital menu plan successfully activated', obj: subscription });
                     }
-                    res.status(200).json({ success: true, message: 'digital menu plan successfully activated', obj: subscription });
-                }
-            ); 
-        })
-        
+                ); 
+            })
+        }
     })
 };
 
